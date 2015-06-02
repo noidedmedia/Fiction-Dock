@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   resources :stories do
-    resources :chapters, except: [:index]
+    resources :chapters
   end
   
   resources :characters

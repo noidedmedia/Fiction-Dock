@@ -1,0 +1,6 @@
+<%= form_for [@story, @chapter] do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_area :body %>
+  <%= f.number_field :chap_num %>
+  <%= f.submit %>
+<% end %>
