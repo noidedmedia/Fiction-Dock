@@ -1,0 +1,140 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+@import "scss-variables";
+
+/* Selector for all elements, don't put anything here without a lot of thought first. */
+/* Box-sizing set to border-box so padding doesn't cause things to go past their defined width/height. */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'fiction-dock-logo';
+  src: url('fff_tusj-fiction-dock.woff2') format('woff2'),
+       url('fff_tusj-fiction-dock.woff') format('woff'),
+       url('fff_tusj-fiction-dock.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Styles applicable to all pages. */
+html, body {
+  font: 400 10px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #fff;
+  margin: 0;
+  overflow-x: hidden;
+
+  /* Only apply "height: 100%" to desktop devices or else 
+     weird things happen with mobile scrolling. */
+  @media all and (min-device-width: $mobile-width) {
+    height: 100%;
+  }
+
+  /* Fix for iOS Safari messing with the text size. */
+  @media all and (max-device-width: $mobile-width) {
+    -webkit-text-size-adjust: none;
+  }
+}
+
+/* Removes margins from all header items. */
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+/* Font sizing for all header elements specifically, h1-h5. */
+h1 {
+  font-size: 3.2rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
+
+h3 {
+  font-size: 2.4rem;
+}
+
+h4 {
+  font-size: 2.1rem;
+}
+
+h5 {
+  font-size: 1.8rem;
+}
+
+/* Removes margin from all paragraph, or "p" elements. */
+p {
+  margin: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+
+/* Fix for WebKit lists. */
+ul, figure {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
+  -webkit-padding-end: 0;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: block;
+}
+
+/* Fix for WebKit search decorations. */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* Fix for Safari adding a box-shadow to text fields on iOS. */ 
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  -webkit-appearance: none;
+}
+
+input,
+textarea {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Fix for WebKit input text style. */
+input, textarea, keygen, select, button {
+  font: 400 inherit 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+// Fix Firefox's ugly default select styling.
+select {
+  -moz-appearance: none;
+}
+
+
+#fiction-dock-logo {
+  font-family: 'fiction-dock-logo';
+  font-size: 3.6rem;
+  letter-spacing: 2px;
+
+  &:first-letter {
+    padding-right: .1em;
+  }
+}
