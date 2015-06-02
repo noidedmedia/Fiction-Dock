@@ -1,3 +1,5 @@
+@import "scss-variables";
+
 #main-header {
   font-size: 1.4rem;
   background-color: #fff;
@@ -19,6 +21,36 @@
 .header-right {
   position: absolute;
   right: 40px;
+}
+
+.header-item {
+  color: #aaaab2;
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 400;
+  padding: 12px 15px 0;
+  transition: color 300ms ease-in-out;
+  vertical-align: top;
+
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  a {
+    color: #aaaab2;
+    text-decoration: none;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+      color: #333;
+      text-decoration: none;
+    }
+  }
+  
+  @media all and (max-device-width: $mobile-width) {
+    padding: 15px 15px;
+  }
 }
 
 .fiction-dock-logo {

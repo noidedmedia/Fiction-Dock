@@ -6,8 +6,15 @@
   </div>
 
   <div class="header-right">
-    <%= link_to t(".create_an_account"), new_user_registration_path %>
-    <%= link_to t(".sign_in"), new_user_session_path %>
+    
+    <div class="header-item">
+      <%= link_to t(".create_an_account"), new_user_registration_path %>
+    </div>
+
+    <div class="header-item">
+      <%= link_to t(".sign_in"), new_user_session_path %>
+    </div>
+
   </div>
 
 </header>
