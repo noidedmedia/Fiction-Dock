@@ -1,0 +1,2 @@
+class FranchisesController < ApplicationController
+end
