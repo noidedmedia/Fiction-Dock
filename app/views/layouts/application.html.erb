@@ -40,7 +40,9 @@
   <meta name="description" content="A better fan fiction repository.">
 
 </head>
-<body>
+<body class="<% if user_signed_in? %>signed-in<% end %>">
+
+  <%= render 'layouts/header' %>
 
   <%= yield %>
 
