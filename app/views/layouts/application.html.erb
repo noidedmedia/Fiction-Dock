@@ -5,7 +5,7 @@
   <%# UTF-8 Character Set %>
   <meta charset="utf-8">
 
-  <title>Fiction Dock</title>
+  <title><%= content_for?(:title) ? content_for(:title) + " - Fiction Dock" : "Fiction Dock" %></title>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -21,6 +21,14 @@
   
   <%# For iPad retina and general Android device compatibility. %>
   <link rel="apple-touch-icon" href="/favicon-152.png">
+
+  <%# Makes the site capable of running as if it was an official app on Android and iOS. %>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <%# Proper application name for "Add to Homescreen" %>
+  <meta name="application-name" content="Fiction Dock" />
+  <meta name="apple-mobile-web-app-title" content="Fiction Dock">
 
   <%# Viewport meta tag %>
   <meta name="viewport" content="width=device-width, user-scalable=no">
