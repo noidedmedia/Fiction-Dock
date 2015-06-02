@@ -7,5 +7,5 @@ class User < ActiveRecord::Base
   has_many :franchise_users
   has_many :franchises, through: :francise_users
   enum level: [:normal, :mod, :admin]
-
+  validates :name, presence: true, format: {with: /\A\w+\z/}
 end
