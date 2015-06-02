@@ -16,9 +16,14 @@
   &.logo-large {
     // Why does this work? I honestly don't know.
     transform: translateX(-25%);
+    -webkit-transform: translateX(-25%);
     width: 200%;
-    font-size: 6.4rem;
+    font-size: 7.2rem;
     text-align: center;
     cursor: default;
+
+    @media all and (max-device-width: $mobile-width) {
+      font-size: 4.2rem;
+    }
   }
 }
