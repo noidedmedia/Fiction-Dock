@@ -21,12 +21,25 @@
   right: 40px;
 }
 
-#fiction-dock-logo {
+.fiction-dock-logo {
   font-family: 'fiction-dock-logo';
-  font-size: 3.2rem;
   letter-spacing: 2px;
 
   &:first-letter {
     padding-right: .1em;
+  }
+
+  &.logo-header {
+    font-size: 3.2rem;
+    cursor: pointer;
+  }
+
+  &.logo-large {
+    // Why does this work? I honestly don't know.
+    transform: translateX(-25%);
+    width: 200%;
+    font-size: 6.4rem;
+    text-align: center;
+    cursor: default;
   }
 }

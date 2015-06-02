@@ -1,0 +1,10 @@
+# Layouts strings, mostly for the header.
+
+en:
+  layouts:
+    header:
+      sign_in: "Sign in"
+      create_an_account: "Create an account"
+      profile: "Profile"
+      settings: "Settings"
+      sign_out: "Sign out"
