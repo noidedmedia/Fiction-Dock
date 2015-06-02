@@ -3,6 +3,8 @@
 .fiction-dock-logo {
   font-family: 'fiction-dock-logo';
   letter-spacing: 2px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &:first-letter {
     padding-right: .1em;
@@ -11,6 +13,15 @@
   &.logo-header {
     font-size: 3.2rem;
     cursor: pointer;
+
+    @media all and (max-device-width: $mobile-width) {
+      font-size: 4.0rem;
+      color: transparent;
+
+      &:first-letter {
+        color: #333;
+      }
+    }
   }
 
   &.logo-large {

@@ -11,16 +11,28 @@
   a {
     text-decoration: none;
   }
+
+  @media all and (max-device-width: $mobile-width) {
+    height: 50px;
+  }
 }
 
 .header-left {
   position: absolute;
   left: 40px;
+
+  @media all and (max-device-width: $mobile-width) {
+    left: 20px;
+  }
 }
 
 .header-right {
   position: absolute;
   right: 40px;
+
+  @media all and (max-device-width: $mobile-width) {
+    right: 20px;
+  }
 }
 
 .header-item {
