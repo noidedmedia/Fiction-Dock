@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602190632) do
+ActiveRecord::Schema.define(version: 20150602192634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "characters", force: :cascade do |t|
+    t.integer  "franchise_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "characters", ["franchise_id"], name: "index_characters_on_franchise_id", using: :btree
+
+  create_table "franchises", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "stories", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +40,16 @@ ActiveRecord::Schema.define(version: 20150602190632) do
     t.datetime "updated_at",  null: false
     t.string   "blurb"
   end
+
+  create_table "story_characters", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "character_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "story_characters", ["character_id"], name: "index_story_characters_on_character_id", using: :btree
+  add_index "story_characters", ["story_id"], name: "index_story_characters_on_story_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -43,4 +70,7 @@ ActiveRecord::Schema.define(version: 20150602190632) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "characters", "franchises"
+  add_foreign_key "story_characters", "characters"
+  add_foreign_key "story_characters", "stories"
 end
