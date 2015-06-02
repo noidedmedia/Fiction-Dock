@@ -1,0 +1,9 @@
+<%= form_for @story do |f| %>
+  <%= fields_for :franchises, @franchises do |fr| %>
+    <%= fr.text_field :name %>
+  <% end %>
+  <%= f.text_field :name %>
+  <%= f.text_area :blurb %>
+  <%= f.text_area :description %>
+<% end %> 
+

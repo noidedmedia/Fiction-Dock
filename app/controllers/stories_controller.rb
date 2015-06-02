@@ -2,8 +2,7 @@ class StoriesController < ApplicationController
   include Pundit
   before_filter :authenticate_user!, except: [:show, :index]
   def index
-    @franchise = Franchise.find(params[:franchise_id])
-    @stories = @franchise.stories
+    @stories = Story.all.includes(:franchises)
   end
 
   def show
@@ -11,11 +10,22 @@ class StoriesController < ApplicationController
   end
 
   def new
-    @franchise = Franchise.find(params[:franchise_id])
-    @story = Story.new(user: current_user,
-                       franchises: [@franchsie])
+    @story = Story.new(user: current_user)
   end
 
+  def create
+    @story = Story.new(story_params)
+    respond_to do |format|
+      if @story.save
+        format.html { redirect_to @story }
+        format.json { render :show, status: :ok, location: @story}
+      else
+        format.html { render :edit}
+        format.json { render json: @story.errors, status: :unprocessable_entity}
+      end
+    end
+
+  end
   def story_params
     params.require(:story)
       .permit(:name,

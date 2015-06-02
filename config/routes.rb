@@ -5,9 +5,7 @@ Rails.application.routes.draw do
     resources :chapters
   end
   resources :characters
-  resources :franchises do
-    resources :stores, shallow: true
-  end
+  resources :franchises
   resources :users
 
   devise_for :users, path: "accounts"
