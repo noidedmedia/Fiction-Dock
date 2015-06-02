@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FictionDock</title>
+
+  <%# UTF-8 Character Set %>
+  <meta charset="utf-8">
+
+  <title>Fiction Dock</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <%# Favicon %>
+  <%# 32px and 64px favicons, just in case someone is using some absurdly old browser. %>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png"/>
+  
+  <%# For iPhone with high-resolution Retina display running iOS ≥ 7. %>
+  <link rel="apple-touch-icon" sizes="120x120" href="/favicon-120.png">
+  
+  <%# For iPad retina and general Android device compatibility. %>
+  <link rel="apple-touch-icon" href="/favicon-152.png">
+
+  <%# Viewport meta tag %>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <%# Theme Color for Chrome on Android, etc. %>
+  <meta name="theme-color" content="#333333">
+
+  <%# Description for Google, etc. %>
+  <meta name="description" content="A better fan fiction repository.">
+
 </head>
 <body>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
