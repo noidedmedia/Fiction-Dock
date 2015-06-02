@@ -23,5 +23,4 @@ class StoriesController < ApplicationController
               :description,
               franchises: [:id])
   end
-  end
 end
