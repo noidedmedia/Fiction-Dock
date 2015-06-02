@@ -3,4 +3,6 @@ class Story < ActiveRecord::Base
   validates :description, length: {in: (10..1000)}
   has_many :story_characters
   has_many :characters, through: :story_characters
+  has_many :story_franchises
+  has_many :franichises, through: :story_franchises
 end

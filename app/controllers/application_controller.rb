@@ -8,4 +8,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :name
   end
 
+  def ensure_user
+    current_user
+  end
 end

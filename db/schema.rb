@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602195220) do
+ActiveRecord::Schema.define(version: 20150602205610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 20150602195220) do
   end
 
   add_index "characters", ["franchise_id"], name: "index_characters_on_franchise_id", using: :btree
+
+  create_table "franchise_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "franchise_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "franchise_users", ["franchise_id"], name: "index_franchise_users_on_franchise_id", using: :btree
+  add_index "franchise_users", ["user_id"], name: "index_franchise_users_on_user_id", using: :btree
 
   create_table "franchises", force: :cascade do |t|
     t.string   "name"
@@ -65,6 +75,16 @@ ActiveRecord::Schema.define(version: 20150602195220) do
   add_index "story_characters", ["character_id"], name: "index_story_characters_on_character_id", using: :btree
   add_index "story_characters", ["story_id"], name: "index_story_characters_on_story_id", using: :btree
 
+  create_table "story_franchises", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "franchise_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "story_franchises", ["franchise_id"], name: "index_story_franchises_on_franchise_id", using: :btree
+  add_index "story_franchises", ["story_id"], name: "index_story_franchises_on_story_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                          null: false
@@ -79,6 +99,7 @@ ActiveRecord::Schema.define(version: 20150602195220) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.integer  "level",                  default: 0,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -86,7 +107,11 @@ ActiveRecord::Schema.define(version: 20150602195220) do
 
   add_foreign_key "chapters", "stories"
   add_foreign_key "characters", "franchises"
+  add_foreign_key "franchise_users", "franchises"
+  add_foreign_key "franchise_users", "users"
   add_foreign_key "stories", "users"
   add_foreign_key "story_characters", "characters"
   add_foreign_key "story_characters", "stories"
+  add_foreign_key "story_franchises", "franchises"
+  add_foreign_key "story_franchises", "stories"
 end
