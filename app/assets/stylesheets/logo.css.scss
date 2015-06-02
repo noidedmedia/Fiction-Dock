@@ -4,6 +4,7 @@
   font-family: 'fiction-dock-logo';
   letter-spacing: 2px;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &:first-letter {
     padding-right: .1em;
