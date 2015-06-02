@@ -1,0 +1,32 @@
+#main-header {
+  font-size: 1.4rem;
+  background-color: #fff;
+  width: 100vw;
+  height: 40px;
+  position: fixed;
+  border-bottom: 1px solid #aaaab2;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.header-left {
+  position: absolute;
+  left: 40px;
+}
+
+.header-right {
+  position: absolute;
+  right: 40px;
+}
+
+#fiction-dock-logo {
+  font-family: 'fiction-dock-logo';
+  font-size: 3.2rem;
+  letter-spacing: 2px;
+
+  &:first-letter {
+    padding-right: .1em;
+  }
+}

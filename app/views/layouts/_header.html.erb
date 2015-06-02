@@ -1,4 +1,13 @@
-<p id="fiction-dock-logo">Fiction Dock</p>
-<%= link_to "Sign in", new_user_session_path %>
+<header id="main-header">
+  <div class="header-left">
+    <%= link_to root_path do %>
+      <p id="fiction-dock-logo">Fiction Dock</p>
+    <% end %>
+  </div>
 
-<%= link_to "Create an account", new_user_registration_path %>
+  <div class="header-right">
+    <%= link_to "Create an account", new_user_registration_path %>
+    <%= link_to "Sign in", new_user_session_path %>
+  </div>
+
+</header>

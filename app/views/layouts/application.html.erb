@@ -5,6 +5,7 @@
   <%# UTF-8 Character Set %>
   <meta charset="utf-8">
 
+  <%# If a title is given in a view, that title is used, with "- Fiction Dock" appended. Otherwise, just "Fiction Dock" is used. %>
   <title><%= content_for?(:title) ? content_for(:title) + " - Fiction Dock" : "Fiction Dock" %></title>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -33,18 +34,20 @@
   <%# Viewport meta tag %>
   <meta name="viewport" content="width=device-width, user-scalable=no">
 
-  <%# Theme Color for Chrome on Android, etc. %>
+  <%# Theme Color for Chrome on Android, the Google app on iOS, etc. %>
   <meta name="theme-color" content="#333333">
 
-  <%# Description for Google, etc. %>
+  <%# Description for search engine results, e.g. Google and DuckDuckGo. %>
   <meta name="description" content="A better fan fiction repository.">
 
 </head>
-<body class="<% if user_signed_in? %>signed-in<% end %>">
+<body <% if user_signed_in? %>class="signed-in"<% end %>>
 
   <%= render 'layouts/header' %>
 
-  <%= yield %>
+  <div id="masthead">
+    <%= yield %>
+  </div>
 
 </body>
 </html>
