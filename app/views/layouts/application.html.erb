@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FictionDock</title>
+
+  <%# UTF-8 Character Set %>
+  <meta charset="utf-8">
+
+  <%# If a title is given in a view, that title is used, with "- Fiction Dock" appended. Otherwise, just "Fiction Dock" is used. %>
+  <title><%= content_for?(:title) ? content_for(:title) + " - Fiction Dock" : "Fiction Dock" %></title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
 
-<%= yield %>
+  <%# Favicon %>
+  <%# 32px and 64px favicons, just in case someone is using some absurdly old browser. %>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png"/>
+  
+  <%# For iPhone with high-resolution Retina display running iOS ≥ 7. %>
+  <link rel="apple-touch-icon" sizes="120x120" href="/favicon-120.png">
+  
+  <%# For iPad retina and general Android device compatibility. %>
+  <link rel="apple-touch-icon" href="/favicon-152.png">
+
+  <%# Makes the site capable of running as if it was an official app on Android and iOS. %>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <%# Proper application name for "Add to Homescreen" %>
+  <meta name="application-name" content="Fiction Dock" />
+  <meta name="apple-mobile-web-app-title" content="Fiction Dock">
+
+  <%# Viewport meta tag %>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <%# Theme Color for Chrome on Android, the Google app on iOS, etc. %>
+  <meta name="theme-color" content="#333333">
+
+  <%# Description for search engine results, e.g. Google and DuckDuckGo. %>
+  <meta name="description" content="A better fan fiction repository.">
+
+</head>
+<body <% if user_signed_in? %>class="signed-in"<% end %>>
+
+  <%= render 'layouts/header' %>
+
+  <div id="masthead">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

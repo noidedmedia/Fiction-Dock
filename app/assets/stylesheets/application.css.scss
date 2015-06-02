@@ -36,6 +36,7 @@
 html, body {
   font: 400 10px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: #fff;
+  color: #333;
   margin: 0;
   overflow-x: hidden;
 
@@ -84,6 +85,10 @@ p {
   -webkit-margin-after: 0;
 }
 
+a {
+  color: #333;
+}
+
 /* Fix for WebKit lists. */
 ul, figure {
   -webkit-margin-before: 0;
@@ -128,13 +133,7 @@ select {
   -moz-appearance: none;
 }
 
-
-#fiction-dock-logo {
-  font-family: 'fiction-dock-logo';
-  font-size: 3.6rem;
-  letter-spacing: 2px;
-
-  &:first-letter {
-    padding-right: .1em;
-  }
+#masthead {
+  width: 100vw;
+  margin-top: 40px;
 }
