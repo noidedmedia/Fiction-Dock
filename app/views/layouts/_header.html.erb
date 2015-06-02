@@ -7,13 +7,27 @@
 
   <div class="header-right">
     
-    <div class="header-item">
-      <%= link_to t(".create_an_account"), new_user_registration_path %>
-    </div>
+    <% if user_signed_in? %>
+    
+      <div class="header-item">
+        <%= current_user.name %>
+      </div>
 
-    <div class="header-item">
-      <%= link_to t(".sign_in"), new_user_session_path %>
-    </div>
+      <div class="header-item">
+        <%= button_to t(".sign_out"), destroy_user_session_path, method: :delete %>
+      </div>
+      
+    <% else %>
+
+      <div class="header-item">
+        <%= link_to t(".create_an_account"), new_user_registration_path %>
+      </div>
+
+      <div class="header-item">
+        <%= link_to t(".sign_in"), new_user_session_path %>
+      </div>
+
+    <% end %>
 
   </div>
 

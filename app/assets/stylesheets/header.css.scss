@@ -24,7 +24,7 @@
 }
 
 .header-item {
-  color: #aaaab2;
+  color: #333;
   display: inline-block;
   font-size: 1.4rem;
   font-weight: 400;
@@ -32,20 +32,21 @@
   transition: color 300ms ease-in-out;
   vertical-align: top;
 
-  &:hover {
-    color: #fff;
-    text-decoration: none;
-  }
-
   a {
     color: #aaaab2;
     text-decoration: none;
     transition: color 300ms ease-in-out;
+  }
 
-    &:hover {
-      color: #333;
-      text-decoration: none;
-    }
+  input {
+    font-size: 1.4rem;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
   }
   
   @media all and (max-device-width: $mobile-width) {
