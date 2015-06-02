@@ -15,10 +15,6 @@ gem 'pundit'
 gem 'devise'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
-gem 'bourbon'
-gem 'neat'
-gem 'bitters'
-gem 'refills'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
