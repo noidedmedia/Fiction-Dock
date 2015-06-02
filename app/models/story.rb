@@ -3,6 +3,7 @@ class Story < ActiveRecord::Base
   validates :description, length: {in: (10..1000)}
   validates :user, presence: true
   belongs_to :user
+  has_many :chapters
   has_many :story_characters
   has_many :characters, through: :story_characters
   has_many :story_franchises
