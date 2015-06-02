@@ -130,4 +130,8 @@ select {
 #masthead {
   width: 100vw;
   margin-top: 40px;
+
+  @media all and (max-device-width: $mobile-width) {
+    margin-top: 50px;
+  }
 }
