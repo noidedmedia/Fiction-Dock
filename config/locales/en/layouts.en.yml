@@ -8,3 +8,9 @@ en:
       profile: "Profile"
       settings: "Settings"
       sign_out: "Sign out"
+    footer:
+      fiction_dock_description: "A better fan fiction repository."
+      source_available_on: "Source available on"
+      terms_and_conditions: "Terms and Conditions"
+      privacy_policy: "Privacy Policy"
+      fiction_dock_copyright: "© 2015 Noided Media"

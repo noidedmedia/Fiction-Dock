@@ -28,6 +28,10 @@
     }
   }
 
+  &.logo-f {
+    font-size: 4.0rem;
+  }
+
   &.logo-large {
     // Why does this work? I honestly don't know.
     transform: translateX(-25%);

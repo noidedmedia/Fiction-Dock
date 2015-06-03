@@ -17,6 +17,10 @@ pre {
   &:focus {
     outline: transparent;
   }
+
+  @media all and (max-device-width: $mobile-width) {
+    margin-left: 0;
+  }
 }
 
 blockquote {
@@ -29,8 +33,15 @@ blockquote {
 .editor {
   width: 80vw;
   margin: auto;
+  display: -webkit-flex;
   display: flex;
-  flex-flow: row nowrap;
+  -webkit-flex-flow: row wrap;
+          flex-flow: row wrap;
+
+  @media all and (max-device-width: $mobile-width) {
+    width: calc(100vw - 40px);
+    margin: 0 20px;
+  }
 
   > .rich-text {
     font-family: 'Lora', serif;
@@ -40,6 +51,10 @@ blockquote {
     display: block;
     height: auto;
     margin-top: 25px;
+
+    @media all and (max-device-width: $mobile-width) {
+      width: 100%;
+    }
 
     > p {
       margin-top: 20px;
@@ -53,6 +68,10 @@ blockquote {
   > .markdown {
     height: auto;
     width: 40vw;
+
+    @media all and (max-device-width: $mobile-width) {
+      width: 100%;
+    }
   }
 }
 

@@ -1,0 +1,99 @@
+@import "scss-variables";
+
+$footer-background: #fff;
+$footer-color: #333;
+$footer-link-color: #333;
+
+#footer {
+  background: #fff;
+  padding: 6px 40px;
+  border-top: 1px solid #aaaab2;
+  width: 100%;
+  display: inline-block;
+  font-size: 1.6rem;
+  height: 60px;
+  margin: 0;
+
+  @media all and (max-device-width: $mobile-width) {
+    height: auto;
+  }
+
+  .footer-logo {
+    margin-right: 20px;
+    margin-top: 20px;
+
+    a {
+      text-decoration: none;
+    }
+
+    @media all and (min-device-width: $mobile-width) {
+      float: left;
+      margin-top: 0;
+    }
+  }
+
+  ul {
+    line-height: 1.4em;
+    margin: 0 0 1em 0;
+    padding: 0;
+    
+    @media all and (min-device-width: $mobile-width) {
+      float: left;
+      line-height: 1.8em;
+      margin-left: 1em;
+      margin-bottom: 0;
+    }
+  }
+
+  ul li {
+    font-weight: 300;
+    list-style: none;
+    padding: 10px 25px 10px 0;
+    
+    @media all and (min-device-width: $mobile-width) {
+      display: inline-block;
+      text-align: left;
+    }
+  }
+
+  .footer-left-links li a {
+    color: $footer-link-color;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 250ms;
+
+    &:focus,
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .footer-right-links {
+    color: $footer-link-color;
+    text-decoration: none;
+
+    > ul > li > p {
+      opacity: 0.6;
+    }
+
+    li {
+      font-size: 1.4rem;
+      font-weight: 400;
+
+      a {
+        text-decoration: none;
+        opacity: 0.6;
+        transition: opacity 250ms;
+
+        &:focus,
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    @media all and (min-device-width: $mobile-width) {
+      float: right;
+    }
+  }
+}
