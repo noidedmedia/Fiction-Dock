@@ -5,13 +5,18 @@
 pre {
   padding: 16px;
   overflow: auto;
-  font-size: 85%;
+  font-size: 1.4rem;
   line-height: 1.45;
   background-color: #f7f7f7;
   border-radius: 3px;
   word-wrap: break-word;
   margin-left: 10px;
   color: #333;
+  height: 100%;
+
+  &:focus {
+    outline: transparent;
+  }
 }
 
 blockquote {
@@ -22,14 +27,32 @@ blockquote {
 }
 
 .editor {
-  width: 800px;
+  width: 80vw;
   margin: auto;
+  display: flex;
+  flex-flow: row nowrap;
 
   > .rich-text {
     font-family: 'Lora', serif;
     outline: none;
     font-size: 1.6rem;
-    margin: 10px 50px;
+    width: 40vw;
+    display: block;
+    height: auto;
+    margin-top: 25px;
+
+    > p {
+      margin-top: 20px;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+
+  > .markdown {
+    height: auto;
+    width: 40vw;
   }
 }
 
@@ -115,7 +138,7 @@ $medium_editor_placeholder_color:           #fff !default;
       color: $medium_editor_placeholder_color;
       color: rgba($medium_editor_placeholder_color, .8);
     }
-    
+
     &:-ms-input-placeholder {
       color: $medium_editor_placeholder_color;
       color: rgba($medium_editor_placeholder_color, .8);
