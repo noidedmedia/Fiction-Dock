@@ -1,9 +1,13 @@
 class Character < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   belongs_to :franchise
   has_many :story_characters
   has_many :stories, through: :characters
   validates :franchise, presence: true
-  before_save :resolve_franchise
+  before_validation :resolve_franchise
+
+  validates :name, presence: true
 
   attr_accessor :franchise_name
   protected
