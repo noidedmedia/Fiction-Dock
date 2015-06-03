@@ -19,7 +19,7 @@ $footer-link-color: #333;
   }
 
   .footer-logo {
-    margin-right: 4px;
+    margin-right: 20px;
     margin-top: 20px;
 
     a {
@@ -56,7 +56,7 @@ $footer-link-color: #333;
     }
   }
 
-  ul li a {
+  .footer-primary-links li a {
     color: $footer-link-color;
     text-decoration: none;
     opacity: 0.7;
@@ -69,19 +69,31 @@ $footer-link-color: #333;
   }
 
   .footer-secondary-links {
-    @media all and (min-device-width: $mobile-width) {
-      float: right;
+    color: $footer-link-color;
+    text-decoration: none;
+
+    > ul > li > p {
+      opacity: 0.6;
     }
 
     li {
       font-size: 1.4rem;
       font-weight: 400;
-      opacity: 0.7;
-      transition: opacity 250ms;
 
-      &:hover {
-        opacity: 1;
+      a {
+        text-decoration: none;
+        opacity: 0.6;
+        transition: opacity 250ms;
+
+        &:focus,
+        &:hover {
+          opacity: 1;
+        }
       }
+    }
+
+    @media all and (min-device-width: $mobile-width) {
+      float: right;
     }
   }
 }
