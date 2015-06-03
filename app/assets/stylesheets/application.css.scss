@@ -25,9 +25,8 @@
 
 @font-face {
   font-family: 'fiction-dock-logo';
-  src: url('fff_tusj-fiction-dock.woff2') format('woff2'),
-       url('fff_tusj-fiction-dock.woff') format('woff'),
-       url('fff_tusj-fiction-dock.ttf') format('truetype');
+  src: font-url('fictiondock.ttf') format('truetype');
+  src: font-url('fictiondock.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
