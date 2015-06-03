@@ -20,6 +20,10 @@ module FictionDock
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # Suggested by Thoughtbot, compresses your content wit gzip.
+    # https://robots.thoughtbot.com/content-compression-with-rack-deflater
+    config.middleware.use Rack::Deflater
+
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     # Custom i18n routes.
