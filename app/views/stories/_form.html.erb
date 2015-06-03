@@ -7,11 +7,10 @@
   </ul>
 <% end %>
 <%= form_for @story do |f| %>
-  <div id="story-franchises-container">
+  <div id="franchise-input-box" contenteditable>
+  </div>
+  <div id="story-franchises-forms-container">
     <%= f.fields_for :franchises do |fr| %>
-      <div class="franchise-name">
-        <%= fr.text_field :id %>
-      </div>
     <% end %>
   </div>
   <%= f.label :name %>
