@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     resources :chapters
   end
   
-  resources :characters
   resources :franchises do
     resources :characters
     get 'stories', on: :member
