@@ -1,0 +1,38 @@
+body.dark-mode {
+  background-color: #444;
+  color: #fff;
+
+  * {
+    transition: color 0ms;
+  }
+
+  a, h1, h2, h3, h4, h5,
+  #sign-in-container .sign-in-header h4,
+  input, label {
+    color: #fff;
+  }
+
+  input[type=text],
+  input[type=email],
+  input[type=password],
+  input[type=checkbox],
+  input[type=checkbox]:checked {
+    border: 1px solid #fff;
+    color: #fff;
+
+    &:hover, &:focus {
+      border: 1px solid #fff;
+      color: #fff;
+    }
+  }
+
+  #main-header {
+    background-color: #333;
+
+    .header-item,
+    .header-item a,
+    .header-item input {
+      color: #fff;
+    }
+  }
+}

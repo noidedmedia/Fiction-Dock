@@ -46,6 +46,10 @@ html, body {
   }
 }
 
+body {
+  min-height: 100vw;
+}
+
 /* Removes margins from all header items. */
 h1, h2, h3, h4, h5 {
   margin: 0;
