@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require turbolinks
+//= require medium-editor
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .

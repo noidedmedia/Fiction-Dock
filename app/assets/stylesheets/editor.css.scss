@@ -1,0 +1,34 @@
+@import "scss-variables";
+
+@import url(https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=latin,latin-ext);
+
+pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  word-wrap: break-word;
+  margin-left: 10px;
+  color: #333;
+}
+
+blockquote {
+  margin: 25px;
+  border-left: 6px solid #2ecc71;
+  padding-left: 9px;
+  margin-left: -15px;
+}
+
+.editor {
+  width: 800px;
+  margin: auto;
+
+  > .rich-text {
+    font-family: 'Lora', serif;
+    outline: none;
+    font-size: 1.6rem;
+    margin: 10px 50px;
+  }
+}
