@@ -35,8 +35,8 @@ blockquote {
   margin: auto;
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-flow: column wrap;
-          flex-flow: column wrap;
+  -webkit-flex-flow: row wrap;
+          flex-flow: row wrap;
 
   @media all and (max-device-width: $mobile-width) {
     width: calc(100vw - 40px);
