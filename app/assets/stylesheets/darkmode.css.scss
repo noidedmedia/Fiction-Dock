@@ -51,6 +51,16 @@ body.dark-mode {
     }
   }
 
+  #footer {
+    background-color: #333;
+    color: #fff;
+    border-top-color: transparent;
+
+    ul li a {
+      color: #fff;
+    }
+  }
+
   .fiction-dock-logo {
     color: #fff;
 
