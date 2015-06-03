@@ -26,11 +26,42 @@ class StoriesController < ApplicationController
     end
 
   end
+
+  def edit 
+    @story = Story.find(params[:id])
+  end
+
+
+  def update
+    @story = Story.find(params[:id])
+    @story.update(story_params)
+    respond_to do |format|
+      if @story.save
+        format.html { redirect_to @story }
+        format.json { render :show, status: ok, location: @story }
+      else
+        format.html { render :edit }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @story = Story.find(params[:id])
+    authorize @story
+    @story.destroy
+    respond_to do |format|
+      format.html { redirect_to "/stories" }
+      format.json { render json: true }
+    end
+  end
+
+  protected 
   def story_params
     params.require(:story)
       .permit(:name,
-              :blurb,
-              :description,
-              franchises: [:id])
+    :blurb,
+    :description,
+    franchises: [:id])
   end
 end
