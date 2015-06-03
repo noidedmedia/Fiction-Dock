@@ -8,8 +8,8 @@
   <%# If a title is given in a view, that title is used, with "- Fiction Dock" appended. Otherwise, just "Fiction Dock" is used. %>
   <title><%= content_for?(:title) ? content_for(:title) + " - Fiction Dock" : "Fiction Dock" %></title>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true, :cache => 'cached/all' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, :cache => 'cached/all' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
   <%# Favicon %>
