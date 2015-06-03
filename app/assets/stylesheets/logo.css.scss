@@ -5,6 +5,7 @@
   letter-spacing: 2px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
 
   &:first-letter {
     padding-right: .1em;
@@ -17,6 +18,8 @@
     @media all and (max-device-width: $mobile-width) {
       font-size: 4.0rem;
       color: transparent;
+      width: 40px;
+      padding-left: 6px;
 
       &:first-letter {
         color: #333;

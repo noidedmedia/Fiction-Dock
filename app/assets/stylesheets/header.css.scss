@@ -8,6 +8,9 @@
   position: fixed;
   border-bottom: 1px solid #aaaab2;
   z-index: 100;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 
   a {
     text-decoration: none;
@@ -32,7 +35,7 @@
   right: 40px;
 
   @media all and (max-device-width: $mobile-width) {
-    right: 20px;
+    left: 60px;
   }
 }
 
@@ -65,8 +68,4 @@
   @media all and (max-device-width: $mobile-width) {
     padding: 15px 15px;
   }
-}
-
-#dark-mode-toggle {
-  cursor: pointer;
 }

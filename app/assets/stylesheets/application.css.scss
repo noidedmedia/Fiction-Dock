@@ -25,9 +25,9 @@
 
 @font-face {
   font-family: 'fiction-dock-logo';
-  src: url('fff_tusj-fiction-dock.woff2') format('woff2'),
-       url('fff_tusj-fiction-dock.woff') format('woff'),
-       url('fff_tusj-fiction-dock.ttf') format('truetype');
+  src: font-url('fictiondock.ttf') format('truetype');
+  src: font-url('fictiondock.woff2') format('woff2');
+  src: font-url('fictiondock.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -44,10 +44,6 @@ html, body {
   @media all and (max-device-width: $mobile-width) {
     -webkit-text-size-adjust: none;
   }
-}
-
-body {
-  min-height: 100vw;
 }
 
 /* Removes margins from all header items. */
@@ -133,9 +129,11 @@ select {
 
 #masthead {
   width: 100vw;
+  height: calc(100vh - 40px);
   margin-top: 40px;
 
   @media all and (max-device-width: $mobile-width) {
+    height: calc(100vh - 50px);
     margin-top: 50px;
   }
 }
