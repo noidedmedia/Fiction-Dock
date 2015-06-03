@@ -1,8 +1,21 @@
 @import "scss-variables";
 
+#dark-mode-toggle {
+  cursor: pointer;
+
+  &:before {
+    content: '★';
+    color: #333;
+  }
+}
+
 body.dark-mode {
   background-color: #444;
   color: #fff;
+
+  #dark-mode-toggle::before {
+    color: #fff;
+  }
 
   * {
     transition: color 0ms;
