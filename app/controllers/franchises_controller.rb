@@ -1,7 +1,7 @@
 class FranchisesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
   def stories
-    @franchise = Franchise.find(params[:id])
+    @franchise = Franchise.friendly.find(params[:id])
     @stories = @franchise.stories
   end
   def index
@@ -14,11 +14,11 @@ class FranchisesController < ApplicationController
   end
 
   def edit
-    @franchise = Franchise.find(params[:id])
+    @franchise = Franchise.friendly.find(params[:id])
   end
 
   def show
-    @franchise = Franchise.find(params[:id])
+    @franchise = Franchise.friendly.find(params[:id])
   end
 
   def create
