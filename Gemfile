@@ -1,7 +1,10 @@
 ruby '2.2.2'
 source 'https://rubygems.org'
 
+# Redcarpet for Markdown
 gem 'redcarpet', '~> 3.2.3'
+
+# The Medium Editor gem for rails.
 gem 'medium-editor-rails'
 
 
