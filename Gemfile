@@ -18,6 +18,10 @@ gem 'friendly_id', '~> 5.1.0'
 
 gem 'pundit'
 
+# For caching
+gem 'rack-cache'
+gem 'dalli'
+
 gem 'devise'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
