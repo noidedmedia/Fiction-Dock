@@ -12,14 +12,6 @@
   overflow-y: hidden;
   white-space: nowrap;
 
-  a {
-    text-decoration: none;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
   @media all and (max-device-width: $mobile-width) {
     height: 50px;
   }
@@ -28,6 +20,14 @@
 .header-left {
   position: absolute;
   left: 40px;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 
   @media all and (max-device-width: $mobile-width) {
     left: 20px;
