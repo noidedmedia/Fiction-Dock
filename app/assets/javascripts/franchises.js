@@ -61,7 +61,7 @@ Franchise.all = function(callback){
   }
   $.ajax("/franchises/", {
     success: success,
-  dataType: "json"
+    dataType: "json"
   });
 }
 
