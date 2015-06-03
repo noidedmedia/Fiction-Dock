@@ -1,3 +1,5 @@
+@import "scss-variables";
+
 body.dark-mode {
   background-color: #444;
   color: #fff;
@@ -33,6 +35,20 @@ body.dark-mode {
     .header-item a,
     .header-item input {
       color: #fff;
+    }
+  }
+
+  .fiction-dock-logo {
+    color: #fff;
+
+    @media all and (max-device-width: $mobile-width) {
+      &.logo-header {
+        color: transparent;
+
+        &:first-letter {
+          color: #fff;
+        }
+      }
     }
   }
 }

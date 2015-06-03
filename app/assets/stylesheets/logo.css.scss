@@ -5,6 +5,7 @@
   letter-spacing: 2px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
 
   &:first-letter {
     padding-right: .1em;
