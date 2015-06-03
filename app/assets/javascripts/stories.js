@@ -5,6 +5,7 @@
  * Or, at least, the franchise selection portion.
  * The characters selection protion communicates with this to find characters.
  */
+
 function StoryForm(franchises){
   this.franchises = franchises;
   this.container = $("#story-franchises-forms-container");
@@ -41,7 +42,11 @@ StoryForm.prototype._makeCallback = function(franchise){
     console.log(that)
      that.addFranchise(franchise);
      that.render();
+     that.clearList();
   };
+}
+StoryForm.prototype.clearList = function(){
+  this.suggestBox.empty();
 }
 StoryForm.prototype.franchisesWithPrefix = function(prefix){
   console.log("Prefix is: " + prefix);
@@ -95,10 +100,7 @@ StoryForm.prototype.render = function(){
       class: 'franchise-id-input',
       value: franchise.id
     });
-    console.log("Appending to container");
-    console.log(this.container);
     this.container.append(input);
-    console.log(this.container);
   }
 }
 
