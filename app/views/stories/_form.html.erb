@@ -1,10 +1,28 @@
+<% if @story.errors.size > 0 %>
+  <h1>Record could not be saved</h1>
+  <ul>
+    <% @story.errors.full_messages do |e| %>
+      <li> <%= e %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= form_for @story do |f| %>
-  <%= fields_for :franchises, @franchises do |fr| %>
-    <%= fr.text_field :name %>
-  <% end %>
+  <div id="story-franchises-container">
+    <%= f.fields_for :franchises do |fr| %>
+      <div class="franchise-name">
+        <%= fr.text_field :id %>
+      </div>
+    <% end %>
+  </div>
+  <%= f.label :name %>
   <%= f.text_field :name %>
+  <br>
+  <%= f.label :blurb %> 
   <%= f.text_area :blurb %>
+  <br>
+  <%= f.label :description %>
   <%= f.text_area :description %>
+  <br>
   <%= f.submit %>
 <% end %> 
 

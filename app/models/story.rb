@@ -13,6 +13,8 @@ class Story < ActiveRecord::Base
   has_many :franchises, through: :story_franchises
 
   accepts_nested_attributes_for :franchises, reject_if: :new_record?
+  accepts_nested_attributes_for :characters, reject_if: :new_record?
+
   validate :has_at_least_one_franchise
   protected
   def has_at_least_one_franchise
