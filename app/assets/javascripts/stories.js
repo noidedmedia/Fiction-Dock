@@ -91,8 +91,8 @@ StoryForm.prototype.render = function(){
     console.log(franchise);
     var input = $("<input>").attr({
       type: 'hidden',
-      name: 'story[franchises_attributes][' + f + '][id]',
-      class: 'franchise-input-id',
+      name: 'story[franchise_ids][]',
+      class: 'franchise-id-input',
       value: franchise.id
     });
     console.log("Appending to container");
@@ -107,10 +107,13 @@ StoryForm.prototype.render = function(){
 StoryForm.prototype.setup = function(after){
   // First we grab the franchises already added
   var that = this;
-  var inputs = this.container.children(".franchise-input-id");
+  var inputs = this.container.children(".franchise-id-input");
+  console.log(inputs);
   inputs.each(function(index, input){
-    Franchise.getById(input.val(), function(fr){
-      that.franchises.append(fr);
+    console.log(input.value);
+    Franchise.getById(input.value, function(fr){
+      console.log(that);
+      that.addFranchise(fr);
     });
   });
   // Now we grab a list of all franchises to make our life easier

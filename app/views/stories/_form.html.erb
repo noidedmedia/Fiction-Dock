@@ -15,7 +15,8 @@
   </ul>
   <div id="story-franchises-forms-container">
     <% @story.franchises.pluck(:id).each do |i| %>
-      <%= f.hidden_field "franchise_ids[]", value: i %>
+      <%# rails hack to make this work %>
+      <input type="hidden" name="story[franchise_ids][]" value="<%= i %>">
     <% end %>
   </div>
   <%= f.label :name %>
