@@ -2,6 +2,7 @@ class Story < ActiveRecord::Base
   validates :name, length: {in: (2..100)}
   validates :description, length: {in: (10..1000)}
   validates :user, presence: true
+  
   belongs_to :user
   has_many :chapters
   has_many :story_characters
@@ -16,4 +17,7 @@ class Story < ActiveRecord::Base
     errors.add(:franchises, "must have at least one") if franchises.length < 1
   end
 
+  def author
+    user
+  end
 end

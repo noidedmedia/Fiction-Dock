@@ -1,5 +1,9 @@
 class FranchisesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
+  def stories
+    @franchise = Franchise.find(params[:id])
+    @stories = @franchise.stories
+  end
   def index
 
     @franchises = Franchise.all

@@ -1,3 +1,5 @@
 <h1><%= @franchise.name %></h1>
-<%= render 'stories/story_list', stories: @franchise.stories %>
+<ul>
+  <%= render partial: 'stories/story_stub',  collection: @franchise.stories, as: "story" %>
+</ul>
 

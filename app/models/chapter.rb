@@ -1,5 +1,5 @@
 class Chapter < ActiveRecord::Base
-  scope :story_order, ->{ order(chap_num: :asc) }
+  scope :story_order, ->{ order(chap_num: :asc).where(published: true) }
   validates :name, presence: true
   belongs_to :story
   validates :story, presence: true

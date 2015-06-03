@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   end
   
   resources :characters
-  resources :franchises
+  resources :franchises do
+    resources :characters
+    get 'stories', on: :member
+  end
   resources :users, only: [:index, :show] do
     get 'stories', on: :member
   end
