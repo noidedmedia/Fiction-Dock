@@ -1,5 +1,7 @@
 <% if @story.errors.size > 0 %>
   <h1>Record could not be saved</h1>
+  <%= @story.inspect %>
+  <%= params.inspect %>
   <ul>
     <% @story.errors.full_messages do |e| %>
       <li> <%= e %></li>
@@ -9,8 +11,11 @@
 <%= form_for @story do |f| %>
   <div id="franchise-input-box" contenteditable>
   </div>
+  <ul id="franchise-input-suggest-box">
+  </ul>
   <div id="story-franchises-forms-container">
-    <%= f.fields_for :franchises do |fr| %>
+    <% @story.franchises.pluck(:id).each do |i| %>
+      <%= f.hidden_field "franchise_ids[]", value: i %>
     <% end %>
   </div>
   <%= f.label :name %>

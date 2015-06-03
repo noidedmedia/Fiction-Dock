@@ -12,15 +12,17 @@ class Story < ActiveRecord::Base
   has_many :story_franchises
   has_many :franchises, through: :story_franchises
 
-  accepts_nested_attributes_for :franchises, reject_if: :new_record?
-  accepts_nested_attributes_for :characters, reject_if: :new_record?
-
+  attr_accessor :franchise_ids
+  before_validation :resolve_franchise_ids
   validate :has_at_least_one_franchise
   protected
+
   def has_at_least_one_franchise
     errors.add(:franchises, "must have at least one") if franchises.length < 1
   end
-
+  def resolve_franchise_ids
+    self.franchises = Franchise.where(id: franchise_ids)
+  end
   def author
     user
   end

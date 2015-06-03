@@ -62,7 +62,7 @@ class StoriesController < ApplicationController
       .permit(:name,
               :blurb,
               :description,
-              franchises: [:id])
+              franchise_ids: [])
       .merge(user_id: current_user.id)
   end
 end

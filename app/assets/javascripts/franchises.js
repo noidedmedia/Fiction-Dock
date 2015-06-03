@@ -35,6 +35,7 @@ Franchise.prototype.characters = function(callback){
     }
     callback(data);
   };
+  
   $.ajax(this._charactersUrl(), {
     success: success,
     dataType: 'json'
