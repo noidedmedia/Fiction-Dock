@@ -15,7 +15,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   config.serve_static_files = true
-  config.static_cache_control = "public, max-age=#{12.hours.to_i}"
+  config.static_cache_control = "public, max-age=#{1.month.to_i}"
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
