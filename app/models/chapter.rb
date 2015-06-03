@@ -7,6 +7,13 @@ class Chapter < ActiveRecord::Base
   before_validation :fix_chap_num
   protected
   def fix_chap_num
-    self.chap_num = story.chapters.story_order.last.chap_num + 1 unless self.chap_num
+    latest_chap = story.chapters.story_order.last
+    unless self.chap_num
+      self.chap_num = if latest_chap
+                        lastest_chap.chap_num + 1
+                      else
+                        1
+                      end
+    end
   end
 end

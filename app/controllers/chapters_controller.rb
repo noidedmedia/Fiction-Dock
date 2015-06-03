@@ -1,15 +1,14 @@
 class ChaptersController < ApplicationController
   include Pundit
+  before_action :load_story
   before_action :authenticate_user!, except: [:show]
   def show
     @chapter = Chapter.find(params[:id])
   end
   def index
-    @story = Story.find(params[:story_id])
     @chapters = @story.chapters
   end
   def new
-    @story = Story.find(params[:story_id])
     @chapter = Chapter.new(story: @story)
     authorize @chapter
   end
@@ -19,7 +18,7 @@ class ChaptersController < ApplicationController
     authorize @chapter
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to @chapter}
+        format.html { redirect_to [@story, @chapter]}
         format.json { render 'show' }
       else
         format.html {render 'edit'}
@@ -30,9 +29,10 @@ class ChaptersController < ApplicationController
 
   def update
     @chapter = Chapter.find(params[:id])
+    authorize @chapter
     respond_to do |format|
       if @chapter.update(chapter_params)
-        format.html { redirect_to @chapter }
+        format.html { redirect_to [@story, @chapter] }
         format.json { render 'show' }
       else
         format.html { render 'edit' }
@@ -40,10 +40,26 @@ class ChaptersController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @chapter = Chapter.find(params[:id])
+    authorize @chapter
+    @chapter.destroy
+    respond_to do |format|
+      format.html { redirect_to @story, notice: "successfully deleted"}
+      format.json { render json: true}
+    end
+  end
+  protected
+  def load_story
+    @story = Story.find(params[:story_id])
+  end
+
   def chapter_params
     params.require(:chapter)
       .permit(:body,
-    :chap_num)
+              :name,
+              :chap_num)
       .merge(story_id: params[:story_id])
   end
 

@@ -1,2 +1,2 @@
 <h1><%= @chapter.name %></h1>
-<%= @chapter.body %>
+<%= markdown_parse @chapter.body %>
