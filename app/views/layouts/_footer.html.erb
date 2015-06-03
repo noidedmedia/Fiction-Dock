@@ -4,18 +4,18 @@
       <p class="fiction-dock-logo logo-f">F</p>
     <% end %>
   </div>
-    <div class="footer-primary-links">
+    <div class="footer-left-links">
       <ul>
-        <li><a href="#">About</a></li>
-        <li><a href="https://github.com/noidedmedia/Fiction-Dock">View source on GitHub</a></li>
+        <li><p><%= t(".fiction_dock_description") %></p></li>
       </ul>
     </div>
 
-    <div class="footer-secondary-links">
+    <div class="footer-right-links">
       <ul>
-        <li><a href="#">Terms and Conditions</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><p>© 2015 Noided Media</p></li>
+        <li><p><%= t(".source_available_on") %> <a href="https://github.com/noidedmedia/Fiction-Dock">GitHub</a></p></li>
+        <li><a href="#"><%= t(".terms_and_conditions") %></a></li>
+        <li><a href="#"><%= t(".privacy_policy") %></a></li>
+        <li><p><%= t(".fiction_dock_copyright") %></p></li>
       </ul>
     </div>
 </footer>
