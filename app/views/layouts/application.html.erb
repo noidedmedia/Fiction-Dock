@@ -8,7 +8,7 @@
   <%# If a title is given in a view, that title is used, with "- Fiction Dock" appended. Otherwise, just "Fiction Dock" is used. %>
   <title><%= content_for?(:title) ? content_for(:title) + " - Fiction Dock" : "Fiction Dock" %></title>
 
-  <%= stylesheet_link_tag    'vital/application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, :defer => true %>
   <%= csrf_meta_tags %>
 
@@ -64,6 +64,5 @@
 
 </body>
 
-<%= stylesheet_link_tag    'non-vital/non-vital', media: 'all', 'data-turbolinks-track' => true %>
 <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=latin,latin-ext', 'data-turbolinks-track' => true %>
 </html>
