@@ -1,0 +1,9 @@
+# Frontpage strings
+
+en:
+  frontpage:
+    index:
+      fiction_dock_tagline: "A better fan fiction repository."
+      franchises: "Franchises"
+      stories: "Stories"
+      characters: "Characters"

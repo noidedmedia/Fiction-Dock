@@ -1,4 +1,12 @@
+.subheader {
+  font-size: 1.4rem;
+  font-weight: 200;
+  text-align: center;
+  padding: 2px;
+}
+
 .stats {
+  margin-top: 50px;
   padding: 12px;
   text-align: center;
 
@@ -12,7 +20,7 @@
     border-right: 1px solid #333;
     color: #333;
     display: inline-block;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 800;
     line-height: 1.1em;
     padding: 0 15px;
@@ -23,6 +31,7 @@
 
     &:last-of-type {
       border-right: 0;
+      padding-right: 0;
     }
   }
 

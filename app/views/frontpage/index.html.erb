@@ -1,9 +1,11 @@
-<p class="fiction-dock-logo logo-large">Fiction Dock</p>
+<h2 class="fiction-dock-logo logo-large">Fiction Dock</h2>
+
+<h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
 
 <div class="stats">
   <ul>
-    <li>98<span>Franchises</span></li>
-    <li>673<span>Stories</span></li>
-    <li>125<span>Characters</span></li>
+    <li><%= Franchise.count %><span><%= t(".franchises") %></span></li>
+    <li><%= Story.count %><span><%= t(".stories") %></span></li>
+    <li><%= Character.count %><span><%= t(".characters") %></span></li>
   </ul>
 </div>
