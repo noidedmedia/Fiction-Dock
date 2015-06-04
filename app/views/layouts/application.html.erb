@@ -9,10 +9,8 @@
   <title><%= content_for?(:title) ? content_for(:title) + " - Fiction Dock" : "Fiction Dock" %></title>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, :defer => true %>
   <%= csrf_meta_tags %>
-
-  <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=latin,latin-ext', 'data-turbolinks-track' => true %>
 
   <%# Favicon %>
   <%# 32px and 64px favicons, just in case someone is using some absurdly old browser. %>
@@ -65,4 +63,6 @@
   <%= render 'layouts/footer' %>
 
 </body>
+
+<%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=latin,latin-ext', 'data-turbolinks-track' => true %>
 </html>
