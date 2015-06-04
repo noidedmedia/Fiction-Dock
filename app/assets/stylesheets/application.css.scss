@@ -24,15 +24,6 @@
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: 'fiction-dock-logo';
-  src: font-url('fictiondock.ttf') format('truetype');
-  src: font-url('fictiondock.woff2') format('woff2');
-  src: font-url('fictiondock.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* Styles applicable to all pages. */
 html, body {
   font: 400 10px 'Helvetica Neue', Helvetica, Arial, sans-serif;

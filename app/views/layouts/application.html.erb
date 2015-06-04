@@ -11,8 +11,8 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  
-  <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=latin,latin-ext' %>
+
+  <%= stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&subset=latin,latin-ext', 'data-turbolinks-track' => true %>
 
   <%# Favicon %>
   <%# 32px and 64px favicons, just in case someone is using some absurdly old browser. %>
@@ -41,6 +41,17 @@
 
   <%# Description for search engine results, e.g. Google and DuckDuckGo. %>
   <meta name="description" content="A better fan fiction repository.">
+
+  <style>
+    @font-face {
+      font-family: 'fiction-dock-logo';
+      src: font-url('fictiondock.ttf') format('truetype');
+      src: font-url('fictiondock.woff2') format('woff2');
+      src: font-url('fictiondock.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
 
 </head>
 <body <% if user_signed_in? %>class="signed-in"<% end %>>
