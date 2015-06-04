@@ -4,3 +4,19 @@
   background-color: #D0D0D0;
 }
 
+#current-franchises-list{
+  padding-top: 10px;
+  width: 400px;
+  background-color: #DDFFDD;
+  .li{
+    border: 1px solid black;
+  }
+  .franchise-delete-button{
+    display: inline;   
+    padding-right: 40px;
+    color: red;
+  }
+  .franchise-display-name{
+    display: inline;
+  }
+}

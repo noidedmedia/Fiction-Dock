@@ -47,7 +47,10 @@ StoryForm.prototype._makeCallback = function(franchise){
   };
 }
 StoryForm.prototype.clearList = function(){
+  console.log("Trying to clear:");
+  console.log(this.suggestBox);
   this.suggestBox.empty();
+  console.log(this.suggestBox);
 }
 StoryForm.prototype.franchisesWithPrefix = function(prefix){
   console.log("Prefix is: " + prefix);
@@ -110,7 +113,7 @@ StoryForm.prototype.removeFranchise = function(f){
 StoryForm.prototype.displayForFranchise = function(f){
   var that = this;
   var d = $("<li>");
-  var deleteButton = $("<div>").attr({class: "franchise-delete-button"});
+  var deleteButton = $("<div>").attr({class: "franchise-delete-button"}).append("remove");
   var name = $("<div>").attr({class: "franchise-display-name"}).append(f.name);
   deleteButton.click(function(e){
     that.removeFranchise(f);
