@@ -43,7 +43,13 @@
     cursor: default;
 
     @media all and (max-device-width: $mobile-width) {
+      max-width: 90vw;
       font-size: 4.2rem;
+    }
+
+    @media all and (max-device-width: 400px) {
+      max-width: 90vw;
+      font-size: 3.2rem;
     }
   }
 }
