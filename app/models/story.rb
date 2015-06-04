@@ -25,7 +25,7 @@ class Story < ActiveRecord::Base
   has_many :characters, through: :story_characters
   has_many :story_franchises
   has_many :franchises, through: :story_franchises
-
+  has_many :ships
   attr_accessor :franchise_ids
   before_validation :resolve_franchise_ids
   validate :has_at_least_one_franchise

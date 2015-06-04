@@ -16,12 +16,17 @@
   <div id="story-franchises-forms-container">
     <% @story.franchises.pluck(:id).each do |i| %>
       <%# rails hack to make this work %>
-      <input type="hidden" name="story[franchise_ids][]" value="<%= i %>">
+      <input type="hidden" name="story[franchise_ids][]" value="<%= i %>" class="franchise-id-input">
     <% end %>
   </div>
   <ul id="current-franchises-list">
 
   </ul>
+  <div id="story-characters-container">
+    <% @story.characters.pluck(:id).each do |c| %>
+      <input class="story-character-input" name="story[character_ids][]" value="<% c %>">
+    <% end %>
+  </div>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>

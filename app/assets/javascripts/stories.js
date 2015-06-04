@@ -1,3 +1,29 @@
+function StoryFormCharacters(form){
+  this.parent = form;
+  this.box = $("#story-characters-list");
+  // Franchises we've already drawn on this round
+  this.drawnFranchises = [];
+}
+
+StoryFormCharacters.prototype.setup = function(done){
+  done();
+}
+StoryFormCharacters.prototype.newFranchises = function(){
+  var r = [];
+  for(var i in this.parent.franchises){
+    // If it's a new franchise
+    if(this.drawnFranchises.indexOf(this.parent.franchises[i]) == -1){
+      r.push(this.parent.franchises[i]);
+    }
+  }
+  return r;
+}
+StoryFormCharacters.prototype.render = function(){
+  var list = this.newFranchises();
+  for(var i in this.newFranchises()){
+    this._addFranchise();
+  }
+}
 /*
  * When you write JavaScript at 11:00 at night, bad things happen
  * This is one of those things
@@ -5,7 +31,6 @@
  * Or, at least, the franchise selection portion.
  * The characters selection protion communicates with this to find characters.
  */
-
 function StoryForm(franchises){
   this.franchises = franchises;
   this.container = $("#story-franchises-forms-container");
@@ -13,6 +38,7 @@ function StoryForm(franchises){
   this.suggestBox = $("#franchise-input-suggest-box");
   this.franchiseDisplay = $("#current-franchises-list");
 }
+
 StoryForm.prototype.setCallbacks = function(){
   var that = this;
   this.box.keyup(function(event){
@@ -74,6 +100,8 @@ StoryForm.prototype.addFranchiseByName = function(name){
 }
 
 StoryForm.prototype.addFranchise = function(franchise){
+  console.log("Adding franchise:");
+  console.log(franchise);
   if(this.franchises.indexOf(franchise) == -1){
     this.franchises.push(franchise);
   }
@@ -131,15 +159,15 @@ StoryForm.prototype.setup = function(after){
   inputs.each(function(index, input){
     console.log(input.value);
     Franchise.getById(input.value, function(fr){
-      console.log(that);
       that.addFranchise(fr);
     });
   });
   // Now we grab a list of all franchises to make our life easier
   Franchise.all(function(all){
-    console.log("Acquiring all franchises");
     that.allFranchises = all;
-    after();
+    that.render();
+    that.characters = new StoryFormCharacters(that);
+    that.characters.setup(after);
   });
 }
 $(function(){

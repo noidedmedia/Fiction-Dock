@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603032110) do
+ActiveRecord::Schema.define(version: 20150604185414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,24 @@ ActiveRecord::Schema.define(version: 20150603032110) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "ship_characters", force: :cascade do |t|
+    t.integer  "ship_id"
+    t.integer  "character_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "ship_characters", ["character_id"], name: "index_ship_characters_on_character_id", using: :btree
+  add_index "ship_characters", ["ship_id"], name: "index_ship_characters_on_ship_id", using: :btree
+
+  create_table "ships", force: :cascade do |t|
+    t.integer  "story_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ships", ["story_id"], name: "index_ships_on_story_id", using: :btree
+
   create_table "stories", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -131,6 +149,9 @@ ActiveRecord::Schema.define(version: 20150603032110) do
   add_foreign_key "characters", "franchises"
   add_foreign_key "franchise_users", "franchises"
   add_foreign_key "franchise_users", "users"
+  add_foreign_key "ship_characters", "characters"
+  add_foreign_key "ship_characters", "ships"
+  add_foreign_key "ships", "stories"
   add_foreign_key "stories", "users"
   add_foreign_key "story_characters", "characters"
   add_foreign_key "story_characters", "stories"
