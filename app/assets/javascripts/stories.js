@@ -11,6 +11,7 @@ function StoryForm(franchises){
   this.container = $("#story-franchises-forms-container");
   this.box = $("#franchise-input-box");
   this.suggestBox = $("#franchise-input-suggest-box");
+  this.franchiseDisplay = $("#current-franchises-list");
 }
 StoryForm.prototype.setCallbacks = function(){
   var that = this;
@@ -90,6 +91,7 @@ StoryForm.prototype.takeControl = function(){
 // Render the form elements
 StoryForm.prototype.render = function(){
   this.container.empty();
+  this.franchiseDisplay.empty();
   for(var f in this.franchises){
     var franchise = this.franchises[f];
     console.log("Trying to add franchise to form");
@@ -101,6 +103,7 @@ StoryForm.prototype.render = function(){
       value: franchise.id
     });
     this.container.append(input);
+    
   }
 }
 
