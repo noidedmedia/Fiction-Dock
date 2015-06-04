@@ -54,17 +54,11 @@ StoryForm.prototype.franchisesWithPrefix = function(prefix){
   var r = []; // Empty array to keep the results
   for(var f in this.allFranchises){
     var franchise = this.allFranchises[f];
-    console.log("Checking against franchise with name: " + franchise.name);
     var prepped = franchise.name.toLowerCase().trim();
-    console.log("Prepped is: " + prepped);
-    console.log("Slice is: '" + prepped.slice(0, prefix.length) + "'");
     if(prepped.slice(0, prefix.length) == prefix){
-      console.log("Succesfully appending!");
       r.push(franchise);
     }
   }
-  console.log("Array is");
-  console.log(r); 
   return r;
 }
 StoryForm.prototype.addFranchiseByName = function(name){
@@ -103,10 +97,27 @@ StoryForm.prototype.render = function(){
       value: franchise.id
     });
     this.container.append(input);
-    
+    var display = this.displayForFranchise(franchise);
+    this.franchiseDisplay.append(display);
   }
 }
-
+StoryForm.prototype.removeFranchise = function(f){
+  var index = this.franchises.indexOf(f);
+  if(index > -1){
+    this.franchises.splice(index, 1);
+  }
+}
+StoryForm.prototype.displayForFranchise = function(f){
+  var that = this;
+  var d = $("<li>");
+  var deleteButton = $("<div>").attr({class: "franchise-delete-button"});
+  var name = $("<div>").attr({class: "franchise-display-name"}).append(f.name);
+  deleteButton.click(function(e){
+    that.removeFranchise(f);
+    that.render();
+  });
+  return d.append(deleteButton).append(name);
+}
 // Setup a story form
 // Runs the `after` callback when finished
 StoryForm.prototype.setup = function(after){
