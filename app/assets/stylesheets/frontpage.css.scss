@@ -1,0 +1,37 @@
+.stats {
+  padding: 12px;
+  text-align: center;
+
+  ul {
+    display: inline-block;
+    padding: 0;
+    text-align: left;
+  }
+
+  li {
+    border-right: 1px solid #333;
+    color: #333;
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.1em;
+    padding: 0 15px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-of-type {
+      border-right: 0;
+    }
+  }
+
+  span {
+    color: #333;
+    opacity: 0.8;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: normal;
+    padding-top: 2px;
+  }
+}

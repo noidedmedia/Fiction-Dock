@@ -75,4 +75,14 @@ body.dark-mode {
       }
     }
   }
+
+  .stats
+    li {
+      border-right-color: #fff;
+      color: #fff;
+    }
+    
+    span {
+      color: #fff;
+    }
 }
