@@ -4,8 +4,22 @@
 
 <div class="stats">
   <ul>
-    <li><%= Franchise.count %><span><%= t(".franchises") %></span></li>
-    <li><%= Story.count %><span><%= t(".stories") %></span></li>
-    <li><%= Character.count %><span><%= t(".characters") %></span></li>
+    <li>
+      <%= link_to franchises_path do %>
+        <%= Franchise.count %><span><%= t(".franchises") %></span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to stories_path do %>
+        <%= Story.count %><span><%= t(".stories") %></span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to root_path do %>
+        <%= Character.count %><span><%= t(".characters") %></span>
+      <% end %>
+    </li>
   </ul>
 </div>
