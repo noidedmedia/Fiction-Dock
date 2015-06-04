@@ -45,9 +45,9 @@
   <style>
     @font-face {
       font-family: 'fiction-dock-logo';
-      src: font-url('fictiondock.ttf') format('truetype');
-      src: font-url('fictiondock.woff2') format('woff2');
-      src: font-url('fictiondock.woff') format('woff');
+      src: url( <%= font_path("fictiondock.ttf") %> ) format('truetype');
+      src: url( <%= font_path("fictiondock.woff2") %> ) format('woff2');
+      src: url( <%= font_path("fictiondock.woff") %> ) format('woff');
       font-weight: normal;
       font-style: normal;
     }
