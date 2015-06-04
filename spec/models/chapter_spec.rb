@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: chapters
+#
+#  id         :integer          not null, primary key
+#  body       :text
+#  chap_num   :integer
+#  story_id   :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  name       :string
+#  published  :boolean          default(FALSE), not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Chapter, type: :model do

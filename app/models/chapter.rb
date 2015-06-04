@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: chapters
+#
+#  id         :integer          not null, primary key
+#  body       :text
+#  chap_num   :integer
+#  story_id   :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  name       :string
+#  published  :boolean          default(FALSE), not null
+#
+
 class Chapter < ActiveRecord::Base
   scope :story_order, ->{ order(chap_num: :asc).where(published: true) }
   validates :name, presence: true
