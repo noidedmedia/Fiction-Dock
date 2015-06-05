@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :franchises do
     resources :characters
     get 'stories', on: :member
+    get 'complete', on: :collection
   end
   resources :users, only: [:index, :show] do
     get 'stories', on: :member

@@ -4,6 +4,10 @@ class FranchisesController < ApplicationController
     @franchise = Franchise.friendly.find(params[:id])
     @stories = @franchise.stories
   end
+
+  def complete
+    @franchises = Franchise.where(["name ILIKE ?", "#{params[:query]}%"])
+  end
   def index
 
     @franchises = Franchise.all

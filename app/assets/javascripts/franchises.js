@@ -26,7 +26,19 @@ Franchise.prototype._charactersUrl = function(){
   return this._baseUrl() + "/characters.json";
 }
 
-
+// Takes a callback to be used on delete, returns a form list item
+Franchise.prototype.formDisplayBox = function(del){
+  var delButton = $("<div>").attr({
+    class: "remove-franchise-button"
+  }).append("Delete Franchise");
+  delButton.click(del);
+  var item = $("<li>");
+  item.append(delButton);
+  item.append($("<div>").attr({
+      class: "franchise-list-name"
+    }).append(this.name));
+  return item;
+}
 Franchise.prototype.characters = function(callback){
   var success = function(data, status){
     var ar = [];
@@ -35,7 +47,7 @@ Franchise.prototype.characters = function(callback){
     }
     callback(data);
   };
-  
+
   $.ajax(this._charactersUrl(), {
     success: success,
     dataType: 'json'
@@ -48,7 +60,7 @@ Franchise.getById = function(id, callback){
   }
   $.ajax("/franchises/" + id, {
     dataType: 'json',
-    success: success
+  success: success
   });
 }
 Franchise.all = function(callback){
@@ -62,7 +74,7 @@ Franchise.all = function(callback){
   }
   $.ajax("/franchises/", {
     success: success,
-    dataType: "json"
+  dataType: "json"
   });
 }
 
