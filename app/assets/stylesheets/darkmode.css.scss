@@ -44,6 +44,7 @@ body.dark-mode {
 
   #main-header {
     background-color: #333;
+    border-bottom: 0;
 
     .header-item,
     .header-item a,
@@ -93,7 +94,7 @@ body.dark-mode {
     border-color: rgba(255,255,255,0.15);
 
     &:before {
-      border-bottom-color: rgba(255,255,255,0.15);
+      border-bottom-color: rgba(255,255,255,0.3);
     }
 
     &:after {
