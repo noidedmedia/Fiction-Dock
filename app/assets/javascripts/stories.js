@@ -28,6 +28,15 @@ function Story(obj){
 
   }
 }
+
+Story.prototype.removeShip = function(s){
+  for(var s in this.ships){
+    var ship = this.ships[s];
+    if(ship.id == s.id){
+      this.splice(s, 1);
+    }
+  }
+}
 /* 
  * Update the story to only contain valid characters
  * Store them in story.potentialCharacters

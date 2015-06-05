@@ -42,20 +42,32 @@ Ship.prototype.containsCharacter = function(c){
  * character, to be ran when the character is added or removed.
  *
  * As such, `done` should probably render the changes somewhere.
+ *
+ * When the removal button is clicked, `removeship` will have the function
+ * `removeShip` called with `this` as an argument
  */
-Ship.prototype.displayForForm = function(story, done){
-  var container = $("<ul>");
+Ship.prototype.displayForForm = function(story, done, removeship){
+  var container = $("<div>").attr({
+    class: "ship-container"
+  });
+  var remove = $("<div>").attr({
+    class: "ship-removal-button"
+  }).append("Remove Ship");
+  var that = this;
+  remove.click(function(){
+    removeship.removeShip(that);
+  });
+  var list = $("<ul>");
   for(var f in story.franchises){
-    container.append(story.franchises[f].listDisplay());
+    list.append(story.franchises[f].listDisplay());
   }
   for(var c in story.characters){
     var character = story.characters[c];
     var contained = this.containsCharacter(character);
     var box = character.formDisplay(contained, this, done);
-    console.log("Adding to franchise with id: " + character.franchise_id);
-    container.find(".franchise-" + character.franchise_id).append(box);
+    list.find(".franchise-" + character.franchise_id).append(box);
   }
-  return container;
+  return container.append(list);
 }
 function ShipForm(story){
   this.story = story;
@@ -70,7 +82,7 @@ ShipForm.prototype.render = function(){
   for(var s in this.story.ships){
     var s = this.story.ships[s];
     console.log(s);
-    this.container.append(s.displayForForm(this.story, renderCallback));
+    this.container.append(s.displayForForm(this.story, renderCallback, this.story));
   }
 }
 ShipForm.prototype.setup = function(done){
