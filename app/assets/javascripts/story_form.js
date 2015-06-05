@@ -1,3 +1,38 @@
+/* 
+ * THIS FILE CONTIANS TECHNICAL DEBT
+ *
+ * IT IS A HORRIBLE GOD-OBJECT I FEEL BAD FOR WRITING
+ *
+ * LOOK AT THE COMMIT HISTORY, IT USED TO BE __WORSE__!
+ *
+ * I've tried to comment it as best I can. Still, monsters lurk within.
+ *
+ * Ye have been warned. 
+ *
+ *                             .ed"""" """$$$$be.
+ *                           -"           ^""**$$$e.
+ *                         ."                   '$$$c
+ *                        /                      "4$$b
+ *                       d  3                      $$$$
+ *                       $  *                   .$$$$$$
+ *                      .$  ^c           $$$$$e$$$$$$$$.
+ *                      d$L  4.         4$$$$$$$$$$$$$$b
+ *                      $$$$b ^ceeeee.  4$$ECL.F*$$$$$$$
+ *                      $$$$P d$$$$F $ $$$$$$$$$- $$$$$$
+ *                      3$$$F "$$$$b   $"$$$$$$$  $$$$*"
+ *                       $$P"  "$$b   .$ $$$$$...e$$
+ *                        *c    ..    $$ 3$$$$$$$$$$eF
+ *                          %ce""    $$$  $$$$$$$$$$*
+ *                           *$e.    *** d$$$$$"L$$
+ *                            $$$      4J$$$$$% $$$
+ *                           $"'$=e....$*$$**$cz$$"
+ *                           $  *=%4.$ L L$ P3$$$F
+ *                           $   "%*ebJLzb$e$$$$$b
+ *                            %..      4$$$$$$$$$$
+ *                             $$$e   z$$$$$$$$$$ 
+ *                              "*$c  "$$$$$$$P"
+ *                                """*$$$$$$$"
+ */
 function StoryForm(){
   this.container = $("#story-form");
   this.storyId = parseInt(this.container.data("story-id"));
