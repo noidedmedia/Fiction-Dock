@@ -7,7 +7,25 @@
   border: 1px solid red;
   display: inline;
 }
+.franchise-list-characters{
+  padding-left: 50px;
+}
 .franchise-list-name{
   display: inline;
   padding-left: 100px;
+}
+.character-list-name{
+  display: inline;
+  padding-left: 100px;
+}
+.character-list-action{
+  display: inline-block;
+  width: 100px;
+}
+
+.character-unchecked{
+  background-color: #EEEEEE;
+}
+.character-checked{
+  background-color: #EEFFEE;
 }

@@ -1,4 +1,4 @@
-json.extract! @story, :name, :blurb, :description
+json.extract! @story, :name, :blurb, :description, :id
 json.user_url user_url(@story.user, format: :json)
 json.chapters @story.chapters.story_order do |chapter|
   json.extract! chapter, :name, :id, :slug

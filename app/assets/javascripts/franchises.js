@@ -26,6 +26,67 @@ Franchise.prototype._charactersUrl = function(){
   return this._baseUrl() + "/characters.json";
 }
 
+Franchise.suggest = function(fragment, callback){
+  var suc = function(data){
+    callback(data);
+  }
+  $.ajax("/franchises/complete.json?query=" + fragment, {
+    dataType: "json",
+    success: suc
+  });
+}
+/*
+ * Returns all you need to suggest franchises to the user.
+ * Append it into your HTML somewhere.
+ * callback: called with the franchise when a user makes the selection
+ *
+ * Due to nested callbacks, this shit is messy as hell
+ * 
+ * ...
+ *
+ * Ok, nested callbacks and me being not very good at writing JS.
+ */
+Franchise.suggestDisplay = function(callback){
+  var container = $("<div>").attr({
+    class: "franchise-suggestor"
+  });
+  var inputbox = $("<input>").attr({
+    class: "franchise-suggestor-input",
+    type: "text"
+  });
+  var list = $("<ul>").attr({
+    class: "franchise-suggestor-list"
+  });
+  inputbox.keyup(function(event){
+    console.log(this);
+    console.log(this.value);
+    var input = this;
+    Franchise.suggest(this.value.trim(), function(franchises){
+      list.empty();
+      for(var f in franchises){
+        var franchise = franchises[f];
+        var item = $("<li>").attr({
+          class: "franchise-suggestor-item"
+        }).append(franchise.name);
+        item.click(Franchise._suggestDisplayCallback(input, list, franchise, callback));
+        list.append(item);
+      }
+    });
+  })
+  container.append(inputbox);
+  container.append(list);
+  return container;
+}
+
+Franchise._suggestDisplayCallback = function(input, list, fr, callback){
+  return function(){
+    console.log("Selected a franchise suggestion!");
+    console.log(fr);
+    input.value = "";
+    Franchise.getById(fr.id, callback);
+    list.empty();
+  }
+}
 // Takes a callback to be used on delete, returns a form list item
 Franchise.prototype.formDisplayBox = function(del){
   var delButton = $("<div>").attr({
