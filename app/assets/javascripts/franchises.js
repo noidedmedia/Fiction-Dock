@@ -37,6 +37,10 @@ Franchise.prototype.formDisplayBox = function(del){
   item.append($("<div>").attr({
       class: "franchise-list-name"
     }).append(this.name));
+  item.append($("<ul>").attr({
+    class: "franchise-list-characters",
+    id: "franchise-" + this.id
+  }));
   return item;
 }
 Franchise.prototype.characters = function(callback){

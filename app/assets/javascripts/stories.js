@@ -90,7 +90,10 @@ StoryForm.prototype._removeFranchiseCallback = function(fr){
     }
   }
 }
-
+/*
+ * Get a list of all valid characters for this story
+ * That is, the list of all characters in the story's franchises
+ */
 StoryForm.prototype._updatePotentialCharacters = function(){
   this.potentialCharacters = [];
   for(var f in this.story.franchises){
@@ -102,15 +105,16 @@ StoryForm.prototype._updatePotentialCharacters = function(){
 }
 // Remove characters from non-valid franchises from our story
 StoryForm.prototype._updateStoryCharacters = function(){
+  // Store a list of story character indexes for later display
+  this.storyCharacterIndexes = [];
   for(var c in this.story.characters){
     var isValid = false
       // TODO: Make these sorted so this can be a binary search
       for(var vc in this.potentialCharacters){
         if(this.potentialCharacters[vc].id == this.story.characters[c].id){
           isValid = true;
-          console.log("Character is valid");
+          this.storyCharacterIndexes.push(vc);
         }
-
       }
     if(! isValid){
       // Remove from the story's characters
@@ -118,9 +122,48 @@ StoryForm.prototype._updateStoryCharacters = function(){
     }
   }
 }
+/*
+ * Returns a callback that removes `ch` from story's characters
+ * Uses ID comparison
+ */
+StoryForm.prototype._removeCharacterCallback = function(ch){
+  var that = this;
+  return function(){
+    for(var c in that.story.characters){
+      if(that.story.characters[c].id == ch.id){
+        that.story.characters.splice(c, 1);
+      }
+    }
+    that.render();
+  }
+}
+
+StoryForm.prototype._addCharacterCallback = function(ch){
+  var that = this;
+  return function(){
+    that.story.characters.append(ch);
+    that.render();
+  }
+}
+/*
+ * Render the characters section
+ * Done after the franchises
+ */
 StoryForm.prototype._renderCharacters = function(){
   this._updatePotentialCharacters();
   this._updateStoryCharacters();
+  for(var c in this.potentialCharacters){
+    var box;
+    if(this.storyCharacterIndexes.indexOf(c) > -1){
+      var ch = this.potentialCharacters[c];
+      box = ch.formDisplay(true, this._removeCharacterCallback(ch));
+    }
+    else{
+      var ch = this.potentialCharacters[c];
+      box = ch.formDisplay(false, this._addCharacterCallback(ch));
+    }
+    $("#franchise-" + ch.franchise_id).append(box);
+  }
 }
 StoryForm.prototype._renderFranchises = function(){
   this.franchiseContainer.empty();
