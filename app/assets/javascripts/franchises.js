@@ -26,6 +26,7 @@ Franchise.prototype._charactersUrl = function(){
   return this._baseUrl() + "/characters.json";
 }
 
+
 Franchise.suggest = function(fragment, callback){
   var suc = function(data){
     callback(data);
@@ -87,12 +88,23 @@ Franchise._suggestDisplayCallback = function(input, list, fr, callback){
     list.empty();
   }
 }
+
+Franchise.prototype.destroyCallbackForForm = function(form){
+  var fr = this;
+  return function(){
+    var index = form.story.franchises.indexOf(fr);
+    if(index > -1){
+      form.story.franchises.splice(index, 1);
+    }
+    form.render();
+  }
+}
 // Takes a callback to be used on delete, returns a form list item
-Franchise.prototype.formDisplayBox = function(del){
+Franchise.prototype.formDisplayBox = function(form){
   var delButton = $("<div>").attr({
     class: "remove-franchise-button"
   }).append("Delete Franchise");
-  delButton.click(del);
+  delButton.click(this.destroyCallbackForForm(form));
   var item = $("<li>");
   item.append(delButton);
   item.append($("<div>").attr({

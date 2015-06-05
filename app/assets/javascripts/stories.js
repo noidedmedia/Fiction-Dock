@@ -72,10 +72,16 @@ StoryForm.prototype.setup = function(){
   if(this._hasSetUp){
     throw "You can't set up twice!";
   }
-  // Helper object for all of our form objects
-  // Makes registering errors easier
+  /*
+   * this is a helper object, which holds jQuery objects representing the
+   * elements of the form. It makes adding errors much, much easier.
+   */
   this.form = {};
-  // Input box for the name of the story
+  /*
+   * In the next section, we basically just build up some inputs and
+   * add them to the DOM.
+   * TODO: Refactor this to use templates or something
+   */
   this.form.name = $("<input>").attr({
     id: "story-name-box",
   type: "text",
@@ -91,6 +97,11 @@ StoryForm.prototype.setup = function(){
   }).append(this.story.blurb);
   this.container.append(this.form.blurb);
   var that = this;
+  /*
+   * Here, we add a franchise-suggestor
+   *
+   * That's in the franchises.js file, so look there for documentation.
+   */
   var suggestDiv = $("<div>").attr({
     class: "franchise-suggestor-container"
   });
@@ -188,16 +199,15 @@ StoryForm.prototype.render = function(){
   this._renderCharacters();
 }
 
-StoryForm.prototype._removeFranchiseCallback = function(fr){
-  var that = this;
-  return function(){
-    console.log("remove franchise called");
-    var index = that.story.franchises.indexOf(fr);
-    console.log("index is: " + index);
-    if(index > -1){
-      that.story.franchises.splice(index, 1);
-      that.render();
-    }
+StoryForm.prototype._renderCharacters = function(){
+  this._updatePotentialCharacters();
+  this._updateStoryCharacters();
+
+  for(var c in this.potentialCharacters){
+    var ch = this.potentialCharacters[c];
+    var box;
+    box = ch.formDisplay( (this.storyCharacterIndexes.indexOf(c) > -1), this); 
+    $("#franchise-" + ch.franchise_id).append(box);
   }
 }
 /*
@@ -232,23 +242,7 @@ StoryForm.prototype._updateStoryCharacters = function(){
     }
   }
 }
-/*
- * Returns a callback that removes `ch` from story's characters
- * Uses ID comparison
- */
-StoryForm.prototype._removeCharacterCallback = function(ch){
-  var that = this;
-  return function(){
-    console.log("REMOVING CHARACTER");
-    console.log(c);
-    for(var c in that.story.characters){
-      if(that.story.characters[c].id == ch.id){
-        that.story.characters.splice(c, 1);
-      }
-    }
-    that.render();
-  }
-}
+
 
 StoryForm.prototype._addCharacterCallback = function(ch){
   var that = this;
@@ -257,32 +251,11 @@ StoryForm.prototype._addCharacterCallback = function(ch){
     that.render();
   }
 }
-/*
- * Render the characters section
- * Done after the franchises
- */
-StoryForm.prototype._renderCharacters = function(){
-  this._updatePotentialCharacters();
-  this._updateStoryCharacters();
-  for(var c in this.potentialCharacters){
-    var box;
-    if(this.storyCharacterIndexes.indexOf(c) > -1){
-      var ch = this.potentialCharacters[c];
-      box = ch.formDisplay(true, this._removeCharacterCallback(ch));
-    }
-    else{
-      var ch = this.potentialCharacters[c];
-      box = ch.formDisplay(false, this._addCharacterCallback(ch));
-    }
-    $("#franchise-" + ch.franchise_id).append(box);
-  }
-}
 StoryForm.prototype._renderFranchises = function(){
   this.form.franchises.empty();
   for(var f in this.story.franchises){
     var franchise = this.story.franchises[f];
-    var callback = this._removeFranchiseCallback(franchise);
-    var box = franchise.formDisplayBox(callback);
+    var box = franchise.formDisplayBox(this);
     this.form.franchises.append(box);
   }
 }
