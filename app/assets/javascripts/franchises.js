@@ -99,6 +99,12 @@ Franchise.prototype.destroyCallbackForForm = function(form){
     form.render();
   }
 }
+
+Franchise.prototype.listDisplay = function(){
+  return $("<li>").attr({
+    class: 'franchise-list-item franchise-' + this.id
+  }).append($("<h3>").append(this.name)).append($("<ul>"));
+}
 // Takes a callback to be used on delete, returns a form list item
 Franchise.prototype.formDisplayBox = function(form){
   var delButton = $("<div>").attr({
@@ -111,8 +117,7 @@ Franchise.prototype.formDisplayBox = function(form){
       class: "franchise-list-name"
     }).append(this.name));
   item.append($("<ul>").attr({
-    class: "franchise-list-characters",
-    id: "franchise-" + this.id
+    class: "franchise-list-characters franchise-" + this.id,
   }));
   return item;
 }

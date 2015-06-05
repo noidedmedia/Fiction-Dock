@@ -5,8 +5,13 @@
 function Story(obj){
   this.franchises = [];
   this.characters = [];
+  this.ships = [];
   for(var prop in obj){
-    if(prop === "characters"){
+    if(prop == "ships"){
+      for(var s in obj.ships)
+        this.ships.push(new Ship(obj.ships[s]));
+    }
+    else if(prop === "characters"){
       for(var c in obj.characters){
         this.characters.push(new Character(obj.characters[c]));
       }
@@ -23,8 +28,39 @@ function Story(obj){
 
   }
 }
+/* 
+ * Update the story to only contain valid characters
+ * Store them in story.potentialCharacters
+ * Store the indexes of charactesr actually in the story in potentiaCharacterIndexes
+ */
+Story.prototype.updateCharacters = function(){
+  console.log("Updating characters in story");
+  this.potentialCharacters = [];
+  for(var f in this.franchises){
+    var fr = this.franchises[f];
+    for(var c in fr.characters){
+      this.potentialCharacters.push(fr.characters[c]);
+    }
+  }
+  this.potentialCharacterIndexes = [];
+  for(var c in this.characters){
+    var isValid = false;
+    // TODO: Make this sorted so we can do a binary search
+    for(var pc in this.potentialCharacters){
+      if(this.potentialCharacters[pc].id == this.characters[c].id){
+        isValid = true;
+        this.potentialCharacterIndexes.push(pc);
+      }
+    }
+    if( ! isValid){
+      this.removeCharacter(this.characters[c]);
+    }
+  }
+}
+
+
 Story.prototype.removeCharacter = function(cr){
-  for(var c in this.charcters){
+  for(var c in this.characters){
     if(this.characters[c].id == cr.id){
       this.characters.splice(c, 1);
     }

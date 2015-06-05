@@ -7,7 +7,7 @@ end
 json.ships @story.ships.includes(:characters) do |ship|
   json.extract! ship, :id
   json.characters ship.characters do |character|
-    json.extract! character, :name, :id, :slug
+    json.extract! character, :name, :id, :slug, :franchise_id
   end
 end
 
@@ -19,6 +19,6 @@ json.franchises @story.franchises.includes(:characters) do |franchise|
   end
 end
 json.characters @story.characters.includes(:franchise) do |character|
-  json.extract! character, :name, :id, :slug
+  json.extract! character, :name, :id, :slug, :franchise_id
   json.url franchise_character_url(character.franchise, character, format: :json)
 end

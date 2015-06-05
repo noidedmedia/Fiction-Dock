@@ -54,7 +54,7 @@ Character.prototype.removalCallback = function(c, done){
 Character.prototype.additionCallback = function(c, done){
   var that = this;
   return function(){
-    c.addCharacter(this);
+    c.addCharacter(that);
     done();
   }
 }

@@ -86,9 +86,13 @@ StoryForm.prototype.setup = function(){
     e.preventDefault();
     that.submitForm();
   });
-  this.container.append(this.submitButton);
-  this._hasSetUp = true;
-  this.render();
+  this.shipForm = new ShipForm(this.story);
+  this.shipForm.setup(function(shipContainer){
+    that.container.append(shipContainer);
+    that.container.append(that.submitButton);
+    that._hasSetUp = true;
+    that.render();
+  });
 }
 StoryForm.prototype.submitForm = function(){
   var toSubmit = {}
@@ -147,7 +151,6 @@ StoryForm.prototype.displayErrors = function(err){
   // Clear our all our old errors first
   $(".errors-list").empty();
   for(var prop in err){
-    console.log("Checking for prop: " + prop);
     if(this.form[prop]){
       this.form[prop].before(this._makeError(err[prop]));
     }
@@ -156,52 +159,22 @@ StoryForm.prototype.displayErrors = function(err){
 StoryForm.prototype.render = function(){
   this._renderFranchises();
   this._renderCharacters();
+  this.shipForm.render();
 }
 
 StoryForm.prototype._renderCharacters = function(){
-  this._updatePotentialCharacters();
-  this._updateStoryCharacters();
-
-  for(var c in this.potentialCharacters){
-    var ch = this.potentialCharacters[c];
+  var that = this;
+  this.story.updateCharacters();
+  for(var c in this.story.potentialCharacters){
+    var ch = this.story.potentialCharacters[c];
     var box;
-    box = ch.formDisplay((this.storyCharacterIndexes.indexOf(c) > -1), this.story, this.render); 
-    $("#franchise-" + ch.franchise_id).append(box);
+    box = ch.formDisplay((this.story.potentialCharacterIndexes.indexOf(c) > -1), this.story, function(){
+      console.log("Rendering...");
+      that.render();
+    });
+    this.form.franchises.find(".franchise-" + ch.franchise_id).append(box);
   }
 }
-/*
- * Get a list of all valid characters for this story
- * That is, the list of all characters in the story's franchises
- */
-StoryForm.prototype._updatePotentialCharacters = function(){
-  this.potentialCharacters = [];
-  for(var f in this.story.franchises){
-    var fr = this.story.franchises[f];
-    for(var c in fr.characters){
-      this.potentialCharacters.push(fr.characters[c]);
-    }
-  }
-}
-// Remove characters from non-valid franchises from our story
-StoryForm.prototype._updateStoryCharacters = function(){
-  // Store a list of story character indexes for later display
-  this.storyCharacterIndexes = [];
-  for(var c in this.story.characters){
-    var isValid = false
-      // TODO: Make these sorted so this can be a binary search
-      for(var vc in this.potentialCharacters){
-        if(this.potentialCharacters[vc].id == this.story.characters[c].id){
-          isValid = true;
-          this.storyCharacterIndexes.push(vc);
-        }
-      }
-    if(! isValid){
-      // Remove from the story's characters
-      this.story.characters.slice(c, 1);
-    }
-  }
-}
-
 
 StoryForm.prototype._addCharacterCallback = function(ch){
   var that = this;
@@ -210,7 +183,9 @@ StoryForm.prototype._addCharacterCallback = function(ch){
     that.render();
   }
 }
+
 StoryForm.prototype._renderFranchises = function(){
+  console.log("Rendering franchises");
   this.form.franchises.empty();
   for(var f in this.story.franchises){
     var franchise = this.story.franchises[f];
@@ -220,12 +195,10 @@ StoryForm.prototype._renderFranchises = function(){
 }
 StoryForm.prototype.takeControl = function(){
   if(this.isNew()){
-    console.log("new story detected");
     this.story = new Story({});
     this.setup();
   }
   else{
-    console.log("Existant story detected, grabbing JSON");
     var that = this;
     Story.byId(this.storyId, function(story){
       that.story = story;
@@ -235,7 +208,6 @@ StoryForm.prototype.takeControl = function(){
 }
 $(function(){
   if(document.getElementById("story-form")){
-    console.log("Making a form and taking control");
     var form = new StoryForm();
     form.takeControl();
   }
