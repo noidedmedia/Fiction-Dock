@@ -23,6 +23,13 @@ function Story(obj){
 
   }
 }
+Story.prototype.removeCharacter = function(cr){
+  for(var c in this.charcters){
+    if(this.characters[c].id == cr.id){
+      this.characters.splice(c, 1);
+    }
+  }
+}
 
 Story.prototype.addCharacter = function(cr){
   for(var c in this.characters){
@@ -45,9 +52,9 @@ Story.prototype.addFranchise = function(fr){
 Story.byId = function(id, callback){
   $.ajax("/stories/" + id + ".json", {
     dataType: "json",
-  success: function(response){
-    callback(new Story(response));
-  }
+    success: function(response){
+      callback(new Story(response));
+    }
   });
 }
 

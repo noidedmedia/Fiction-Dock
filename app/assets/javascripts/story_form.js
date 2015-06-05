@@ -165,7 +165,7 @@ StoryForm.prototype._renderCharacters = function(){
   for(var c in this.potentialCharacters){
     var ch = this.potentialCharacters[c];
     var box;
-    box = ch.formDisplay( (this.storyCharacterIndexes.indexOf(c) > -1), this); 
+    box = ch.formDisplay((this.storyCharacterIndexes.indexOf(c) > -1), this.story, this.render); 
     $("#franchise-" + ch.franchise_id).append(box);
   }
 }
@@ -228,8 +228,6 @@ StoryForm.prototype.takeControl = function(){
     console.log("Existant story detected, grabbing JSON");
     var that = this;
     Story.byId(this.storyId, function(story){
-      console.log("Grabbed json gave story:")
-      console.log(story)
       that.story = story;
     that.setup();
     });

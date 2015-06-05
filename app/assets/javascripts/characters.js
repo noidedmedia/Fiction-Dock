@@ -6,8 +6,18 @@ function Character(obj){
     this[key] = obj[key];
   }
 }
-
-Character.prototype.formDisplay = function(checked, form){
+/*
+ * Returns a list item for display, with proper callbacks
+ *
+ * When checked, it will use `removeCharacter` on `c` to remove
+ * a character.
+ *
+ * When checked=false, it will use `addCharacter` on `c` to add a
+ * character.
+ *
+ * The callback `done` is run after either callback has finished.
+ */
+Character.prototype.formDisplay = function(checked, c, done){
   var container = $("<li>");
   var toggle = $("<div>");
   if(checked == true){
@@ -17,7 +27,7 @@ Character.prototype.formDisplay = function(checked, form){
     toggle.attr({
       class: "character-list-action"
     }).append("Remove");
-    toggle.click(this.removeFromFormCallback(form));
+    toggle.click(this.removalCallback(c, done));
   }
   else{
     container.attr({
@@ -26,7 +36,7 @@ Character.prototype.formDisplay = function(checked, form){
     toggle.attr({
       class: "character-list-action character-unchecked"
     }).append("Add");
-    toggle.click(this.addToFormCallback(form));
+    toggle.click(this.additionCallback(c, done));
   }
   container.append(toggle);
   container.append($("<div>").attr({
@@ -34,24 +44,17 @@ Character.prototype.formDisplay = function(checked, form){
   }).append(this.name));
   return container;
 }
-Character.prototype.removeFromFormCallback = function(form){
-  console.log("Generating a form removal callback");
-  console.log(this);
+Character.prototype.removalCallback = function(c, done){
   var that = this;
   return function(){
-    console.log("Removing from form!");
-    for(var c in form.story.characters){
-      if(form.story.characters[c].id == that.id){
-        form.story.characters.splice(c, 1);
-      }
-    }
-    form.render();
+    c.removeCharacter(that);
+    done();
   }
 }
-Character.prototype.addToFormCallback = function(form){
+Character.prototype.additionCallback = function(c, done){
   var that = this;
   return function(){
-    form.story.addCharacter(that);
-    form.render();
+    c.addCharacter(this);
+    done();
   }
 }

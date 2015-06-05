@@ -26,6 +26,7 @@ class Story < ActiveRecord::Base
   has_many :story_franchises
   has_many :franchises, through: :story_franchises
   has_many :ships
+  accepts_nested_attributes_for :ships
   attr_accessor :franchise_ids
   attr_accessor :character_ids
   before_validation :resolve_character_ids
