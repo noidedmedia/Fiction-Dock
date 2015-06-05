@@ -77,7 +77,7 @@ body.dark-mode {
     }
   }
 
-  .stats
+  .stats {
     li {
       border-right-color: #fff;
       color: #fff;
@@ -86,4 +86,22 @@ body.dark-mode {
     span {
       color: #fff;
     }
+  }
+
+  .tooltip {
+    background-color: #444;
+    border-color: rgba(255,255,255,0.15);
+
+    &:before {
+      border-bottom-color: rgba(255,255,255,0.15);
+    }
+
+    &:after {
+      border-bottom-color: #444;
+    }
+
+    ul li a:hover {
+      background-color: #666;
+    }
+  }
 }
