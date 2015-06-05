@@ -1,10 +1,7 @@
 /*
- * A (sort of horrible) bit of JavaScript for managing the creation of a story
- * TODO: rename to "techncial_debt.js"
- * TODO: talk to the Pope about cleansing this file
- * TODO; fix this file
+ * Object that represents a story
+ * Construct with the JSON returned by the API
  */
-// Object that represents a story
 function Story(obj){
   this.franchises = [];
   this.characters = [];
