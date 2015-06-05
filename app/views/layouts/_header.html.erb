@@ -1,16 +1,34 @@
 <header id="main-header">
   <div class="header-left">
-    <%= link_to root_path do %>
-      <p class="fiction-dock-logo logo-header">Fiction Dock</p>
-    <% end %>
+
+    <div class="header-item">
+      <div id="dark-mode-toggle"><span class="octicon octicon-light-bulb"></span></div>
+    </div>
+
+    <div class="header-item">
+      <%= link_to root_path do %>
+        <p class="fiction-dock-logo logo-header">Fiction Dock</p>
+      <% end %>
+    </div>
+
   </div>
 
   <div class="header-right">
     
     <% if user_signed_in? %>
-      
+
       <div class="header-item">
-        <div id="dark-mode-toggle"></div>
+        <div id="create-button">
+          <span class="octicon octicon-plus"></span>
+          <span class="dropdown-caret"></span>
+        </div>
+
+        <div id="create-button-tooltip" class="tooltip" data-showon="#create-button">
+          <ul>
+            <li><%= link_to "Create new franchise", new_franchise_path %>
+            <li><%= link_to "Create new story", new_story_path %>
+          </ul>
+        </div>
       </div>
 
       <div class="header-item">

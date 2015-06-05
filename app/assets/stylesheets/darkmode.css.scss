@@ -2,20 +2,21 @@
 
 #dark-mode-toggle {
   cursor: pointer;
+  position: relative;
+  margin-top: -4px;
+  padding-right: 15px;
 
-  &:before {
-    content: '★';
-    color: #333;
+  > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 2.4rem;
   }
 }
 
 body.dark-mode {
   background-color: #444;
   color: #fff;
-
-  #dark-mode-toggle::before {
-    color: #fff;
-  }
 
   * {
     transition: color 0ms;
@@ -43,6 +44,7 @@ body.dark-mode {
 
   #main-header {
     background-color: #333;
+    border-bottom: 0;
 
     .header-item,
     .header-item a,
@@ -76,7 +78,7 @@ body.dark-mode {
     }
   }
 
-  .stats
+  .stats {
     li {
       border-right-color: #fff;
       color: #fff;
@@ -85,4 +87,22 @@ body.dark-mode {
     span {
       color: #fff;
     }
+  }
+
+  .tooltip {
+    background-color: #444;
+    border-color: rgba(255,255,255,0.15);
+
+    &:before {
+      border-bottom-color: rgba(255,255,255,0.3);
+    }
+
+    &:after {
+      border-bottom-color: #444;
+    }
+
+    ul li a:hover {
+      background-color: #666;
+    }
+  }
 }

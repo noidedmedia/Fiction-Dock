@@ -24,7 +24,15 @@ module FictionDock
     # https://robots.thoughtbot.com/content-compression-with-rack-deflater
     config.middleware.use Rack::Deflater
 
+    # Add fonts to asset pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    # Add bower assets to asset pipeline
+    config.assets.paths << Rails.root.join("vendor", "assets", "bower_components")
+
+    # Needed for GitHub's Octicons
+    # https://github.com/github/octicons/
+    config.assets.precompile += %w(*.svg *.eot *.woff *.ttf)
 
     # Custom i18n routes.
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
