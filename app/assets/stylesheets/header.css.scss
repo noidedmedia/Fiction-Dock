@@ -8,8 +8,6 @@
   position: fixed;
   border-bottom: 1px solid #aaaab2;
   z-index: 100;
-  overflow-x: auto;
-  overflow-y: hidden;
   white-space: nowrap;
 
   @media all and (max-device-width: $mobile-width) {
@@ -19,9 +17,9 @@
 
 .header-left {
   position: absolute;
-  left: 40px;
+  left: 30px;
 
-  a {
+  .header-item > a {
     text-decoration: none;
 
     &:hover {
@@ -78,5 +76,90 @@
   
   @media all and (max-device-width: $mobile-width) {
     padding: 15px 15px;
+  }
+}
+
+#create-button {
+  height: 100%;
+  display: block;
+  cursor: pointer;
+  position: relative;
+  
+  .octicon-plus {
+    font-size: 18px;
+  }
+}
+
+.dropdown-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  content: "";
+  vertical-align: -1px;
+  border: 4px solid;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  color: #333;
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  top: 42px;
+  z-index: 100;
+  width: 180px;
+  margin-top: 2px;
+  margin-left: -80px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+
+  &:before {
+    position: absolute;
+    top: -16px;
+    left: 79px;
+    display: inline-block;
+    content: "";
+    border: 8px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.15);
+  }
+
+  &:after {
+    position: absolute;
+    top: -14px;
+    left: 80px;
+    display: inline-block;
+    content: "";
+    border: 7px solid transparent;
+    border-bottom-color: #fff;
+  }
+
+  &.active {
+    display: block;
+  }
+
+  ul {
+    padding: 2px 0;
+
+    li {
+      height: 32px;
+      width: 100%;
+    
+      a {
+        display: block;
+        padding: 8px 10px;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: none;
+          background-color: #f4f4f4;
+        }
+      }
+    }
   }
 }

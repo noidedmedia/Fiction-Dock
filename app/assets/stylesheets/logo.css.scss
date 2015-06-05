@@ -15,6 +15,7 @@
   &.logo-header {
     font-size: 3.2rem;
     cursor: pointer;
+    margin-top: -12px;
 
     @media all and (max-device-width: $mobile-width) {
       font-size: 4.0rem;

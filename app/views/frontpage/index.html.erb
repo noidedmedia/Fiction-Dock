@@ -6,19 +6,22 @@
   <ul>
     <li>
       <%= link_to franchises_path do %>
-        <%= Franchise.count %><span><%= t(".franchises") %></span>
+        <%= Franchise.count %>
+        <span><%= t(".franchises") %></span>
       <% end %>
     </li>
 
     <li>
       <%= link_to stories_path do %>
-        <%= Story.count %><span><%= t(".stories") %></span>
+        <%= Story.count %>
+        <span><%= t(".stories") %></span>
       <% end %>
     </li>
 
     <li>
       <%= link_to root_path do %>
-        <%= Character.count %><span><%= t(".characters") %></span>
+        <%= Character.count %>
+        <span><%= t(".characters") %></span>
       <% end %>
     </li>
   </ul>
