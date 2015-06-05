@@ -27,6 +27,8 @@ class Story < ActiveRecord::Base
   has_many :franchises, through: :story_franchises
   has_many :ships
   attr_accessor :franchise_ids
+  attr_accessor :character_ids
+  before_validation :resolve_character_ids
   before_validation :resolve_franchise_ids
   validate :has_at_least_one_franchise
   protected
@@ -37,6 +39,11 @@ class Story < ActiveRecord::Base
   def resolve_franchise_ids
     self.franchises = Franchise.where(id: franchise_ids)
   end
+
+  def resolve_character_ids
+    self.characters = Character.where(id: character_ids)
+  end
+
   def author
     user
   end

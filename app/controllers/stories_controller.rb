@@ -38,7 +38,7 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.save
         format.html { redirect_to @story }
-        format.json { render :show, status: ok, location: @story }
+        format.json { render :show, status: :ok, location: @story }
       else
         format.html { render :edit }
         format.json { render json: @story.errors, status: :unprocessable_entity }
@@ -62,7 +62,8 @@ class StoriesController < ApplicationController
       .permit(:name,
               :blurb,
               :description,
-              :franchise_ids => [])
+              :franchise_ids => [],
+              :character_ids => [])
       .merge(user_id: current_user.id)
   end
 end
