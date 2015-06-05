@@ -2,10 +2,6 @@
   <div class="header-left">
 
     <div class="header-item">
-      <div id="dark-mode-toggle"><span class="octicon octicon-light-bulb"></span></div>
-    </div>
-
-    <div class="header-item">
       <%= link_to root_path do %>
         <p class="fiction-dock-logo logo-header">Fiction Dock</p>
       <% end %>
@@ -16,6 +12,12 @@
   <div class="header-right">
     
     <% if user_signed_in? %>
+
+      <div class="header-item">
+        <div id="dark-mode-toggle">
+          <span class="octicon octicon-light-bulb"></span>
+        </div>
+      </div>
 
       <div class="header-item">
         <div id="create-button">
@@ -42,7 +44,9 @@
     <% else %>
 
       <div class="header-item">
-        <div id="dark-mode-toggle"></div>
+        <div id="dark-mode-toggle">
+          <span class="octicon octicon-light-bulb"></span>
+        </div>
       </div>
 
       <div class="header-item">

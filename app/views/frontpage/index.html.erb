@@ -27,7 +27,7 @@
   </ul>
 </div>
 
-<% if user_signed_in? && current_user.stories.count > 0 %>
+<% if user_signed_in? && current_user.stories.exists? %>
   <h6>Your stories:</h6>
   <%= render partial: 'stories/story_stub', collection: current_user.stories, as: :story %>
 <% end %>
