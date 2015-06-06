@@ -19,6 +19,13 @@
     </li>
 
     <li>
+      <%= link_to stories_path do %>
+        <%= Chapter.count %>
+        <span><%= t(".chapters") %></span>
+      <% end %>
+    </li>
+
+    <li>
       <%= link_to root_path do %>
         <%= Character.count %>
         <span><%= t(".characters") %></span>
