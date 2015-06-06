@@ -34,10 +34,9 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
-    @story.update(story_params)
-    logger.debug("@story.ships: #{@story.ships.map(&:inspect).join("\n")}")
+    logger.debug("Pepaired params: #{prepaired_params}")
     respond_to do |format|
-      if @story.save
+      if @story.update(prepaired_params)
         format.html { redirect_to @story }
         format.json { render :show, status: :ok, location: @story }
       else
@@ -65,7 +64,65 @@ class StoriesController < ApplicationController
               :description,
               :franchise_ids => [],
               :character_ids => [],
-              ships_attributes: [:id, {character_ids: []}])
+              ships_attributes: [:id, {
+                ship_characters_attributes: [
+                  :character_id
+                ]}])
       .merge(user_id: current_user.id)
+  end
+
+  ##
+  # Yes, this is evil.
+  # Less evil than the hack this is used to be.
+  #
+  # Basically, Rails makes some sort of odd assumptions about how nested
+  # attributes work. 
+  # It will only destroy things if you explicitly tell it to.
+  # We don't really want that——our request is going to update the request 
+  # completely. 
+  #
+  # So we basically add all the _delete attributes it wants. 
+  def prepaired_params
+    p = story_params
+    logger.debug("Story params: #{p.to_yaml}")
+    # To make my life easier, we just re-build the ship attributes from 
+    # sratch every single time
+    # TODO: Fix this, probably
+    p["ships_attributes"] ||= {}
+    p["ships_attributes"].each do |_, sa|
+      logger.debug("-" * 80)
+      logger.debug("sa is #{sa.to_yaml} (#{sa.class})")
+      next unless id = sa["id"]
+      # AR passes this as a hash of hashes where the key doesn't matter
+      # Yeah
+      #
+      # So we just simulate that
+      # Theoretically, if somebody has 120 characters in a ship, this may break
+      # I sincerely hope this never happens, because damn, how would a
+      # relationship involving that many people even work? That would also
+      # be one of the first nine stories, so that's unlikely as hell
+      Ship.find(id)
+        .ship_characters
+        .pluck(:id)
+        .each do |i| 
+        sa["ship_characters_attributes"]["12#{id}"] = {"character_id" => i.to_i, "_destroy" => true}
+      end
+    end
+    ship_ids = p["ships_attributes"].map{|_, k|
+      logger.debug("*" * 80)
+      logger.debug(k)
+    }.compact
+    ##
+    # Delete any ship we don't want
+    del_ids = @story.ships.pluck(:id) - ship_ids
+    del_ids.each do |id|
+      # Rails passes this as a hash of hashes
+      # since the values don't actually matter anyway, we just use 
+      # a prefix (to prevent collisions) and the id 
+      # if a user has over 1121 ships in their story, this may collide
+      # but honestly they they probably deserve it at that point, jeez
+      p["ships_attributes"]["112#{id}"] = {"id" => id, "_destroy" => true}
+    end
+    return p
   end
 end

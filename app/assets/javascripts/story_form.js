@@ -116,13 +116,15 @@ StoryForm.prototype.submitForm = function(){
   for(var s in this.story.ships){
     var ship = this.story.ships[s];
     // Ship object we build up to properly format our data
-    var sship = {};
-    sship.id = ship.id;
-    sship.character_ids = [];
-    for(var c in ship.characters){
-      sship.character_ids.push(ship.characters[c].id);
+    var ship_attrs = {}
+    if(ship.id){
+      ship_attrs.id = ship.id;
     }
-    toSubmit.ships_attributes.push(sship);
+    ship_attrs.ship_characters_attributes = [];
+    for(var c in ship.characters){
+      ship_attrs.ship_characters_attributes.push({character_id: ship.characters[c].id});
+    }
+    toSubmit.ships_attributes.push(ship_attrs);
   }
   console.log("Trying to submit");
   console.log(toSubmit);
@@ -137,7 +139,7 @@ StoryForm.prototype.submitForm = function(){
   var that = this;
   var success = function(data){
     console.log("Success!");
-    window.location.href = "/stories/" + data.id;
+    // window.location.href = "/stories/" + data.id;
   };
   var error = function(data){
     console.warn("Error in AJAX request");

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604185414) do
+ActiveRecord::Schema.define(version: 20150606043228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,8 +149,8 @@ ActiveRecord::Schema.define(version: 20150604185414) do
   add_foreign_key "characters", "franchises"
   add_foreign_key "franchise_users", "franchises"
   add_foreign_key "franchise_users", "users"
-  add_foreign_key "ship_characters", "characters"
-  add_foreign_key "ship_characters", "ships"
+  add_foreign_key "ship_characters", "characters", on_delete: :cascade
+  add_foreign_key "ship_characters", "ships", on_delete: :cascade
   add_foreign_key "ships", "stories"
   add_foreign_key "stories", "users"
   add_foreign_key "story_characters", "characters"
