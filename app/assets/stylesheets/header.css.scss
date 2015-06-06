@@ -79,15 +79,16 @@
   }
 }
 
+#browse-button,
 #create-button {
   height: 100%;
   display: block;
   cursor: pointer;
   position: relative;
-  
-  .octicon-plus {
-    font-size: 18px;
-  }
+}
+
+#create-button .octicon-plus {
+  font-size: 18px;
 }
 
 .dropdown-caret {
@@ -107,9 +108,10 @@
   position: absolute;
   top: 42px;
   z-index: 100;
-  width: 180px;
+  width: auto;
+  min-width: 100px;
   margin-top: 2px;
-  margin-left: -80px;
+  margin-left: -10%;
   padding-top: 5px;
   padding-bottom: 5px;
   list-style: none;
@@ -121,7 +123,6 @@
   &:before {
     position: absolute;
     top: -16px;
-    left: 79px;
     display: inline-block;
     content: "";
     border: 8px solid transparent;
@@ -131,7 +132,6 @@
   &:after {
     position: absolute;
     top: -14px;
-    left: 80px;
     display: inline-block;
     content: "";
     border: 7px solid transparent;
@@ -151,7 +151,7 @@
     
       a {
         display: block;
-        padding: 8px 10px;
+        padding: 8px 40px 8px 10px;
         text-decoration: none;
 
         &:hover {
@@ -160,5 +160,25 @@
         }
       }
     }
+  }
+}
+
+#create-tooltip {
+  &:before {
+    left: 36px;
+  }
+
+  &:after {
+    left: 37px;
+  }
+}
+
+#browse-tooltip {
+  &:before {
+    left: 79px;
+  }
+
+  &:after {
+    left: 80px;
   }
 }

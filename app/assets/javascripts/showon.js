@@ -21,8 +21,30 @@ var showon = function() {
     // The following line sets "toggle" equal to a jQuery selector for said
     // value.
     var toggle = $( $(_this).data("showon") );
+
     $(toggle).on("click", function() {
       $(_this).toggleClass('active');
+
+      // If the element being pressed has he class "tooltip", all other
+      // open tooltips will be closed when the element is pressed.
+      $(".tooltip").not(_this).removeClass('active');
+
+      // This prevents "bubbling up" of the click event when it's within the
+      // dialog, to prevent "clickoutside" from erroneously running the
+      // active toggle function when the click is within the dialog.
+      $(_this).bind("click", function(e) {
+        e.stopPropagation();
+      });
+
+      // Binds a function to toggle the active/inactive classes on the dialog
+      // to clicking outside the button that toggles the dialog.
+      // Binding "clickoutside" to the dialog itself doesn't work, because
+      // the toggle is technically outside the dialog and the dialog's
+      // active classes are removed before it's able to display.
+      $(toggle).bind("clickoutside", function() {
+        $(_this).removeClass('active');
+        $(_this).unbind("clickoutside");
+      });
     });
   });
 };

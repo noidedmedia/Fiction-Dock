@@ -32,20 +32,22 @@ class Story < ActiveRecord::Base
   before_validation :resolve_character_ids
   before_validation :resolve_franchise_ids
   validate :has_at_least_one_franchise
+
+  def author
+    user
+  end
+
   protected
 
   def has_at_least_one_franchise
     errors.add(:franchises, "must have at least one") if franchises.length < 1
   end
+
   def resolve_franchise_ids
     self.franchises = Franchise.where(id: franchise_ids)
   end
 
   def resolve_character_ids
     self.characters = Character.where(id: character_ids)
-  end
-
-  def author
-    user
   end
 end

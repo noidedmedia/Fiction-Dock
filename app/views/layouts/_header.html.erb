@@ -2,13 +2,23 @@
   <div class="header-left">
 
     <div class="header-item">
-      <div id="dark-mode-toggle"><span class="octicon octicon-light-bulb"></span></div>
-    </div>
-
-    <div class="header-item">
       <%= link_to root_path do %>
         <p class="fiction-dock-logo logo-header">Fiction Dock</p>
       <% end %>
+    </div>
+
+    <div class="header-item">
+      <div id="browse-button">
+        <%= t(".browse") %>
+        <span class="dropdown-caret"></span>
+      </div>
+
+      <div id="browse-tooltip" class="tooltip" data-showon="#browse-button">
+        <ul>
+          <li><%= link_to t(".franchises"), franchises_path %>
+          <li><%= link_to t(".stories"), stories_path %>
+        </ul>
+      </div>
     </div>
 
   </div>
@@ -18,15 +28,21 @@
     <% if user_signed_in? %>
 
       <div class="header-item">
+        <div id="dark-mode-toggle">
+          <span class="octicon octicon-light-bulb"></span>
+        </div>
+      </div>
+
+      <div class="header-item">
         <div id="create-button">
           <span class="octicon octicon-plus"></span>
           <span class="dropdown-caret"></span>
         </div>
 
-        <div id="create-button-tooltip" class="tooltip" data-showon="#create-button">
+        <div id="create-tooltip" class="tooltip" data-showon="#create-button">
           <ul>
-            <li><%= link_to "Create new franchise", new_franchise_path %>
-            <li><%= link_to "Create new story", new_story_path %>
+            <li><%= link_to t(".create_new_franchise"), new_franchise_path %>
+            <li><%= link_to t(".create_new_story"), new_story_path %>
           </ul>
         </div>
       </div>
@@ -42,7 +58,9 @@
     <% else %>
 
       <div class="header-item">
-        <div id="dark-mode-toggle"></div>
+        <div id="dark-mode-toggle">
+          <span class="octicon octicon-light-bulb"></span>
+        </div>
       </div>
 
       <div class="header-item">
