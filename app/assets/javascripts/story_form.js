@@ -139,7 +139,7 @@ StoryForm.prototype.submitForm = function(){
   var that = this;
   var success = function(data){
     console.log("Success!");
-    // window.location.href = "/stories/" + data.id;
+    window.location.href = "/stories/" + data.id;
   };
   var error = function(data){
     console.warn("Error in AJAX request");
