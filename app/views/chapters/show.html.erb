@@ -1,2 +1,15 @@
-<h1><%= @chapter.name %></h1>
-<%= markdown_parse @chapter.body %>
+<div class="story-text">
+
+  <h2 class="chapter-title"><%= @chapter.name %></h2>
+
+  <ul class="story-options">
+    <% if current_user == @story.author %>
+      <li><%= link_to "Edit", edit_story_chapter_path(@story, @chapter) %></li>
+    <% end %>
+  </ul>
+
+  <article class="chapter-body">
+    <%= markdown_parse @chapter.body %>
+  </article>
+
+</div>
