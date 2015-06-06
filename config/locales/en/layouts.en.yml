@@ -3,6 +3,11 @@
 en:
   layouts:
     header:
+      browse: "Browse"
+      franchises: "Franchises"
+      stories: "Stories"
+      create_new_franchise: "Create new franchise"
+      create_new_story: "Create new story"
       sign_in: "Sign in"
       create_an_account: "Create an account"
       profile: "Profile"

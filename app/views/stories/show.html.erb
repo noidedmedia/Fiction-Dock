@@ -1,5 +1,7 @@
 <h1><%= @story.name %></h1>
 <div><%= @story.description %></div>
+<div><%= link_to "Add a new chapter", new_story_chapter_path(@story) %></div>
+
 <ul>
   <%= render partial: 'chapter_stub', collection: @story.chapters, as: :chapter %>
 </ul>

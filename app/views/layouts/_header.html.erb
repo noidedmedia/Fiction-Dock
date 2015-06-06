@@ -9,14 +9,14 @@
 
     <div class="header-item">
       <div id="browse-button">
-        Browse
+        <%= t(".browse") %>
         <span class="dropdown-caret"></span>
       </div>
 
       <div id="browse-tooltip" class="tooltip" data-showon="#browse-button">
         <ul>
-          <li><%= link_to "Franchises", franchises_path %>
-          <li><%= link_to "Stories", stories_path %>
+          <li><%= link_to t(".franchises"), franchises_path %>
+          <li><%= link_to t(".stories"), stories_path %>
         </ul>
       </div>
     </div>
@@ -41,8 +41,8 @@
 
         <div id="create-tooltip" class="tooltip" data-showon="#create-button">
           <ul>
-            <li><%= link_to "Create new franchise", new_franchise_path %>
-            <li><%= link_to "Create new story", new_story_path %>
+            <li><%= link_to t(".create_new_franchise"), new_franchise_path %>
+            <li><%= link_to t(".create_new_story"), new_story_path %>
           </ul>
         </div>
       </div>
