@@ -1,11 +1,16 @@
 <% @chapter.errors.full_messages.each do |err| %>
   <%= err %>
 <% end %> 
+
 <%= form_for [@story, @chapter] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   
+  <%= f.label :body %>
   <%= f.text_area :body %>
+
+  <%= f.label :chap_num %>
   <%= f.number_field :chap_num %>
+
   <%= f.submit %>
 <% end %>
