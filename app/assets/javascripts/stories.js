@@ -29,11 +29,14 @@ function Story(obj){
   }
 }
 
+Story.prototype.addShip = function(ship){
+  this.ships.push(ship);
+}
 Story.prototype.removeShip = function(s){
-  for(var s in this.ships){
-    var ship = this.ships[s];
+  for(var si in this.ships){
+    var ship = this.ships[si];
     if(ship.id == s.id){
-      this.splice(s, 1);
+      this.ships.splice(s, 1);
     }
   }
 }

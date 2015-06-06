@@ -10,6 +10,16 @@ function Ship(obj){
     }
   } 
 }
+
+Ship.newShipButton = function(story, click){
+  var bt = $("<div>").attr({
+    class: "new-ship-button"
+  }).append("Add a ship").click(function(){
+    story.addShip(new Ship({})); 
+    click();
+  });
+  return bt;
+}
 Ship.prototype.addCharacter = function(c){
   if(this.containsCharacter(c))
     return;
@@ -44,7 +54,7 @@ Ship.prototype.containsCharacter = function(c){
  * As such, `done` should probably render the changes somewhere.
  *
  * When the removal button is clicked, `removeship` will have the function
- * `removeShip` called with `this` as an argument
+ * `removeShip` called with `this` as an argument. `done` will also be called.
  */
 Ship.prototype.displayForForm = function(story, done, removeship){
   var container = $("<div>").attr({
@@ -56,7 +66,9 @@ Ship.prototype.displayForForm = function(story, done, removeship){
   var that = this;
   remove.click(function(){
     removeship.removeShip(that);
+    done()
   });
+  container.append(remove);
   var list = $("<ul>");
   for(var f in story.franchises){
     list.append(story.franchises[f].listDisplay());
@@ -81,7 +93,6 @@ ShipForm.prototype.render = function(){
   }
   for(var s in this.story.ships){
     var s = this.story.ships[s];
-    console.log(s);
     this.container.append(s.displayForForm(this.story, renderCallback, this.story));
   }
 }

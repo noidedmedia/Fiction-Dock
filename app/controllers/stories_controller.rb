@@ -35,6 +35,7 @@ class StoriesController < ApplicationController
   def update
     @story = Story.find(params[:id])
     @story.update(story_params)
+    logger.debug("@story.ships: #{@story.ships.map(&:inspect).join("\n")}")
     respond_to do |format|
       if @story.save
         format.html { redirect_to @story }
@@ -63,7 +64,8 @@ class StoriesController < ApplicationController
               :blurb,
               :description,
               :franchise_ids => [],
-              :character_ids => [])
+              :character_ids => [],
+              ships_attributes: [:id, {character_ids: []}])
       .merge(user_id: current_user.id)
   end
 end

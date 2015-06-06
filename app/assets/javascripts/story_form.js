@@ -89,12 +89,17 @@ StoryForm.prototype.setup = function(){
   this.shipForm = new ShipForm(this.story);
   this.shipForm.setup(function(shipContainer){
     that.container.append(shipContainer);
-    that.container.append(that.submitButton);
+    that.container.append(Ship.newShipButton(that.story, function(){
+      that.render();
+    }));
     that._hasSetUp = true;
+    that.container.append(that.submitButton);
     that.render();
   });
 }
 StoryForm.prototype.submitForm = function(){
+  console.log("Submitting form!");
+  console.log(this);
   var toSubmit = {}
   toSubmit.name = this.form.name.val();
   toSubmit.description = this.form.description.val();
@@ -106,6 +111,18 @@ StoryForm.prototype.submitForm = function(){
   toSubmit.character_ids = [];
   for(var c in this.story.characters){
     toSubmit.character_ids.push(this.story.characters[c].id);
+  }
+  toSubmit.ships_attributes = [];
+  for(var s in this.story.ships){
+    var ship = this.story.ships[s];
+    // Ship object we build up to properly format our data
+    var sship = {};
+    sship.id = ship.id;
+    sship.character_ids = [];
+    for(var c in ship.characters){
+      sship.character_ids.push(ship.characters[c].id);
+    }
+    toSubmit.ships_attributes.push(sship);
   }
   console.log("Trying to submit");
   console.log(toSubmit);
@@ -137,6 +154,7 @@ StoryForm.prototype.submitForm = function(){
     error: error,
     data: {story: toSubmit}
   });
+  console.log("Story theoretically AJAXes successfully");
 }
 StoryForm.prototype._makeError = function(err){
   var container = $("<ul>").attr({
@@ -195,14 +213,19 @@ StoryForm.prototype._renderFranchises = function(){
 }
 StoryForm.prototype.takeControl = function(){
   if(this.isNew()){
+    console.log("New story detected, taking control");
     this.story = new Story({});
     this.setup();
   }
   else{
     var that = this;
+    console.log("Existing story detected, fetching data...");
     Story.byId(this.storyId, function(story){
+      console.log("In setup, got story:");
+      console.log(story);
+      console.log("Taking control.");
       that.story = story;
-    that.setup();
+      that.setup();
     });
   }
 }
