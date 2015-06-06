@@ -21,8 +21,13 @@ var showon = function() {
     // The following line sets "toggle" equal to a jQuery selector for said
     // value.
     var toggle = $( $(_this).data("showon") );
+
     $(toggle).on("click", function() {
       $(_this).toggleClass('active');
+
+      // If the element being pressed is has he class "tooltip", all other
+      // open tooltips will be closed when the element is pressed.
+      $(".tooltip").not(_this).removeClass('active');
     });
   });
 };
