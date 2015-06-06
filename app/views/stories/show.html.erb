@@ -1,11 +1,23 @@
-<h1><%= @story.name %></h1>
-<div><%= @story.description %></div>
+<div class="story-directory story-text">
 
-<% if current_user == @story.author %>
-  <div><%= link_to "Add a new chapter", new_story_chapter_path(@story) %></div>
-<% end %>
+  <h2 class="story-title"><%= @story.name %></h2>
+  <p class="story-description"><%= @story.description %></p>
 
-<ul>
-  <%= render partial: 'chapter_stub', collection: @story.chapters, as: :chapter %>
-</ul>
+  <ul class="story-options">
+    <% if current_user == @story.author %>
+      <li><%= link_to "Edit", edit_story_path(@story) %></li>
+    <% end %>
 
+    <li><%= link_to "Share", "#" %></li>
+    <li><%= link_to "Report", "#" %></li>
+  </ul>
+
+  <ol class="chapter-list">
+    <%= render partial: 'chapter_stub', collection: @story.chapters, as: :chapter %>
+
+    <% if current_user == @story.author %>
+      <li class="add-new-chapter"><%= link_to "Add a new chapter", new_story_chapter_path(@story) %></li>
+    <% end %>
+  </ol>
+
+</div>
