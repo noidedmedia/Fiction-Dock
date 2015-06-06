@@ -1,31 +1,110 @@
-#story-franchise-container{
-}
+@import "scss-variables";
 
-.remove-franchise-button{
+.remove-franchise-button {
   color: red;
-  background-color: #FFEEEE;
+  background-color: #ffeeee;
   border: 1px solid red;
   display: inline;
 }
-.franchise-list-characters{
+
+.franchise-list-characters {
   padding-left: 50px;
 }
-.franchise-list-name{
+
+.franchise-list-name {
   display: inline;
   padding-left: 100px;
 }
-.character-list-name{
+
+.character-list-name {
   display: inline;
   padding-left: 100px;
 }
-.character-list-action{
+
+.character-list-action {
   display: inline-block;
   width: 100px;
 }
 
-.character-unchecked{
-  background-color: #EEEEEE;
+.character-unchecked {
+  background-color: #eee;
 }
-.character-checked{
-  background-color: #EEFFEE;
+
+.character-checked {
+  background-color: #eeffee;
+}
+
+.story-text {
+  font-family: 'Lora', Georgia, Cambria, 'Times New Roman', Times, serif;
+  margin: auto;
+  width: 100vw;
+  max-width: 700px;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  @media all and (max-device-width: $mobile-width) {
+    width: calc(100vw - 20px);
+    max-width: 100vw;
+  }
+}
+
+.story-directory {
+  text-align: center;
+  padding-top: 60px;
+}
+
+.story-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.story-description {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.story-options {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  padding: 20px 0;
+  font-size: 1.6rem;
+
+  li {
+    display: inline-block;
+    margin: 0 20px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.chapter-list {
+  font-size: 1.8rem;
+  margin-top: 40px;
+  display: inline-block;
+  text-align: left;
+
+  li {
+    white-space: nowrap;
+    display: list-item;
+    line-height: 3.6rem;
+  }
+
+  .add-new-chapter {
+    display: inline-block;
+
+    a {
+      color: #333;
+      opacity: 0.6;
+      text-decoration: none;
+      display: block;
+    }
+
+    &:hover a {
+      opacity: 1;
+    }
+  }
 }
