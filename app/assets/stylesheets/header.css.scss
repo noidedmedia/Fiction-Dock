@@ -33,7 +33,7 @@
 
 .header-right {
   position: absolute;
-  right: 75px;
+  right: 90px;
 
   @media all and (max-device-width: $mobile-width) {
     left: 20px;
@@ -193,7 +193,6 @@
 
 .flyout {
   position: relative;
-  width: 100%;
   list-style: none;
   min-width: 100px;
   font-size: 1.4rem;
@@ -236,15 +235,58 @@
 #general-info {
   position: absolute;
   top: 0;
-  height: auto;
-  max-height: 45px;
-  width: 30px;
   right: 40px;
-  transition: max-height 400ms;
+  height: 45px;
+  width: 32px;
+  cursor: pointer;
+  z-index: 1000;
+  padding: 14px 12px 0;
+  transition: background-color 200ms 400ms;
 
-  &:hover {
+  &.active {
     background-color: #fff;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 -8px 11px 1px rgba(0, 0, 0, 0.15);
+    transition: background-color 0ms;
+  }
+}
+
+#general-info-flyout {
+  position: absolute;
+  top: 45px;
+  right: 40px;
+  height: auto;
+  max-height: 0;
+  overflow-y: hidden;
+  transition: max-height 400ms;
+  z-index: 999;
+  transition: max-height 400ms, box-shadow 200ms 400ms, background-color 200ms 400ms;
+
+  &.active {
+    background-color: #fff;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
     max-height: 500px;
+    transition: max-height 400ms;
+  }
+
+  ul {
+    position: relative;
+
+    li {
+      height: 32px;
+
+      a {
+        width: 100%;
+        display: block;
+        padding: 8px 50px 8px 15px;
+        text-decoration: none;
+        background-color: transparent;
+        text-align: left;
+
+        &:hover {
+          text-decoration: none;
+          background-color: #f4f4f4;
+        }
+      }
+    }
   }
 }

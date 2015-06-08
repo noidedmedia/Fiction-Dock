@@ -83,19 +83,18 @@
 
   </div>
 
-  <div id="general-info" class="header-item header-item-with-flyout">
-    <div class="header-item-title"><span class="octicon octicon-light-bulb"></span></div>
+  <div id="general-info" class="header-item">
+    <span class="octicon octicon-primitive-dot"></span>
+  </div>
 
-    <div id="general-info-flyout" class="flyout">
-      <ul>
-        <li><%= link_to t(".about"), "#" %></li>
-        <li><%= link_to t(".faq"), "#" %></li>
-        <li><%= link_to t(".blog"), "#" %></li>
-        <!-- <li><%= link_to t(".terms_and_conditions"), "#" %></li> -->
-        <!-- <li><%= link_to t(".privacy_policy"), "#" %></li> -->
-      </ul>
-    </div>
-
+  <div id="general-info-flyout" data-showon="#general-info">
+    <ul>
+      <li><%= link_to t(".about"), "#" %></li>
+      <li><%= link_to t(".faq"), "#" %></li>
+      <li><%= link_to t(".blog"), "#" %></li>
+      <!-- <li><%= link_to t(".terms_and_conditions"), "#" %></li> -->
+      <!-- <li><%= link_to t(".privacy_policy"), "#" %></li> -->
+    </ul>
   </div>
 
 </header>
