@@ -14,8 +14,23 @@
 
 FactoryGirl.define do
   factory :story do
-    name "MyString"
-description "MyText"
-  end
+    user
+    name { Faker::Name.name }
+    description { Faker::Lorem.paragraph }
+    transient do
+      franchises_count 2
+      characters_count 2
+    end
+    after(:build) do |story, ev|
+      fr = ev.franchises_count.times.map{ create(:franchise_with_characters) }
+      story.franchises += fr
+      cr = fr.map(&:characters).flatten.sample(ev.characters_count)
+      story.characters = cr
+    end
 
+    after(:create) do |story, ev|
+      story.franchises.each(&:save)
+      story.characters.each(&:save)
+    end
+  end
 end

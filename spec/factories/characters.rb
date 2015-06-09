@@ -13,9 +13,10 @@
 
 FactoryGirl.define do
   factory :character do
-    franchise nil
-name "MyString"
-description "MyText"
+    franchise
+    name { Faker::Name.name } 
+    description { Faker::Lorem.paragraph }
+   
   end
 
 end

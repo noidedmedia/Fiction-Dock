@@ -19,7 +19,8 @@ class Story < ActiveRecord::Base
   validates :name, length: {in: (2..100)}
   validates :description, length: {in: (10..1000)}
   validates :user, presence: true
-  validates :franchises, length: {minimum: 1}
+  validates :franchises, presence: true
+  validates :characters, presence: true
   belongs_to :user
   has_many :chapters
   has_many :story_characters
@@ -32,21 +33,17 @@ class Story < ActiveRecord::Base
   accepts_nested_attributes_for :ships, allow_destroy: true
   before_validation :resolve_character_ids
   before_validation :resolve_franchise_ids
-  before_validation :resolve_nested_attributes
   def author
     user
   end
 
   protected
-  def resolve_nested_attributes
-    logger.debug("-" * 80)
-    logger.debug("Attributes are:")
-  end
+
   def resolve_franchise_ids
-    self.franchises = Franchise.where(id: franchise_ids)
+    self.franchises = Franchise.where(id: franchise_ids) if franchise_ids && franchise_ids.count > 0
   end
 
   def resolve_character_ids
-    self.characters = Character.where(id: character_ids)
+    self.characters = Character.where(id: character_ids) if character_ids && character_ids.count > 0
   end
 end

@@ -14,10 +14,9 @@
 
 FactoryGirl.define do
   factory :chapter do
-    body "MyText"
-title "MyString"
-chap_num 1
-story nil
+    body "It was a dark and stormy night. The cliches were too strong."
+    name "Part 1: The beginning"
+    chap_num 1
+    story 
   end
-
 end
