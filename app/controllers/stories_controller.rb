@@ -74,9 +74,9 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
-    logger.debug("Pepaired params: #{prepaired_params}")
+    logger.debug("Pepaired params: #{prepped_params}")
     respond_to do |format|
-      if @story.update(prepaired_params)
+      if @story.update(prepped_params)
         format.html { redirect_to @story }
         format.json { render :show, status: :ok, location: @story }
       else
@@ -122,7 +122,7 @@ class StoriesController < ApplicationController
   # completely. 
   #
   # So we basically add all the _delete attributes it wants. 
-  def prepaired_params
+  def prepped_params
     p = story_params
     logger.debug("Story params: #{p.to_yaml}")
     # To make my life easier, we just re-build the ship attributes from 

@@ -8,16 +8,16 @@ RSpec.describe StoriesController, type: :controller do
       sign_in @user
     end
     describe "post #create" do
-      it "accepts nested attributes" do
-        f1 = FactoryGirl.create(:franchise)
-        f2 = FactoryGirl.create(:franchise) 
-      
+      it "accepts an array of franchise ids" do
+        f1 = FactoryGirl.create(:franchise_with_characters)
+        f2 = FactoryGirl.create(:franchise)
         expect{
           post(:create, story: {
             name: "A test story",
             blurb: "A story we use to test",
             description: "When the test does test, who will test?",
-            franchise_ids: [f1.id, f2.id]
+            franchise_ids: [f1.id, f2.id],
+            character_ids: f1.characters.pluck(:id)
           })
         }.to change{Story.count}.by(1)
         expect(Story.last.franchises).to contain_exactly(f1, f2)
