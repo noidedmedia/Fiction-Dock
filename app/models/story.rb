@@ -1,17 +1,15 @@
-# == Schema Information
+##
+# Story class. Represents a story on the site.
 #
-# Table name: stories
-#
-#  id          :integer          not null, primary key
-#  name        :string
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  blurb       :string
-#  user_id     :integer
-#  published   :boolean          default(FALSE), not null
-#
-
+#== Relationships (excluding join tables)
+# franchises:: all franchies this story falls under. This is used to oragnize
+#              stories, crossovers, you name it. It's also used to make sure
+#              character lists are accurate.
+# characters:: the characters that are in this story. They can be from any 
+#              franchie, as long as this story is also under that franchise.
+# user:: the person who wrote this story.
+# chapters:: individual chapters of this story. These contain the actual
+#            content for the story.
 class Story < ActiveRecord::Base
   include Commentable
   scope :for_display, ->{where(published: true).order("created_at DESC")}

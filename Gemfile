@@ -1,7 +1,6 @@
 ruby '2.2.2'
 source 'https://rubygems.org'
 
-gem 'annotate', '~> 2.6.6'
 
 # Redcarpet for Markdown
 gem 'redcarpet', '~> 3.2.3'
@@ -63,7 +62,9 @@ group :development do
   gem 'pry-rails'
   gem 'binding_of_caller'
   gem 'quiet_assets'
-
+  ##
+  # Prettier rdoc documentation
+  gem 'hanna-boostrep'
 end
 
 

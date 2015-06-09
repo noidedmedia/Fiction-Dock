@@ -15,5 +15,23 @@
 require 'rails_helper'
 
 RSpec.describe Story, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validation" do
+    it "requires at least one character" do
+      s = FactoryGirl.build(:story)
+      s.characters = []
+      expect(s).to_not be_valid
+    end
+    it "requires at least one franchise" do
+      s = FactoryGirl.build(:story)
+      s.franchises = []
+      expect(s).to_not be_valid
+    end
+    # TODO: name this something better
+    it "requires all characters be from a franchise it has" do
+      s = FactoryGirl.build(:story)
+      f = FactoryGirl.build(:franchise_with_characters)
+      s.characters = [f.characters.first]
+      expect(s).to_not be_valid
+    end
+  end
 end
