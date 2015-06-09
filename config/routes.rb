@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   
   resources :stories do
+    # see if currently subscribed
+    get 'subscribed'
+    # subscribe if not currently subscribed
+    post 'subscribe'
+    # unsubscribe if currently subscribed
+    delete 'unsubscribe'
     resources :chapters
   end
   

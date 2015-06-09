@@ -1,6 +1,46 @@
 class StoriesController < ApplicationController
   include Pundit
   before_filter :authenticate_user!, except: [:show, :index]
+  def subscribe
+    if current_user.subscriptions.where(story_id: params[:id]).first.nil?
+      Subscription.create(story_id: params[:id],
+                          user_id: current_user.id)
+      respond_to do |format|
+        format.html { redirect_to story_path(params[:id]) }
+        format.json { render json: true }
+      end
+    else
+      respond_to do |format|
+        # TODO: fix this
+        format.html { redirect_to story_path(params[:id]) }
+        format.json { render json: false}
+      end
+    end
+  end
+  
+  def unsubscribe
+    s = Subscription.where(story_id: params[:id],
+                       user_id: current_user.id)
+    respond_to do |format|
+      if s.try(:destroy)
+        format.html { redirect_to story_path(params[:id])}
+        format.json { render json: true}
+      else
+        # TODO: Fix this
+        format.html { redirect_to story_path(params[:id])}
+        format.json { render json: false}
+      end
+    end
+  end
+
+  def subscribed
+    if Subscription.where(story_id: params[:id], user_id: current_user.id)
+      render json: true
+    else
+      render json: false
+    end
+  end
+
   def index
     @stories = Story.all.includes(:franchises)
   end

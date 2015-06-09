@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   has_many :stories
   has_many :franchise_users
   has_many :franchises, through: :francise_users
+  has_many :subscriptions
+  has_many :subscribed_stories, through: :subscriptions, class_name: "Story", foreign_key: "story_id"
   enum level: [:normal, :mod, :admin]
   validates :name, presence: true, format: {with: /\A\w+\z/}
 end
