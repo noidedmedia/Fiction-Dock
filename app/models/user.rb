@@ -1,25 +1,15 @@
-# == Schema Information
+##
+# A user is exactly what it says on the tin: somebody who uses FictionDock.
+# We use `Devise` for our authentication, so check out their docs as well.
 #
-# Table name: users
-#
-#  id                     :integer          not null, primary key
-#  name                   :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
-#  level                  :integer          default(0), not null
-#  slug                   :string
-#
-
+#== Relations (exlcuding join tables)
+# comments:: the comments this user has made
+# franchises:: the franchises this user moderates. Moderating a franchise
+#              allows a user to change its description, add or remove
+#              characters, and other such tasks.
+# subscribed_stories:: the stories this user is subscribed to. At some point
+#                      in the near future, these stories will generate a
+#                      notification the user when updated.
 class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged

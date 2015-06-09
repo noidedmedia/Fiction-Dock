@@ -1,15 +1,11 @@
-# == Schema Information
+##
+# A franchise is a media property. It encompasses all forms of media (so the 
+# LOTR movies and the LOTR books are considered the same franchsise).
 #
-# Table name: franchises
-#
-#  id          :integer          not null, primary key
-#  name        :string
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  slug        :string
-#
-
+#== Relations (Excluding Join Tables)
+# stories:: stories that take place in the universe of this franchise. Note
+#           that this does include crossovers.
+# characters:: characters that belong to this franchise.
 class Franchise < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged

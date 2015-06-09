@@ -1,16 +1,10 @@
-# == Schema Information
+##
+# A character represents exactly what it says on the tin: a character in a 
+# fictional work.
 #
-# Table name: characters
-#
-#  id           :integer          not null, primary key
-#  franchise_id :integer
-#  name         :string
-#  description  :text
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  slug         :string
-#
-
+# Characters belong to a franchise. So "The Heavy" belongs to the franchise 
+# "TF2". Characters can only belong to one franchise at once, so the various
+# incarnations of King Aurthur are considered seperate characters.
 class Character < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
