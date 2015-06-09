@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609032002) do
+ActiveRecord::Schema.define(version: 20150609033120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,16 +39,6 @@ ActiveRecord::Schema.define(version: 20150609032002) do
 
   add_index "characters", ["franchise_id"], name: "index_characters_on_franchise_id", using: :btree
   add_index "characters", ["slug"], name: "index_characters_on_slug", unique: true, using: :btree
-
-  create_table "follows", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "story_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "follows", ["story_id"], name: "index_follows_on_story_id", using: :btree
-  add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
 
   create_table "franchise_users", force: :cascade do |t|
     t.integer  "user_id"
@@ -132,6 +122,16 @@ ActiveRecord::Schema.define(version: 20150609032002) do
 
   add_index "story_franchises", ["franchise_id"], name: "index_story_franchises_on_franchise_id", using: :btree
   add_index "story_franchises", ["story_id"], name: "index_story_franchises_on_story_id", using: :btree
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "story_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "subscriptions", ["story_id"], name: "index_subscriptions_on_story_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
