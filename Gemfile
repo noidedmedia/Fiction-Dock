@@ -64,7 +64,7 @@ group :development do
   gem 'quiet_assets'
   ##
   # Prettier rdoc documentation
-  gem 'hanna-boostrep'
+  gem 'hanna-bootstrap'
 end
 
 
