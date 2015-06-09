@@ -1,30 +1,53 @@
+##
+# Handle all actions related to a franchise
 class FranchisesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
+  ##
+  # Get all stories under this franchise
+  # TODO: paginate this
   def stories
     @franchise = Franchise.friendly.find(params[:id])
     @stories = @franchise.stories
   end
 
+  ##
+  # Autocomplete a franchise by name
+  # Only really useful with JSON
+  # Names are case-insensitive
   def complete
     @franchises = Franchise.where(["name ILIKE ?", "#{params[:query]}%"])
   end
-  def index
 
+  ##
+  # List all franchises
+  # TODO: paginate this
+  def index
     @franchises = Franchise.all
   end
 
+  ##
+  # Create a new franchise
+  # TODO: restrict this so not just anybody can do it
   def new
     @franchise = Franchise.new
   end
 
+  ##
+  # Edit a franchise
+  # TODO: restrict this only to authorized users
   def edit
     @franchise = Franchise.friendly.find(params[:id])
   end
 
+  ##
+  # Show a franchise, including stories within
   def show
     @franchise = Franchise.friendly.find(params[:id])
   end
 
+  ##
+  # Make a new franchise
+  # TODO: restrict this
   def create
     @franchise = Franchise.new(franchise_params)
     respond_to do |format|
@@ -39,6 +62,8 @@ class FranchisesController < ApplicationController
   end
 
   protected
+  ##
+  # Paramters needted to create a franchise
   def franchise_params
     params.require(:franchise)
       .permit(:name,

@@ -1,7 +1,13 @@
+##
+# Helpers we may need in all views
 module ApplicationHelper
+  ##
+  # Properly format a Time
   def pretty_time(t)
     t.strftime("%l:%M %p %B %d, %Y")
   end
+  ##
+  # Parse markdown, return HTML
   def markdown_parse(str)
     options = {
       filter_html: true,

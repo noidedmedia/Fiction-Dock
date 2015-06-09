@@ -1,4 +1,4 @@
-##
+#
 # A user is exactly what it says on the tin: somebody who uses FictionDock.
 # We use `Devise` for our authentication, so check out their docs as well.
 #

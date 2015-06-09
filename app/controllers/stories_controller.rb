@@ -1,6 +1,19 @@
+##
+# This controller manages the entire lifecycle of stories, as well as
+# subscriptions on stories.
+#
 class StoriesController < ApplicationController
+  ##
+  # Use pundit for authorization
   include Pundit
   before_filter :authenticate_user!, except: [:show, :index]
+
+  ##
+  # Subscribe to this story. 
+  # On a JSON request, it returns `true` if it worked, and `false` otherwise
+  # On an HTML request, it kind of... just redirects
+  #
+  # The point is to do this with JSON
   def subscribe
     if current_user.subscriptions.where(story_id: params[:id]).first.nil?
       Subscription.create(story_id: params[:id],
@@ -18,6 +31,9 @@ class StoriesController < ApplicationController
     end
   end
   
+  ##
+  # use a DELETE to unsubscribe
+  # Returns the success as a JSON
   def unsubscribe
     s = Subscription.where(story_id: params[:id],
                        user_id: current_user.id)
@@ -33,6 +49,9 @@ class StoriesController < ApplicationController
     end
   end
 
+  ##
+  # See if the current_user is subscribed to this story
+  # Returns a JSON response
   def subscribed
     if Subscription.where(story_id: params[:id], user_id: current_user.id)
       render json: true
@@ -41,18 +60,27 @@ class StoriesController < ApplicationController
     end
   end
 
+  ##
+  # Get a list of all stories
+  # TODO: paginate this
   def index
     @stories = Story.all.includes(:franchises)
   end
 
+  ##
+  # Display a story. The id needs to be in `params[:id]`
   def show
     @story = Story.find(params[:id])
   end
 
+  ##
+  # Display a form to create a new story.
   def new
     @story = Story.new(user: current_user)
   end
 
+  ##
+  # Actually create the new story.
   def create
     @story = Story.new(story_params)
     respond_to do |format|
@@ -64,16 +92,20 @@ class StoriesController < ApplicationController
         format.json { render json: @story.errors, status: :unprocessable_entity}
       end
     end
-
   end
 
+  ##
+  # Display a form to edit the story in `params[:id]`
   def edit 
     @story = Story.find(params[:id])
+    authorize @story
   end
 
-
+  ## 
+  # Update the given story.
   def update
     @story = Story.find(params[:id])
+    authorize @story
     logger.debug("Pepaired params: #{prepped_params}")
     respond_to do |format|
       if @story.update(prepped_params)
@@ -86,6 +118,8 @@ class StoriesController < ApplicationController
     end
   end
 
+  ##
+  # Remove the given story.
   def destroy
     @story = Story.find(params[:id])
     authorize @story
@@ -96,7 +130,22 @@ class StoriesController < ApplicationController
     end
   end
 
-  protected 
+  protected
+
+  ##
+  # Paramters to create a story. Has the following schema:
+  #     story: {
+  #       name: name,
+  #       blurb: blurb,
+  #       description: description,
+  #       franchise_ids: [franchise_id],
+  #       character_ids: [character_id],
+  #       ships_attributes: [{
+  #          id: ship_id,
+  #          ship_characters_attributes: [{
+  #            character_id: character_id
+  #          }]
+  #       }]
   def story_params
     params.require(:story)
       .permit(:name,
