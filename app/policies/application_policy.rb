@@ -1,53 +1,48 @@
+##
+# Default policy
 class ApplicationPolicy
-  attr_reader :user, :record
-
+ 
+  ##
+  # Default initializer
   def initialize(user, record)
     @user = user
     @record = record
   end
-
+  ##
+  # Indexes are public by default
   def index?
-    false
+    true
   end
-
+  ##
+  # by default, you can view
   def show?
-    scope.where(:id => record.id).exists?
+    true
   end
-
+  ##
+  # By default, disallow creation
   def create?
     false
   end
-
+  ##
+  # Only allow new if we can create
   def new?
     create?
   end
-
+  ##
+  # BY default, disallow udpate
   def update?
     false
   end
-
+  ##
+  # Only allow edit if we can update
   def edit?
     update?
   end
-
+  ## 
+  # By default, disallow destroy
   def destroy?
     false
   end
 
-  def scope
-    Pundit.policy_scope!(user, record.class)
-  end
-
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
-    def resolve
-      scope
-    end
-  end
+  
 end

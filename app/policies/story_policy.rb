@@ -2,6 +2,9 @@
 # Determine who is allowed to edit stories
 # (spoiler: it's the user who made them)
 class StoryPolicy < ApplicationPolicy
+  ##
+  # Just to make life a bit easier, we allow anybody to access
+  # `@user` and `@story`
   attr_accessor :user, :story
   ##
   # Set up with a user and a story
