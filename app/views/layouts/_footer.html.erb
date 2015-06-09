@@ -1,21 +1,22 @@
 <footer id="footer">
-  <div class="footer-logo">
-    <%= link_to root_path do %>
-      <p class="fiction-dock-logo logo-f">F</p>
-    <% end %>
-  </div>
-    <div class="footer-left-links">
-      <ul>
-        <li><p><%= t(".fiction_dock_description") %></p></li>
-      </ul>
-    </div>
 
-    <div class="footer-right-links">
-      <ul>
-        <li><a href="https://github.com/noidedmedia/Fiction-Dock"><%= t(".source_available_on") %> GitHub</a></li>
-        <li><a href="#"><%= t(".terms_and_conditions") %></a></li>
-        <li><a href="#"><%= t(".privacy_policy") %></a></li>
-        <li><p><%= t(".fiction_dock_copyright") %></p></li>
-      </ul>
+  <div class="footer-left">
+    <ul>
+      <li><p><%= t(".fiction_dock_copyright") %></p></li>
+    </ul>
+  </div>
+
+  <div class="footer-center">
+    <div class="footer-logo">
+      <%= link_to root_path do %>
+        <p class="fiction-dock-logo logo-f">F</p>
+      <% end %>
     </div>
+  </div>
+
+  <div class="footer-right">
+    <ul>
+      <li><a href="https://github.com/noidedmedia/Fiction-Dock"><span class="octicon octicon-mark-github"></span></a></li>
+    </ul>
+  </div>
 </footer>

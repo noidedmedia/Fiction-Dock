@@ -24,6 +24,7 @@ var showon = function() {
 
     $(toggle).on("click", function() {
       $(_this).toggleClass('active');
+      $(toggle).toggleClass('active');
 
       // If the element being pressed has he class "tooltip", all other
       // open tooltips will be closed when the element is pressed.
@@ -43,6 +44,7 @@ var showon = function() {
       // active classes are removed before it's able to display.
       $(toggle).bind("clickoutside", function() {
         $(_this).removeClass('active');
+        $(toggle).removeClass('active');
         $(_this).unbind("clickoutside");
       });
     });

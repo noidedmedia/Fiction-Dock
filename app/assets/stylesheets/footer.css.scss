@@ -9,18 +9,18 @@ $footer-link-color: #333;
   padding: 6px 40px;
   border-top: 1px solid #aaaab2;
   width: 100%;
-  display: inline-block;
   font-size: 1.6rem;
   height: 60px;
   margin: 0;
+  position: relative;
 
   @media all and (max-device-width: $mobile-width) {
     height: auto;
   }
 
   .footer-logo {
-    margin-right: 20px;
-    margin-top: 20px;
+    display: block;
+    margin: auto;
 
     a {
       text-decoration: none;
@@ -43,44 +43,32 @@ $footer-link-color: #333;
       margin-left: 1em;
       margin-bottom: 0;
     }
-  }
-
-  ul li {
-    font-weight: 300;
-    list-style: none;
-    padding: 10px 25px 10px 0;
-
-    > p {
-      opacity: 0.6;
-    }
-    
-    @media all and (min-device-width: $mobile-width) {
-      display: inline-block;
-      text-align: left;
-    }
-  }
-
-  .footer-left-links li a {
-    color: $footer-link-color;
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 250ms;
-
-    &:focus,
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  .footer-right-links {
-    color: $footer-link-color;
-    text-decoration: none;
 
     li {
-      font-size: 1.4rem;
-      font-weight: 400;
+      font-weight: 300;
+      list-style: none;
+
+      > p {
+        opacity: 0.6;
+      }
+    
+      @media all and (min-device-width: $mobile-width) {
+        display: inline-block;
+        text-align: left;
+      }
+    }
+  }
+
+  .footer-left {
+    position: absolute;
+    left: 40px;
+    padding: 8px 0;
+
+    li {
+      font-size: 1.2rem;
 
       a {
+        color: $footer-link-color;
         text-decoration: none;
         opacity: 0.6;
         transition: opacity 250ms;
@@ -92,8 +80,44 @@ $footer-link-color: #333;
       }
     }
 
-    @media all and (min-device-width: $mobile-width) {
-      float: right;
+    @media all and (max-device-width: $mobile-width) {
+      left: 20px;
+      padding: 10px 0;
+    }
+  }
+
+  .footer-center {
+    display: flex;
+    position: absolute;
+    width: 50vw;
+    margin: auto;
+    left: 25vw;
+  }
+
+  .footer-right {
+    color: $footer-link-color;
+    text-decoration: none;
+    padding: 12px 0;
+    position: absolute;
+    right: 40px;
+
+    li a {
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 250ms;
+
+      span {
+        font-size: 2.4rem;
+      }
+
+      &:focus,
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    @media all and (max-device-width: $mobile-width) {
+      right: 20px;
     }
   }
 }

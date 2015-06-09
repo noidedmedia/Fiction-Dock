@@ -89,7 +89,8 @@ body.dark-mode {
     }
   }
 
-  .tooltip {
+  .tooltip, .flyout,
+  #general-info-flyout {
     background-color: #444;
     border-color: rgba(255,255,255,0.15);
 
@@ -101,9 +102,19 @@ body.dark-mode {
       border-bottom-color: #444;
     }
 
-    ul li a:hover {
+    ul li a:hover,
+    ul li input:hover {
       background-color: #666;
     }
+  }
+
+  #general-info.active,
+  #username {
+    background-color: #444;
+  }
+
+  .header-item-with-flyout::hover {
+    background-color: #444;
   }
 
   .chapter-list .add-new-chapter a {

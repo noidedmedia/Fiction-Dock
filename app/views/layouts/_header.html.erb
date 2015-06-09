@@ -47,12 +47,20 @@
         </div>
       </div>
 
-      <div class="header-item">
-        <%= link_to current_user.name, user_path(current_user) %>
-      </div>
+      <div id="username" class="header-item header-item-with-flyout">
+        <div class="header-item-title"><%= current_user.name %></div>
 
-      <div class="header-item">
-        <%= button_to t(".sign_out"), destroy_user_session_path, method: :delete %>
+        <div class="header-profile-picture">
+          
+        </div>
+
+        <div id="user-flyout" class="flyout">
+          <ul>
+            <li><%= link_to t(".profile"), user_path(current_user) %></li>
+
+            <li><%= button_to t(".sign_out"), destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </div>
       </div>
 
     <% else %>
@@ -73,6 +81,20 @@
 
     <% end %>
 
+  </div>
+
+  <div id="general-info" class="header-item">
+    <span class="octicon octicon-primitive-dot"></span>
+  </div>
+
+  <div id="general-info-flyout" data-showon="#general-info">
+    <ul>
+      <li><%= link_to t(".about"), "#" %></li>
+      <li><%= link_to t(".faq"), "#" %></li>
+      <li><%= link_to t(".blog"), "#" %></li>
+      <!-- <li><%= link_to t(".terms_and_conditions"), "#" %></li> -->
+      <!-- <li><%= link_to t(".privacy_policy"), "#" %></li> -->
+    </ul>
   </div>
 
 </header>
