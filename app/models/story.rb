@@ -13,6 +13,7 @@
 #
 
 class Story < ActiveRecord::Base
+  include Commentable
   scope :for_display, ->{where(published: true).order("created_at DESC")}
 
   validates :name, length: {in: (2..100)}
