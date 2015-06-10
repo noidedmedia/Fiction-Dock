@@ -23,6 +23,7 @@ class Story < ActiveRecord::Base
   # @return [ActiveRecord::Relation<Story>] all stories that have been published
   scope :for_display, ->{where(published: true).order("created_at DESC")}
 
+  validate :character_inclusion
   validates :name, length: {in: (2..100)}
   validates :description, length: {in: (10..1000)}
   validates :user, presence: true
@@ -68,6 +69,13 @@ class Story < ActiveRecord::Base
   end
 
   protected
+  ##
+  # Make sure that all our characters are in valid franchises
+  def character_inclusion
+    if characters.where.not(franchise_id: franchises.pluck(:id)).count > 0 
+      errors.add(:characters, "Are not all within valid franchises")
+    end
+  end
   ##
   # Resolve the franchises in `franchise_ids` to the actual franchise objects
   def resolve_franchise_ids

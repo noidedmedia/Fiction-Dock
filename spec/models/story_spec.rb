@@ -28,9 +28,13 @@ RSpec.describe Story, type: :model do
     end
     # TODO: name this something better
     it "requires all characters be from a franchise it has" do
-      s = FactoryGirl.build(:story)
-      f = FactoryGirl.build(:franchise_with_characters)
-      s.characters = [f.characters.first]
+      inc = FactoryGirl.create(:franchise_with_characters)
+      notinc = FactoryGirl.create(:franchise_with_characters)
+      s = FactoryGirl.create(:story)
+      s.franchises << inc
+      s.characters << notinc.characters.first
+      expect(s.characters).to include(notinc.characters.first)
+      expect(s.franchises).to include(inc)
       expect(s).to_not be_valid
     end
   end
