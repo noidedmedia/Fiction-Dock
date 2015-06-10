@@ -43,5 +43,5 @@ class User < ActiveRecord::Base
   has_many :subscribed_stories, through: :subscriptions, class_name: "Story", foreign_key: "story_id"
 
   enum level: [:normal, :mod, :admin]
-  validates :name, presence: true, format: {with: /\A\w+\z/}
+  validates :name, presence: true, format: {with: /\A\w+\z/}, uniqueness: {case_sensative: false}
 end

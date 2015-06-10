@@ -49,9 +49,9 @@ class CharactersController < ApplicationController
   # Change a character
   # TODO: restrict this
   def update
-    @character = Character.friendly.find(params[:id]).update(character_params)
+    @character = Character.friendly.find(params[:id])
     respond_to do |format|
-      if @character.save
+      if @character.update(character_params)
         format.html { redirect_to [@franchise, @character] }
         format.json { render 'show' }
       else

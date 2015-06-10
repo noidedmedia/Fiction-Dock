@@ -22,7 +22,7 @@
 
 FactoryGirl.define do
   factory :user do
-    name "MyString"
+    name { Faker::Internet.user_name(nil, ["_"]) }
     email { Faker::Internet.email } 
     password { Faker::Internet.password(8) }
   end
