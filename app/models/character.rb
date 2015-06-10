@@ -20,5 +20,6 @@ class Character < ActiveRecord::Base
   # Stories with this character in them
   has_many :stories, through: :story_characters
   validates :franchise, presence: true
-  validates :name, presence: true, uniqueness: {case_sensative: false}
+  validates :name, presence: true, uniqueness: {case_sensative: false,
+                                                scope: :franchise}
 end
