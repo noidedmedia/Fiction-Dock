@@ -62,6 +62,8 @@ group :development do
   gem 'pry-rails'
   gem 'binding_of_caller'
   gem 'quiet_assets'
+  gem 'yard'
+  gem 'yard-activerecord'
 end
 
 
@@ -70,6 +72,4 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda-matchers'
-  gem 'yard'
-  gem 'yard-activerecord'
 end
