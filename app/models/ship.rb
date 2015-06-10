@@ -27,11 +27,23 @@ class Ship < ActiveRecord::Base
   attr_accessor :character_ids
   accepts_nested_attributes_for :ship_characters, allow_destroy: true
   before_validation :save_character_ids
-  # We have to validate the ship_characters because of how the relation
-  # works.
-  validates :ship_characters, presence: true, length: {minimum: 2}
+  validates :story, presence: true
+  validate :has_two_characters
+  validate :characters_in_story
   protected
 
+  def characters_in_story
+    # bail early if we don't have a story, since a different validation
+    # will catch that
+    return unless story
+    excluded = characters.where.not(id: story.characters.pluck(:id))
+    if excluded.length > 0
+      errors.add(:characters, "Must all be in parent story")
+    end
+  end
+  def has_two_characters
+    errors.add(:characters, "too few (need at lest two)") unless characters.length > 1
+  end
   ## 
   # Resolve `character_ids` into real characters
   def save_character_ids
