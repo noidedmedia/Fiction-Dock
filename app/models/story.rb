@@ -1,18 +1,26 @@
 ##
+# A class representing a story on the site.
 #
-# Story class. Represents a story on the site.
+# @attr [Array<Integer>] franchise_ids an array of franchise ids, to be resolved
+#   into a real collection of franchises when the model saves
+# 
+# @attr [Array<Integer>] character_ids an array of character ids, to be
+#   resolved into a real collection of franchises when the model saves.
 #
-#== Relationships (excluding join tables)
-# franchises:: all franchies this story falls under. This is used to oragnize
-#   stories, crossovers, you name it. It's also used to make sure
-#   character lists are accurate.
-# characters:: the characters that are in this story. They can be from any 
-#   franchise, as long as this story is also under that franchise.
-# user:: the person who wrote this story.
-# chapters:: individual chapters of this story. These contain the actual
-#   content for the story.
+# @attr [String] blurb a short description of the story, aka a "blurb"
+#
+# @attr [Text] description a long-form description of the story.
+#
+# @attr [String] name the name of the story
+#
+# @attr [Boolean] published a value indicating if the story is published.
+#   When `false`, this story will not be displayed in any results.
+#
 class Story < ActiveRecord::Base
   include Commentable
+  ##
+  # A scope of all stories ready for Display
+  # @return [ActiveRecord::Relation<Story>] all stories that have been published
   scope :for_display, ->{where(published: true).order("created_at DESC")}
 
   validates :name, length: {in: (2..100)}
@@ -20,20 +28,30 @@ class Story < ActiveRecord::Base
   validates :user, presence: true
   validates :franchises, presence: true
   validates :characters, presence: true
+  ##
+  # The user who wrote the story
+  # @return [User]
   belongs_to :user
+
   has_many :chapters
   has_many :story_characters
+  ##
+  # All the characters in this story
+  # @return [ActiveRecord::Relation<Character>]
   has_many :characters, through: :story_characters
+  ##
+  # Join table of `Story` to `Franchise`
+  # Allows us to place this story within several franchises
   has_many :story_franchises
+  ##
+  # All the franchises our story takes place in
+  # @return [ActiveRecord::Relation<Franchise>]
   has_many :franchises, through: :story_franchises
+  ##
+  # All the Ships in this story
+  # @return [ActiveRecord::Relation<Ship>]
   has_many :ships, autosave: true
-  ##
-  # Allow a user to pass in an array of `franchise_id`s, which makes 
-  # dealing with nested attributes less terrible
   attr_accessor :franchise_ids
-  ##
-  # Allow a user to pass in an array of `character_id`s, which makes dealing
-  # with nested attributes less awful
   attr_accessor :character_ids
  
  
@@ -44,6 +62,7 @@ class Story < ActiveRecord::Base
   ##
   # My designer wanted to use `@story.author` in views
   # So this exists
+  # @return [User] the author of this story
   def author
     user
   end
