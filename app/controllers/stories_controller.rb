@@ -133,7 +133,7 @@ class StoriesController < ApplicationController
   protected
 
   ##
-  # Paramters to create a story. Has the following schema:
+  # Parameters to create a story. Has the following schema:
   #     story: {
   #       name: name,
   #       blurb: blurb,

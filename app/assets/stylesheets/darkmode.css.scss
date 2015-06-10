@@ -32,14 +32,21 @@ body.dark-mode {
   input[type=email],
   input[type=password],
   input[type=checkbox],
-  input[type=checkbox]:checked {
+  input[type=checkbox]:checked,
+  input[type=number],
+  textarea {
     border: 1px solid #fff;
     color: #fff;
+    background-color: transparent;
 
     &:hover, &:focus {
       border: 1px solid #fff;
       color: #fff;
     }
+  }
+
+  input[type=submit] {
+    color: #fff;
   }
 
   #main-header {
@@ -109,11 +116,8 @@ body.dark-mode {
   }
 
   #general-info.active,
-  #username {
-    background-color: #444;
-  }
-
-  .header-item-with-flyout::hover {
+  #username:hover,
+  .header-item-with-flyout:hover {
     background-color: #444;
   }
 
