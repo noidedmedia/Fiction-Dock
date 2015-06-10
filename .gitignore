@@ -45,5 +45,6 @@ config/secrets.yml
 *.bowerrc
 bower.json
 
+.yardoc/*
 # Ignore pow environment settings
 .powenv

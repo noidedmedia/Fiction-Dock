@@ -1,0 +1,6 @@
+FictionDock is a GPL-Affero-Licensed, Rails-based, Fanfiction website.
+
+It is primarily maintained by Noided Media, and was originally coded as part of
+a "break" from ImageHex.
+
+

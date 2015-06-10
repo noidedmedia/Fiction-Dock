@@ -5,19 +5,7 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
-RDoc::Task.new :documentation do |rdoc|
-  rdoc.rdoc_files.include("app/**/*.rb", "lib/**/*.rb")
-  rdoc.rdoc_dir = "doc"
-  rdoc.generator = "bootstrap"
-  rdoc.title = "ImageHex Documentation"
-  rdoc.options << "--all"
+YARD::Rake::YardocTask.new do |t|
+  t.files = ["lib/**/*.rb", "app/**/*.rb"]
+  t.stats_options = ['--list-undoc']
 end
-
-RDoc::Task.new :doc_coverage do |rdoc|
-  rdoc.rdoc_files.include("app/**/*.rb")
-  rdoc.rdoc_dir = "doc"
-  rdoc.title = "ImageHex Documentation"
-  rdoc.options << "-C"
-  rdoc.options << "--all"
-end
-

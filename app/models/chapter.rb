@@ -2,9 +2,10 @@
 # A chapter is a part of a story. It contains the actual text of that part,
 # as well as a title. 
 #
-# It also has a `chap_num`, which is the index of this chapter in the story.
-# This index is 1-based. 
 class Chapter < ActiveRecord::Base
+  ##
+  # Returns a list of chapters by the order they will be in their story.
+  # This essentially means that they are ordered by `chap_num`
   scope :story_order, ->{ order(chap_num: :asc).where(published: true) }
   validates :name, presence: true
   belongs_to :story

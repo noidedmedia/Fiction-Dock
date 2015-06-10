@@ -62,9 +62,8 @@ group :development do
   gem 'pry-rails'
   gem 'binding_of_caller'
   gem 'quiet_assets'
-  ##
-  # Prettier rdoc documentation
-  gem 'hanna-bootstrap'
+  gem 'yard'
+  gem 'yard-activerecord'
 end
 
 
