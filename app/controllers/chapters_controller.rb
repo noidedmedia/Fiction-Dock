@@ -67,6 +67,11 @@ class ChaptersController < ApplicationController
       format.json { render json: true}
     end
   end
+
+  def edit
+    @chapter = Chapter.find(params[:id])
+    authorize @chapter
+  end
   protected
   ##
   # Always load the story from `params[:story_id]`

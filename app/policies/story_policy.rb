@@ -12,30 +12,20 @@ class StoryPolicy < ApplicationPolicy
     @user = user
     @story = story
   end
-  ## 
-  # Users can edit a story if they own it
-  #
-  def edit
-    owned?
-  end
+ 
   ##
   # Users can update a story if they own it
-  def update
+  def update?
     owned?
-  end
-  ##
-  # Users can try to create a story if they exist
-  def new
-    user
   end
   ##
   # Users can create a story if they exist
-  def create
+  def create?
     user
   end
   ##
   # Users can destroy a story if they own it
-  def destroy
+  def destroy?
     owned?
   end
 
@@ -43,6 +33,6 @@ class StoryPolicy < ApplicationPolicy
   ##
   # Does the user own this story?
   def owned?
-    @story.user == @user
+    @story.user.id == @user.id
   end
 end

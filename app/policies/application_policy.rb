@@ -42,7 +42,5 @@ class ApplicationPolicy
   # By default, disallow destroy
   def destroy?
     false
-  end
-
-  
+  end 
 end
