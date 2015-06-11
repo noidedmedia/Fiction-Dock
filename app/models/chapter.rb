@@ -21,9 +21,9 @@ class Chapter < ActiveRecord::Base
   # end of the last chapter.
   def fix_chap_num
     unless self.chap_num
-    latest_chap = story.chapters.story_order.last
+    latest_chap = story.chapters.last
       self.chap_num = if latest_chap
-                        lastest_chap.chap_num + 1
+                        latest_chap.chap_num + 1
                       else
                         1
                       end

@@ -8,6 +8,14 @@ class StoriesController < ApplicationController
   include Pundit
   before_filter :authenticate_user!, except: [:show, :index]
 
+  def search
+    if params[:json]
+      puts params[:json]
+      @stories = Searcher.new(JSON.parse(params[:json]))
+    else
+      @stories = Story.all
+    end
+  end
   ##
   # Subscribe to this story. 
   # On a JSON request, it returns `true` if it worked, and `false` otherwise

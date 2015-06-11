@@ -68,9 +68,6 @@ class Story < ActiveRecord::Base
     user
   end
 
-  def to_param
-    "#{id}-#{name}"
-  end
   protected
   ##
   # Make sure that all our characters are in valid franchises

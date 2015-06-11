@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     post 'subscribe'
     # unsubscribe if currently subscribed
     delete 'unsubscribe'
+    get 'search', on: :collection
     resources :chapters
   end
 
