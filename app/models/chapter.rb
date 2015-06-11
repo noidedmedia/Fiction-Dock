@@ -3,6 +3,8 @@
 # as well as a title. 
 #
 class Chapter < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :scoped, scope: [:story]
   ##
   # Returns a list of chapters by the order they will be in their story.
   # This essentially means that they are ordered by `chap_num`

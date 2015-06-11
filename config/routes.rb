@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
-  
+Rails.application.routes.draw do 
+  ##
+  # 
   resources :stories do
     # see if currently subscribed
     get 'subscribed'
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
     delete 'unsubscribe'
     resources :chapters
   end
-  
+
   resources :franchises do
     resources :characters
     get 'stories', on: :member
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, path: "accounts"
-  
+
   root 'frontpage#index'
 
 end

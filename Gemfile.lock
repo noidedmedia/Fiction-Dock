@@ -97,6 +97,8 @@ GEM
     medium-editor-rails (2.0.9)
       railties (>= 3.0)
     method_source (0.8.2)
+    migration_data (0.0.4)
+      rails (>= 4.0.0.rc1)
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.7.0)
@@ -229,6 +231,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   medium-editor-rails
+  migration_data
   pg
   pry-rails
   pundit

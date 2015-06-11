@@ -8,7 +8,7 @@ class ChaptersController < ApplicationController
   ##
   # Show this chapter, so a user can read it
   def show
-    @chapter = Chapter.find(params[:id])
+    @chapter = @story.chapters.friendly.find(params[:id])
   end
   ##
   # List all chapters
@@ -44,7 +44,7 @@ class ChaptersController < ApplicationController
   # Update a chapter
   # see chapter_params for more info
   def update
-    @chapter = Chapter.find(params[:id])
+    @chapter = @story.chapters.friendly.find(params[:id])
     authorize @chapter
     respond_to do |format|
       if @chapter.update(chapter_params)
@@ -59,7 +59,7 @@ class ChaptersController < ApplicationController
   ##
   # Remove a chapter
   def destroy
-    @chapter = Chapter.find(params[:id])
+    @chapter = @story.chapters.friendly.find(params[:id])
     authorize @chapter
     @chapter.destroy
     respond_to do |format|
@@ -69,7 +69,7 @@ class ChaptersController < ApplicationController
   end
 
   def edit
-    @chapter = Chapter.find(params[:id])
+    @chapter = @story.chapters.friendly.find(params[:id])
     authorize @chapter
   end
   protected
