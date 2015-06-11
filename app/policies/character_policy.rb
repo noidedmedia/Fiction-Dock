@@ -1,0 +1,22 @@
+class CharacterPolicy < ApplicationPolicy
+  def initialize(u, c)
+    @character = c
+    @user = u
+  end
+  def create?
+    moderated?
+  end
+
+  def update?
+    moderated?
+  end
+
+  def destroy?
+    @user.level == "admin"
+  end
+
+  protected
+  def moderated?
+    @character.franchise.moderated_by?(@user) || @user.mod_or_higher?
+  end
+end

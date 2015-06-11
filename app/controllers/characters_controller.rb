@@ -2,6 +2,8 @@
 # Handle all actions related to a character
 # Always loads the franchise from `params[:franchise_id]`
 class CharactersController < ApplicationController
+  include Pundit
+
   before_action :load_franchise
   before_action :authenticate_user!, except: [:show, :index]
   ##
@@ -20,6 +22,7 @@ class CharactersController < ApplicationController
   # TODO: restrict this
   def new
     @character = Character.new(franchise: @franchise)
+    authorize @character
   end
 
   ##
@@ -27,13 +30,14 @@ class CharactersController < ApplicationController
   # TODO: restrict this
   def edit
     @character = Character.friendly.find(params[:id])
+    authorize @character
   end
-
   ##
   # Make a new character
   # TODO: restritct this
   def create
     @character = Character.new(character_params)
+    authorize @character
     respond_to do |format|
       if @character.save
         format.html { redirect_to [@franchise, @character] }
@@ -50,6 +54,7 @@ class CharactersController < ApplicationController
   # TODO: restrict this
   def update
     @character = Character.friendly.find(params[:id])
+    authorize @character
     respond_to do |format|
       if @character.update(character_params)
         format.html { redirect_to [@franchise, @character] }
