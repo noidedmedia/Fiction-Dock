@@ -13,7 +13,7 @@
   </ul>
 
   <ol class="chapter-list">
-    <%= render partial: 'chapter_stub', collection: @story.chapters, as: :chapter %>
+    <%= render partial: 'chapter_stub', collection: policy_scope(@story.chapters), as: :chapter %>
 
     <% if current_user == @story.author %>
       <li class="add-new-chapter"><%= link_to "Add a new chapter", new_story_chapter_path(@story) %></li>

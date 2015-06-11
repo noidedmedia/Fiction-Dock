@@ -1,6 +1,20 @@
 ##
 # See if a user may modify this chapter
 class ChapterPolicy < ApplicationPolicy
+  class Scope
+    attr_reader :user, :scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+    def resolve
+      if (s = scope.first) and Story.find(s.story_id).user_id == @user.id
+        scope.all
+      else
+        scope.published
+      end
+    end
+  end
   ##
   # Set up with the user trying to edit, and the chapter
   def initialize(user, chapter)

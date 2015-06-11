@@ -8,7 +8,8 @@ class Chapter < ActiveRecord::Base
   ##
   # Returns a list of chapters by the order they will be in their story.
   # This essentially means that they are ordered by `chap_num`
-  scope :story_order, ->{ order(chap_num: :asc).where(published: true) }
+  scope :published, ->{ where(published: true) }
+  default_scope{ order("chap_num ASC") }
   validates :name, presence: true
   belongs_to :story
   validates :story, presence: true
