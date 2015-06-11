@@ -1,6 +1,8 @@
-<% stories.each do |story| %>
-  <div>
-    <%= link_to story.name, story %>
-    <%= story.description %>
-  </div>
-<% end %>
+<ul class="story-list">
+  <% stories.each do |story| %>
+    <li class="story-list-item">
+      <p class="story-list-item-title"><%= link_to story.name, story %>
+      <p class="story-list-item-blurb"><%= story.blurb %>
+    </li>
+  <% end %>
+</ul>
