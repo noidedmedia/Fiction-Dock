@@ -1,5 +1,5 @@
 class Searcher
-  def initialize(params)
-    puts params.inspect
+  def initialize(json)
+    puts json.inspect
   end
 end

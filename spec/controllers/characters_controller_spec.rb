@@ -5,7 +5,7 @@ RSpec.describe CharactersController, type: :controller do
   let(:franchise){FactoryGirl.create(:franchise)}
   context "when logged in" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(:user, level: :admin)
       sign_in @user
     end
     describe "post #create" do
