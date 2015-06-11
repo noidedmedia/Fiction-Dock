@@ -1,8 +1,11 @@
 @import "scss-variables";
 
+// Title of the chapter's parent story.
 .chapter-story-title {
   font-weight: 500;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-top: 20px;
 
   a {
     text-decoration: none;
@@ -11,6 +14,15 @@
       text-decoration: underline;
     }
   }
+}
+
+// Chapter number.
+.chapter-number {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  font-weight: 500;
+  font-size: 1.4rem;
+  text-align: center;
 }
 
 .chapter-title {

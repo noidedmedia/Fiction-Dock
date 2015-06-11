@@ -101,8 +101,27 @@ input[type="search"]::-webkit-search-cancel-button {
 /* Fix for Safari adding a box-shadow to text fields on iOS. */ 
 input[type="text"],
 input[type="password"],
-input[type="email"] {
+input[type="email"],
+textarea {
   -webkit-appearance: none;
+  border: 1px solid #333;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+input[type="submit"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-color: transparent;
+  opacity: 0.8;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 input,
@@ -122,8 +141,8 @@ select {
 
 #masthead {
   width: 100vw;
-  min-height: calc(100vh - 100px);
-  margin-top: 40px;
+  min-height: calc(100vh - 105px);
+  margin-top: 45px;
 
   @media all and (max-device-width: $mobile-width) {
     height: calc(100vh - 110px);
