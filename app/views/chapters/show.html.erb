@@ -1,18 +1,36 @@
-<div class="story-text">
+<article class="story-text">
 
-  <p class="chapter-story-title"><%= link_to @story.name, story_path(@story) %></p>
-  <p class="chapter-number">Chapter <%= @chapter.chap_num %></p>
-  
+  <h5 class="chapter-story-title"><%= link_to @story.name, story_path(@story) %></h5>
+  <h6 class="chapter-number">Chapter <%= @chapter.chap_num %></h6>
+
   <h3 class="chapter-title"><%= @chapter.name %></h3>
 
-  <ul class="story-options">
-    <% if current_user == @story.author %>
-      <li><%= link_to "Edit", edit_story_chapter_path(@story, @chapter) %></li>
-    <% end %>
-  </ul>
+  <% if current_user == @story.author %>
+    <ul class="story-options">
+      <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
+    </ul>
+  <% end %>
 
-  <article class="chapter-body">
+  <div class="chapter-body">
     <%= markdown_parse @chapter.body %>
-  </article>
+  </div>
 
-</div>
+  <div class="pagination">
+
+    <% if @chapter.chap_num != 1 %>
+      <div class="page-prev"><a href="#">Prev</a></div>
+    <% end %>
+
+    <div class="page-next"><a href="#">Next</a></div>
+  </div>
+
+  <hr>
+
+  <div class="chapter-information">
+    <p class="chapter-author"><%= t(".written_by", author: @story.author.name ) %> </p>
+
+    <p class="chapter-published-date"><%= t(".published_on", date: @chapter.created_at.strftime("%B %e, %Y") ) %></p>
+
+  </div>
+
+</article>

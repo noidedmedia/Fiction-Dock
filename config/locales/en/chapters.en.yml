@@ -1,0 +1,8 @@
+# Chapters strings.
+
+en:
+  chapters:
+    show:
+      edit: "Edit"
+      written_by: "Written by %{author}"
+      published_on: "Published on %{date}"

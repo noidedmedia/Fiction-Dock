@@ -31,6 +31,8 @@ html, body {
   color: #333;
   margin: 0;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
 
   /* Fix for iOS Safari messing with the text size. */
   @media all and (max-device-width: $mobile-width) {
@@ -76,8 +78,8 @@ a {
   color: #333;
 }
 
-/* Fix for WebKit lists. */
-ul, ol, figure {
+/* Fix for WebKit lists, horizontal rules, etc. */
+ul, ol, figure, hr {
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
   -webkit-margin-start: 0;
