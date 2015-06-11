@@ -1,6 +1,7 @@
 ##
 # Handle all actions related to a franchise
 class FranchisesController < ApplicationController
+  include Pundit
   before_action :authenticate_user!, only: [:new, :edit]
   after_action :verify_authorized, except: [:complete, :index, :show, :stories]
   ##

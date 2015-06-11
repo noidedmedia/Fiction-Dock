@@ -1,6 +1,4 @@
 Rails.application.routes.draw do 
-  ##
-  # 
   resources :stories do
     # see if currently subscribed
     get 'subscribed'
@@ -15,6 +13,7 @@ Rails.application.routes.draw do
     resources :characters
     get 'stories', on: :member
     get 'complete', on: :collection
+    resources :users, controller: :franchise_users, except: [:show, :edit, :update]
   end
   resources :users, only: [:index, :show] do
     get 'stories', on: :member

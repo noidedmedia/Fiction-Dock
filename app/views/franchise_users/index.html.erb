@@ -1,0 +1,11 @@
+<ul>
+<% @franchise_users.each do |fr| %>
+  <li>
+  <div>
+    <%= link_to fr.user.name, fr.user %>
+  </div>
+  <div>
+    <%= button_to "delete", franchise_user_path(@franchise, fr), method: :delete %>
+  </div>
+  </li>
+<% end %>

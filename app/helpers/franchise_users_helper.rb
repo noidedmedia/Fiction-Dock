@@ -1,0 +1,2 @@
+module FranchiseUsersHelper
+end

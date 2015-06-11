@@ -10,6 +10,11 @@ class Franchise < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
   has_many :story_franchises
+  has_many :franchise_users
+  has_many :users, through: :franchise_users
   has_many :stories, through: :story_franchises
   has_many :characters
+  def moderated_by?(user)
+    users.include?(user)
+  end
 end

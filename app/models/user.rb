@@ -44,4 +44,8 @@ class User < ActiveRecord::Base
 
   enum level: [:normal, :mod, :admin]
   validates :name, presence: true, format: {with: /\A\w+\z/}, uniqueness: {case_sensative: false}
+
+  def mod_or_higher?
+    level == "mod" || level == "admin"
+  end
 end

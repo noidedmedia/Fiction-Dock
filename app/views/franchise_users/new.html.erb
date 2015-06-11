@@ -1,0 +1,8 @@
+<% @franchise_user.errors.each do |err| %>
+  <%= err %>
+<% end %>
+<%= form_for @franchise_user do |f| %>
+  <%= f.label :user_id %>
+  <%= f.number_field :user_id %>
+  <%= f.submit %> 
+<% end %> 
