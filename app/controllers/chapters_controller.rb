@@ -9,6 +9,7 @@ class ChaptersController < ApplicationController
   # Show this chapter, so a user can read it
   def show
     @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
   end
   ##
   # List all chapters
