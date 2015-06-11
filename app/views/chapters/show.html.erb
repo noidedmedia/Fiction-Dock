@@ -1,6 +1,8 @@
 <div class="story-text">
 
   <p class="chapter-story-title"><%= link_to @story.name, story_path(@story) %></p>
+  <p class="chapter-number">Chapter <%= @chapter.chap_num %></p>
+  
   <h3 class="chapter-title"><%= @chapter.name %></h3>
 
   <ul class="story-options">

@@ -87,6 +87,7 @@ $footer-link-color: #333;
   }
 
   .footer-center {
+    display: -webkit-flex;
     display: flex;
     position: absolute;
     width: 50vw;
