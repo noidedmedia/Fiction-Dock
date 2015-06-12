@@ -22,7 +22,7 @@ class Story < ActiveRecord::Base
   # A scope of all stories ready for Display
   # @return [ActiveRecord::Relation<Story>] all stories that have been published
   scope :for_display, ->{where(published: true).order("created_at DESC")}
-
+  validates :blurb, length: {in: (0..250)}
   validate :character_inclusion
   validates :name, length: {in: (2..100)}
   validates :description, length: {in: (10..1000)}
