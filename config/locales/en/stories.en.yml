@@ -11,3 +11,9 @@ en:
       share: "Share"
       report: "Report"
       add_a_new_chapter: "Add a new chapter"
+      languages:
+        en: "English"
+        es: "Spanish"
+      licenses:
+        all_rights_reserved: "All Rights Reserved"
+        cc_zero: "CC-0 (Public Domain)"
