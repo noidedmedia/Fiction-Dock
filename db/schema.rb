@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611201141) do
+ActiveRecord::Schema.define(version: 20150612000749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,17 +168,17 @@ ActiveRecord::Schema.define(version: 20150611201141) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
-  add_foreign_key "chapters", "stories"
+  add_foreign_key "chapters", "stories", on_delete: :cascade
   add_foreign_key "characters", "franchises"
   add_foreign_key "comments", "users", on_delete: :cascade
   add_foreign_key "franchise_users", "franchises"
   add_foreign_key "franchise_users", "users"
   add_foreign_key "ship_characters", "characters", on_delete: :cascade
   add_foreign_key "ship_characters", "ships", on_delete: :cascade
-  add_foreign_key "ships", "stories"
+  add_foreign_key "ships", "stories", on_delete: :cascade
   add_foreign_key "stories", "users"
   add_foreign_key "story_characters", "characters"
-  add_foreign_key "story_characters", "stories"
+  add_foreign_key "story_characters", "stories", on_delete: :cascade
   add_foreign_key "story_franchises", "franchises"
-  add_foreign_key "story_franchises", "stories"
+  add_foreign_key "story_franchises", "stories", on_delete: :cascade
 end

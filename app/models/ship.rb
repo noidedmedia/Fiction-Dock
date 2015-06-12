@@ -42,7 +42,7 @@ class Ship < ActiveRecord::Base
     end
   end
   def has_two_characters
-    errors.add(:characters, "too few (need at lest two)") unless characters.length > 1
+    errors.add(:characters, "too few (need at lest two)") unless ship_characters.length > 1
   end
   ## 
   # Resolve `character_ids` into real characters

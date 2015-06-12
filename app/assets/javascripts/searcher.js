@@ -21,7 +21,6 @@ SearchControls.prototype.submit = function(){
   console.log(this.story);
   var submitobj = {};
   var jsonstr = JSON.stringify(this.story);
-  window.location.href = "/stories/search?json=" encodeURIComponent(jsonstr);
 }
 $(function(){
   var d;
