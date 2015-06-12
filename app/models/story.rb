@@ -71,6 +71,26 @@ class Story < ActiveRecord::Base
     user
   end
 
+  ##
+  # Returns a localized list of all license options for use
+  # with the select element on the Story page.
+  #
+  def self.license_attributes_for_select
+    licenses.map do |license, k|
+      [I18n.t("licenses.#{license}"), license]
+    end
+  end
+
+  ##
+  # Returns a localized list of all language options for use
+  # with the select element on the Story page.
+  #
+  def self.language_attributes_for_select
+    languages.map do |language, k|
+      [I18n.t("languages.#{language}"), language]
+    end
+  end
+
   protected
   def set_parent_for_ship(ship)
     ship.story ||= self

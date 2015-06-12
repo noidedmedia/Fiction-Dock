@@ -10,5 +10,9 @@
     <%= f.label :description %>
     <%= f.text_area :description, id: "story-description-field" %>
 
+    <%= f.select :language, options_for_select(Story.language_attributes_for_select), {}, { class: "custom-select", id: "story-language-select" } %>
+
+    <%= f.select :license, options_for_select(Story.license_attributes_for_select), {}, { class: "custom-select", id: "story-license-select" } %>
+
   <% end %> 
 </div>
