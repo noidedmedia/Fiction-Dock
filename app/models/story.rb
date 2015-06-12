@@ -51,7 +51,7 @@ class Story < ActiveRecord::Base
   ##
   # All the Ships in this story
   # @return [ActiveRecord::Relation<Ship>]
-  has_many :ships, autosave: true
+  has_many :ships, autosave: true, before_add: :set_parent_for_ship
   attr_accessor :franchise_ids
   attr_accessor :character_ids
  
@@ -69,6 +69,9 @@ class Story < ActiveRecord::Base
   end
 
   protected
+  def set_parent_for_ship(ship)
+    ship.story ||= self
+  end
   ##
   # Make sure that all our characters are in valid franchises
   def character_inclusion
