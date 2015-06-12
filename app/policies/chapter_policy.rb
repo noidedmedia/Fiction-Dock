@@ -8,7 +8,7 @@ class ChapterPolicy < ApplicationPolicy
       @scope = scope
     end
     def resolve
-      if (s = scope.first) and Story.find(s.story_id).user_id == @user.id
+      if (s = scope.first) and @user and Story.find(s.story_id).user_id == @user.id
         scope.all
       else
         scope.published
