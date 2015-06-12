@@ -97,6 +97,8 @@ StoryForm.prototype.submitForm = function(){
   toSubmit.name = this.form.name.val();
   toSubmit.description = this.form.description.val();
   toSubmit.blurb = this.form.blurb.val();
+  toSubmit.language = $("#story-language-select").val();
+  toSubmit.license = $("#story-license-select").val();
   toSubmit.franchise_ids = [];
   for(var f in this.story.franchises){
     toSubmit.franchise_ids.push(this.story.franchises[f].id);
