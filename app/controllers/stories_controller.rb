@@ -156,6 +156,8 @@ class StoriesController < ApplicationController
       .permit(:name,
               :blurb,
               :description,
+              :license,
+              :language,
               :franchise_ids => [],
               :character_ids => [],
               ships_attributes: [{
