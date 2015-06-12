@@ -25,7 +25,7 @@ class Ship < ActiveRecord::Base
   # the user to pass in an array of character ids that are then
   # resolved into real characters
   attr_accessor :character_ids
-  accepts_nested_attributes_for :ship_characters, allow_destroy: true
+  accepts_nested_attributes_for :ship_characters
   before_validation :save_character_ids
   validates :story, presence: true
   validate :has_two_characters
