@@ -124,4 +124,12 @@ body.dark-mode {
   .chapter-list .add-new-chapter a {
     color: #fff;
   }
+
+  .story-list-header {
+    border-bottom: 1px solid rgba(#fff,0.6);
+  }
+
+  .story-list-item:not(:first-of-type) {
+    border-top: 1px solid rgba(#fff,0.3);
+  }
 }
