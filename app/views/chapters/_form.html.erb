@@ -2,12 +2,17 @@
   <%= err %>
 <% end %> 
 
-<%= form_for [@story, @chapter] do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  
-  <%= f.label :body %>
-  <%= f.text_area :body %>
 
-  <%= f.submit %>
+<%= form_for [@story, @chapter] do |f| %>
+  <div class="editor">
+    <%= f.text_field :name, placeholder: t(".chapter_title") %>
+    
+    <div id="rich-text" data-placeholder="<%= t('.start_writing_here') %>">
+      
+    </div>
+
+    <%= f.text_area :body, id: "markdown" %>
+
+    <%= f.submit %>
+  </div>
 <% end %>

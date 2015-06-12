@@ -9,3 +9,6 @@ en:
       published_on: "Published on %{date}"
       prev: "Prev"
       next: "Next"
+    form:
+      chapter_title: "Chapter title"
+      start_writing_here: "Start writing here..."
