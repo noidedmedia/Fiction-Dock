@@ -1,0 +1,10 @@
+# Static stuff strings, e.g. the About page.
+
+en:
+  static_stuff:
+    about:
+      fiction_dock_tagline: "A better fan fiction repository."
+      franchises: "Franchises"
+      stories: "Stories"
+      chapters: "Chapters"
+      characters: "Characters"

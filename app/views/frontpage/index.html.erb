@@ -2,38 +2,6 @@
 
 <h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
 
-<div class="stats">
-  <ul>
-    <li>
-      <%= link_to franchises_path do %>
-        <%= Franchise.count %>
-        <span><%= t(".franchises") %></span>
-      <% end %>
-    </li>
-
-    <li>
-      <%= link_to stories_path do %>
-        <%= Story.count %>
-        <span><%= t(".stories") %></span>
-      <% end %>
-    </li>
-
-    <li>
-      <%= link_to stories_path do %>
-        <%= Chapter.count %>
-        <span><%= t(".chapters") %></span>
-      <% end %>
-    </li>
-
-    <li>
-      <%= link_to root_path do %>
-        <%= Character.count %>
-        <span><%= t(".characters") %></span>
-      <% end %>
-    </li>
-  </ul>
-</div>
-
 <% if user_signed_in? && current_user.stories.exists? %>
   <h6>Your stories:</h6>
   <%= render partial: 'stories/story_stub', collection: current_user.stories.limit(5).reverse_order, as: :story %>

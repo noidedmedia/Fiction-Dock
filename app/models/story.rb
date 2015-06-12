@@ -60,8 +60,9 @@ class Story < ActiveRecord::Base
   before_validation :resolve_character_ids
   before_validation :resolve_franchise_ids
 
-  enum license: [:cc_by_sa]
+  enum license: [:all_rights_reserved, :cc_zero, :cc_by, :cc_by_sa, :cc_by_nd, :cc_by_nc, :cc_by_nd_sa, :cc_by_nc_nd]
   enum language: [:en, :es]
+
   ##
   # My designer wanted to use `@story.author` in views
   # So this exists
