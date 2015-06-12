@@ -41,25 +41,10 @@ StoryForm.prototype.setup = function(){
    * elements of the form. It makes adding errors much, much easier.
    */
   this.form = {};
-  /*
-   * In the next section, we basically just build up some inputs and
-   * add them to the DOM.
-   * TODO: Refactor this to use templates or something
-   */
-  this.form.name = $("<input>").attr({
-    id: "story-name-box",
-  type: "text",
-  value: this.story.name
-  });
-  this.container.append(this.form.name);
-  this.form.description = $("<textarea>").attr({
-    id: "story-description-box"
-  }).append(this.story.description);
-  this.container.append(this.form.description);
-  this.form.blurb = $("<textarea>").attr({
-    id: "story-blurb-box"
-  }).append(this.story.blurb);
-  this.container.append(this.form.blurb);
+  
+  this.form.name = $("#story-name-field");
+  this.form.description = $("#story-description-field");
+  this.form.blurb = $("#story-blurb-field");
   var that = this;
   /*
    * Here, we add a franchise-suggestor

@@ -1,3 +1,10 @@
 <div id="story-form" data-story-id="<%= @story.id %>">
-
+  <%= form_for @story do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, id: "story-name-field" %>
+    <%= f.label :blurb %>
+    <%= f.text_area:blurb, id: "story-blurb-field" %>
+    <%= f.label :description%>
+    <%= f.text_area :description, id: "story-description-field" %>
+  <% end %> 
 </div>
