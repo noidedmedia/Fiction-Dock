@@ -9,12 +9,7 @@ class StoriesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index]
 
   def search
-    if params[:json]
-      puts params[:json]
-      @stories = Searcher.new(JSON.parse(params[:json]))
-    else
-      @stories = Story.all
-    end
+    @stories = Searcher.new(params).resolve
   end
   ##
   # Subscribe to this story. 

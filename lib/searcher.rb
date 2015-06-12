@@ -27,7 +27,7 @@ class Searcher
   def load_chars
     @chars = @hash["characters"]
     if @chars
-      @chars = @chars.split(", ").map!(&:to_i)
+      @chars = @chars.split(",").map!(&:to_i)
     end
   end
   def resolve_characters
