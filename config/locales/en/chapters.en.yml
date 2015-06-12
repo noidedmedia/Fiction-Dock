@@ -7,3 +7,5 @@ en:
       edit: "Edit"
       written_by_html: "Written by %{author}"
       published_on: "Published on %{date}"
+      prev: "Prev"
+      next: "Next"

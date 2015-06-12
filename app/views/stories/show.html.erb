@@ -1,6 +1,8 @@
 <div class="story-directory story-text">
 
   <h2 class="story-title"><%= @story.name %></h2>
+  <p class="story-information"><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %> · <%= t(".published_on", date: @story.created_at.strftime("%B %e, %Y") ) %></p>
+
   <p class="story-description"><%= @story.description %></p>
 
   <ul class="story-options">

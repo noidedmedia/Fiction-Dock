@@ -5,6 +5,8 @@ en:
     story_list:
       stories: "Stories"
     show:
+      written_by_html: "Written by %{author}"
+      published_on: "Published on %{date}"
       edit: "Edit"
       share: "Share"
       report: "Report"
