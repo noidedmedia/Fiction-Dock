@@ -27,8 +27,12 @@
   <hr>
 
   <div class="chapter-information">
-    <p class="chapter-author"><%= t(".written_by", author: @story.author.name ) %> </p>
+    <%# Story author. %>
+    <%# The "html" suffix in the i18n string is so that the link is rendered properly as HTML. %>
+    <%# See also: http://stackoverflow.com/questions/2543936/rails-i18n-translating-text-with-links-inside %>
+    <p class="chapter-author"><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %> </p>
 
+    <%# Date of publishing. %>
     <p class="chapter-published-date"><%= t(".published_on", date: @chapter.created_at.strftime("%B %e, %Y") ) %></p>
 
   </div>

@@ -5,5 +5,5 @@ en:
     show:
       chapter: "Chapter %{chapter_number}"
       edit: "Edit"
-      written_by: "Written by %{author}"
+      written_by_html: "Written by %{author}"
       published_on: "Published on %{date}"
