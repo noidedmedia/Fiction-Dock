@@ -17,11 +17,18 @@
 
   <div class="pagination">
 
-    <% if @chapter.chap_num != 1 %>
-      <div class="page-prev"><a href="#">Prev</a></div>
+    <% unless @chapter.chap_num == 1 %>
+      <div class="page-prev">
+        <%= link_to t(".prev"), story_chapter_path(@story, @chapter.chap_num - 1) %>
+      </div>
     <% end %>
 
-    <div class="page-next"><a href="#">Next</a></div>
+    <% unless @story.chapters.count == @chapter.chap_num %>
+      <div class="page-next">
+        <%= link_to t(".next"), story_chapter_path(@story, @chapter.chap_num + 1) %>
+      </div>
+    <% end %>
+
   </div>
 
   <hr>
