@@ -80,3 +80,18 @@
   //   content: '\f078';
   // }
 }
+
+.chapter-information {
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 10px 0;
+
+  .chapter-author {
+    opacity: 1;
+    padding-bottom: 8px;
+  }
+
+  .chapter-published-date {
+    opacity: 0.8;
+  }
+}

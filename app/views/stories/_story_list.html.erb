@@ -1,4 +1,6 @@
 <ul class="story-list">
+  <div class="story-list-header"><%= t(".stories") %></div>
+
   <% stories.each do |story| %>
     <li class="story-list-item">
       <p class="story-list-item-title"><%= link_to story.name, story %>

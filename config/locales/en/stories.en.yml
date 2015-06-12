@@ -1,0 +1,11 @@
+# Chapters strings.
+
+en:
+  stories:
+    story_list:
+      stories: "Stories"
+    show:
+      edit: "Edit"
+      share: "Share"
+      report: "Report"
+      add_a_new_chapter: "Add a new chapter"
