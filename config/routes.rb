@@ -1,4 +1,6 @@
 Rails.application.routes.draw do 
+  get 'static_stuff/about'
+
   resources :stories do
     # see if currently subscribed
     get 'subscribed'
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, path: "accounts"
+
+  get '/about', to: "static_stuff#about"
 
   root 'frontpage#index'
 
