@@ -1,14 +1,14 @@
 function Ship(obj){
   this.characters = []
-  for(var prop in obj){
-    if(prop == "characters"){
-      for(var c in obj.characters)
-        this.characters.push(new Character(obj.characters[c]));
-    }
-    else{
-      this[prop] = obj[prop];
-    }
-  } 
+    for(var prop in obj){
+      if(prop == "characters"){
+        for(var c in obj.characters)
+          this.characters.push(new Character(obj.characters[c]));
+      }
+      else{
+        this[prop] = obj[prop];
+      }
+    } 
 }
 
 Ship.newShipButton = function(story, click){
@@ -60,15 +60,17 @@ Ship.prototype.displayForForm = function(story, done, removeship){
   var container = $("<div>").attr({
     class: "ship-container"
   });
-  var remove = $("<div>").attr({
-    class: "ship-removal-button"
-  }).append("Remove Ship");
-  var that = this;
-  remove.click(function(){
-    removeship.removeShip(that);
-    done()
-  });
-  container.append(remove);
+  if(removeship){
+    var remove = $("<div>").attr({
+      class: "ship-removal-button"
+    }).append("Remove Ship");
+    var that = this;
+    remove.click(function(){
+      removeship.removeShip(that);
+      done()
+    });
+    container.append(remove);
+  }
   var list = $("<ul>");
   for(var f in story.franchises){
     list.append(story.franchises[f].listDisplay());
@@ -81,8 +83,13 @@ Ship.prototype.displayForForm = function(story, done, removeship){
   }
   return container.append(list);
 }
-function ShipForm(story){
+/*
+ * onlyOne is an optional parameter
+ * if true, then the `remove` button on `ship` will no longer exist
+ */
+function ShipForm(story, onlyOne){
   this.story = story;
+  this.onlyOne = onlyOne
 }
 
 ShipForm.prototype.render = function(){
@@ -93,7 +100,13 @@ ShipForm.prototype.render = function(){
   }
   for(var s in this.story.ships){
     var s = this.story.ships[s];
-    this.container.append(s.displayForForm(this.story, renderCallback, this.story));
+    if(this.onlyOne){
+      var remove = false;
+    }
+    else{
+      var remove = this.story;
+    }
+    this.container.append(s.displayForForm(this.story, renderCallback, remove));
   }
 }
 ShipForm.prototype.setup = function(done){

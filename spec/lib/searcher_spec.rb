@@ -21,15 +21,15 @@ RSpec.describe Searcher do
   end
   it "finds via ships" do
     hs = {
-      "ship" => ship.characters.pluck(:id).join(", ")
+      "ship" => ship.characters.pluck(:id)
     }
     searcher = Searcher.new(hs)
     expect(searcher.resolve).to contain_exactly(story_with_ship, story_with_both)
   end
   it "finds via a ship and a character" do
     hs = {
-      "ship" => ship.characters.pluck(:id).join(", "),
-      "characters" => characters.map(&:id).join(", ")
+      "ship" => ship.characters.pluck(:id),
+      "characters" => characters.map(&:id)
     }
     searcher = Searcher.new(hs)
     expect(searcher.resolve).to eq([story_with_both])
@@ -39,7 +39,7 @@ RSpec.describe Searcher do
     expect(story_with_characters.characters).to include(*characters)
     expect(story_with_both.characters).to include(*characters)
     hs = { 
-      "characters" => characters.map(&:id).join(", ")
+      "characters" => characters.map(&:id)
     }
     
     searcher = Searcher.new(hs)

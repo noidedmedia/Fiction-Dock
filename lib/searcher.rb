@@ -1,7 +1,8 @@
 class Searcher
   def initialize(hash)
     @hash = hash
-    prepare_hash
+    @chars = hash["characters"]
+    @ship_chars = hash["ship"]
   end
   
   def resolve
@@ -12,24 +13,8 @@ class Searcher
   end
   attr_reader :query
   protected
-  def prepare_hash
-    load_ship
-    load_chars
-  end
+   
 
-  def load_ship
-    @ship_chars = @hash["ship"]
-    if @ship_chars
-      @ship_chars = @ship_chars.split(",").map!(&:to_i)
-    end
-  end
-
-  def load_chars
-    @chars = @hash["characters"]
-    if @chars
-      @chars = @chars.split(",").map!(&:to_i)
-    end
-  end
   def resolve_characters
     @query = @query
       .join(story_characters).on(story_characters[:story_id].eq(stories[:id]))

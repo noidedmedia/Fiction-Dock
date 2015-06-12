@@ -18,7 +18,19 @@ function Franchise(obj){
     }
   }
 }
-
+// Load characters into this franchise with AJAX
+// call `done` when finished
+Franchise.prototype.loadCharacters = function(done){
+  var that = this;
+  $.ajax({
+    url: this._charactersUrl,
+    success: function(chars){
+      for(c in chars){
+        that.characters.push(new Character(chars[c]));
+        done();
+      }
+  }});
+}
 Franchise.prototype._baseUrl = function(){
   return "/franchises/" + this.id + "/";
 }
@@ -89,14 +101,11 @@ Franchise._suggestDisplayCallback = function(input, list, fr, callback){
   }
 }
 
-Franchise.prototype.destroyCallbackForForm = function(form){
+Franchise.prototype.destroyCallback = function(form, done){
   var fr = this;
   return function(){
-    var index = form.story.franchises.indexOf(fr);
-    if(index > -1){
-      form.story.franchises.splice(index, 1);
-    }
-    form.render();
+    form.removeFranchise(fr);
+    done();
   }
 }
 
@@ -105,12 +114,14 @@ Franchise.prototype.listDisplay = function(){
     class: 'franchise-list-item franchise-' + this.id
   }).append($("<h3>").append(this.name)).append($("<ul>"));
 }
-// Takes a callback to be used on delete, returns a form list item
-Franchise.prototype.formDisplayBox = function(form){
+// Returns a list item for this franchise, with a delete button
+// Will call the function `removeFranchise` on `container` with `this` when
+// the delete button is clicked. Will run `callback` afterwards.
+Franchise.prototype.listItemWithDelete = function(container, callback){
   var delButton = $("<div>").attr({
     class: "remove-franchise-button"
   }).append("Delete Franchise");
-  delButton.click(this.destroyCallbackForForm(form));
+  delButton.click(this.destroyCallback(container, callback));
   var item = $("<li>");
   item.append(delButton);
   item.append($("<div>").attr({
@@ -121,20 +132,7 @@ Franchise.prototype.formDisplayBox = function(form){
   }));
   return item;
 }
-Franchise.prototype.characters = function(callback){
-  var success = function(data, status){
-    var ar = [];
-    for(var d in data){
-      ar.push(new Character(data));
-    }
-    callback(data);
-  };
 
-  $.ajax(this._charactersUrl(), {
-    success: success,
-    dataType: 'json'
-  });
-}
 
 Franchise.getById = function(id, callback){
   var success = function(data){

@@ -20,6 +20,14 @@ function StoryForm(){
 StoryForm.prototype.isNew = function(){
   return (this.storyId == undefined);
 }
+
+StoryForm.prototype.renderCallback = function(){
+  var that = this;
+  return function(){
+    console.log("Rendering in callback");
+    that.render();
+  }
+}
 /*
  * The setup function handles one-time setup.
  * These are the things that we don't render on each pass.
@@ -211,7 +219,7 @@ StoryForm.prototype._renderFranchises = function(){
   this.form.franchises.empty();
   for(var f in this.story.franchises){
     var franchise = this.story.franchises[f];
-    var box = franchise.formDisplayBox(this);
+    var box = franchise.listItemWithDelete(this.story, this.renderCallback());
     this.form.franchises.append(box);
   }
 }

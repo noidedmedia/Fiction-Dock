@@ -55,6 +55,11 @@ Story.prototype.updateCharacters = function(){
       this.potentialCharacters.push(fr.characters[c]);
     }
   }
+  // Potential character indexes holds the index within potentialCharacters
+  // of characters in this story
+  //
+  // Useful to check if a character is already in the story while iterating
+  // through potentialChacaters
   this.potentialCharacterIndexes = [];
   for(var c in this.characters){
     var isValid = false;
@@ -62,6 +67,7 @@ Story.prototype.updateCharacters = function(){
     for(var pc in this.potentialCharacters){
       if(this.potentialCharacters[pc].id == this.characters[c].id){
         isValid = true;
+       
         this.potentialCharacterIndexes.push(pc);
       }
     }
@@ -97,6 +103,16 @@ Story.prototype.addFranchise = function(fr){
   }
   this.franchises.push(fr);
   return this.franchises.length - 1;
+}
+
+Story.prototype.removeFranchise = function(fr){
+  console.log("Removing franchise with id: " + fr.id);
+  for(var f in this.franchises){
+    console.log("Checking against id: " + this.franchises[f].id);
+    if(this.franchises[f].id == fr.id){
+      this.franchises.splice(f, 1);
+    }
+  }
 }
 Story.byId = function(id, callback){
   $.ajax("/stories/" + id + ".json", {
