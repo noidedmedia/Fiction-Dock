@@ -104,8 +104,15 @@
 
   li {
     white-space: nowrap;
-    display: list-item;
+    display: block;
     line-height: 3.6rem;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      content: attr(data-chapter-number);
+      left: -24px;
+    }
   }
 
   .add-new-chapter {
