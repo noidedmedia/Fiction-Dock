@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
   ##
   # Use pundit for authorization
   include Pundit
-  before_filter :authenticate_user!, except: [:show, :index]
+  before_filter :authenticate_user!, except: [:show, :index, :search]
 
   def search
     @stories = Searcher.new(params).resolve
