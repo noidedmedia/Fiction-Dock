@@ -1,9 +1,15 @@
-# Chapters strings.
+# Stories strings.
 
 en:
   stories:
+    index:
+      browse_stories: "Browse stories"
     story_list:
       stories: "Stories"
+    new:
+      create_a_new_story_page_title: "Create a new story"
+    edit:
+      edit_story_page_title: "Editing %{story_name}"
     show:
       written_by_html: "Written by %{author}"
       published_on: "Published on %{date}"

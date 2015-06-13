@@ -3,6 +3,7 @@
 en:
   static_stuff:
     about:
+      about_page_title: "About"
       fiction_dock_tagline: "A better place for your fan fiction."
       franchises: "Franchises"
       stories: "Stories"

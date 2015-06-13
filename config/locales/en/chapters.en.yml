@@ -3,6 +3,7 @@
 en:
   chapters:
     show:
+      chapter_page_title: "%{chapter_name} - %{story_name}"
       chapter: "Chapter %{chapter_number}"
       edit: "Edit"
       written_by_html: "Written by %{author}"
@@ -14,3 +15,7 @@ en:
       start_writing_here: "Start writing here..."
       you_have_unsaved_changes: "You have unsaved changes!"
       save: "Save"
+    new:
+      new_chapter_page_title: "New chapter in %{story_name}"
+    edit:
+      editing_chapter_page_title: "Editing %{chapter_name}"

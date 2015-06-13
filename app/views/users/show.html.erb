@@ -1,3 +1,5 @@
+<%- title @user.name %>
+
 <h1><%= @user.name %></h1>
 <ul>
   <%= render partial: 'stories/story_stub', collection: @user.stories, as: :story %>

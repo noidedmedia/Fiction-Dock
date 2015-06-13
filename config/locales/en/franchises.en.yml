@@ -1,0 +1,10 @@
+# Layouts strings, mostly for the header.
+
+en:
+  franchises:
+    index:
+      browse_franchises: "Browse franchises"
+    new:
+      create_a_new_franchise_page_title: "Create a new franchise"
+    edit:
+      edit_franchise_page_title: "Editing %{franchise_name}"

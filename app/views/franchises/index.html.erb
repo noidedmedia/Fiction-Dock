@@ -1,3 +1,5 @@
+<%- title t(".browse_franchises") %>
+
 <h1>Franchises:</h1>
 <% @franchises.each do |franchise| %>
   <%= link_to franchise.name, franchise %>

@@ -1,3 +1,5 @@
+<%- title t(".chapter_page_title", story_name: @story.name, chapter_name: @chapter.name) %>
+
 <article class="story-text-container">
 
   <h5 class="chapter-story-title"><%= link_to @story.name, story_path(@story) %></h5>

@@ -1,0 +1,8 @@
+# Users strings.
+
+en:
+  users:
+    index:
+      browse_users: "Browse users"
+    show:
+      edit: "Edit"
