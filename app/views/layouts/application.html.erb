@@ -6,7 +6,7 @@
   <meta charset="utf-8">
 
   <%# If a title is given in a view, that title is used, with "- Fiction Dock" appended. Otherwise, just "Fiction Dock" is used. %>
-  <title><%= content_for?(:title) ? content_for(:title) + " - Fiction Dock" : "Fiction Dock" %></title>
+  <title><%= content_for?(:title) ? content_for(:title) + " - Fiction Dock" : t(".fiction_dock_title") %></title>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, :defer => true %>
