@@ -18,6 +18,11 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     authorize @story
     @story.unpublish
+    respond_to do |format|
+      format.json {render json: @story.published}
+    end
+
+
   end
 
   def published
@@ -52,13 +57,13 @@ class StoriesController < ApplicationController
       end
     end
   end
-  
+
   ##
   # use a DELETE to unsubscribe
   # Returns the success as a JSON
   def unsubscribe
     s = Subscription.where(story_id: params[:id],
-                       user_id: current_user.id)
+                           user_id: current_user.id)
     respond_to do |format|
       if s.try(:destroy)
         format.html { redirect_to story_path(params[:id])}
@@ -173,18 +178,18 @@ class StoriesController < ApplicationController
   def story_params
     params.require(:story)
       .permit(:name,
-              :blurb,
-              :description,
-              :license,
-              :language,
-              :franchise_ids => [],
-              :character_ids => [],
-              ships_attributes: [{
-                ship_characters_attributes: [
-                  :character_id
-                ]}])
-      .merge(user_id: current_user.id)
-      
+    :blurb,
+    :description,
+    :license,
+    :language,
+    :franchise_ids => [],
+    :character_ids => [],
+    ships_attributes: [{
+      ship_characters_attributes: [
+        :character_id
+      ]}])
+        .merge(user_id: current_user.id)
+
   end
 
   def prepped_params
