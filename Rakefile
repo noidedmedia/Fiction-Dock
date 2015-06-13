@@ -2,11 +2,14 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
-require 'yard'
 
 Rails.application.load_tasks
 
-YARD::Rake::YardocTask.new do |t|
-  t.files = ["lib/**/*.rb", "app/**/*.rb"]
-  t.stats_options = ['--list-undoc']
+if (!Rails.env.production?)
+  require 'yard'
+
+  YARD::Rake::YardocTask.new do |t|
+    t.files = ["lib/**/*.rb", "app/**/*.rb"]
+    t.stats_options = ['--list-undoc']
+  end
 end
