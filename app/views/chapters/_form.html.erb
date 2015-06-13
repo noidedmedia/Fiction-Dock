@@ -7,7 +7,9 @@
     <%= f.text_field :name, placeholder: t(".chapter_title"), autocomplete: "off" %>
     
     <div id="rich-text" class="story-text" data-placeholder="<%= t('.start_writing_here') %>">
-      <%= markdown_parse @chapter.body %>
+      <% unless @chapter.body == nil %>
+        <%= markdown_parse @chapter.body %>
+      <% end %>
     </div>
 
     <%= f.text_area :body, id: "markdown" %>
