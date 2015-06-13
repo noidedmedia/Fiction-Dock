@@ -3,6 +3,8 @@ function markdownEditor() {
   var placeholder = $("#rich-text").data("placeholder");
   new MediumEditor(document.querySelector(".editor > #rich-text"), {
     buttons: ["bold", "italic", "underline", "orderedlist", "unorderedlist", "header1", "header2", "quote"],
+    firstHeader: 'h4',
+    secondHeader: 'h5',
     paste: {
         cleanPastedHTML: true,
         cleanAttrs: ['style', 'dir'],

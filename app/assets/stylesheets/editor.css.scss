@@ -1,12 +1,5 @@
 @import "scss-variables";
 
-blockquote {
-  margin: 25px;
-  border-left: 6px solid #2ecc71;
-  padding-left: 9px;
-  margin-left: -15px;
-}
-
 .editor {
   width: 100%;
   max-width: 700px;
@@ -26,7 +19,6 @@ blockquote {
   }
 
   > #rich-text {
-    font-family: 'Lora', serif;
     outline: none;
     font-size: 1.6rem;
     line-height: 3.0rem;

@@ -133,11 +133,20 @@ input, textarea, keygen, select, button {
   font: 400 inherit 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-// Fix Firefox's ugly default select styling.
+/* Fix Firefox's ugly default select styling. */
 select {
   -moz-appearance: none;
 }
 
+/* Quotation styling, mostly for use with stories */
+blockquote {
+  margin: 25px;
+  margin-left: 0;
+  border-left: 6px solid #333;
+  padding-left: 9px;
+}
+
+/* Overall container element for the page, excluding the header and footer. */
 #masthead {
   width: 100vw;
   min-height: calc(100vh - 105px);

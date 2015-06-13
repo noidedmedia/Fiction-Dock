@@ -1,47 +1,50 @@
-<article class="story-text">
+<article class="story-text-container">
 
   <h5 class="chapter-story-title"><%= link_to @story.name, story_path(@story) %></h5>
   <h6 class="chapter-number"><%= t(".chapter", chapter_number: @chapter.chap_num) %></h6>
 
-  <h3 class="chapter-title"><%= @chapter.name %></h3>
+  <div class="story-text">
 
-  <% if current_user == @story.author %>
-    <ul class="story-options">
-      <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
-    </ul>
-  <% end %>
+    <h3 class="chapter-title"><%= @chapter.name %></h3>
 
-  <div class="chapter-body">
-    <%= markdown_parse @chapter.body %>
-  </div>
-
-  <div class="pagination">
-
-    <% unless @chapter.chap_num == 1 %>
-      <div class="page-prev">
-        <%= link_to t(".prev"), story_chapter_path(@story, @chapter.chap_num - 1) %>
-      </div>
+    <% if current_user == @story.author %>
+      <ul class="story-options">
+        <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
+      </ul>
     <% end %>
 
-    <% unless @story.chapters.count == @chapter.chap_num %>
-      <div class="page-next">
-        <%= link_to t(".next"), story_chapter_path(@story, @chapter.chap_num + 1) %>
-      </div>
-    <% end %>
+    <div class="chapter-body">
+      <%= markdown_parse @chapter.body %>
+    </div>
 
-  </div>
+    <div class="pagination">
 
-  <hr>
+      <% unless @chapter.chap_num == 1 %>
+        <div class="page-prev">
+          <%= link_to t(".prev"), story_chapter_path(@story, @chapter.chap_num - 1) %>
+        </div>
+      <% end %>
 
-  <div class="chapter-information">
-    <%# Story author. %>
-    <%# The "html" suffix in the i18n string is so that the link is rendered properly as HTML. %>
-    <%# See also: http://stackoverflow.com/questions/2543936/rails-i18n-translating-text-with-links-inside %>
-    <p class="chapter-author"><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %> </p>
+      <% unless @story.chapters.count == @chapter.chap_num %>
+        <div class="page-next">
+          <%= link_to t(".next"), story_chapter_path(@story, @chapter.chap_num + 1) %>
+        </div>
+      <% end %>
 
-    <%# Date of publishing. %>
-    <p class="chapter-published-date"><%= t(".published_on", date: @chapter.created_at.strftime("%B %e, %Y") ) %></p>
+    </div>
 
+    <hr>
+
+    <div class="chapter-information">
+      <%# Story author. %>
+      <%# The "html" suffix in the i18n string is so that the link is rendered properly as HTML. %>
+      <%# See also: http://stackoverflow.com/questions/2543936/rails-i18n-translating-text-with-links-inside %>
+      <p class="chapter-author"><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %> </p>
+
+      <%# Date of publishing. %>
+      <p class="chapter-published-date"><%= t(".published_on", date: @chapter.created_at.strftime("%B %e, %Y") ) %></p>
+
+    </div>
   </div>
 
 </article>

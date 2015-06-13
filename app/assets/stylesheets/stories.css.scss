@@ -36,14 +36,29 @@
 
 .story-text {
   font-family: 'Lora', Georgia, Cambria, 'Times New Roman', Times, serif;
-  margin: auto;
-  margin-bottom: 40px;
-  width: 100vw;
-  max-width: 700px;
-  padding-top: 10px;
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  h4 {
+    font-size: 3.2rem;
+    line-height: 48px;
+    margin-top: 40px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  h5 {
+    font-size: 2.4rem;
+    line-height: 40px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  h4 + h5 {
+    margin-top: 5px;
   }
 
   hr {
@@ -52,6 +67,14 @@
     border-top: 1px solid currentColor;
     opacity: 0.5;
   }
+}
+
+.story-text-container {
+  margin: auto;
+  margin-bottom: 40px;
+  width: 100vw;
+  max-width: 700px;
+  padding-top: 10px;
 
   @media all and (max-device-width: $mobile-width) {
     width: calc(100vw - 20px);
@@ -89,7 +112,7 @@
 
   li {
     display: inline-block;
-    margin: 0 20px;
+    margin-right: 20px;
   }
 
   a {
