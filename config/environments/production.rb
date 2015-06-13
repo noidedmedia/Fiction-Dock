@@ -83,4 +83,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Heroku Google Analytics Key
+  config.google_analytics_key = ENV['GOOGLE_ANALYTICS_KEY']
 end
