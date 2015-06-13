@@ -14,6 +14,7 @@ class Franchise < ActiveRecord::Base
   has_many :users, through: :franchise_users
   has_many :stories, through: :story_franchises
   has_many :characters
+  
   def moderated_by?(user)
     users.include?(user)
   end

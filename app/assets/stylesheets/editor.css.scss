@@ -74,14 +74,14 @@
   }
 }
 
-$medium_editor_bgcolor:                     #333 !default;
-$medium_editor_border_color:                #222 !default;
+$medium_editor_bgcolor:                     #fff !default;
+$medium_editor_border_color:                #aaaab2 !default;
 $medium_editor_button_size:                 60px !default;
-$medium_editor_button_active_text_color:    #fff !default;
-$medium_editor_hover_color:                 #444 !default;
-$medium_editor_link_color:                  #fff !default;
+$medium_editor_button_active_text_color:    #333 !default;
+$medium_editor_hover_color:                 #f0f0f0 !default;
+$medium_editor_link_color:                  #333 !default;
 $medium_editor_border_radius:               4px !default;
-$medium_editor_placeholder_color:           #fff !default;
+$medium_editor_placeholder_color:           #333 !default;
 
 .medium-toolbar-arrow-under:after {
   top: $medium_editor_button_size;
@@ -176,4 +176,41 @@ $medium_editor_placeholder_color:           #fff !default;
 
 .medium-editor-placeholder:after {
   color: $medium_editor_border_color;
+}
+
+
+.medium-toolbar-arrow-under:before, .medium-toolbar-arrow-under:after,
+.medium-toolbar-arrow-over:after, .medium-toolbar-arrow-over:before {
+  position: absolute;
+  left: 50%;
+  display: block;
+  margin-left: -8px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  content: "";
+}
+
+.medium-toolbar-arrow-under:before {
+  top: 61px;
+  border-color: $medium_editor_border_color transparent transparent transparent;
+  border-width: 8px 8px 0 8px;
+}
+
+.medium-toolbar-arrow-under:after {
+  top: 60px;
+  border-color: $medium_editor_bgcolor transparent transparent transparent;
+  border-width: 8px 8px 0 8px;
+}
+
+.medium-toolbar-arrow-over:before {
+  top: -9px !important;
+  border-color: transparent transparent $medium_editor_border_color transparent;
+  border-width: 0 8px 8px 8px;
+}
+
+.medium-toolbar-arrow-over:after {
+  top: -8px !important;
+  border-color: transparent transparent $medium_editor_bgcolor transparent;
+  border-width: 0 8px 8px 8px;
 }
