@@ -43,7 +43,7 @@ class StoriesController < ApplicationController
     end
   end
   def search
-    @stories = Searcher.new(params).resolve
+    @stories = Searcher.new(params).resolve(page: params[:page])
   end
   ##
   # Subscribe to this story. 
@@ -101,7 +101,7 @@ class StoriesController < ApplicationController
   # Get a list of all stories
   # TODO: paginate this
   def index
-    @stories = Story.all.includes(:franchises)
+    @stories = Story.all.includes(:franchises).paginate(page: params[:page])
   end
 
   ##

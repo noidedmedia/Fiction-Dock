@@ -5,11 +5,11 @@ class Searcher
     @ship_chars = hash["ship"]
   end
   
-  def resolve
+  def resolve(page:)
     @query = stories.project(stories[Arel.star]).group(stories[:id])
     resolve_ship_chars if @ship_chars && @ship_chars.length > 0
     resolve_characters if @chars && @chars.length > 0 
-    Story.find_by_sql(@query.to_sql)
+    Story.paginate_by_sql(@query.to_sql, page: page)
   end
   attr_reader :query
   protected
