@@ -12,4 +12,5 @@ en:
     form:
       chapter_title: "Chapter title"
       start_writing_here: "Start writing here..."
+      you_have_unsaved_changes: "You have unsaved changes!"
       save: "Save"

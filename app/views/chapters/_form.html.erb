@@ -6,7 +6,7 @@
   <div class="editor">
     <%= f.text_field :name, placeholder: t(".chapter_title"), autocomplete: "off" %>
     
-    <div id="rich-text" class="story-text" data-placeholder="<%= t('.start_writing_here') %>">
+    <div id="rich-text" class="story-text" data-placeholder="<%= t('.start_writing_here') %>" data-onbeforeunload="<%= t('.you_have_unsaved_changes') %>">
       <% unless @chapter.body == nil %>
         <%= markdown_parse @chapter.body %>
       <% end %>
