@@ -11,7 +11,6 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, :defer => true %>
   <%= csrf_meta_tags %>
-
   <%# Google Analytics %>
   <% if Rails.env == "production"  %>
     <script>
@@ -19,10 +18,8 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
       ga('create', '<%= Rails.configuration.google_analytics_key %>', 'auto');
       ga('send', 'pageview');
-
     </script>
   <% end %>
 
