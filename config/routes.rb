@@ -1,6 +1,12 @@
 Rails.application.routes.draw do 
   get 'static_stuff/about'
 
+  concern :publishable do
+    member do
+      post :publish
+      delete :unpublish
+    end
+  end
   resources :stories do
     # see if currently subscribed
     get 'subscribed'
