@@ -1,26 +1,5 @@
 @import "scss-variables";
 
-pre {
-  padding: 16px;
-  overflow: auto;
-  font-size: 1.4rem;
-  line-height: 1.45;
-  background-color: #f7f7f7;
-  border-radius: 3px;
-  word-wrap: break-word;
-  margin-left: 10px;
-  color: #333;
-  height: 100%;
-
-  &:focus {
-    outline: transparent;
-  }
-
-  @media all and (max-device-width: $mobile-width) {
-    margin-left: 0;
-  }
-}
-
 blockquote {
   margin: 25px;
   border-left: 6px solid #2ecc71;
@@ -29,15 +8,20 @@ blockquote {
 }
 
 .editor {
-  width: 80vw;
+  width: 100%;
+  max-width: 700px;
   margin: auto;
+  margin-top: 120px;
+  margin-bottom: 50px;
+  position: relative;
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-flow: row wrap;
-          flex-flow: row wrap;
+  -webkit-flex-flow: column wrap;
+          flex-flow: column wrap;
 
   @media all and (max-device-width: $mobile-width) {
     width: calc(100vw - 40px);
+    max-width: 100%;
     margin: 0 20px;
   }
 
@@ -45,14 +29,12 @@ blockquote {
     font-family: 'Lora', serif;
     outline: none;
     font-size: 1.6rem;
-    width: 40vw;
+    line-height: 3.0rem;
     display: block;
     height: auto;
     margin-top: 25px;
-
-    @media all and (max-device-width: $mobile-width) {
-      width: 100%;
-    }
+    margin-bottom: 25px;
+    cursor: text;
 
     > p {
       margin-top: 20px;
@@ -69,6 +51,32 @@ blockquote {
 
     @media all and (max-device-width: $mobile-width) {
       width: 100%;
+    }
+  }
+
+  textarea {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  input[type=text] {
+    font-size: 4.8rem;
+    border: transparent;
+    font-weight: 600;
+    border: none;
+  }
+
+  input[type=submit] {
+    background-color: transparent;
+    border: transparent;
+    position: absolute;
+    right: 0;
+    font-size: 1.4rem;
+    margin-top: 10px;
+
+    &:focus {
+      outline: none;
     }
   }
 }

@@ -35,12 +35,12 @@ body.dark-mode {
   input[type=checkbox]:checked,
   input[type=number],
   textarea {
-    border: 1px solid #fff;
+    border: 1px solid inherit;
     color: #fff;
     background-color: transparent;
 
     &:hover, &:focus {
-      border: 1px solid #fff;
+      border: 1px solid inherit;
       color: #fff;
     }
   }
@@ -131,5 +131,9 @@ body.dark-mode {
 
   .story-list-item:not(:first-of-type) {
     border-top: 1px solid rgba(#fff,0.3);
+  }
+
+  .medium-editor-placeholder:after {
+    color: #fff;
   }
 }

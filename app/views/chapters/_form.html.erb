@@ -5,14 +5,16 @@
 
 <%= form_for [@story, @chapter] do |f| %>
   <div class="editor">
-    <%= f.text_field :name, placeholder: t(".chapter_title") %>
+    <%= f.text_field :name, placeholder: t(".chapter_title"), autocomplete: "off" %>
     
     <div id="rich-text" data-placeholder="<%= t('.start_writing_here') %>">
-      
+
     </div>
 
     <%= f.text_area :body, id: "markdown" %>
 
-    <%= f.submit %>
+    <hr>
+
+    <%= f.submit t(".save") %>
   </div>
 <% end %>
