@@ -5,9 +5,10 @@ Rails.application.routes.draw do
     member do
       post :publish
       delete :unpublish
+      get :published
     end
   end
-  resources :stories do
+  resources :stories, concerns: [:publishable] do
     # see if currently subscribed
     get 'subscribed'
     # subscribe if not currently subscribed
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
     delete 'unsubscribe'
     get 'search', on: :collection
     resources :chapters
+
   end
 
   resources :franchises do

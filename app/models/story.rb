@@ -18,6 +18,7 @@
 #
 class Story < ActiveRecord::Base
   include Commentable
+  include Publishable
   ##
   # A scope of all stories ready for Display
   # @return [ActiveRecord::Relation<Story>] all stories that have been published

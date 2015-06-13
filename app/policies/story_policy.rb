@@ -12,7 +12,18 @@ class StoryPolicy < ApplicationPolicy
     @user = user
     @story = story
   end
- 
+
+  def publish?
+    owned?
+  end
+
+  def published?
+    owned?
+  end
+
+  def unpublish?
+    owned?
+  end
   ##
   # Users can update a story if they own it
   def update?

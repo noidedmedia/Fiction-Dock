@@ -8,6 +8,25 @@ class StoriesController < ApplicationController
   include Pundit
   before_filter :authenticate_user!, except: [:show, :index, :search]
 
+  def publish
+    @story = Story.find(params[:id])
+    authorize @story
+    @story.publish
+  end
+
+  def unpublish
+    @story = Story.find(params[:id])
+    authorize @story
+    @story.unpublish
+  end
+
+  def published
+    @story = Story.find(params[:id])
+    authorize @story
+    respond_to do |format|
+      format.json { render json: @story.published? }
+    end
+  end
   def search
     @stories = Searcher.new(params).resolve
   end
