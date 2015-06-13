@@ -9,6 +9,10 @@
   z-index: 100;
   white-space: nowrap;
 
+  li {
+    display: block;
+  }
+
   @media all and (max-device-width: $mobile-width) {
     height: 50px;
   }

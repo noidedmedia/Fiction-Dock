@@ -12,6 +12,7 @@ function markdownEditor() {
         text: placeholder
     },
     imageDragging: false,
+    disableDoubleReturn: true,
     extensions: {
       markdown: new MeMarkdown(function (md) {
         markdownelement.innerText = md;
