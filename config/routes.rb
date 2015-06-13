@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     # unsubscribe if currently subscribed
     delete 'unsubscribe'
     get 'search', on: :collection
-    resources :chapters
+    resources :chapters, concerns: [:publishable]
 
   end
 

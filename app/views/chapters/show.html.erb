@@ -12,6 +12,15 @@
     <% if current_user == @story.author %>
       <ul class="story-options">
         <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
+        <% if @chapter.published %>
+          <li>
+          <%= button_to "Unpublish", unpublish_story_chapter_path(@story, @chapter), confirm: "Are you sure?", method: :delete, id: "unpublish-chapter-button" %>
+          </li>
+        <% else %>
+          <li>
+          <%= button_to "Publish", publish_story_chapter_path(@story, @chapter), method: :post, confirm: "Are you sure?", id: "publish-chapter-button" %>
+          </li>
+        <% end %>
       </ul>
     <% end %>
 

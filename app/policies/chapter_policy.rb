@@ -26,7 +26,7 @@ class ChapterPolicy < ApplicationPolicy
   attr_accessor :chapter
 
   def show?
-    @chapter.published || @chapter.story.user == @user
+    @chapter.published || owned?
   end
   ##
   # Users can create a new chapter if they own the story

@@ -23,6 +23,8 @@ class Story < ActiveRecord::Base
   # A scope of all stories ready for Display
   # @return [ActiveRecord::Relation<Story>] all stories that have been published
   scope :for_display, ->{where(published: true).order("created_at DESC")}
+  
+  validate :has_published_chapters
   validates :blurb, length: {in: (0..250)}
   validate :character_inclusion
   validates :name, length: {in: (2..100)}
@@ -73,6 +75,12 @@ class Story < ActiveRecord::Base
   end
 
   ##
+  # See if this story can be published
+  # @returns [Boolean] if the story can be published
+  def publishable?
+    chapters.published.count > 0 
+  end
+  ##
   # Returns a localized list of all license options for use
   # with the select element on the Story page.
   #
@@ -93,6 +101,12 @@ class Story < ActiveRecord::Base
   end
 
   protected
+
+  def has_published_chapters
+    if published?
+      errors.add(:chapters, "needs to have one published") unless publishable?
+    end
+  end
   def set_parent_for_ship(ship)
     ship.story ||= self
   end

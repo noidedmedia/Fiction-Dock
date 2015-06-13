@@ -5,6 +5,30 @@ class ChaptersController < ApplicationController
   include Pundit
   before_action :load_story
   before_action :authenticate_user!, except: [:show]
+  def publish
+    @chapter = @story.chapters.friendly.find(params[:id])
+    @chapter.publish
+    respond_to do |format|
+      format.json { render json: @chapter.published? }
+      format.html { redirect_to [@story, @chapter] }
+    end
+  end
+
+  def unpublish
+    @chapter = @story.chapters.friendly.find(params[:id])
+    @chapter.unpublish
+    respond_to do |format|
+      format.json { render json: @chapter.published? }
+      format.html { redirect_to [@story, @chapter] }
+    end
+  end
+
+  def published
+    @chapter = @story.chapters.friendly.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @chapter.published? }
+    end
+  end
   ##
   # Show this chapter, so a user can read it
   def show
@@ -91,8 +115,8 @@ class ChaptersController < ApplicationController
   def chapter_params
     params.require(:chapter)
       .permit(:body,
-              :name,
-              :chap_num)
+    :name,
+    :chap_num)
       .merge(story_id: params[:story_id])
   end
 end

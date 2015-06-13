@@ -1,13 +1,12 @@
 module Publishable
   extend ActiveSupport::Concern
-
   def publish
-    published = true
-    self.save
+    self.published = true
+    save
   end
 
   def unpublish
-    published = false
-    self.save
+    self.published = false
+    save
   end
 end

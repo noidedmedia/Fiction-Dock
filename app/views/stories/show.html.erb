@@ -13,6 +13,19 @@
   <ul class="story-options">
     <% if current_user == @story.author %>
       <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
+      <% if @story.published %>
+        <li>
+        <%= button_to "Unpublish", unpublish_story_path(@story), method: :delete %>
+        </li>
+      <% elsif @story.publishable? %>
+        <li>
+        <%= button_to "Publish", publish_story_path(@story), method: :post %>
+        </li>
+      <% else %>
+        <li>
+        You cannot publish this story. Publish a chapter first.
+        </li>
+      <% end %>
     <% end %>
 
     <li><%= link_to t(".share"), "#" %></li>

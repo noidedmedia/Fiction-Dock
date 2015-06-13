@@ -11,18 +11,28 @@ class StoriesController < ApplicationController
   def publish
     @story = Story.find(params[:id])
     authorize @story
-    @story.publish
+    respond_to do |format|
+      if @story.publish
+        format.html { redirect_to @story } 
+        format.json{ render json: true }
+      else
+        format.json { render json: @story.errors, status: :unproccessible_entity }
+      end
+    end
+
   end
 
   def unpublish
     @story = Story.find(params[:id])
     authorize @story
-    @story.unpublish
     respond_to do |format|
-      format.json {render json: @story.published}
+      if @story.unpublish
+        format.json{ render json: true }
+        format.html { redirect_to @story }
+      else
+        format.json { render json: @story.errors, status: :unproccessible_entity }
+      end
     end
-
-
   end
 
   def published
