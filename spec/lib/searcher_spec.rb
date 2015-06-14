@@ -6,8 +6,7 @@ RSpec.describe Searcher do
   let(:story_with_characters){FactoryGirl.create(:story)}
   let(:story_with_ship){FactoryGirl.create(:story)}
   let(:story_with_both){FactoryGirl.create(:story)}
-  let(:ship){FactoryGirl.create(:ship,
-                                story: story_with_ship)}
+  let(:ship){FactoryGirl.create(:ship)}
   before(:each) do
     characters.each do |car|
       story_with_characters.characters << car
@@ -16,15 +15,15 @@ RSpec.describe Searcher do
     ship.characters.each do |car|
       story_with_both.characters << car
     end
-    s = FactoryGirl.create(:ship, story: story_with_both)
-    s.characters = ship.characters
+    ship.stories << story_with_ship
+    ship.stories << story_with_both
   end
   it "finds via ships" do
     hs = {
       "ship" => ship.characters.pluck(:id)
     }
     searcher = Searcher.new(hs)
-    expect(searcher.resolve).to contain_exactly(story_with_ship, story_with_both)
+    expect(searcher.resolve(page: 1)).to contain_exactly(story_with_ship, story_with_both)
   end
   it "finds via a ship and a character" do
     hs = {
@@ -32,7 +31,7 @@ RSpec.describe Searcher do
       "characters" => characters.map(&:id)
     }
     searcher = Searcher.new(hs)
-    expect(searcher.resolve).to eq([story_with_both])
+    expect(searcher.resolve(page: 1)).to eq([story_with_both])
   end
   it "finds via characters" do
     ## Note the use of the array splat
@@ -43,8 +42,8 @@ RSpec.describe Searcher do
     }
     
     searcher = Searcher.new(hs)
-    expect(searcher.resolve).to contain_exactly(story_with_characters, 
-                                                story_with_both)
+    expect(searcher.resolve(page: 1)).to contain_exactly(story_with_characters, 
+                                                         story_with_both)
 
   end
 end

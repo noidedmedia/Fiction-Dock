@@ -5,8 +5,7 @@ FactoryGirl.define do
       characters_count 2
     end
     after(:build) do |ship, ev|
-      create_list(:story_ship, ev.story_count, ship: ship)
-      ship.characters = ship.stories.first.characters.sample(ev.characters_count)
+      ship.characters << ev.characters_count.times.map{ create(:character)}
     end
   end
 
