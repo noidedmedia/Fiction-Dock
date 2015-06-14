@@ -15,8 +15,9 @@
 #
 # == Relations (Excluding Join Tables)
 # characters:: all characters involved in this ship
-# story:: the story that this ship is in
 class Ship < ActiveRecord::Base
+  has_many :story_ships
+  has_many :stories, through: :story_ships
   has_many :ship_characters, autosave: true
   has_many :characters, through: :ship_characters
   accepts_nested_attributes_for :ship_characters

@@ -17,6 +17,7 @@ FactoryGirl.define do
     user
     name { Faker::Name.name }
     description { Faker::Lorem.paragraph }
+    blurb { Faker::Lorem.sentence }
     transient do
       franchises_count 2
       characters_count 2

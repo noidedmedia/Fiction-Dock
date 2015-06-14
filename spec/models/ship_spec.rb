@@ -13,10 +13,5 @@ RSpec.describe Ship, type: :model do
       ship.characters = 2.times.map{FactoryGirl.create(:character)}
       expect(ship).to_not be_valid
     end
-    it "ensures the story exists" do
-      ship = FactoryGirl.create(:ship)
-      ship.story = nil
-      expect(ship).to_not be_valid
-    end
   end
 end
