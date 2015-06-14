@@ -24,13 +24,18 @@ class Searcher
   end
   def resolve_ship_chars
     @query = @query
-      .join(ships).on(ships[:story_id].eq(stories[:id]))
+      .joins(story_ships).on(story_ships[:story_id].eq(stories[:id]))
+      .join(ships).on(ships[:id].eq(story_ships[:ship_id]))
       .join(ship_characters).on(ship_characters[:ship_id].eq(ships[:id]))
       .join(Arel.sql("INNER JOIN characters as shipchars on shipchars.id = ship_characters.character_id"))
       .where(Arel.sql("shipchars.id").in(@ship_chars))
       .having(Arel.sql("COUNT(DISTINCT shipchars)").eq(@ship_chars.count))
   end
   private
+  def story_ships
+    @_story_ships ||= StoryShip.arel_table
+  end
+
   def ship_characters
     @_ship_charactrs ||= ShipCharacter.arel_table
   end

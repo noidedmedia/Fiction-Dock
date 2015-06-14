@@ -145,7 +145,6 @@ class StoriesController < ApplicationController
     authorize @story
     # We re-build ships on each input
     # So we mark the old ones for destruction
-    @story.story_ships.each(&:mark_for_destruction)
     respond_to do |format|
       if @story.update(story_params)
         format.html { redirect_to @story }
