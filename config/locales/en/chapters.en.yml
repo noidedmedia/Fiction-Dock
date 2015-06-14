@@ -10,7 +10,7 @@ en:
       published_on: "Published on %{date}"
       prev: "Prev"
       next: "Next"
-    form:
+    rich_form:
       chapter_title: "Chapter title"
       start_writing_here: "Start writing here..."
       you_have_unsaved_changes: "You have unsaved changes!"

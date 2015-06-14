@@ -4,7 +4,7 @@ function darkModeCookie() {
   // If the user hasn't visited the site before, and the cookie is therefore undefined
   // we give the cookie a value of false, as dark mode isn't default.
   if ( darkmodecookie == undefined ) {
-    Cookies.set('darkmode', 'false');
+    Cookies.set('darkmode', 'false', { path: '/', expires: 30 });
   }
 
   if (darkmodecookie == "true") {
@@ -23,12 +23,12 @@ function darkModeToggle() {
     if (darkmodecookie == "true") {
       
       $("body").removeClass("dark-mode");
-      Cookies.set('darkmode', 'false');
+      Cookies.set('darkmode', 'false', { path: '/', expires: 30 });
   
     } else if (darkmodecookie !== "true") {
       
       $("body").addClass("dark-mode");
-      Cookies.set('darkmode', 'true');
+      Cookies.set('darkmode', 'true', { path: '/', expires: 30 });
     }
   });
 }
