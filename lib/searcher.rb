@@ -24,7 +24,7 @@ class Searcher
   end
   def resolve_ship_chars
     @query = @query
-      .joins(story_ships).on(story_ships[:story_id].eq(stories[:id]))
+      .join(story_ships).on(story_ships[:story_id].eq(stories[:id]))
       .join(ships).on(ships[:id].eq(story_ships[:ship_id]))
       .join(ship_characters).on(ship_characters[:ship_id].eq(ships[:id]))
       .join(Arel.sql("INNER JOIN characters as shipchars on shipchars.id = ship_characters.character_id"))

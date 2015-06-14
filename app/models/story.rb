@@ -97,9 +97,14 @@ class Story < ActiveRecord::Base
   end
 
   protected
+  # please see `save_ship_attrs`
+  def destroy_all_story_ships
+    story_ships.each(&:mark_for_destruction)
+  end
   ##
   # TODO: make this less awful
   def save_ship_attrs
+    destroy_all_story_ships and return unless ship_attrs
     ##
     # Originally, this code marked all the story_ships for destruction,
     # then unmarked them if they no longer needed to be destroyed
@@ -128,7 +133,8 @@ class Story < ActiveRecord::Base
         else
           logger.debug("This ship is not currently associated.")
           logger.debug("Associating it now.")
-          self.story_ships.build(story: self, ship: s)
+          built = self.story_ships.build(ship: s)
+          logger.debug("Built story is: #{built.inspect}")
         end
         ##
         # if no such ship exists, build it
@@ -144,7 +150,7 @@ class Story < ActiveRecord::Base
     #
     # So this sadness is the result. 
     story_ships.each do |story_ship|
-      story_ship.mark_for_destruction unless story_ship.id.in? do_not_destroy
+      story_ship.mark_for_destruction unless story_ship.id.in?(do_not_destroy) || story_ship.new_record?
     end
   end
 
