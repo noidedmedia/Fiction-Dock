@@ -23,7 +23,7 @@ class Story < ActiveRecord::Base
   # A scope of all stories ready for Display
   # @return [ActiveRecord::Relation<Story>] all stories that have been published
   scope :for_display, ->{where(published: true).order("created_at DESC")}
-  
+
   validate :has_published_chapters
   validates :blurb, length: {in: (0..250)}
   validate :character_inclusion
@@ -51,18 +51,14 @@ class Story < ActiveRecord::Base
   # All the franchises our story takes place in
   # @return [ActiveRecord::Relation<Franchise>]
   has_many :franchises, through: :story_franchises
-  ##
-  # All the Ships in this story
-  # @return [ActiveRecord::Relation<Ship>]
-  has_many :ships, autosave: true, before_add: :set_parent_for_ship
+  has_many :story_ships, autosave: true
+  has_many :ships, through: :story_ships
+  attr_accessor :ship_attrs
   attr_accessor :franchise_ids
   attr_accessor :character_ids
- 
- 
-  accepts_nested_attributes_for :ships, allow_destroy: true
   before_validation :resolve_character_ids
   before_validation :resolve_franchise_ids
-
+  before_validation :save_ship_attrs
   enum license: [:all_rights_reserved, :cc_zero, :cc_by, :cc_by_sa, :cc_by_nd, :cc_by_nc, :cc_by_nd_sa, :cc_by_nc_nd]
   enum language: [:en, :es]
 
@@ -101,6 +97,35 @@ class Story < ActiveRecord::Base
   end
 
   protected
+  ##
+  # TODO: make this less awful
+  def save_ship_attrs
+    ##
+    # We rebuild the story_ships from scratch everytime
+    # Originally, this code had stuff in it to unmark relevant story_ships
+    # from destruction. That, however, wasn't working——it was still set to
+    # be destroyed, even when I used instance_eval and set 
+    # @marked_for_destruction to false
+    #
+    # So this is a placeholder hack until we fix that
+    story_ships.each(&:mark_for_destruction)
+    character_ids = ship_attrs.map{|x| x["characters"]}
+    # character_ids is now an array of arrays
+    # each internal array has values representing the characters in a
+    # given ship
+    character_ids.each do |c_ids|
+      # Do sql set division with no remainder to find a ship with EXACTLY
+      # the characters we want
+      if s = Ship.with_exact_ids(c_ids)
+        self.story_ships.build(story: self, ship: s)
+      ##
+      # if no such ship exists, build it
+      else
+        q = self.ships.build(characters: Character.where(id: c_ids))
+      end
+    end
+  end
+
 
   def has_published_chapters
     if published?

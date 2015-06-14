@@ -2,8 +2,10 @@ function Ship(obj){
   this.characters = []
     for(var prop in obj){
       if(prop == "characters"){
-        for(var c in obj.characters)
+        for(var c in obj.characters){
+          console.log("Adding character with id: " + obj.characters[c].id);
           this.characters.push(new Character(obj.characters[c]));
+        }
       }
       else{
         this[prop] = obj[prop];
@@ -21,6 +23,7 @@ Ship.newShipButton = function(story, click){
   return bt;
 }
 Ship.prototype.addCharacter = function(c){
+  console.log("Trying to add character with id: " + c.id);
   if(this.containsCharacter(c))
     return;
   this.characters.push(c);

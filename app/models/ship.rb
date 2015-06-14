@@ -17,42 +17,29 @@
 # characters:: all characters involved in this ship
 # story:: the story that this ship is in
 class Ship < ActiveRecord::Base
-  belongs_to :story, inverse_of: :ships
   has_many :ship_characters, autosave: true
   has_many :characters, through: :ship_characters
-  ##
-  # In order to make accepting nested attributes easier, we allow
-  # the user to pass in an array of character ids that are then
-  # resolved into real characters
-  attr_accessor :character_ids
   accepts_nested_attributes_for :ship_characters
-  before_validation :save_character_ids
-  validates :story, presence: true
   validate :has_two_characters
-  validate :characters_in_story
-  protected
 
-  def characters_in_story
-    # bail early if we don't have a story, since a different validation
-    # will catch that
-    return unless story
-    excluded = characters.where.not(id: story.characters.pluck(:id))
-    if excluded.length > 0
-      errors.add(:characters, "Must all be in parent story")
-    end
+  def self.with_exact_ids(ids)
+    find_by_sql([SQL_SELECT_BY_CHARACTER_IDS, ids, ids.length, ids]).first
   end
+  protected
+  ##
+  # ActiveRecord doesn't like EXCEPT, so we do this in raw SQL
+  SQL_SELECT_BY_CHARACTER_IDS = %{
+    SELECT ships.* FROM ships
+    INNER JOIN ship_characters ON ship_characters.ship_id = ships.id
+    WHERE ship_characters.character_id IN (?)
+    GROUP BY ships.id
+    HAVING COUNT(*) = ?
+    EXCEPT
+    SELECT ships.* FROM ships
+    INNER JOIN ship_characters ON ship_characters.ship_id = ships.id
+    WHERE ship_characters.character_id NOT IN (?)
+  }
   def has_two_characters
     errors.add(:characters, "too few (need at lest two)") unless ship_characters.length > 1
-  end
-  ## 
-  # Resolve `character_ids` into real characters
-  def save_character_ids
-    return unless character_ids
-    characters.try :each do |c|
-      c.mark_for_destruction
-    end
-    character_ids.each do |id|
-      c = ship_characters.build(character_id: id)
-    end
   end
 end

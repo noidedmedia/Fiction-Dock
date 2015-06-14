@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612200329) do
+ActiveRecord::Schema.define(version: 20150614024709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,12 +97,9 @@ ActiveRecord::Schema.define(version: 20150612200329) do
   add_index "ship_characters", ["ship_id"], name: "index_ship_characters_on_ship_id", using: :btree
 
   create_table "ships", force: :cascade do |t|
-    t.integer  "story_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "ships", ["story_id"], name: "index_ships_on_story_id", using: :btree
 
   create_table "stories", force: :cascade do |t|
     t.string   "name"
@@ -137,6 +134,16 @@ ActiveRecord::Schema.define(version: 20150612200329) do
 
   add_index "story_franchises", ["franchise_id"], name: "index_story_franchises_on_franchise_id", using: :btree
   add_index "story_franchises", ["story_id"], name: "index_story_franchises_on_story_id", using: :btree
+
+  create_table "story_ships", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "ship_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "story_ships", ["ship_id"], name: "index_story_ships_on_ship_id", using: :btree
+  add_index "story_ships", ["story_id"], name: "index_story_ships_on_story_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
@@ -177,10 +184,11 @@ ActiveRecord::Schema.define(version: 20150612200329) do
   add_foreign_key "franchise_users", "users"
   add_foreign_key "ship_characters", "characters", on_delete: :cascade
   add_foreign_key "ship_characters", "ships", on_delete: :cascade
-  add_foreign_key "ships", "stories", on_delete: :cascade
   add_foreign_key "stories", "users"
   add_foreign_key "story_characters", "characters"
   add_foreign_key "story_characters", "stories", on_delete: :cascade
   add_foreign_key "story_franchises", "franchises"
   add_foreign_key "story_franchises", "stories", on_delete: :cascade
+  add_foreign_key "story_ships", "ships", on_delete: :cascade
+  add_foreign_key "story_ships", "stories", on_delete: :cascade
 end

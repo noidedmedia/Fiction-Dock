@@ -145,7 +145,7 @@ class StoriesController < ApplicationController
     authorize @story
     # We re-build ships on each input
     # So we mark the old ones for destruction
-    @story.ships.each(&:mark_for_destruction)
+    @story.story_ships.each(&:mark_for_destruction)
     respond_to do |format|
       if @story.update(story_params)
         format.html { redirect_to @story }
@@ -194,16 +194,10 @@ class StoriesController < ApplicationController
     :language,
     :franchise_ids => [],
     :character_ids => [],
-    ships_attributes: [{
-      ship_characters_attributes: [
-        :character_id
-      ]}])
+    :ship_attrs => {
+      characters: []      
+    })
         .merge(user_id: current_user.id)
 
-  end
-
-  def prepped_params
-    s = story_params
-    s
   end
 end

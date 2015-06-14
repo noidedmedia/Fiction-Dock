@@ -107,19 +107,12 @@ StoryForm.prototype.submitForm = function(){
   for(var c in this.story.characters){
     toSubmit.character_ids.push(this.story.characters[c].id);
   }
-  toSubmit.ships_attributes = [];
+  toSubmit.ship_attrs = [];
   for(var s in this.story.ships){
-    var ship = this.story.ships[s];
-    // Ship object we build up to properly format our data
-    var ship_attrs = {}
-    if(ship.id){
-      ship_attrs.id = ship.id;
-    }
-    ship_attrs.ship_characters_attributes = [];
-    for(var c in ship.characters){
-      ship_attrs.ship_characters_attributes.push({character_id: ship.characters[c].id});
-    }
-    toSubmit.ships_attributes.push(ship_attrs);
+    var characters = $.map(this.story.ships[s].characters, function(n, i){
+      return n.id;
+    });
+    toSubmit.ship_attrs.push({characters: characters});
   }
   console.log("Trying to submit");
   console.log(toSubmit);
