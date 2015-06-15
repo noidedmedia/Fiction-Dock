@@ -10,7 +10,7 @@
     <h3 class="chapter-title"><%= @chapter.name %></h3>
 
     <% if current_user == @story.author %>
-      <ul class="story-options">
+      <ul id="chapter-options" class="page-options">
         <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
         <% if @chapter.published %>
           <li>
