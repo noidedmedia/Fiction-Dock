@@ -1,7 +1,13 @@
 <%- title t(".browse_franchises") %>
 
-<h1>Franchises:</h1>
-<% @franchises.each do |franchise| %>
-  <%= link_to franchise.name, franchise %>
-  <%= franchise.description %>
-<% end %>
+<ul id="franchise-list" class="fd-list fd-browse-list">
+  <div class="fd-list-header"><%= t(".franchises") %></div>
+
+  <% @franchises.each do |franchise| %>
+    <li class="fd-list-item">
+      <p class="fd-list-item-title franchise-list-item-title"><%= link_to franchise.name, franchise %>
+      <p class="fd-list-item-subtitle franchise-list-item-description"><%= franchise.description %>
+    </li>
+  <% end %>
+
+</ul>

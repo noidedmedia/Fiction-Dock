@@ -1,6 +1,6 @@
 <%- title @story.name %>
 
-<div class="story-directory story-text-container story-text">
+<div class="story-directory fd-text-container story-text">
 
   <h2 class="story-title"><%= @story.name %></h2>
   <div class="story-information">
@@ -10,7 +10,7 @@
 
   <p class="story-description"><%= @story.description %></p>
 
-  <ul id="story-options" class="page-options">
+  <ul id="story-options" class="fd-page-options">
     <% if current_user == @story.author %>
       <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
 

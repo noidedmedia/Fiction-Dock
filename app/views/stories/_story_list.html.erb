@@ -1,10 +1,10 @@
-<ul class="story-list">
-  <div class="story-list-header"><%= t(".stories") %></div>
+<ul id="story-list" class="fd-list fd-browse-list">
+  <div class="fd-list-header"><%= t(".stories") %></div>
 
   <% stories.each do |story| %>
-    <li class="story-list-item">
-      <p class="story-list-item-title"><%= link_to story.name, story %>
-      <p class="story-list-item-blurb"><%= story.blurb %>
+    <li class="fd-list-item">
+      <p class="fd-list-item-title story-list-item-title"><%= link_to story.name, story %>
+      <p class="fd-list-item-subtitle story-list-item-blurb"><%= story.blurb %>
     </li>
   <% end %>
 </ul>

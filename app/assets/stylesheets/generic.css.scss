@@ -1,8 +1,68 @@
 @import "scss-variables";
 
 // Generic CSS classes
+// "fd" is short for Fiction Dock
 
-.page-options {
+.fd-list {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  padding-top: 10px;
+
+  &.fd-browse-list {
+    padding-top: 50px;
+  }
+
+  .fd-list-header {
+    font-size: 2.4rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(#333,0.5);
+    padding: 5px 0;
+  }
+
+  .fd-list-item {
+    padding: 15px 0;
+    display: block;
+
+    &:not(:first-of-type) {
+      border-top: 1px solid rgba(#333,0.2);
+    }
+
+    .fd-list-item-title {
+      font-size: 1.8rem;
+      font-weight: 500;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .fd-list-item-subtitle {
+      font-size: 1.4rem;
+      padding-top: 2px;
+    }
+  }
+
+  @media all and (max-device-width: $mobile-width) {
+    width: calc(100vw - 20px);
+    max-width: 100vw;
+  }
+}
+
+.fd-text-container {
+  margin: auto;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 700px;
+  padding-top: 10px;
+
+  @media all and (max-device-width: $mobile-width) {
+    width: calc(100vw - 20px);
+    max-width: 100vw;
+  }
+}
+
+.fd-page-options {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 600;
   padding: 20px 0;

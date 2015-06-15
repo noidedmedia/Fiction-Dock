@@ -2,13 +2,13 @@
 <div><%= markdown_parse @franchise.description %></div>
 
 
-<ul id="franchise-options" class="page-options">
+<ul id="franchise-options" class="fd-page-options">
   <%= link_to t(".edit"), edit_franchise_path(@franchise) %>
   <%= link_to t(".add_a_new_character"), new_franchise_character_path(@franchise) %>
 </ul>
 
 <% if @franchise.stories.count > 0 %>
-  <ul>
+  <ul id="franchise-story-list" class="fd-list">
     <%= render partial: 'stories/story_stub',  collection: @franchise.stories, as: "story" %>
   </ul>
 <% else %>

@@ -125,18 +125,18 @@ body.dark-mode {
     color: #fff;
   }
 
-  .story-list-header {
+  .fd-list-header {
     border-bottom: 1px solid rgba(#fff,0.6);
   }
 
-  .story-list-item:not(:first-of-type) {
+  .fd-list-item:not(:first-of-type) {
     border-top: 1px solid rgba(#fff,0.3);
   }
 
-  .medium-editor-placeholder:after {
-    color: #fff;
-  }
 
+  /* ==============================================
+      Medium Editor
+     ============================================== */
 
   $medium_editor_bgcolor:                     #333 !default;
   $medium_editor_border_color:                #222 !default;
@@ -176,7 +176,6 @@ body.dark-mode {
       }
     }
   }
-  
 
   .medium-toolbar-arrow-under:before {
     border-color: $medium_editor_border_color transparent transparent transparent;
@@ -192,5 +191,9 @@ body.dark-mode {
 
   .medium-toolbar-arrow-over:after {
     border-color: transparent transparent $medium_editor_bgcolor transparent;
+  }
+
+  .medium-editor-placeholder:after {
+    color: #fff;
   }
 }

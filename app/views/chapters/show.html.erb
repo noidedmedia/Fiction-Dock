@@ -1,6 +1,6 @@
 <%- title t(".chapter_page_title", story_name: @story.name, chapter_name: @chapter.name) %>
 
-<article class="story-text-container">
+<article id="chapter-text-container" class="fd-text-container">
 
   <h5 class="chapter-story-title"><%= link_to @story.name, story_path(@story) %></h5>
   <h6 class="chapter-number"><%= t(".chapter", chapter_number: @chapter.chap_num) %></h6>
@@ -10,7 +10,7 @@
     <h3 class="chapter-title"><%= @chapter.name %></h3>
 
     <% if current_user == @story.author %>
-      <ul id="chapter-options" class="page-options">
+      <ul id="chapter-options" class="fd-page-options">
         <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
         <% if @chapter.published %>
           <li>
