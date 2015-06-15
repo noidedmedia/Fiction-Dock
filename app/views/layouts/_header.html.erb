@@ -15,8 +15,10 @@
 
       <div id="browse-tooltip" class="tooltip" data-showon="#browse-button">
         <ul>
+          <li><%= link_to t(".authors"), users_path %>
           <li><%= link_to t(".stories"), stories_path %>
           <li><%= link_to t(".franchises"), franchises_path %>
+          <li><%= link_to t(".characters"), "#" %>
         </ul>
       </div>
     </div>

@@ -1,7 +1,17 @@
 <%- title @user.name %>
 
 <h1><%= @user.name %></h1>
-<ul>
-  <%= render partial: 'stories/story_stub', collection: @user.stories, as: :story %>
-</ul>
 
+<% if @user.stories.count > 0 %>
+  <ul>
+    <%= render partial: 'stories/story_stub', collection: @user.stories, as: :story %>
+  </ul>
+<% else %>
+  <p><%= t(".this_user_hasn't_published_anything_yet") %></p>
+<% end %>
+
+<% if @user.level === "admin" %>
+  Admin
+<% elsif @user.level === "mod" %>
+  Moderator
+<% end %>

@@ -6,8 +6,10 @@ en:
       fiction_dock_title: "Fiction Dock: A better place for your fan fiction"
     header:
       browse: "Browse"
+      authors: "Authors"
       franchises: "Franchises"
       stories: "Stories"
+      characters: "Characters"
       create_new_franchise: "Create new franchise"
       create_new_story: "Create new story"
       sign_in: "Sign in"

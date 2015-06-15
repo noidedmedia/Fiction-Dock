@@ -6,3 +6,4 @@ en:
       browse_users: "Browse users"
     show:
       edit: "Edit"
+      this_user_hasn't_published_anything_yet: "This user hasn't published anything yet."

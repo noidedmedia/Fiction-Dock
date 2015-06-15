@@ -6,6 +6,8 @@ en:
       chapter_page_title: "%{chapter_name} - %{story_name}"
       chapter: "Chapter %{chapter_number}"
       edit: "Edit"
+      publish: "Publish"
+      unpublish: "Unpublish"
       written_by_html: "Written by %{author}"
       published_on: "Published on %{date}"
       prev: "Prev"

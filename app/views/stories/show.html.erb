@@ -10,20 +10,21 @@
 
   <p class="story-description"><%= @story.description %></p>
 
-  <ul class="story-options">
+  <ul id="story-options" class="page-options">
     <% if current_user == @story.author %>
       <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
+
       <% if @story.published %>
         <li>
-        <%= button_to "Unpublish", unpublish_story_path(@story), method: :delete %>
+        <%= button_to t(".unpublish"), unpublish_story_path(@story), method: :delete %>
         </li>
       <% elsif @story.publishable? %>
         <li>
-        <%= button_to "Publish", publish_story_path(@story), method: :post %>
+        <%= button_to t(".publish"), publish_story_path(@story), method: :post %>
         </li>
       <% else %>
         <li>
-        You cannot publish this story. Publish a chapter first.
+          <%= button_to t(".publish"), publish_story_path(@story), method: :post, disabled: true, title: t(".you_can't_publish_this_story_without_first_publishing_a_chapter") %>
         </li>
       <% end %>
     <% end %>

@@ -14,11 +14,11 @@
         <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
         <% if @chapter.published %>
           <li>
-          <%= button_to "Unpublish", unpublish_story_chapter_path(@story, @chapter), method: :delete, id: "unpublish-chapter-button", data: { confirm: "Are you sure?" } %>
+          <%= button_to t(".unpublish"), unpublish_story_chapter_path(@story, @chapter), method: :delete, id: "unpublish-chapter-button", data: { confirm: "Are you sure?" } %>
           </li>
         <% else %>
           <li>
-          <%= button_to "Publish", publish_story_chapter_path(@story, @chapter), method: :post, id: "publish-chapter-button", data: { confirm: "Are you sure?" } %>
+          <%= button_to t(".publish"), publish_story_chapter_path(@story, @chapter), method: :post, id: "publish-chapter-button", data: { confirm: "Are you sure?" } %>
           </li>
         <% end %>
       </ul>
