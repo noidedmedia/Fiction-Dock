@@ -1,16 +1,19 @@
-<h1><%= @franchise.name %></h1>
-<div><%= markdown_parse @franchise.description %></div>
+<div class="fd-text-container">
 
+  <h2><%= @franchise.name %></h2>
+  <div><%= markdown_parse @franchise.description %></div>
 
-<ul id="franchise-options" class="fd-page-options">
-  <%= link_to t(".edit"), edit_franchise_path(@franchise) %>
-  <%= link_to t(".add_a_new_character"), new_franchise_character_path(@franchise) %>
-</ul>
-
-<% if @franchise.stories.count > 0 %>
-  <ul id="franchise-story-list" class="fd-list">
-    <%= render partial: 'stories/story_stub',  collection: @franchise.stories, as: "story" %>
+  <ul id="franchise-options" class="fd-page-options">
+    <li><%= link_to t(".edit"), edit_franchise_path(@franchise) %>
+    <li><%= link_to t(".add_a_new_character"), new_franchise_character_path(@franchise) %>
   </ul>
-<% else %>
-  <p><%= t(".no_stories_have_been_written_for_this_franchise_yet") %></p>
-<% end %>
+
+  <% if @franchise.stories.count > 0 %>
+    <ul id="franchise-story-list" class="fd-list">
+      <%= render partial: 'stories/story_stub',  collection: @franchise.stories, as: "story" %>
+    </ul>
+  <% else %>
+    <p><%= t(".no_stories_have_been_written_for_this_franchise_yet") %></p>
+  <% end %>
+
+</div>
