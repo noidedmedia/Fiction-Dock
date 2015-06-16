@@ -101,7 +101,7 @@ class StoriesController < ApplicationController
   # Get a list of all stories
   # TODO: paginate this
   def index
-    @stories = Story.all.includes(:franchises).paginate(page: params[:page])
+    @stories = Story.all.includes(:franchises).for_display.paginate(page: params[:page])
   end
 
   ##
