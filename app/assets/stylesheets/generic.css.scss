@@ -31,6 +31,9 @@
     .fd-list-item-title {
       font-size: 1.8em;
       font-weight: 500;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
 
       a {
         text-decoration: none;
