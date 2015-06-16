@@ -42,6 +42,7 @@ class FranchisesController < ApplicationController
     @franchise = Franchise.friendly.find(params[:id])
     authorize @franchise
   end
+
   ##
   # Show a franchise, including stories within
   def show
@@ -61,6 +62,7 @@ class FranchisesController < ApplicationController
       end
     end
   end
+
   ##
   # Make a new franchise
   # TODO: restrict this
@@ -80,7 +82,7 @@ class FranchisesController < ApplicationController
 
   protected
   ##
-  # Paramters needted to create a franchise
+  # Parameters needed to create a franchise
   def franchise_params
     params.require(:franchise)
       .permit(:name,

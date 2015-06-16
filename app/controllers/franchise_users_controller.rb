@@ -7,8 +7,8 @@ class FranchiseUsersController < ApplicationController
 
   def index
     @franchise_users = @franchise.franchise_users
-
   end
+
   def new
     @franchise_user = FranchiseUser.new(franchise: @franchise)
     authorize @franchise_user
@@ -37,7 +37,9 @@ class FranchiseUsersController < ApplicationController
       format.html {redirect_to @franchise }
     end
   end
+
   protected
+  
   def load_franchise
     @franchise = Franchise.friendly.find(params[:franchise_id])
   end
