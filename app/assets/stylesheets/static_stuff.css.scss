@@ -1,3 +1,46 @@
-// Place all the styles related to the StaticStuff controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "scss-variables";
+
+.stats {
+  margin-top: 50px;
+  padding: 12px;
+  text-align: center;
+
+  ul {
+    display: inline-block;
+    padding: 0;
+    text-align: left;
+  }
+
+  ul > li > a {
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  li {
+    color: #333;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1.1em;
+    border-right: 1px solid #333;
+    padding: 0 15px;
+
+    &:first-of-type {
+      padding-left: 0;
+    }
+
+    &:last-of-type {
+      border-right: 0;
+      padding-right: 0;
+    }
+  }
+
+  span {
+    color: #333;
+    opacity: 0.8;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: normal;
+    padding-top: 2px;
+  }
+}

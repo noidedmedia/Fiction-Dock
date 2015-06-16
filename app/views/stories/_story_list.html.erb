@@ -9,4 +9,4 @@
   <% end %>
 </ul>
 
-<%= will_paginate stories %>
+<%= will_paginate stories if stories && !stories.empty? %>

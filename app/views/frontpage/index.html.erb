@@ -1,11 +1,29 @@
-<h2 class="fiction-dock-logo logo-large">Fiction Dock</h2>
+<div id="frontpage-container">
 
-<h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
+  <div id="frontpage-header">
+    <h2 class="fiction-dock-logo logo-large">Fiction Dock</h2>
 
-<% if user_signed_in? && current_user.stories.exists? %>
-  <ul id="frontpage-user-story-list" class="fd-list">
-    <div class="fd-list-header"><%= t(".your_stories") %></div>
+    <h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
+  </div>
 
-    <%= render partial: 'stories/story_stub', collection: current_user.stories.limit(5).reverse_order, as: :story %>
-  </ul>
-<% end %>
+  <% if user_signed_in? && current_user.stories.exists? %>
+    <div class="frontpage-column">
+      <ul id="frontpage-user-story-list" class="fd-list">
+        <div class="frontpage-list-header"><%= t(".your_stories") %></div>
+
+        <%= render partial: 'stories/story_stub', collection: current_user.stories.limit(5).reverse_order, as: :story %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @stories.exists? %>
+    <div class="frontpage-column">
+      <ul id="frontpage-recent-story-list" class="fd-list">
+        <div class="frontpage-list-header"><%= t(".recent_stories") %></div>
+
+        <%= render partial: 'stories/story_stub', collection: @stories.limit(5), as: :story %>
+      </ul>
+    </div>
+  <% end %>
+
+</div>

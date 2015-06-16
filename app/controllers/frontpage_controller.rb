@@ -3,6 +3,7 @@
 class FrontpageController < ApplicationController
   ##
   # Display the frontpage
-  def frontpage
+  def index
+    @stories = Story.order('created_at DESC')
   end
 end
