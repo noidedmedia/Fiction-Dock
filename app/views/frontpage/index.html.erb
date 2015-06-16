@@ -19,7 +19,7 @@
   <% unless @stories.blank? %>
     <div class="frontpage-column">
       <ul id="frontpage-recent-story-list" class="fd-list">
-        <div class="frontpage-list-header"><%= t(".recent_stories") %></div>
+        <div class="frontpage-list-header"><%= t(".recently_published_stories") %></div>
 
         <%= render partial: 'stories/story_stub', collection: @stories.limit(5), as: :story %>
       </ul>
