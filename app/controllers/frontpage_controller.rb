@@ -4,6 +4,6 @@ class FrontpageController < ApplicationController
   ##
   # Display the frontpage
   def index
-    @stories = Story.order('created_at DESC').for_display
+    @stories = Story.for_display.limit(5)
   end
 end
