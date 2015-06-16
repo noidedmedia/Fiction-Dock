@@ -40,7 +40,7 @@
         <div class="pagination-right">
           <%= link_to t(".next"), story_chapter_path(@story, @chapter.chap_num + 1) %>
         </div>
-      <% elsif @story.chapters.count === @chapter.chap_num && current_user == @story.author %>
+      <% elsif @story.chapters.count == @chapter.chap_num && current_user == @story.author %>
         <div class="pagination-right">
           <%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %>
         </div>
