@@ -35,12 +35,12 @@ body.dark-mode {
   input[type=checkbox]:checked,
   input[type=number],
   textarea {
-    border: 1px solid inherit;
+    border: 1px solid #fff;
     color: #fff;
     background-color: transparent;
 
     &:hover, &:focus {
-      border: 1px solid inherit;
+      border: 1px solid #fff;
       color: #fff;
     }
   }
