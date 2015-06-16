@@ -6,7 +6,7 @@
     <h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
   </div>
 
-  <% if user_signed_in? && current_user.stories.blank? %>
+  <% if user_signed_in? && !current_user.stories.blank? %>
     <div class="frontpage-column">
       <ul id="frontpage-user-story-list" class="fd-list">
         <div class="frontpage-list-header"><%= t(".your_stories") %></div>
