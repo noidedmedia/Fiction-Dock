@@ -48,7 +48,7 @@
   text-align: center;
   position: relative;
 
-  .page-prev, .page-next {
+  .pagination-left, .pagination-right {
     position: absolute;
 
     > a {
@@ -56,11 +56,11 @@
     }
   }
 
-  .page-prev {
+  .pagination-left {
     left: 2px;
   }
 
-  .page-next {
+  .pagination-right {
     right: 2px;
   }
 }

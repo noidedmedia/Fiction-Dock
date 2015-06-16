@@ -31,14 +31,18 @@
     <div class="pagination">
 
       <% unless @chapter.chap_num == 1 %>
-        <div class="page-prev">
-          <%= link_to t(".prev"), story_chapter_path(@story, @chapter.chap_num - 1) %>
+        <div class="pagination-left">
+          <%= link_to t(".previous"), story_chapter_path(@story, @chapter.chap_num - 1) %>
         </div>
       <% end %>
 
-      <% unless @story.chapters.count == @chapter.chap_num %>
-        <div class="page-next">
+      <% if @story.chapters.count != @chapter.chap_num %>
+        <div class="pagination-right">
           <%= link_to t(".next"), story_chapter_path(@story, @chapter.chap_num + 1) %>
+        </div>
+      <% elsif @story.chapters.count === @chapter.chap_num && current_user == @story.author %>
+        <div class="pagination-right">
+          <%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %>
         </div>
       <% end %>
 
