@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: franchises
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  slug        :string
+#
+
 ##
 # A franchise is a media property. It encompasses all forms of media (so the 
 # LOTR movies and the LOTR books are considered the same franchsise).

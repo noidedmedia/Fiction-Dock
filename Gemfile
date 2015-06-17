@@ -67,6 +67,7 @@ group :development do
   gem 'quiet_assets'
   gem 'yard'
   gem 'yard-activerecord'
+  gem 'annotate'
 end
 
 
