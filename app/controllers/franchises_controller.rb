@@ -75,7 +75,7 @@ class FranchisesController < ApplicationController
         format.json { render :show, status: :created, location: @franchise }
       else
         format.html { render :new }
-        formt.json { render json: @franchise.errors, status: :unprocessable_entity }
+        format.json { render json: @franchise.errors, status: :unprocessable_entity }
       end
     end
   end
