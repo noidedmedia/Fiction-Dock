@@ -13,10 +13,8 @@
     <li><%= link_to t(".add_a_new_character"), new_franchise_character_path(@franchise) %>
   </ul>
 
-  <% if @franchise.characters.count > 0 %>
-    <% @franchise.characters.each do |character| %>
-      <%= character.name %>
-    <% end %>
+  <% @franchise.characters.each do |character| %>
+    <%= character.name %>
   <% end %>
 
   <% if @franchise.stories.count > 0 %>
