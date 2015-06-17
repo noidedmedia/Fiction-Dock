@@ -4,13 +4,16 @@
   <div class="user-header">
     <h2 class="display-name"><%= @user.name %></h2>
 
-    <div class="user-badge">
-      <% if @user.level === "admin" %>
+    <% if @user.level === "admin" %>
+      <div class="user-badge">
         <p><%= t(".admin") %></p>
-      <% elsif @user.level === "mod" %>
+      </div>
+    <% elsif @user.level === "mod" %>
+      <div class="user-badge">
         <p><%= t(".moderator") %></p>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+    
   </div>
 
   <div class="user-subheader">
