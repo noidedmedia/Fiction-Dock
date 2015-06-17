@@ -14,9 +14,9 @@ namespace :db do
       username = Faker::Internet.user_name(Faker::Name.first_name + "_" + Faker::Name.last_name)
       email = Faker::Internet.email(username)
       password = Faker::Internet.password(8, 18)
-      User.create!(:name => username,
-                   :email => email,
-                   :password => password)
+      User.create(:name => username,
+                  :email => email,
+                  :password => password)
     end
     puts "Users populated"
 
@@ -30,8 +30,8 @@ namespace :db do
       # Randomly chosen user
       user = User.order('random()').first
 
-      Franchise.create!(:name => name,
-                        :description => description)
+      Franchise.create(:name => name,
+                       :description => description)
     end
 
     puts "Franchises populated"
