@@ -21,7 +21,9 @@ module ApplicationHelper
     options = {
       filter_html: true,
       hard_wrap: true,
-      link_attributes: {rel: 'nofollow', target: '_blank'}
+      link_attributes: {rel: 'nofollow', target: '_blank'},
+      no_styles: true,
+      no_images: true
     }
     extensions = {
       autolink: true,
