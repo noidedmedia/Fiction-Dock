@@ -26,11 +26,15 @@ namespace :db do
 
       # Randomly generated word count value
       description = Faker::Lorem.sentence(rand(5...25))
-      user = User.order('random()').first.name
+
+      # Randomly chosen user
+      user = User.order('random()').first
 
       Franchise.create!(:name => name,
                         :description => description)
     end
+
     puts "Franchises populated"
+
   end
 end
