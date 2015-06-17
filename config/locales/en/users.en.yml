@@ -5,6 +5,7 @@ en:
     index:
       browse_users: "Browse users"
     show:
+      at_username: "@%{username}"
       admin: "Admin"
       moderator: "Moderator"
       joined_on: "Joined on %{date}"

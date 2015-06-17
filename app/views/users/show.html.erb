@@ -1,19 +1,26 @@
 <%- title @user.name %>
 
-<div class="fd-text-container">
-  <h2><%= @user.name %></h2>
-  
-  <% if @user.level === "admin" %>
-    <%= t(".admin") %>
-  <% elsif @user.level === "mod" %>
-    <%= t(".moderator") %>
-  <% end %>
+<div id="user-page" class="fd-text-container">
+  <div class="user-header">
+    <h2 class="display-name"><%= @user.name %></h2>
 
-  <%= t(".joined_on", date: pretty_date(@user.created_at)) %>
+    <div class="user-badge">
+      <% if @user.level === "admin" %>
+        <p><%= t(".admin") %></p>
+      <% elsif @user.level === "mod" %>
+        <p><%= t(".moderator") %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="user-subheader">
+    <p class="username"><%= t(".at_username", username: @user.name) %></p> ·
+    <p class="joined-on"><%= t(".joined_on", date: pretty_date(@user.created_at)) %></p>
+  </div>
 
   <% if @user.stories.count > 0 %>
     <ul id="user-story-list" class="fd-list">
-      <%= render partial: 'stories/story_stub', collection: @user.stories, as: :story %>
+      <%= render partial: 'stories/story_stub', collection: @user.stories.for_display, as: :story %>
     </ul>
   <% else %>
     <p><%= t(".this_user_hasn't_published_anything_yet") %></p>

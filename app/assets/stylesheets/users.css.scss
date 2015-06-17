@@ -1,3 +1,44 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "scss-variables";
+
+.user-header {
+  margin-top: 50px;
+  position: relative;
+}
+
+.display-name {
+  display: inline-block;
+  font-size: 2.1rem;
+  font-weight: 500;
+  padding: 5px 0;
+}
+
+.user-badge {
+  display: inline-block;
+  font-size: 1.4rem;
+  margin-left: 10px;
+  border-radius: 3px;
+  background-color: #5bb289;
+  color: #fff;
+  padding: 5px 8px;
+  top: 3px;
+  position: absolute;
+  cursor: default;
+}
+
+.user-subheader {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding-top: 5px;
+  margin-bottom: 20px;
+}
+
+.username {
+  font-size: 1.4rem;
+  display: inline;
+}
+
+.joined-on {
+  font-size: 1.4rem;
+  display: inline;
+}
