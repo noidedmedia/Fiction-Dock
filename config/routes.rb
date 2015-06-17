@@ -1,5 +1,4 @@
-Rails.application.routes.draw do 
-  get 'static_stuff/about'
+Rails.application.routes.draw do
 
   concern :publishable do
     member do
@@ -8,6 +7,7 @@ Rails.application.routes.draw do
       get :published
     end
   end
+
   resources :stories, concerns: [:publishable] do
     # see if currently subscribed
     get 'subscribed'
@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     delete 'unsubscribe'
     get 'search', on: :collection
     resources :chapters, concerns: [:publishable]
-
   end
 
   resources :franchises do
@@ -26,6 +25,7 @@ Rails.application.routes.draw do
     get 'complete', on: :collection
     resources :users, controller: :franchise_users, except: [:show, :edit, :update]
   end
+
   resources :users, only: [:index, :show] do
     get 'stories', on: :member
   end
