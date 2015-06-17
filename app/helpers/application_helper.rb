@@ -3,9 +3,18 @@
 module ApplicationHelper
   ##
   # Properly format a Time
+  # 7:21 PM June 14, 2015
   def pretty_time(t)
     t.strftime("%l:%M %p %B %d, %Y")
   end
+
+  ##
+  # Properly format a Date
+  # June 14, 2015
+  def pretty_date(t)
+    t.strftime("%B %d, %Y")
+  end
+
   ##
   # Parse markdown, return HTML
   def markdown_parse(str)

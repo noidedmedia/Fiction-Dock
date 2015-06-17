@@ -89,6 +89,10 @@ body.dark-mode {
     }
   }
 
+  .editor input[type=text] {
+    border-color: transparent;
+  }
+
   .stats {
     li {
       border-right-color: #fff;
