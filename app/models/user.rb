@@ -42,12 +42,13 @@ class User < ActiveRecord::Base
   # @return [ActiveRecord::Relation<Story>]
   has_many :subscribed_stories, through: :subscriptions, class_name: "Story", foreign_key: "story_id"
 
-  enum level: [:normal, :mod, :admin]
   validates :name,
     presence: true,
     format: {with: /\A\w+\z/},
     uniqueness: {case_sensative: false},
     length: {in: 2..25}
+
+  enum level: [:normal, :mod, :admin]
 
   def mod_or_higher?
     level == "mod" || level == "admin"

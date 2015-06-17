@@ -42,9 +42,11 @@ class StoriesController < ApplicationController
       format.json { render json: @story.published? }
     end
   end
+  
   def search
     @stories = Searcher.new(params).resolve(page: params[:page])
   end
+
   ##
   # Subscribe to this story. 
   # On a JSON request, it returns `true` if it worked, and `false` otherwise

@@ -4,7 +4,10 @@
   <div><%= markdown_parse @franchise.description %></div>
 
   <ul id="franchise-options" class="fd-page-options">
-    <li><%= link_to t(".edit"), edit_franchise_path(@franchise) %>
+    <% if policy(@franchise).update? %>
+      <li><%= link_to t(".edit"), edit_franchise_path(@franchise) %>
+    <% end %>
+
     <li><%= link_to t(".add_a_new_character"), new_franchise_character_path(@franchise) %>
   </ul>
 

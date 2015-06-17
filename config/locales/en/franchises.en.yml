@@ -11,10 +11,12 @@ en:
       no_stories_have_been_written_for_this_franchise_yet: "No stories have been written for this franchise yet."
     new:
       create_a_new_franchise_page_title: "Create a new franchise"
+      submit_franchise: "Create franchise"
     edit:
       edit_franchise_page_title: "Editing %{franchise_name}"
+      submit_franchise: "Create franchise"
     form:
       franchise_title: "Franchise title"
       write_a_short_description_of_the_franchise: "Write a short description of the franchise."
       description: "Description"
-      create_franchise: "Create franchise"
+      submit_franchise: "Create franchise"
