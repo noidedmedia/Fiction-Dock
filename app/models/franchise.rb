@@ -7,7 +7,7 @@
 #           that this does include crossovers.
 # characters:: characters that belong to this franchise.
 class Franchise < ActiveRecord::Base
-  validates :name, length: {minimum: 5, maximum: 100}
+  validates :name, length: {minimum: 2, maximum: 100}
   validates :description, length: {minimum: 25, maximum: 1000}
   extend FriendlyId
   friendly_id :name, use: :slugged
