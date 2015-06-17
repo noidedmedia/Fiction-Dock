@@ -13,3 +13,9 @@ en:
       create_a_new_franchise_page_title: "Create a new franchise"
     edit:
       edit_franchise_page_title: "Editing %{franchise_name}"
+    form:
+      franchise_title: "Franchise title"
+      the_title_of_the_franchise: "The title of the franchise"
+      write_a_short_description_of_the_franchise: "Write a short description of the franchise."
+      description: "Description"
+      create_franchise: "Create franchise"

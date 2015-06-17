@@ -2,14 +2,16 @@
   <%= error %>
 <% end %> 
 
-<%= form_for @franchise do |f| %>
+<div class="franchise-form">
+  <%= form_for @franchise do |f| %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+    <%= f.label :name, t(".franchise_title") %>
+    <%= f.text_field :name, placeholder: t(".the_title_of_the_franchise") %>
 
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  
-  <%= f.submit %>
+    <%= f.label :description, t(".description") %>
+    <%= f.text_area :description, placeholder: t(".write_a_short_description_of_the_franchise") %>
+    
+    <%= f.submit t(".create_franchise") %>
 
-<% end %>
+  <% end %>
+</div>
