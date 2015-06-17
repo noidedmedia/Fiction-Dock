@@ -35,8 +35,12 @@
   line-height: 3.0rem;
   margin: 15px 0;
 
-  p {
-    margin-bottom: 15px;
+  p, ol, ul {
+    margin-bottom: 20px;
+  }
+
+  li {
+    margin-left: 30px;
   }
 }
 
