@@ -31,7 +31,7 @@ namespace :db do
       FactoryGirl.create(:franchise,
         :name => name,
         :description => Faker::Lorem.sentence(rand(5...25)),
-        :users => user_pool.sample
+        :users => [user_pool.sample]
       )
     }
     puts "Franchises populated"
