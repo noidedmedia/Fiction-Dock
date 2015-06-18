@@ -8,7 +8,7 @@
 # characters:: characters that belong to this franchise.
 class Franchise < ActiveRecord::Base
   validates :name, length: {minimum: 2, maximum: 100}
-  validates :description, length: {minimum: 10, maximum: 1000}
+  validates :description, length: {minimum: 4, maximum: 1000}
   extend FriendlyId
   friendly_id :name, use: :slugged
   has_many :story_franchises
