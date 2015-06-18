@@ -39,7 +39,7 @@ namespace :db do
 
     25.times {
       FactoryGirl.create(:story,
-        :name => Faker::Lorem.sentence(rand(1...10)),
+        :name => Faker::Lorem.sentence(rand(1...5)),
         :description => Faker::Lorem.sentence(rand(5...25)),
         :user => user_pool.sample
       )
