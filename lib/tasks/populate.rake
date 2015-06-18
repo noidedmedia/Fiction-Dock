@@ -16,7 +16,7 @@ namespace :db do
 
     25.times {
       user_pool << FactoryGirl.create(:user,
-        :name => Faker::Internet.user_name((Faker::Name.first_name + Faker::Name.last_name).to_s),
+        :name => Faker::Internet.user_name((Faker::Name.first_name + Faker::Name.last_name).to_s, ["_"]),
         :email => Faker::Internet.email(:name),
         :password => Faker::Internet.password(8, 18)
       )
