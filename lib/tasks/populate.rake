@@ -1,4 +1,5 @@
 require 'faker'
+require 'factory_girl'
 
 task :env_checker do
   unless Rails.env.development?
@@ -10,31 +11,40 @@ end
 namespace :db do
   desc "Fill database with sample data"
   task :populate => [:environment, :env_checker] do
-    25.times do |n|
-      username = Faker::Internet.user_name(Faker::Name.first_name + "_" + Faker::Name.last_name)
-      email = Faker::Internet.email(username)
-      password = Faker::Internet.password(8, 18)
-      User.create(:name => username,
-                  :email => email,
-                  :password => password)
-    end
+
+    user_pool = []
+
+    25.times {
+      user_pool << FactoryGirl.create(:user,
+        :name => Faker::Internet.user_name((Faker::Name.first_name + Faker::Name.last_name).to_s),
+        :email => Faker::Internet.email(:name),
+        :password => Faker::Internet.password(8, 18)
+      )
+    }
     puts "Users populated"
 
-    25.times do |n|
-      name = Faker::Hacker.noun + " " + Faker::Hacker.verb
+
+    25.times {
+      name = Faker::Hacker.noun
       name.capitalize!
 
-      # Randomly generated word count value
-      description = Faker::Lorem.sentence(rand(5...25))
-
-      # Randomly chosen user
-      user = User.order('random()').first
-
-      Franchise.create(:name => name,
-                       :description => description)
-    end
-
+      FactoryGirl.create(:franchise,
+        :name => name,
+        :description => Faker::Lorem.sentence(rand(5...25)),
+        :users => user_pool.sample
+      )
+    }
     puts "Franchises populated"
+
+
+    25.times {
+      FactoryGirl.create(:story,
+        :name => Faker::Lorem.sentence(rand(1...10)),
+        :description => Faker::Lorem.sentence(rand(5...25)),
+        :user => user_pool.sample
+      )
+    }
+    puts "Stories populated"
 
   end
 end
