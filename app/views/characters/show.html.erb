@@ -6,4 +6,4 @@
 <h2><%= @character.name %></h2>
 <div><%= markdown_parse @character.description %></div>
 
-<%= render partial: 'stories/story_stub', collection: @character.stories, as: 'story' %>
+<%= render partial: 'stories/story_stub', collection: @character.stories.for_display, as: 'story' %>

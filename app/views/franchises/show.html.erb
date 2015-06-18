@@ -19,7 +19,7 @@
 
   <% if @franchise.stories.count > 0 %>
     <ul id="franchise-story-list" class="fd-list">
-      <%= render partial: 'stories/story_stub',  collection: @franchise.stories, as: "story" %>
+      <%= render partial: 'stories/story_stub',  collection: @franchise.stories.for_display, as: "story" %>
     </ul>
   <% else %>
     <p><%= t(".no_stories_have_been_written_for_this_franchise_yet") %></p>
