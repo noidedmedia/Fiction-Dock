@@ -6,4 +6,8 @@
 <h2><%= @character.name %></h2>
 <div><%= markdown_parse @character.description %></div>
 
+<ul id="character-options" class="fd-page-options">
+  <li><%= link_to t(".edit"), edit_franchise_character_path(@franchise, @character) %>
+</ul>
+
 <%= render partial: 'stories/story_stub', collection: @character.stories.for_display, as: 'story' %>
