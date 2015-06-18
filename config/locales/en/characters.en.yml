@@ -1,0 +1,15 @@
+# Characters strings.
+
+en:
+  characters:
+    index:
+      browse_characters: "Browse characters"
+      characters: "Characters"
+    new:
+      add_a_character_page_title: "Add a character"
+    edit:
+      edit_character_page_title: "Editing %{character_name}"
+    form:
+      character_name: "Character name"
+      write_a_short_description_of_the_character: "Write a short description of the character."
+      description: "Description"
