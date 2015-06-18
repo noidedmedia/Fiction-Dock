@@ -8,6 +8,20 @@
     <p><%= t("languages.#{@story.language}") %> · <%= t("licenses.#{@story.license}") %>
   </div>
 
+  <div class="story-information">
+    <ul>
+      <% @story.franchises.each do |franchise| %>
+        <li><%= link_to franchise.name, franchise_path(franchise) %></li>
+      <% end %>
+    </ul>
+
+    <ul>
+      <% @story.characters.each do |character| %>
+        <li><%= link_to character.name, franchise_character_path(character.franchise, character) %></li>
+      <% end %>
+    </ul>
+  </div>
+
   <p class="story-description"><%= @story.description %></p>
 
   <ul id="story-options" class="fd-page-options">
