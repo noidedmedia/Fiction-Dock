@@ -1,5 +1,9 @@
-<h1><%= @character.name %></h1>
-<div>
-  <%= markdown_parse @character.description %>
-</div>
+<%- title @character.name %>
+
+
+<%= link_to @franchise.name, franchise_path(@franchise) %>
+
+<h2><%= @character.name %></h2>
+<div><%= markdown_parse @character.description %></div>
+
 <%= render partial: 'stories/story_stub', collection: @character.stories, as: 'story' %>
