@@ -46,5 +46,13 @@ namespace :db do
     }
     puts "Stories populated"
 
+    Story.all.each do |story|
+      3.times { FactoryGirl.create(:chapter, :story_id => story.id, :name => Faker::Lorem.words(4), :body => Faker::Lorem.paragraphs(rand(3..10)), :published => true ) }
+
+      # This doesn't work, but I wish it did.
+      FactoryGirl.modify(:story, :id => story.id, :published => true)
+    end
+    puts "Chapters populated, stories published"
+
   end
 end
