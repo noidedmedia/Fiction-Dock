@@ -4,6 +4,7 @@
 # 
 # @attr [String] name this user's name
 class User < ActiveRecord::Base
+
   extend FriendlyId
   friendly_id :name, use: :slugged
   
@@ -47,7 +48,6 @@ class User < ActiveRecord::Base
     format: {with: /\A\w+\z/},
     uniqueness: {case_sensative: false},
     length: {in: 2..25}
-
   enum level: [:normal, :mod, :admin]
 
   def mod_or_higher?
