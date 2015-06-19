@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: ships
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 FactoryGirl.define do
   factory :ship do
     transient do 

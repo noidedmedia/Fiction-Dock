@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: ships
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 ##
 # 
 # It wouldn't be a place to park ships without a model for a Ship.
