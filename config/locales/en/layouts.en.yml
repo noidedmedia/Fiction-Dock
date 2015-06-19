@@ -5,6 +5,7 @@ en:
     application:
       fiction_dock_title: "Fiction Dock: A better place for your fan fiction"
     header:
+      search: "Search"
       browse: "Browse"
       authors: "Authors"
       franchises: "Franchises"

@@ -5,6 +5,8 @@ en:
     index:
       browse_characters: "Browse characters"
       characters: "Characters"
+    show:
+      this_character_hasn't_been_included_in_any_published_stories_yet: "This character hasn't been included in any published stories yet."
     new:
       add_a_character_page_title: "Add a character"
     edit:
@@ -13,3 +15,6 @@ en:
       character_name: "Character name"
       write_a_short_description_of_the_character: "Write a short description of the character."
       description: "Description"
+      submit: 
+        new: "Submit"
+        edit: "Save changes"

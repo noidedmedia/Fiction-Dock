@@ -90,6 +90,44 @@
   }
 }
 
+#header-search {
+  position: relative;
+  width: 245px;
+
+  input[type=search] {
+    width: 240px;
+    height: 32px;
+    top: 7px;
+    left: 5px;
+    padding: 6px 6px 6px 30px;
+    font-size: 1.4rem;
+    position: absolute;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: transparent;
+    border: 1px solid #aaaab2;
+    border-radius: 4px;
+    transition: border 200ms;
+
+    &:focus {
+      border: 1px solid #333;
+      outline: none;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    color: #aaaab2;
+
+    &:focus {
+      color: #333;
+    }
+  }
+}
+
 #browse-button,
 #create-button {
   height: 100%;

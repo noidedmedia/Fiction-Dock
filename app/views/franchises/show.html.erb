@@ -15,6 +15,8 @@
 
   <% @franchise.characters.each do |character| %>
     <%= link_to character.name, franchise_character_path(@franchise, character) %>
+
+    <%= character.stories.count %>
   <% end %>
 
   <% if @franchise.stories.count > 0 %>
