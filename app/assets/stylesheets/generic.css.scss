@@ -122,6 +122,8 @@
 
   textarea {
     resize: vertical;
+    min-height: 100px;
+    max-height: 400px;
   }
 
   input[type=text], textarea {

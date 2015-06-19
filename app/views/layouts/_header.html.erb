@@ -7,6 +7,18 @@
       <% end %>
     </div>
 
+    <div id="header-search" class="header-item">
+      <form action="/stories/search" method="get">
+        <%# Search icon %>
+        <label for="header-search-input">
+          <span class="octicon octicon-search"></span>
+        </label>
+
+        <%# Search input %>
+        <input type="search" id="header-search-input" name="q" placeholder=<%= t(".search") %> required autocomplete="off" />
+      </form>
+    </div>
+
     <div class="header-item">
       <div id="browse-button">
         <%= t(".browse") %>

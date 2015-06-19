@@ -10,4 +10,10 @@
   <li><%= link_to t(".edit"), edit_franchise_character_path(@franchise, @character) %>
 </ul>
 
-<%= render partial: 'stories/story_stub', collection: @character.stories.for_display, as: 'story' %>
+<% unless @character.stories.for_display.blank? %>
+  <ul id="character-story-list" class="fd-list">
+    <%= render partial: 'stories/story_stub', collection: @character.stories.for_display, as: :story %>
+  </ul>
+<% else %>
+  Nope
+<% end %>
