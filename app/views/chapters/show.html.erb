@@ -32,17 +32,13 @@
 
       <% unless @chapter.chap_num == 1 %>
         <div class="pagination-left">
-          <% @story.chapters.limit(1).offset(@chapter.chap_num - 2).each do |chapter| %>
-            <%= link_to t(".previous"), [@story, chapter] %>
-          <% end %>
+          <%= link_to t(".previous"), @chapter.prev_chapter %>
         </div>
       <% end %>
 
       <% if @story.chapters.count != @chapter.chap_num %>
         <div class="pagination-right">
-          <% @story.chapters.limit(1).offset(@chapter.chap_num).each do |chapter| %>
-            <%= link_to t(".next"), [@story, chapter] %>
-          <% end %>
+          <%= link_to t(".next"), @chapter.next_chapter %>
         </div>
       <% elsif @story.chapters.count == @chapter.chap_num && current_user == @story.author %>
         <div class="pagination-right">
