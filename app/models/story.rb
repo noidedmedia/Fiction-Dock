@@ -24,6 +24,11 @@ class Story < ActiveRecord::Base
   # @return [ActiveRecord::Relation<Story>] all stories that have been published
   scope :for_display, ->{where(published: true).order("created_at DESC")}
 
+  scope :all_ages, ->{where(content_rating: 0)}
+  ##
+  # Use a little speed hack here
+  # Rails should generated a BETWEEN for this, which is fast
+  scope :teens_and_under, -> {where(content_rating: (0..1))}
   enum content_rating: [:everybody, :teens, :adults]
   validate :has_published_chapters
   validates :blurb, length: {in: (0..250)}
