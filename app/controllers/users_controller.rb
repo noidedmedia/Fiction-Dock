@@ -15,6 +15,16 @@ class UsersController < ApplicationController
   end
 
   ##
+  # Show a given user's profile
+  def edit
+    if current_user != User.friendly.find(params[:id])
+      redirect_to edit_user_path(current_user) and return
+    else
+      @user = current_user
+    end
+  end
+
+  ##
   # Get all stories written by a given user
   def stories
     @user = User.friendly.find(params[:id])
