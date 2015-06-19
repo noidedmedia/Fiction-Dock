@@ -108,6 +108,7 @@
     background-color: transparent;
     border: 1px solid #aaaab2;
     border-radius: 4px;
+    transition: border 200ms;
 
     &:focus {
       border: 1px solid #333;

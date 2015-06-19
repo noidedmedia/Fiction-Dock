@@ -64,6 +64,14 @@ body.dark-mode {
     }
   }
 
+  #header-search input[type=search] {
+    border: 1px solid rgba(#fff,0.7);
+
+    &:focus {
+      border: 1px solid #fff;
+    }
+  }
+
   #footer {
     background-color: #333;
     color: #fff;
