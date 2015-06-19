@@ -10,6 +10,7 @@
 #  updated_at :datetime         not null
 #  name       :string
 #  published  :boolean          default(FALSE), not null
+#  slug       :string
 #
 
 require 'rails_helper'

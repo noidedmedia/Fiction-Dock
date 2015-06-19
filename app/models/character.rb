@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: characters
+#
+#  id           :integer          not null, primary key
+#  franchise_id :integer
+#  name         :string
+#  description  :text
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  slug         :string
+#
+
 ##
 # A character represents exactly what it says on the tin: a character in a 
 # fictional work.

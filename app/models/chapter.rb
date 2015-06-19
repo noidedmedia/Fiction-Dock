@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: chapters
+#
+#  id         :integer          not null, primary key
+#  body       :text
+#  chap_num   :integer
+#  story_id   :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  name       :string
+#  published  :boolean          default(FALSE), not null
+#  slug       :string
+#
+
 ##
 # A chapter is a part of a story. It contains the actual text of that part,
 # as well as a title. 

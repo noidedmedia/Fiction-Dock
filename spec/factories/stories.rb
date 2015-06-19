@@ -10,6 +10,8 @@
 #  blurb       :string
 #  user_id     :integer
 #  published   :boolean          default(FALSE), not null
+#  license     :integer          default(0), not null
+#  language    :integer          default(0), not null
 #
 
 FactoryGirl.define do

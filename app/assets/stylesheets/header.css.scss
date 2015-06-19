@@ -270,6 +270,10 @@
         -moz-appearance: none;
         appearance: none;
         cursor: pointer;
+
+        &:focus {
+          outline: none;
+        }
       }
     }
   }
