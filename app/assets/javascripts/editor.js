@@ -17,7 +17,7 @@ function markdownEditor() {
     disableDoubleReturn: true,
     extensions: {
       markdown: new MeMarkdown(function (md) {
-        markdownelement.innerText = md;
+        markdownelement.innerHTML = md;
       })
     }
   });
