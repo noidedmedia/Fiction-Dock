@@ -3,9 +3,8 @@
 class UsersController < ApplicationController
   ##
   # Display a list of all users
-  # TODO: paginate this
   def index
-    @users = User.all
+    @users = User.all.paginate(page: params[:page])
   end
 
   ##

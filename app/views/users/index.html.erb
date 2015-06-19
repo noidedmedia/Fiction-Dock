@@ -3,3 +3,5 @@
 <% @users.each do |user| %>
   <p><%= user.name %>
 <% end %>
+
+<%= will_paginate @users if @users && !@users.empty? %>
