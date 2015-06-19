@@ -23,8 +23,8 @@ class Chapter < ActiveRecord::Base
 
   def prev_chapter
     @_prev_chapter ||= story.chapters.where(chap_num: chap_num - 1).first
-
   end
+  
   protected
   ##
   # If this chapter is not explicitly assigned an order, we append it to the
