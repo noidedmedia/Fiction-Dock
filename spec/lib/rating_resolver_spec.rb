@@ -9,25 +9,37 @@ RSpec.describe RatingResolver do
                                   content_rating: :adult)
     end
     it "resolves adult" do
-      expect(RatingResolver.new({
+      r = RatingResolver.new({
         "adult" => "true"
-      }).resolve).to contain_exactly(@adult)
+      }).resolve 
+      r.each do |story|
+        expect(story.content_rating).to eq("adult")
+      end
     end
     it "resolves teen" do
-      expect(RatingResolver.new({
+      r = RatingResolver.new({
         "teen" => "true"
-      }).resolve).to contain_exactly(@teen)
+      }).resolve
+      r.each do |story|
+        expect(story.content_rating).to eq("teen")
+      end
     end
     it "resolves everybody" do
-      expect(RatingResolver.new({
+      r = RatingResolver.new({
         "everybody" => "true"
-      })).to contain_exactly(@everybody)
+      }).resolve
+      r.each do |story|
+        expect(story.content_rating).to eq("everybody")
+      end
     end
     it "resolves with multiple ratings" do
-      expect(RatingResolver.new({
+      r = RatingResolver.new({
         "everybody" => "true",
         "teen" => "true"
-      })).to contain_exactly(@everybody, @teen)
+      }).resolve
+      r.each do |story|
+        expect(["everybody", "teen"]).to include(story.content_rating)
+      end
     end
   end
 end

@@ -30,5 +30,4 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
     @stories = @user.stories
   end
-
 end

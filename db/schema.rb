@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619215645) do
+ActiveRecord::Schema.define(version: 20150619225225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,8 +112,8 @@ ActiveRecord::Schema.define(version: 20150619215645) do
     t.integer  "license",        default: 0,     null: false
     t.integer  "language",       default: 0,     null: false
     t.integer  "content_rating", default: 0,     null: false
-    t.integer  "sex"
-    t.integer  "violence"
+    t.boolean  "sex",            default: false, null: false
+    t.boolean  "violence",       default: false, null: false
   end
 
   add_index "stories", ["user_id"], name: "index_stories_on_user_id", using: :btree
