@@ -1,19 +1,22 @@
 <%- title @character.name %>
 
+<div class="fd-text-container">
 
-<%= link_to @franchise.name, franchise_path(@franchise) %>
+  <%= link_to @franchise.name, franchise_path(@franchise) %>
 
-<h2><%= @character.name %></h2>
-<div><%= markdown_parse @character.description %></div>
+  <h2><%= @character.name %></h2>
+  <div><%= markdown_parse @character.description %></div>
 
-<ul id="character-options" class="fd-page-options">
-  <li><%= link_to t(".edit"), edit_franchise_character_path(@franchise, @character) %>
-</ul>
-
-<% unless @character.stories.for_display.blank? %>
-  <ul id="character-story-list" class="fd-list">
-    <%= render partial: 'stories/story_stub', collection: @character.stories.for_display, as: :story %>
+  <ul id="character-options" class="fd-page-options">
+    <li><%= link_to t(".edit"), edit_franchise_character_path(@franchise, @character) %>
   </ul>
-<% else %>
-  Nope
-<% end %>
+
+  <% unless @character.stories.for_display.blank? %>
+    <ul id="character-story-list" class="fd-list">
+      <%= render partial: 'stories/story_stub', collection: @character.stories.for_display, as: :story %>
+    </ul>
+  <% else %>
+    <p><%= t(".this_character_hasn't_been_included_in_any_published_stories_yet") %>
+  <% end %>
+
+</div>

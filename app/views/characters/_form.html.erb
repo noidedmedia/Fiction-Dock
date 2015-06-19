@@ -7,7 +7,8 @@
     <%= f.label :description, t(".description") %>
     <%= f.text_area :description, placeholder: t(".write_a_short_description_of_the_character") %>
 
-    <%= f.submit %>
+    <%# Submit button string will change depending on the action name (edit, new, etc.)%>
+    <%= f.submit t(".submit.#{action_name}") %>
 
   <% end %> 
 </div>

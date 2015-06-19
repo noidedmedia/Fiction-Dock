@@ -140,9 +140,11 @@
     opacity: 0.7;
     margin-top: 15px;
     font-size: 1.4rem;
+    transition: opacity 200ms;
 
-    &:hover {
+    &:hover, &:focus {
       opacity: 1;
+      outline: none;
     }
   }
 
