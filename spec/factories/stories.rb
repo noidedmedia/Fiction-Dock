@@ -14,6 +14,7 @@
 
 FactoryGirl.define do
   factory :story do
+    content_rating :everybody
     user
     name { Faker::Name.name }
     description { Faker::Lorem.paragraph }

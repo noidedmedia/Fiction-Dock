@@ -19,14 +19,14 @@ RSpec.describe Story, type: :model do
   it { should validate_presence_of(:content_rating)}
   describe "content ratings" do
     let(:all_ages){FactoryGirl.create(:story,
-                                      content_rating: :all_ages)}
+                                      content_rating: :everybody)}
     let(:not_children){ FactoryGirl.create(:story,
-                                           content_rating: :not_children)}
+                                           content_rating: :teens)}
     let(:adults_only){FactoryGIrl.create(:story,
-                                         content_rating: :adults_only)}
+                                         content_rating: :adults)}
 
     it "has a scope for stories that are for all ages" do
-
+      expect(Story.not_
     end
 
     it "has a scope for teens and up" do

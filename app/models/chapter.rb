@@ -18,11 +18,11 @@ class Chapter < ActiveRecord::Base
   before_validation :fix_chap_num
 
   def next_chapter
-    story.chapters.where(chap_num: chap_num + 1).first
+    @_next_chapter ||= story.chapters.where(chap_num: chap_num + 1).first
   end
 
   def prev_chapter
-    story.chapters.where(chap_num: chap_num - 1).first
+    @_prev_chapter ||= story.chapters.where(chap_num: chap_num - 1).first
 
   end
   protected
