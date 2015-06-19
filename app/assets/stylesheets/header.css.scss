@@ -92,12 +92,13 @@
 
 #header-search {
   position: relative;
-  width: 250px;
+  width: 245px;
 
   input[type=search] {
     width: 240px;
     height: 32px;
     top: 7px;
+    left: 5px;
     padding: 6px 6px 6px 30px;
     font-size: 1.4rem;
     position: absolute;
@@ -116,7 +117,7 @@
 
   label {
     position: absolute;
-    left: 24px;
+    left: 15px;
     top: 15px;
     color: #aaaab2;
 
