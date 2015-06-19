@@ -16,6 +16,15 @@ class Chapter < ActiveRecord::Base
   validates :story, presence: true
   validates :chap_num, numericality: {greater_than: 0}
   before_validation :fix_chap_num
+
+  def next_chapter
+    story.chapters.where(chap_num: chap_num + 1).first
+  end
+
+  def prev_chapter
+    story.chapters.where(chap_num: chap_num - 1).first
+
+  end
   protected
   ##
   # If this chapter is not explicitly assigned an order, we append it to the
