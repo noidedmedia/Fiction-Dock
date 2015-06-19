@@ -21,6 +21,8 @@ class FranchisePolicy < ApplicationPolicy
   protected
   
   def admined?
-    @franchise.moderated_by?(@user) || @user.mod_or_higher?
+    if @user
+      @franchise.moderated_by?(@user) || @user.mod_or_higher?
+    end
   end
 end
