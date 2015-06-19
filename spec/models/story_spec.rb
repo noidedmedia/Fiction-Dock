@@ -15,6 +15,25 @@
 require 'rails_helper'
 
 RSpec.describe Story, type: :model do
+  it { should define_enum_for(:content_rating)}
+  it { should validate_presence_of(:content_rating)}
+  describe "content ratings" do
+    let(:all_ages){FactoryGirl.create(:story,
+                                      content_rating: :all_ages)}
+    let(:not_children){ FactoryGirl.create(:story,
+                                           content_rating: :not_children)}
+    let(:adults_only){FactoryGIrl.create(:story,
+                                         content_rating: :adults_only)}
+
+    it "has a scope for stories that are for all ages" do
+
+    end
+
+    it "has a scope for teens and up" do
+
+    end
+  end
+
   describe "validation" do
     it "requires at least one character" do
       s = FactoryGirl.build(:story)

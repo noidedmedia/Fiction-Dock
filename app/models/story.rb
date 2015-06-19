@@ -24,6 +24,7 @@ class Story < ActiveRecord::Base
   # @return [ActiveRecord::Relation<Story>] all stories that have been published
   scope :for_display, ->{where(published: true).order("created_at DESC")}
 
+  enum content_rating: [:all_ages, :not_children, :adults_only]
   validate :has_published_chapters
   validates :blurb, length: {in: (0..250)}
   validate :character_inclusion
