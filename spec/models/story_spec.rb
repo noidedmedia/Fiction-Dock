@@ -19,7 +19,22 @@ require 'rails_helper'
 RSpec.describe Story, type: :model do
   it { should define_enum_for(:content_rating)}
   it { should validate_presence_of(:content_rating)}
-
+  describe "content ratings" do
+    let(:adult){FactoryGirl.create(:story,
+                                   content_rating: :adult)}
+    let(:everybody){FactoryGirl.create(:story,
+                                       content_rating: :everybody)}
+    let(:teen){FactoryGirl.create(:story,
+                                  content_rating: :teen)}
+    it "lets teen and adult stories through by default" do
+      adult
+      everybody
+      teen
+      Story.for_content_rating.each do |story|
+        expect(["everybody", "teen"]).to include(story.content_rating)
+      end
+    end
+  end
   describe "validation" do
     it "requires at least one character" do
       s = FactoryGirl.build(:story)

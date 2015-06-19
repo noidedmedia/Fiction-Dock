@@ -24,6 +24,6 @@ class RatingResolver
     if name.nil?
       return false
     end
-    YAML.load(name)
+    YAML.load(name.to_s)
   end
 end
