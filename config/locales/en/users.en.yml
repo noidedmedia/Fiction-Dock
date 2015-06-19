@@ -11,3 +11,5 @@ en:
       joined_on: "Joined on %{date}"
       edit: "Edit"
       this_user_hasn't_published_anything_yet: "This user hasn't published anything yet."
+    edit:
+      editing_username: "Editing %{username}"
