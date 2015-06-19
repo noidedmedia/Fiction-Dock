@@ -9,7 +9,7 @@ class FranchisesController < ApplicationController
   # TODO: paginate this
   def stories
     @franchise = Franchise.friendly.find(params[:id])
-    @stories = @franchise.stories
+    @stories = Story.for_content(accepted_content).where(franchises: [@franchise])
   end
 
   ##

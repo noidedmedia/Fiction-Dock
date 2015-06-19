@@ -30,7 +30,7 @@ RSpec.describe Story, type: :model do
       adult
       everybody
       teen
-      Story.for_content_rating.each do |story|
+      Story.for_content.each do |story|
         expect(["everybody", "teen"]).to include(story.content_rating)
       end
     end

@@ -11,6 +11,15 @@ class ApplicationController < ActionController::Base
   
   before_action :configure_permitted_devise_params, if: :devise_controller?
 
+  def accepted_content
+    if params["content"]
+      params["content"]
+    elsif current_user && (c = current_user.content_pref)
+      c
+    else
+      nil
+    end
+  end
   ##
   # Configure the permitted parameters for devise
   def configure_permitted_devise_params

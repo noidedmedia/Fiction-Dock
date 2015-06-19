@@ -87,12 +87,8 @@ class Story < ActiveRecord::Base
     user
   end
 
-  def self.for_content_rating(hsh={
-    "adult" => false,
-    "teen" => true,
-    "everybody" => true
-  })
-    RatingResolver.new(hsh).resolve
+  def self.for_content(conent=nil)
+    RatingResolver.new(content).resolve
   end
   ##
   # See if this story can be published

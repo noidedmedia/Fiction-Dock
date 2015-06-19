@@ -1,20 +1,24 @@
 class Searcher
-  def initialize(hash)
+  def initialize(hash, content: nil)
+    @content = content
     @hash = hash
     @chars = hash["characters"]
     @ship_chars = hash["ship"]
   end
   
-  def resolve(page:)
+  def resolve(content=nil, page:)
     @query = stories.project(stories[Arel.star]).group(stories[:id])
     resolve_ship_chars if @ship_chars && @ship_chars.length > 0
-    resolve_characters if @chars && @chars.length > 0 
+    resolve_characters if @chars && @chars.length > 0
+    resolve_content
     Story.paginate_by_sql(@query.to_sql, page: page)
   end
   attr_reader :query
   protected
-   
 
+  def resolve_content
+    @query = RatingResolver.new(@content).ammend_to_arel(@query)
+  end
   def resolve_characters
     @query = @query
       .join(story_characters).on(story_characters[:story_id].eq(stories[:id]))

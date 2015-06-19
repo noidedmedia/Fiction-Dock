@@ -44,7 +44,8 @@ class StoriesController < ApplicationController
   end
   
   def search
-    @stories = Searcher.new(params).resolve(page: params[:page])
+    @stories = Searcher.new(params, content: accepted_content)
+      .resolve(page: params[:page])
   end
 
   ##
@@ -101,9 +102,9 @@ class StoriesController < ApplicationController
 
   ##
   # Get a list of all stories
-  # TODO: paginate this
   def index
-    @stories = Story.all.includes(:franchises).for_display.paginate(page: params[:page])
+    @stories = Story.for_content(accepted_content)
+      .includes(:franchises).for_display.paginate(page: params[:page])
   end
 
   ##

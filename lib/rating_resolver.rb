@@ -1,8 +1,16 @@
 class RatingResolver
   def initialize(hsh)
-    @hash = Hash.new
-    RATING_NAMES.each do |val|
-      @hash[val] = to_boolean(hsh[val])
+    if hsh 
+      @hash = Hash.new
+      RATING_NAMES.each do |val|
+        @hash[val] = to_boolean(hsh[val])
+      end
+    else
+      @hash = {
+        "adult" => "false",
+        "teen" => "true",
+        "everybody" => "true"
+      }
     end
   end
   RATING_NAMES = Story.content_ratings.keys
@@ -11,7 +19,13 @@ class RatingResolver
     prepare_content_ratings
     Story.where(content_rating: @accepted_content_ratings)
   end
-
+  ##
+  # Ammend the conditions we add to an arel query
+  def ammend_to_arel(arel)
+    stories = Story.arel_table
+    prepare_content_ratings
+    return arel.where(stories[:content_rating].in(@accepted_content_ratings))
+  end
   def prepare_content_ratings
     @accepted_content_ratings = []
     @hash.each do |k, v|
