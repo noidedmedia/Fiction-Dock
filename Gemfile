@@ -8,6 +8,10 @@ gem 'redcarpet', '~> 3.2.3'
 # The Medium Editor gem for rails.
 gem 'medium-editor-rails'
 
+# Sitemap generator
+# https://github.com/kjvarga/sitemap_generator
+gem 'sitemap_generator'
+
 
 gem 'will_paginate', "~> 3.0.6"
 # Data migrations!
