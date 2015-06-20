@@ -1,121 +1,72 @@
 function Ship(obj){
-  this.characters = []
-    for(var prop in obj){
-      if(prop == "characters"){
-        for(var c in obj.characters){
-          console.log("Adding character with id: " + obj.characters[c].id);
-          this.characters.push(new Character(obj.characters[c]));
-        }
+  this.characters = [];
+  for(var prop in obj){
+    if(prop == "characters"){
+      for(var c in obj.characters){
+        this.characters.push(new Character(obj.characters[c]));
       }
-      else{
-        this[prop] = obj[prop];
-      }
-    } 
-}
-
-Ship.newShipButton = function(story, click){
-  var bt = $("<div>").attr({
-    class: "new-ship-button"
-  }).append("Add a ship").click(function(){
-    story.addShip(new Ship({})); 
-    click();
-  });
-  return bt;
-}
-Ship.prototype.addCharacter = function(c){
-  console.log("Trying to add character with id: " + c.id);
-  if(this.containsCharacter(c))
-    return;
-  this.characters.push(c);
-}
-/*
- * Remove a character from the ship
- * TODO: replace with a binary search to avoid evil O[n]
- * Altneraitvely, turn characters into a hash of id -> character 
- * That's probably faster
- */
-Ship.prototype.removeCharacter = function(c){
-  for(var vc in this.characters){
-    if(this.characters[vc].id == c.id){
-      this.characters.splice(vc, 1);
-    }
-  }
-}
-Ship.prototype.containsCharacter = function(c){
-  for(var vc in this.characters){
-    if(this.characters[vc].id == c.id){
-      return true;
-    }
-  }
-  return false;
-}
-/*
- * Get a display box, for use in a form of some kind
- * Will pass the "done" callback to the add/remove functionality of each
- * character, to be ran when the character is added or removed.
- *
- * As such, `done` should probably render the changes somewhere.
- *
- * When the removal button is clicked, `removeship` will have the function
- * `removeShip` called with `this` as an argument. `done` will also be called.
- */
-Ship.prototype.displayForForm = function(story, done, removeship){
-  var container = $("<div>").attr({
-    class: "ship-container"
-  });
-  if(removeship){
-    var remove = $("<div>").attr({
-      class: "ship-removal-button"
-    }).append("Remove Ship");
-    var that = this;
-    remove.click(function(){
-      removeship.removeShip(that);
-      done()
-    });
-    container.append(remove);
-  }
-  var list = $("<ul>");
-  for(var f in story.franchises){
-    list.append(story.franchises[f].listDisplay());
-  }
-  for(var c in story.characters){
-    var character = story.characters[c];
-    var contained = this.containsCharacter(character);
-    var box = character.formDisplay(contained, this, done);
-    list.find(".franchise-" + character.franchise_id).append(box);
-  }
-  return container.append(list);
-}
-/*
- * onlyOne is an optional parameter
- * if true, then the `remove` button on `ship` will no longer exist
- */
-function ShipForm(story, onlyOne){
-  this.story = story;
-  this.onlyOne = onlyOne
-}
-
-ShipForm.prototype.render = function(){
-  this.container.empty();
-  var that = this;
-  var renderCallback = function(){
-    that.render();
-  }
-  for(var s in this.story.ships){
-    var s = this.story.ships[s];
-    if(this.onlyOne){
-      var remove = false;
     }
     else{
-      var remove = this.story;
+      this[prop] = obj[prop];
     }
-    this.container.append(s.displayForForm(this.story, renderCallback, remove));
   }
 }
-ShipForm.prototype.setup = function(done){
-  this.container = $("<div>").attr({
-    class: "ship-container"
-  });
+/*
+ * If the ship is given a displayer, this will tell that displayer to
+ * `render` itself.
+ */
+Ship.prototype.render = function(){
+  if(this.displayer)
+    this.displayer.render();
+}
+
+// remove this ship from its parent story
+Ship.prototype.suicide = function(){
+  this.story.removeShip(this);
+}
+
+// Find the index of a character in this ship
+// returns -1 if the character isn't found
+// compares via ID
+Ship.prototype.indexOfCharacter = function(character){
+  for(var c in this.characters){
+    if(this.characters[c].id == character.id){
+      return c;
+    }
+  }
+  return -1;
+}
+/*
+ * Add a character to this ship, if it's not already inside
+ */
+Ship.prototype.addCharacter = function(character){
+  if(this.indexOfCharacter(character) == -1){
+    // Character not currently contained
+    if(this.story.indexOfCharacter(character) != -1){
+      this.characters.push(character);
+      this.render();
+    }
+  }
+}
+/*
+ * Remove a character from this ship
+ */
+Ship.prototype.removeCharacter = function(character){
+  var ind = this.indexOfCharacter(character);
+  if(ind > -1){
+    this.characters.splice(ind, 1);
+    this.render();
+  }
+}
+/*
+ * Update this ship, removing all characters which are not present
+ * in the parent story.
+ */
+Ship.prototype.updateCharacters = function(characters){
+  for(var c in this.characters){
+    if(this.story.indexOfCharacter(this.characters[c]) == -1){
+      this.characters.splice(c, 1);
+    }
+  }
   this.render();
-  done(this.container);
 }
