@@ -1,1 +1,15 @@
 <%- title t(".editing_username", username: @user.name) %>
+<%= form_for @user do |f| %>
+  <h1>Content Rating Preferences</h1>
+  <%= f.fields_for :content_pref, OpenStruct.new(@user.content_pref) do |fc| %>
+    <%= fc.label :adult %>
+    <%= fc.check_box :adult %>
+    <br>
+    <%= fc.label :teen %>
+    <%= fc.check_box :teen %>
+    <br>
+    <%= fc.label :everybody %>
+    <%= fc.check_box :everybody %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
