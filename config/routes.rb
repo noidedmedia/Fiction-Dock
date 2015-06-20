@@ -27,7 +27,11 @@ Rails.application.routes.draw do
     resources :users, controller: :franchise_users, except: [:show, :edit, :update]
   end
 
-  resources :users, except: [:new, :create, :destroy]  do
+  resources :characters do
+    get 'stories', on: :member
+  end
+
+  resources :users, except: [:new, :create, :destroy] do
     get 'stories', on: :member
   end
 

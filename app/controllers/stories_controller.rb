@@ -16,7 +16,7 @@ class StoriesController < ApplicationController
         format.html { redirect_to @story } 
         format.json{ render json: true }
       else
-        format.json { render json: @story.errors, status: :unproccessible_entity }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
 
@@ -30,7 +30,7 @@ class StoriesController < ApplicationController
         format.json{ render json: true }
         format.html { redirect_to @story }
       else
-        format.json { render json: @story.errors, status: :unproccessible_entity }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
   end

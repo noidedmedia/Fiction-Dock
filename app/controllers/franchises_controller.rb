@@ -25,7 +25,6 @@ class FranchisesController < ApplicationController
 
   ##
   # List all franchises
-  # TODO: paginate this
   def index
     @franchises = Franchise.all.paginate(page: params[:page])
   end

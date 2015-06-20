@@ -1,9 +1,3 @@
 <%- title t(".browse_users") %>
 
-<% @users.each do |user| %>
-  <p><%= user.name %>
-<% end %>
-
-<div class="pagination-container">
-  <%= paginate(@users) %>
-</div>
+<%= render "user_list", users: @users %>

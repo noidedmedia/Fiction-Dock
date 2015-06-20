@@ -1,0 +1,14 @@
+<ul id="character-list" class="fd-list fd-browse-list">
+  <div class="fd-list-header"><%= t(".characters") %></div>
+
+  <% characters.each do |character| %>
+    <li class="fd-list-item">
+      <p class="fd-list-item-title character-list-item-title"><%= link_to character.name, franchise_character_path(character.franchise_id, character) %>
+      <p class="fd-list-item-subtitle character-list-item-description"><%= character.description %>
+    </li>
+  <% end %>
+</ul>
+
+<div class="pagination-container">
+  <%= paginate(characters) %>
+</div>

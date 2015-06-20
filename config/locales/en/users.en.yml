@@ -4,6 +4,8 @@ en:
   users:
     index:
       browse_users: "Browse users"
+    user_list:
+      users: "Users"
     show:
       at_username: "@%{username}"
       admin: "Admin"

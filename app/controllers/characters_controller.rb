@@ -4,13 +4,15 @@
 class CharactersController < ApplicationController
   include Pundit
 
-  before_action :load_franchise
+  before_action :load_franchise, except: [:index]
   before_action :authenticate_user!, except: [:show, :index]
+
   ##
-  # Show a list of all characters in a franchise
+  # Show a list of all characters
   def index
-    @characters = @franchise.characters
+    @characters = Character.all.paginate(page: params[:page])
   end
+
   ##
   # Show a bio about this character
   def show
@@ -35,6 +37,7 @@ class CharactersController < ApplicationController
     @character = Character.friendly.find(params[:id])
     authorize @character
   end
+
   ##
   # Make a new character
   # TODO: restritct this
@@ -47,7 +50,7 @@ class CharactersController < ApplicationController
         format.json { render 'show' }
       else
         format.html { render 'new' }
-        format.json { render json: @character.errors, status: :unproccessable_entity }
+        format.json { render json: @character.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,10 +67,11 @@ class CharactersController < ApplicationController
         format.json { render 'show' }
       else
         format.html { render 'new' }
-        format.json { render json: @character.errors, status: :unproccessable_entity }
+        format.json { render json: @character.errors, status: :unprocessable_entity }
       end
     end
   end
+
   protected
   ##
   # Always load a franchise into `@franchise` from `params[:franchise_id]`

@@ -1,0 +1,13 @@
+<ul id="user-list" class="fd-list fd-browse-list">
+  <div class="fd-list-header"><%= t(".users") %></div>
+
+  <% users.each do |user| %>
+    <li class="fd-list-item">
+      <p class="fd-list-item-title user-list-item-title"><%= link_to user.name, user_path(user) %>
+    </li>
+  <% end %>
+</ul>
+
+<div class="pagination-container">
+  <%= paginate(users) %>
+</div>

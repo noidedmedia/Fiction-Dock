@@ -4,6 +4,7 @@ en:
   franchises:
     index:
       browse_franchises: "Browse franchises"
+    franchise_list:
       franchises: "Franchises"
     show:
       edit: "Edit"
