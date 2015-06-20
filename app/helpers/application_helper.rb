@@ -46,4 +46,14 @@ module ApplicationHelper
     content_for(:title) { page_title }
   end
 
+  ##
+  # Pagination helper
+  # Adds the "pagination" CSS class to the main pagination div, and ensures
+  # that the collecton exists and is not empty before displaying anything.
+  def paginate(collection, options={})
+    options[:class] ||= 'pagination'
+    options[:link_separator] ||= ''
+    will_paginate(collection, options) if collection && !collection.empty?
+  end
+
 end

@@ -44,31 +44,6 @@
   }
 }
 
-.pagination {
-  width: 100%;
-  height: 20px;
-  margin-top: 40px;
-  font-size: 1.6rem;
-  text-align: center;
-  position: relative;
-
-  .pagination-left, .pagination-right {
-    position: absolute;
-
-    > a {
-      text-decoration: none;
-    }
-  }
-
-  .pagination-left {
-    left: 2px;
-  }
-
-  .pagination-right {
-    right: 2px;
-  }
-}
-
 .chapter-information {
   width: 100%;
   font-size: 1.4rem;
