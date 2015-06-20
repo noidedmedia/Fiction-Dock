@@ -1,0 +1,7 @@
+# "will_paginate" pagination gem strings.
+
+en:
+  will_paginate:
+    previous_label: "Previous"
+    next_label: "Next"
+    page_gap: "&hellip;"
