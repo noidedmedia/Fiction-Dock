@@ -11,10 +11,15 @@ class Searcher
     resolve_ship_chars if @ship_chars && @ship_chars.length > 0
     resolve_characters if @chars && @chars.length > 0
     resolve_content
+    resolve_published
     Story.paginate_by_sql(@query.to_sql, page: page)
   end
   attr_reader :query
   protected
+
+  def resolve_published
+    @query = @query.where(stories[:published].eq(true))
+  end
 
   def resolve_content
     @query = RatingResolver.new(@content).ammend_to_arel(@query)

@@ -12,6 +12,5 @@ development:
 test:
   <<: *default
   database: fictiondoc_test
-
 production:
   <<: *default
