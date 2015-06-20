@@ -148,6 +148,33 @@
     }
   }
 
+  .select-container {
+    display: inline-block;
+    width: calc(50% - 7px);
+
+    &:first-of-type {
+      margin-right: 10px;
+    }
+  }
+
+  select {
+    width: 100%;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
+    -webkit-appearance: none;
+    padding: 8px;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+
+    &:focus {
+      outline: transparent;
+    }
+  }
+
   @media all and (max-device-width: $mobile-width) {
     width: calc(100vw - 20px);
     max-width: 100vw;
