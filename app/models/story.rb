@@ -87,7 +87,7 @@ class Story < ActiveRecord::Base
     user
   end
 
-  def self.for_content(conent=nil)
+  def self.for_content(content=nil)
     RatingResolver.new(content).resolve
   end
   ##
