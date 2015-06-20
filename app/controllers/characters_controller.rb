@@ -15,7 +15,7 @@ class CharactersController < ApplicationController
   # Show a bio about this character
   def show
     @character = Character.friendly.find(params[:id])
-    @stories = Story.for_content(acceptable_content)
+    @stories = Story.for_content(accepted_content)
       .for_display.joins(:characters).where(characters: {id: @character.id})
       .paginate(page: page, per_page: per_page)
   end
