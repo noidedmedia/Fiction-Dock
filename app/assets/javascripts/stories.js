@@ -96,6 +96,7 @@ Story.prototype.addCharacter = function(cr){
   return this.characters.length - 1;
 }
 Story.prototype.addFranchise = function(fr){
+  console.log("Adding franchise with id: " + fr.id);
   for(var f in this.franchises){
     if(this.franchises[f].id == fr.id){
       return -1

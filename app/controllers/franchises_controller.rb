@@ -9,7 +9,10 @@ class FranchisesController < ApplicationController
   # TODO: paginate this
   def stories
     @franchise = Franchise.friendly.find(params[:id])
-    @stories = Story.for_content(accepted_content).where(franchises: [@franchise])
+    @stories = Story.for_content(accepted_content)
+      .joins(:franchises).where(franchises: {id: @franchise.id})
+      .for_display
+      .paginate(page: page, per_page: per_page)
   end
 
   ##
@@ -47,6 +50,10 @@ class FranchisesController < ApplicationController
   # Show a franchise, including stories within
   def show
     @franchise = Franchise.friendly.find(params[:id])
+    @stories = Story.for_content(accepted_content)
+      .for_display
+      .joins(:franchise).where(franchise: {id: @franchise.id})
+      .paginate(page: page, per_page: per_page)
   end
 
   def update

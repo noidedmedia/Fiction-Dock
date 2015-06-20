@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
   
   before_action :configure_permitted_devise_params, if: :devise_controller?
 
+  def per_page
+    params["per_page"] or 20
+  end
+  def page
+    params["page"] or 1
+  end
   def accepted_content
     if params["content"]
       params["content"]

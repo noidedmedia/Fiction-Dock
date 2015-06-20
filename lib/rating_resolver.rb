@@ -7,9 +7,9 @@ class RatingResolver
       end
     else
       @hash = {
-        "adult" => "false",
-        "teen" => "true",
-        "everybody" => "true"
+        "adult" => false,
+        "teen" => true,
+        "everybody" => true
       }
     end
   end
