@@ -30,6 +30,7 @@ function Story(obj){
     }
   }
 }
+
 /*
  * Find the index of a franchise by the ID
  */
@@ -41,6 +42,7 @@ Story.prototype.indexOfFranchise = function(franchise){
   }
   return -1;
 }
+
 /*
  * add a franchise, assuming it's not in this story already
  */
@@ -50,6 +52,7 @@ Story.prototype.addFranchise = function(franchise){
     this.render();
   }
 }
+
 /*
  * See if a story can contain a character.
  * This bascially checks if a character is in `potentialCharacters`.
@@ -62,6 +65,7 @@ Story.prototype.canContainCharacter = function(character){
   }
   return false;
 }
+
 /*
  * Remove a ship from the story.
  * NOTE: does not check via id, instead checking via object equivalence
@@ -69,6 +73,7 @@ Story.prototype.canContainCharacter = function(character){
 Story.prototype.removeShip = function(ship){
   this.ships.splice(this.ships.indexOf(ship), 1);
 }
+
 /*
  * Update the list of potential characters.
  * Useful when a franchise is added or removed.
@@ -87,6 +92,7 @@ Story.prototype.updatePotentialCharacters = function(){
   this.updateShipCharacters();
   this.render();
 }
+
 /*
  * Tell all our ships to update their characters.
  */
@@ -95,6 +101,7 @@ Story.prototype.updateShipCharacters = function(){
     this.ships[s].updateCharacters();
   }
 }
+
 /*
  * Remove a franchise from our list of franchises
  */
@@ -106,6 +113,7 @@ Story.prototype.removeFranchise = function(franchise){
     this.render();
   }
 }
+
 /*
  * Find the index of `character` in our list of characters.
  * Compares via id
@@ -119,6 +127,7 @@ Story.prototype.indexOfCharacter = function(character){
   }
   return -1;
 }
+
 /*
  * Add a character to the story, assuming it was not already inside
  */
@@ -128,6 +137,7 @@ Story.prototype.addCharacter = function(character){
     this.render();
   }
 }
+
 /*
  * Remove a character from this story.
  */
@@ -140,9 +150,11 @@ Story.prototype.removeCharacter = function(character){
 }
 
 Story.prototype.render = function(){
-  if(this.displayer)
+  if(this.displayer) {
     this.displayer.render();
+  }
 }
+
 /*
  * Fetch a story by ID
  *

@@ -20,3 +20,15 @@ en:
       share: "Share"
       report: "Report"
       add_a_new_chapter: "Add a new chapter"
+    form:
+      story_name: "Story name"
+      language: "Language"
+      license: "License"
+      blurb: "Blurb"
+      write_a_very_short_description_of_the_story: "Write a very short description of the story"
+      description: "Description"
+      write_a_description_of_the_story: "Write a description of the story"
+      franchises: "Franchises"
+      submit: 
+        new: "Submit"
+        edit: "Save changes"

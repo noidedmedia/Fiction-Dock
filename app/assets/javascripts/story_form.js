@@ -1,5 +1,5 @@
 /* 
- * THIS FILE CONTIANS TECHNICAL DEBT
+ * THIS FILE CONTAINS TECHNICAL DEBT
  *
  * IT IS A HORRIBLE GOD-OBJECT I FEEL BAD FOR WRITING
  *
@@ -33,6 +33,8 @@ StoryForm.prototype.renderCallback = function(){
  * These are the things that we don't render on each pass.
  */
 StoryForm.prototype.setup = function(){
+  console.log("Setting shit up");
+
   if(this._hasSetUp){
     throw "You can't set up twice!";
   }
@@ -57,11 +59,6 @@ StoryForm.prototype.setup = function(){
   suggestDiv.append($("<div>").attr({
     class: "franchise-suggestor-label"
   }).append("Add a Franchise:"));
-  // Add a franchise suggestor that will add a franchise on selection
-  suggestDiv.append(Franchise.suggestDisplay(function(fr){
-    that.story.addFranchise(fr);
-    that.render();
-  }));
   this.container.append(suggestDiv);
   this.form.franchises = $("<ul>").attr({
     id: "story-franchise-container"
@@ -71,24 +68,13 @@ StoryForm.prototype.setup = function(){
     id: "story-character-container"
   });
   this.container.append(this.form.characters);
-  this.submitButton = $("<input>").attr({
-    type: "submit",
-    value: "Submit"
-  });
-  this.submitButton.click(function(e){
+  $("#story-form-submit").click(function(e){
     e.preventDefault();
+    console.log(e);
+    console.log(that);
     that.submitForm();
   });
-  this.shipForm = new ShipForm(this.story);
-  this.shipForm.setup(function(shipContainer){
-    that.container.append(shipContainer);
-    that.container.append(Ship.newShipButton(that.story, function(){
-      that.render();
-    }));
-    that._hasSetUp = true;
-    that.container.append(that.submitButton);
-    that.render();
-  });
+  this.ship = new Ship(this.story);
 }
 StoryForm.prototype.submitForm = function(){
   console.log("Submitting form!");
@@ -131,7 +117,6 @@ StoryForm.prototype.submitForm = function(){
   };
   var error = function(data){
     console.warn("Error in AJAX request");
-    console.warn(res);
     var res = data.responseJSON;
     console.warn(res);
     that.displayErrors(res);

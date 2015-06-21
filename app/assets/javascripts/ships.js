@@ -16,12 +16,13 @@ function Ship(obj){
  * `render` itself.
  */
 Ship.prototype.render = function(){
-  if(this.displayer)
+  if(this.displayer) {
     this.displayer.render();
+  }
 }
 
 // remove this ship from its parent story
-Ship.prototype.suicide = function(){
+Ship.prototype.sudoku = function(){
   this.story.removeShip(this);
 }
 

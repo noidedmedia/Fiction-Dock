@@ -1,5 +1,5 @@
 function Character(obj){
-  for(var key in obj){
+  for(var key in obj) {
     this[key] = obj[key];
   }
 }
@@ -10,9 +10,9 @@ function Character(obj){
  * `removeCharacter` on the parent object. If it is false, it will
  * contained a button which calls `addCharacter` on the parent object.
  */
-Character.prototype.displayItem(object, remove){
+Character.prototype.displayItem = function(object, remove) {
   var item = $("<li>").addClass("character-list-item");
-  item.append($("<div">).attr({
+  item.append($("<div>").attr({
     class: "character-name"
   }).append(this.name));
   if(remove){
@@ -23,10 +23,10 @@ Character.prototype.displayItem(object, remove){
   }
 }
 
-Character.prototype.addButton = function(object){
+Character.prototype.addButton = function(object) {
 
 }
 
-Character.prototype.removeButton = function(object){
+Character.prototype.removeButton = function(object) {
 
 }
