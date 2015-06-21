@@ -7,9 +7,11 @@
   <h2><%= @character.name %></h2>
   <div><%= markdown_parse @character.description %></div>
 
-  <ul id="character-options" class="fd-page-options">
-    <li><%= link_to t(".edit"), edit_franchise_character_path(@franchise, @character) %>
-  </ul>
+  <% if user_signed_in? %>
+    <ul id="character-options" class="fd-page-options">
+      <li><%= link_to t(".edit"), edit_franchise_character_path(@franchise, @character) %>
+    </ul>
+  <% end %>
 
   <% unless @character.stories.for_display.blank? %>
     <ul id="character-story-list" class="fd-list">
