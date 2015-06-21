@@ -33,6 +33,7 @@ module ApplicationHelper
     markdown = Redcarpet::Markdown.new(renderer, extensions)
     markdown.render(str).html_safe
   end
+  
   ##
   # Helper used to determine if a link is to the page currently being viewed.
   def current(path)

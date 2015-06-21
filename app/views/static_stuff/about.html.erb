@@ -7,29 +7,29 @@
 <div class="stats">
   <ul>
     <li>
-      <%= link_to franchises_path do %>
-        <%= Franchise.count %>
-        <span><%= t(".franchises") %></span>
-      <% end %>
-    </li>
-
-    <li>
       <%= link_to stories_path do %>
-        <%= Story.count %>
+        <%= @story_count %>
         <span><%= t(".stories") %></span>
       <% end %>
     </li>
 
     <li>
       <%= link_to stories_path do %>
-        <%= Chapter.count %>
+        <%= @chapter_count %>
         <span><%= t(".chapters") %></span>
       <% end %>
     </li>
 
     <li>
-      <%= link_to root_path do %>
-        <%= Character.count %>
+      <%= link_to franchises_path do %>
+        <%= @franchise_count %>
+        <span><%= t(".franchises") %></span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to characters_path do %>
+        <%= @character_count %>
         <span><%= t(".characters") %></span>
       <% end %>
     </li>

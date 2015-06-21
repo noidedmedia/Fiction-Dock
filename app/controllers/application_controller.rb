@@ -14,9 +14,11 @@ class ApplicationController < ActionController::Base
   def per_page
     params["per_page"] or 20
   end
+
   def page
     params["page"] or 1
   end
+  
   def accepted_content
     if params["content"]
       params["content"]
@@ -26,6 +28,7 @@ class ApplicationController < ActionController::Base
       nil
     end
   end
+  
   ##
   # Configure the permitted parameters for devise
   def configure_permitted_devise_params
