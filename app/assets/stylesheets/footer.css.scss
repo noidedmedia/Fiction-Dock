@@ -14,7 +14,7 @@ $footer-link-color: #333;
   margin: 0;
   position: relative;
 
-  @media all and (max-device-width: $mobile-width) {
+  @media all and (max-width: $mobile-width) {
     height: auto;
   }
 
@@ -26,7 +26,7 @@ $footer-link-color: #333;
       text-decoration: none;
     }
 
-    @media all and (min-device-width: $mobile-width) {
+    @media all and (min-width: $mobile-width) {
       float: left;
       margin-top: 0;
     }
@@ -37,7 +37,7 @@ $footer-link-color: #333;
     margin: 0 0 1em 0;
     padding: 0;
     
-    @media all and (min-device-width: $mobile-width) {
+    @media all and (min-width: $mobile-width) {
       float: left;
       line-height: 1.8em;
       margin-left: 1em;
@@ -52,7 +52,7 @@ $footer-link-color: #333;
         opacity: 0.6;
       }
     
-      @media all and (min-device-width: $mobile-width) {
+      @media all and (min-width: $mobile-width) {
         display: inline-block;
         text-align: left;
       }
@@ -80,7 +80,7 @@ $footer-link-color: #333;
       }
     }
 
-    @media all and (max-device-width: $mobile-width) {
+    @media all and (max-width: $mobile-width) {
       left: 20px;
       padding: 10px 0;
     }
@@ -98,7 +98,7 @@ $footer-link-color: #333;
   .footer-right {
     color: $footer-link-color;
     text-decoration: none;
-    padding: 12px 0;
+    padding-top: 12px;
     position: absolute;
     right: 40px;
 
@@ -117,7 +117,7 @@ $footer-link-color: #333;
       }
     }
 
-    @media all and (max-device-width: $mobile-width) {
+    @media all and (max-width: $mobile-width) {
       right: 20px;
     }
   }

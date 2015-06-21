@@ -91,7 +91,7 @@ body.dark-mode {
   .fiction-dock-logo {
     color: #fff;
 
-    @media all and (max-device-width: $mobile-width) {
+    @media all and (max-width: $mobile-width) {
       &.logo-header {
         color: transparent;
 

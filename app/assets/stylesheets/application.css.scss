@@ -30,12 +30,11 @@ html, body {
   background-color: #fff;
   color: #333;
   margin: 0;
-  overflow-x: hidden;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Fix for iOS Safari messing with the text size. */
-  @media all and (max-device-width: $mobile-width) {
+  @media all and (max-width: $mobile-width) {
+    /* Fix for iOS Safari messing with the text size. */
     -webkit-text-size-adjust: none;
   }
 }
@@ -102,9 +101,11 @@ input[type="password"],
 input[type="email"],
 textarea {
   -webkit-appearance: none;
-  border: 1px solid #333;
+  border: 1px solid #aaa;
+  transition: border-color 200ms;
 
   &:focus {
+    border-color: #333;
     outline: none;
   }
 }
@@ -152,8 +153,8 @@ blockquote {
   min-height: calc(100vh - 105px);
   margin-top: 45px;
 
-  @media all and (max-device-width: $mobile-width) {
-    height: calc(100vh - 110px);
+  @media all and (max-width: $mobile-width) {
+    min-height: calc(100vh - 110px);
     margin-top: 50px;
   }
 }

@@ -7,9 +7,9 @@
   padding: 30px 20px;
   justify-content: center;
 
-  @media all and (max-device-width: $mobile-width) {
+  @media all and (max-width: $mobile-width) {
     width: 100vw;
-    padding: 20px 0;
+    padding: 0;
   }
 }
 
@@ -32,9 +32,9 @@
   margin: 15px 30px;
   font-size: 8px;
 
-  @media all and (max-device-width: $mobile-width) {
-    width: calc(100vw - 20px);
-    margin: 10px;
+  @media all and (max-width: $mobile-width) {
+    width: 100%;
+    margin: 10px 0;
   }
 
   .fd-list .fd-list-item {

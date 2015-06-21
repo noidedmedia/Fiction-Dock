@@ -26,12 +26,11 @@ class FranchisesController < ApplicationController
   ##
   # List all franchises
   def index
-    @franchises = Franchise.all.paginate(page: params[:page])
+    @franchises = Franchise.all.order('created_at DESC').paginate(page: params[:page])
   end
 
   ##
   # Create a new franchise
-  # TODO: restrict this so not just anybody can do it
   def new
     @franchise = Franchise.new
     authorize @franchise
@@ -60,8 +59,8 @@ class FranchisesController < ApplicationController
     authorize @franchise
     respond_to do |format|
       if @franchise.update(franchise_params)
-        format.html{ redirect_to @franchise, notice: 'franchise updated'}
-        format.json{ render :show, status: :created, location: @franchise}
+        format.html { redirect_to @franchise, notice: 'franchise updated' }
+        format.json { render :show, status: :created, location: @franchise}
       else
         format.json { render :edit }
         format.json { render json: @franchise.errors, status: :unprocessable_entity }
@@ -77,7 +76,7 @@ class FranchisesController < ApplicationController
     authorize @franchise
     respond_to do |format|
       if @franchise.save
-        format.html {redirect_to @franchise, notice: 'franchise created'}
+        format.html { redirect_to @franchise, notice: 'franchise created' }
         format.json { render :show, status: :created, location: @franchise }
       else
         format.html { render :new }
@@ -92,6 +91,6 @@ class FranchisesController < ApplicationController
   def franchise_params
     params.require(:franchise)
       .permit(:name,
-    :description)
+              :description)
   end
 end

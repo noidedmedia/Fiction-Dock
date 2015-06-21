@@ -5,6 +5,7 @@
   background-color: #eeeeee;
   width: 100vw;
   height: 45px;
+  top: 0;
   position: fixed;
   z-index: 100;
   white-space: nowrap;
@@ -13,7 +14,7 @@
     display: block;
   }
 
-  @media all and (max-device-width: $mobile-width) {
+  @media all and (max-width: $mobile-width) {
     height: 50px;
   }
 }
@@ -30,7 +31,7 @@
     }
   }
 
-  @media all and (max-device-width: $mobile-width) {
+  @media all and (max-width: $mobile-width) {
     left: 20px;
   }
 }
@@ -39,7 +40,7 @@
   position: absolute;
   right: 90px;
 
-  @media all and (max-device-width: $mobile-width) {
+  @media all and (max-width: $mobile-width) {
     left: 20px;
   }
 }
@@ -85,7 +86,7 @@
     }
   }
   
-  @media all and (max-device-width: $mobile-width) {
+  @media all and (max-width: $mobile-width) {
     padding: 15px 15px;
   }
 }
@@ -107,7 +108,7 @@
     -moz-appearance: none;
     background-color: transparent;
     border: 1px solid #aaaab2;
-    border-radius: 4px;
+    border-radius: 2px;
     transition: border 200ms;
 
     &:focus {

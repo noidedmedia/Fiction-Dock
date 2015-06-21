@@ -11,6 +11,10 @@
 
   &.fd-browse-list {
     padding-top: 50px;
+
+    @media all and (max-width: $mobile-width) {
+      padding-top: 10px;
+    }
   }
 
   .fd-list-header {
@@ -46,21 +50,22 @@
     }
   }
 
-  @media all and (max-device-width: $mobile-width) {
-    width: calc(100vw - 20px);
+  @media all and (max-width: $mobile-width) {
+    width: calc(100vw - 40px);
     max-width: 100vw;
+    margin: auto;
   }
 }
 
 .fd-text-container {
   margin: auto;
-  margin-bottom: 40px;
   width: 100%;
   max-width: 700px;
   padding-top: 10px;
+  padding-bottom: 40px;
 
-  @media all and (max-device-width: $mobile-width) {
-    width: calc(100vw - 20px);
+  @media all and (max-width: $mobile-width) {
+    width: calc(100vw - 40px);
     max-width: 100vw;
   }
 }
@@ -161,7 +166,7 @@
     width: 100%;
     background-color: transparent;
     color: #333;
-    border: 1px solid #333;
+    border: 1px solid #aaa;
     -webkit-appearance: none;
     padding: 8px;
     font-size: 1.4rem;
@@ -169,13 +174,15 @@
     border-radius: 0;
     cursor: pointer;
     position: relative;
+    transition: 200ms;
 
     &:focus {
+      border-color: #333;
       outline: transparent;
     }
   }
 
-  @media all and (max-device-width: $mobile-width) {
+  @media all and (max-width: $mobile-width) {
     width: calc(100vw - 20px);
     max-width: 100vw;
     padding-top: 10px;
@@ -186,6 +193,7 @@
   width: 100%;
   text-align: center;
   display: block;
+  padding: 10px 0 20px;
 }
 
 .pagination {
@@ -246,6 +254,8 @@
 }
 
 .pagination-absolute {
+  position: relative;
+  font-size: 1.6rem;
   width: 100%;
   height: 24px;
 
@@ -265,4 +275,3 @@
     right: 2px;
   }
 }
-
