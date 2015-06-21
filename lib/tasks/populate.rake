@@ -1,6 +1,3 @@
-require 'faker'
-require 'factory_girl'
-
 task :env_checker do
   unless Rails.env.development?
     puts "Not in development environment, exiting!"
@@ -11,6 +8,9 @@ end
 namespace :db do
   desc "Fill database with sample data"
   task :populate => [:environment, :env_checker] do
+
+    require 'faker'
+    require 'factory_girl'
 
     user_pool = []
 
