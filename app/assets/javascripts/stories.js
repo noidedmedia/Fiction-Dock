@@ -3,157 +3,77 @@
  * Construct with the JSON returned by the API
  */
 function Story(obj){
-  this.franchises = [];
-  this.characters = [];
-  this.ships = [];
   for(var prop in obj){
-    if(prop == "ships"){
-      for(var s in obj.ships){
-        var ship = new Ship(obj.ships[s]);
-        ship.story = this;
-        this.ships.push(ship);
-      }
-    }
-    else if(prop === "characters"){
-      for(var c in obj.characters){
-        this.characters.push(new Character(obj.characters[c]));
-      }
-    }
-    else if(prop === "franchises"){
-      for(var f in obj.franchises){
-        var fr = new Franchise(obj.franchises[f]);
-        this.franchises.push(fr);
-      }
-    }
-    else{
-      this[prop] = obj[prop];
-    }
+    this[prop] = obj[prop];
+  }
+  if(this.id){
+    Story.cache[this.id] = this;
+    console.log("Story.cache is");
+    console.log(Story.cache);
+    this.baseURL = "/stories/" + this.id;
+  }
+  else{
+    console.log("Made new story with no id.");
   }
 }
 
-/*
- * Find the index of a franchise by the ID
- */
-Story.prototype.indexOfFranchise = function(franchise){
-  for(var f in this.franchises){
-    if(this.franchises[f].id == franchise.id){
-      return f;
-    }
-  }
-  return -1;
-}
-
-/*
- * add a franchise, assuming it's not in this story already
- */
-Story.prototype.addFranchise = function(franchise){
-  if(this.indexOfFranchise(franchise) == -1){
-    this.franchises.push(f);
-    this.render();
-  }
-}
-
-/*
- * See if a story can contain a character.
- * This bascially checks if a character is in `potentialCharacters`.
- */
-Story.prototype.canContainCharacter = function(character){
-  for(var c in this.potentialCharacters){
-    if(this.potentialCharacters[c].id == character.id){
-      return true;
-    }
-  }
-  return false;
-}
-
-/*
- * Remove a ship from the story.
- * NOTE: does not check via id, instead checking via object equivalence
- */
-Story.prototype.removeShip = function(ship){
-  this.ships.splice(this.ships.indexOf(ship), 1);
-}
-
-/*
- * Update the list of potential characters.
- * Useful when a franchise is added or removed.
- */
-Story.prototype.updatePotentialCharacters = function(){
-  this.potentialCharacters = [];
-  for(var f in this.franchises[f]){
-    for(var c in this.franchises[f].characters){
-      this.potentialCharacters.push(this.franchises[f].characters[c]);
-    }
-  }
-  for(var c in this.characters){
-    if(! this.characters.canContainCharacter(this.characters(c)))
-      this.characters.splice(c, 1);
-  }
-  this.updateShipCharacters();
-  this.render();
-}
-
-/*
- * Tell all our ships to update their characters.
- */
-Story.prototype.updateShipCharacters = function(){
-  for(var s in this.ships){
-    this.ships[s].updateCharacters();
-  }
-}
-
-/*
- * Remove a franchise from our list of franchises
- */
-Story.prototype.removeFranchise = function(franchise){
-  var ind = this.indexOfFranchise(franchise);
-  if(ind > -1){
-    this.franchises.splice(ind, 1);
-    this.updatePotentialCharacters();
-    this.render();
-  }
-}
-
-/*
- * Find the index of `character` in our list of characters.
- * Compares via id
- * Returns -1 if nothing found
- */
-Story.prototype.indexOfCharacter = function(character){
-  for(var c in this.characters){
-    if(this.characters[c].id == character.id){
-      return c;
-    }
-  }
-  return -1;
-}
-
-/*
- * Add a character to the story, assuming it was not already inside
- */
-Story.prototype.addCharacter = function(character){
-  if(this.indexOfCharacter(character) == -1 && this.canContainCharacter(character)){
-    this.characters.push(character);
-    this.render();
-  }
-}
-
-/*
- * Remove a character from this story.
- */
 Story.prototype.removeCharacter = function(character){
-  var ind = this.indexOfCharacter(character);
-  if(ind > -1){
-    this.characters.splice(ind, 1);
-    this.render();
-  }
+  this.characters.splice(this.characters.indexOf(character), 1);
+}
+/*
+ * Fetch the franchises with AJAX.
+ * call the callback with `this` as the arg when done.
+ */
+Story.prototype.fillFranchises = function(callback){
+  var that = this;
+  $.ajax(this.baseURL + "/franchises.json", {
+    dataType: "json",
+    success: function(data){
+      var newFranch = [];
+      for(var d in data){
+        newFranch.push(Franchise.getByJson(data[d]));
+      }
+      that.franchises = newFranch;
+      callback(that);
+    }
+  });
 }
 
-Story.prototype.render = function(){
-  if(this.displayer) {
-    this.displayer.render();
-  }
+Story.prototype.fillCharacters = function(callback){
+  var that = this;
+  $.ajax(this.baseURL + "/characters.json", {
+    dataType: "json",
+    success: function(data){
+      var nc = [];
+      for(var d in data){
+        nc.push(Character.getByJson(data[d]));
+      }
+      that.characters = nc;
+      callback(that);
+    }
+  });
 }
+
+Story.prototype.fillShips = function(callback){
+  var that = this;
+  $.ajax(this.baseURL + "/ships.json", {
+    dataType: "json",
+    success: function(data){
+      var nc = [];
+      for(var d in data){
+        nc.push(Ship.getByJson(data[d]));
+      }
+      that.ships = nc;
+      callback(that);
+    }
+  });
+}
+/*
+ * A cache of storyId -> story
+ */
+Story.cache = {};
+
+
 
 /*
  * Fetch a story by ID
@@ -161,11 +81,29 @@ Story.prototype.render = function(){
  * Pass this story on to `callback`
  */
 Story.byId = function(id, callback){
-  $.ajax("/stories/" + id + "json", {
+  $.ajax("/stories/" + id + ".json", {
     dataType: "json",
-    success: function(response){
-      callback(new Story(response));
-    }
+  success: function(response){
+    var s = new Story(response)
+    callback(s);
+  }
   });
 }
 
+
+Story.prototype.fillAll = function(callback, progress){
+  this.fillFranchises(function(story){
+    if(progress){
+      progress(1/3);
+    }
+    story.fillCharacters(function(story1){
+      if(progress){
+        progress(2/3);
+      }
+      story.fillShips(function(story2){
+        progress(3/3);
+        callback(story2);
+      });
+    });
+  });
+}
