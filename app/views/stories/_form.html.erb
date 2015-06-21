@@ -20,6 +20,52 @@
     <%= f.label :description, t(".description") %>
     <%= f.text_area :description, id: "story-description-field", placeholder: t(".write_a_description_of_the_story") %>
 
+    <p id="new-story-franchises-header" class="new-story-section-header">Franchises</p>
+
+    <div class="franchise-container">
+      <p>Team Fortress 2</p>
+      <ul>
+        <li>The Soldier</li>
+        <li>The Scout</li>
+        <li>The Medic</li>
+        <li><button>Add a character</button></li>
+      </ul>
+    </div>
+
+    <div class="franchise-container">
+      <p>Pokémon</p>
+      <ul>
+        <li>Gary Oak</li>
+        <li>Misty</li>
+        <li><button>Add a character</button></li>
+      </ul>
+    </div>
+
+    <button>Add a ship</button>
+
+    <p id="new-story-ships-header" class="new-story-section-header">Ships</p>
+
+    <div class="ship-container">
+      <p>Ship 1</p>
+      <ul>
+        <li>
+          The Soldier <span>(Team Fortress 2)</span>
+          <span class="delete-character">X</span>
+        </li>
+        
+        <li>
+          The Scout <span>(Team Fortress 2)</span>
+          <span class="delete-character">X</span>
+        </li>
+        
+        <li>
+          <button>Add a character</button>
+        </li>
+      </ul>
+    </div>
+
+    <button>Add a ship</button>
+
     <%# Submit button string will change depending on the action name (edit, new, etc.)%>
     <%= f.submit t(".submit.#{action_name}"), id: "story-form-submit" %>
 
