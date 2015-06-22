@@ -29,4 +29,37 @@ FranchiseCharacterDisplay.prototype.render = function(){
     }));
   }, this);
   this.box.append(list);
+  this.box.append(this.newCharacterButton());
+}
+
+FranchiseCharacterDisplay.prototype.newCharacterButton = function(){
+  console.log("Getting the new character button");
+  var that = this;
+  var btn = $("<button>").append("Add a character");
+  btn.click(function(){
+    btn.replaceWith(that.newCharacterList());
+  });
+  return btn;
+}
+FranchiseCharacterDisplay.prototype.newCharacterList = function(){
+  var list = $("<ul>").attr({class: "new-character-list"});
+  this.charactersNotInContainer().forEach(function(char){
+    var that = this;
+    var item = $("<li>");
+    item.append(char.name);
+    item.click(function(){
+      that.container.addCharacter(char);
+      that.render();
+    });
+    list.append(item);
+  },this);
+  return list;
+}
+FranchiseCharacterDisplay.prototype.charactersNotInContainer = function(){
+var newChars = this.franchise.characters.filter(function(char){
+    return this.container.characters.indexOf(char) == -1;
+  }, this);
+  console.log("Characters not in story:");
+  console.log(newChars);
+  return newChars;
 }

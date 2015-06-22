@@ -28,6 +28,7 @@ StoryForm.prototype.finishedControl = function(){
     id: "javascript-form-elements"
   });
   this.container.append(this.innerContainer);
+  this.suggestor = new FranchiseSuggest(this.story, this);
   this.render();
 }
 
@@ -38,6 +39,7 @@ StoryForm.prototype.render = function(){
     this.innerContainer.append(d.getBox());
     d.render();
   },this);
+  this.innerContainer.append(this.suggestor.toggleButton());
 }
 StoryForm.prototype.addLoadingBar = function(){
   console.log("Adding loading bar");

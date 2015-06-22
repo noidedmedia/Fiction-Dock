@@ -17,8 +17,21 @@ function Story(obj){
   }
 }
 
+Story.prototype.addFranchise = function(franchise){
+  if(this.franchises.indexOf(franchise == -1)){
+    console.log("Adding franchise to story");
+    console.log(franchise);
+    this.franchises.push(franchise);
+  }
+}
 Story.prototype.removeCharacter = function(character){
   this.characters.splice(this.characters.indexOf(character), 1);
+}
+
+Story.prototype.addCharacter = function(character){
+  if(this.characters.indexOf(character) == -1){
+    this.characters.push(character);
+  }
 }
 /*
  * Fetch the franchises with AJAX.

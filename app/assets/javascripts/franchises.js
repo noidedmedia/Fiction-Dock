@@ -39,3 +39,22 @@ Franchise.getByJson = function(json){
     return new Franchise(json);
   }
 }
+
+Franchise.byId = function(id, callback){
+  console.log("Finding with id: " + id);
+  if(Franchise.cache[id]){
+    callback(Franchise.cache[id]);
+    return;
+  }
+  $.ajax("/franchises/" + id + ".json", {
+    dataType: "json",
+    success: function(data){
+      console.log("got data in callback");
+      console.log(data);
+      callback(Franchise.getByJson(data));
+    },
+    error: function(err){
+      console.warn("Error!");
+      console.warn(error);
+    }})
+}
