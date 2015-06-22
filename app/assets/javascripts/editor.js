@@ -2,16 +2,20 @@ function markdownEditor() {
   var markdownelement = document.querySelector(".editor > #markdown");
   var placeholder = $("#rich-text").data("placeholder");
   new MediumEditor(document.querySelector(".editor > #rich-text"), {
-    buttons: ["bold", "italic", "orderedlist", "unorderedlist", "header1", "header2", "quote"],
-    firstHeader: 'h4',
-    secondHeader: 'h5',
+    buttons: ["bold", "italic", "orderedlist", "unorderedlist", "header1", "header2", "quote", "anchor"],
+    firstHeader: 'h1',
+    secondHeader: 'h2',
+    autoLink: true,
+    anchorPreview: {
+      hideDelay: 400
+    },
     paste: {
-        cleanPastedHTML: true,
-        cleanAttrs: ['style', 'dir'],
-        cleanTags: ['label', 'meta']
+      cleanPastedHTML: true,
+      cleanAttrs: ['style', 'dir'],
+      cleanTags: ['label', 'meta']
     },
     placeholder: {
-        text: placeholder
+      text: placeholder
     },
     imageDragging: false,
     disableDoubleReturn: true,

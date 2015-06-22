@@ -4,7 +4,7 @@
   width: 100%;
   max-width: 700px;
   margin: auto;
-  padding-top: 120px;
+  padding-top: 20px;
   padding-bottom: 80px;
   position: relative;
   display: -webkit-flex;
@@ -42,18 +42,43 @@
     }
   }
 
-  textarea {
-    position: fixed;
-    opacity: 0;
-    pointer-events: none;
+  &.plain-editor {
+
+    input[type=text] {
+      width: 100%;
+      font-size: 3.2rem;
+      font-weight: 600;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      min-height: 300px;
+      resize: vertical;
+      width: 100%;
+      font-size: 1.4rem;
+      line-height: 2.1rem;
+      padding: 10px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    }
   }
 
-  input[type=text] {
-    font-size: 4.8rem;
-    border: transparent;
-    font-weight: 600;
-    border: none;
-    width: 100%;
+  &.rich-editor {
+    padding-top: 120px;
+
+    input[type=text] {
+      font-size: 4.8rem;
+      border: transparent;
+      font-weight: 600;
+      border: none;
+      width: 100%;
+    }
+
+    textarea {
+      position: fixed;
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   input[type=submit] {
@@ -69,6 +94,7 @@
     }
   }
 }
+
 
 $medium_editor_bgcolor:                     #fff !default;
 $medium_editor_border_color:                #aaaab2 !default;

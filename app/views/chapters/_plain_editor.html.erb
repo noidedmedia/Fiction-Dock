@@ -2,13 +2,15 @@
   <%= err %>
 <% end %>
 
+<div>
+  <%= link_to "Switch to Rich Editor", url_for(editor: "rich_editor") %>
+</div>
+
 <%= form_for [@story, @chapter] do |f| %>
-  <div class="editor">
+  <div class="editor plain-editor">
     <%= f.text_field :name, placeholder: t(".chapter_title"), autocomplete: "off" %>
 
-    <%= f.text_area :body, id: "markdown-show" %>
-
-    <hr>
+    <%= f.text_area :body, id: "plain-text" %>
 
     <%= f.submit t(".save") %>
   </div>

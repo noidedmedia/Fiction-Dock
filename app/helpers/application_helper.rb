@@ -23,7 +23,10 @@ module ApplicationHelper
       hard_wrap: true,
       link_attributes: {rel: 'nofollow', target: '_blank'},
       no_styles: true,
-      no_images: true
+      no_images: true,
+      with_toc_data: true,
+      no_intra_emphasis: true,
+      safe_links_only: true
     }
     extensions = {
       autolink: true,

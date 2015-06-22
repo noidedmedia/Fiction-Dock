@@ -13,7 +13,12 @@ en:
       previous: "Previous"
       next: "Next"
       add_a_new_chapter: "Add a new chapter"
-    rich_form:
+    rich_editor:
+      chapter_title: "Chapter title"
+      start_writing_here: "Start writing here..."
+      you_have_unsaved_changes: "You have unsaved changes!"
+      save: "Save"
+    plain_editor:
       chapter_title: "Chapter title"
       start_writing_here: "Start writing here..."
       you_have_unsaved_changes: "You have unsaved changes!"

@@ -41,7 +41,7 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
-  h4 {
+  h1 {
     font-size: 3.2rem;
     line-height: 48px;
     margin-top: 40px;
@@ -49,7 +49,7 @@
     margin-bottom: 10px;
   }
 
-  h5 {
+  h2 {
     font-size: 2.4rem;
     line-height: 40px;
     margin-top: 40px;
@@ -57,7 +57,7 @@
     font-weight: 500;
   }
 
-  h4 + h5 {
+  h1 + h2 {
     margin-top: 5px;
   }
 
