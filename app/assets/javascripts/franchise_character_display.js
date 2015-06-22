@@ -16,7 +16,7 @@ FranchiseCharacterDisplay.prototype.render = function(){
   var list = $("<ul>");
   var contained = this.container.characters.filter(function(char){
     if(char.franchise_id == this.franchise.id){
-      return true
+      return true;
     }
     else{
       return false;
@@ -31,7 +31,7 @@ FranchiseCharacterDisplay.prototype.render = function(){
   }, this);
   this.box.append(list);
   this.box.append(this.newCharacterButton());
-}
+};
 
 FranchiseCharacterDisplay.prototype.newCharacterButton = function(){
   console.log("Getting the new character button");

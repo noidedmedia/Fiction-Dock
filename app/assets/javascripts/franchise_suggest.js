@@ -47,7 +47,7 @@ FranchiseSuggest.prototype.displayList = function(data){
   this.list.empty();
   console.log("Got data:");
   console.log(data);
-  
+
   data.forEach(function(franc){
     console.log("Appending franchise to suggest list:");
     console.log(franc);
@@ -66,7 +66,7 @@ FranchiseSuggest.prototype.displayList = function(data){
           console.log(that.renderer);
           that.renderer.render();
         }
-      })
+      });
     });
 
     console.log("item is:");
