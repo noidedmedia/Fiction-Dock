@@ -15,7 +15,8 @@ FranchiseSuggest.prototype.toggleButton = function(){
     $(btn).replaceWith(that.display());
   });
   return btn;
-}
+};
+
 FranchiseSuggest.prototype.display = function(){
   var that = this;
   this.box = $("<div>");
@@ -28,7 +29,8 @@ FranchiseSuggest.prototype.display = function(){
         console.log("That is:");
         console.log(that);
         that.displayList(data);
-      }});
+      }
+    });
   });
   this.box.append(input);
   this.list = $("<ul>").attr({class: "franchise-suggestions"});
@@ -38,31 +40,37 @@ FranchiseSuggest.prototype.display = function(){
   console.log("children are:");
   console.log(this.box.children());
   return this.box;
-}
+};
 
 FranchiseSuggest.prototype.displayList = function(data){
   var that = this;
   this.list.empty();
   console.log("Got data:");
   console.log(data);
+  
   data.forEach(function(franc){
     console.log("Appending franchise to suggest list:");
     console.log(franc);
     var item = $("<li>").append(franc.name);
+
     item.click(function(){
       console.log("list item clicked");
+
       Franchise.byId(franc.id, function(fr){
         console.log("Got franchise with id:");
         console.log(fr);
         that.container.addFranchise(fr);
+        
         if(that.renderer){
           console.log("Rendering renderer:");
           console.log(that.renderer);
           that.renderer.render();
         }
-      })});
-      console.log("item is:");
-      console.log(item);
-      this.list.append(item);
+      })
+    });
+
+    console.log("item is:");
+    console.log(item);
+    this.list.append(item);
   }, this);
-}
+};
