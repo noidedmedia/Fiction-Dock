@@ -1,0 +1,24 @@
+# =============================================================================
+# Font Custom Configuration
+#   This file should live in the directory where you run `fontcustom compile`.
+#   For more info, visit <https://github.com/FontCustom/fontcustom>.
+# =============================================================================
+
+font_name: fictiondockicons
+css_selector: .icon-{{glyph}}
+preprocessor_path: ""
+autowidth: true
+no_hash: true
+force: false
+debug: false
+quiet: false
+
+input:
+  vectors: app/assets/icons
+
+output:
+  fonts: app/assets/fonts
+  css: app/assets/stylesheets
+
+templates:
+  - scss-rails
