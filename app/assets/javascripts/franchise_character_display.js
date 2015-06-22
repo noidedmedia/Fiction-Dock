@@ -8,7 +8,8 @@ FranchiseCharacterDisplay.prototype.getBox = function(){
     class: "franchise-container"
   });
   return this.box;
-}
+};
+
 FranchiseCharacterDisplay.prototype.render = function(){
   this.box.empty();
   this.box.append($("<p>").append(this.franchise.name));
@@ -40,7 +41,8 @@ FranchiseCharacterDisplay.prototype.newCharacterButton = function(){
     btn.replaceWith(that.newCharacterList());
   });
   return btn;
-}
+};
+
 FranchiseCharacterDisplay.prototype.newCharacterList = function(){
   var list = $("<ul>").attr({class: "new-character-list"});
   this.charactersNotInContainer().forEach(function(char){
@@ -54,12 +56,14 @@ FranchiseCharacterDisplay.prototype.newCharacterList = function(){
     list.append(item);
   },this);
   return list;
-}
+};
+
 FranchiseCharacterDisplay.prototype.charactersNotInContainer = function(){
-var newChars = this.franchise.characters.filter(function(char){
+  var newChars = this.franchise.characters.filter(function(char){
     return this.container.characters.indexOf(char) == -1;
   }, this);
+
   console.log("Characters not in story:");
   console.log(newChars);
   return newChars;
-}
+};
