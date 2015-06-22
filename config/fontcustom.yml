@@ -15,10 +15,12 @@ quiet: false
 
 input:
   vectors: app/assets/icons
+  templates: app/assets/icons/templates
 
 output:
   fonts: app/assets/fonts
   css: app/assets/stylesheets
+  _fictiondockicons.css.scss: app/assets/stylesheets
 
 templates:
-  - scss-rails
+  - _fictiondockicons.css.scss

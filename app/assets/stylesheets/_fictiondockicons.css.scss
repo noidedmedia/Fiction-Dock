@@ -23,27 +23,12 @@
 [data-icon]:before { content: attr(data-icon); }
 
 [data-icon]:before,
-.icon-check:before,
-.icon-close:before,
-.icon-dot:before,
-.icon-flame:before,
-.icon-gear:before,
-.icon-light-bulb:before,
-.icon-link:before,
-.icon-lock:before,
-.icon-mark-github:before,
-.icon-pencil:before,
-.icon-plus:before,
-.icon-quote:before,
-.icon-screen-full:before,
-.icon-screen-normal:before,
-.icon-search:before,
-.icon-tag:before,
-.icon-three-bars:before {
+.icon {
   display: inline-block;
   font-family: "fictiondockicons";
   font-style: normal;
   font-weight: normal;
+  font-size: 1.4rem;
   font-variant: normal;
   line-height: 1;
   text-decoration: inherit;
@@ -51,6 +36,9 @@
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   font-smoothing: antialiased;
 }
 
