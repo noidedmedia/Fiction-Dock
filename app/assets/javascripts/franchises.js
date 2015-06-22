@@ -24,6 +24,7 @@ function Franchise(obj){
     Franchise.cache[this.id] = this;
   }
 }
+
 /*
  * A cache object. Keys are the ids of a franchise, value is the real
  * franchise object.
