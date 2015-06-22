@@ -11,6 +11,7 @@ FranchiseCharacterDisplay.prototype.getBox = function(){
 };
 
 FranchiseCharacterDisplay.prototype.render = function(){
+  console.log(this);
   this.box.empty();
   this.box.append($("<p>").append(this.franchise.name));
   var list = $("<ul>");

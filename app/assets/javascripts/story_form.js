@@ -33,8 +33,11 @@ StoryForm.prototype.finishedControl = function(){
 }
 
 StoryForm.prototype.render = function(){
+  console.log(this.story.franchises);
   this.innerContainer.empty();
   this.story.franchises.forEach(function(franchise){
+    console.log("Displaying franchise: ");
+    console.log(franchise);
     var d = new FranchiseCharacterDisplay(franchise, this.story);
     this.innerContainer.append(d.getBox());
     d.render();

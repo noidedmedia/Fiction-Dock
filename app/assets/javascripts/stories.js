@@ -42,8 +42,12 @@ Story.prototype.fillFranchises = function(callback){
   $.ajax(this.baseURL + "/franchises.json", {
     dataType: "json",
     success: function(data){
+      console.log("Filling franchises in story, got data:");
+      console.log(data);
       var newFranch = [];
       for(var d in data){
+        console.log("Adding franchise with data:");
+        console.log(data);
         newFranch.push(Franchise.getByJson(data[d]));
       }
       that.franchises = newFranch;
