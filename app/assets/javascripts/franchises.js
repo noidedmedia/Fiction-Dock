@@ -56,5 +56,6 @@ Franchise.byId = function(id, callback){
     error: function(err){
       console.warn("Error!");
       console.warn(error);
-    }})
+    }
+  })
 }
