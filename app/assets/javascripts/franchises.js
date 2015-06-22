@@ -32,7 +32,6 @@ function Franchise(obj){
 Franchise.cache = {};
 
 Franchise.getByJson = function(json){
-  console.log("Attempting to get with 
   if(json.id){
     var franch;
     if(franch = Franchise.cache[json.id]){
