@@ -23,16 +23,18 @@ Story.prototype.addFranchise = function(franchise){
     console.log(franchise);
     this.franchises.push(franchise);
   }
-}
+};
+
 Story.prototype.removeCharacter = function(character){
   this.characters.splice(this.characters.indexOf(character), 1);
-}
+};
 
 Story.prototype.addCharacter = function(character){
   if(this.characters.indexOf(character) == -1){
     this.characters.push(character);
   }
-}
+};
+
 /*
  * Fetch the franchises with AJAX.
  * call the callback with `this` as the arg when done.
@@ -50,7 +52,7 @@ Story.prototype.fillFranchises = function(callback){
       callback(that);
     }
   });
-}
+};
 
 Story.prototype.fillCharacters = function(callback){
   var that = this;
@@ -65,7 +67,7 @@ Story.prototype.fillCharacters = function(callback){
       callback(that);
     }
   });
-}
+};
 
 Story.prototype.fillShips = function(callback){
   var that = this;
@@ -80,7 +82,8 @@ Story.prototype.fillShips = function(callback){
       callback(that);
     }
   });
-}
+};
+
 /*
  * A cache of storyId -> story
  */
@@ -96,13 +99,12 @@ Story.cache = {};
 Story.byId = function(id, callback){
   $.ajax("/stories/" + id + ".json", {
     dataType: "json",
-  success: function(response){
-    var s = new Story(response)
-    callback(s);
-  }
+    success: function(response){
+      var s = new Story(response);
+      callback(s);
+    }
   });
-}
-
+};
 
 Story.prototype.fillAll = function(callback, progress){
   this.fillFranchises(function(story){
@@ -119,4 +121,4 @@ Story.prototype.fillAll = function(callback, progress){
       });
     });
   });
-}
+};
