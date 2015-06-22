@@ -28,17 +28,17 @@ function Franchise(obj){
  * A cache object. Keys are the ids of a franchise, value is the real
  * franchise object.
  */
-Franchise.cache = {}
+Franchise.cache = {};
 
 Franchise.getByJson = function(json){
   if(json.id){
     var franch;
-    if(franch = Franchise.cache[json.id]){
+    if(franch == Franchise.cache[json.id]){
       return franch;
     }
     return new Franchise(json);
   }
-}
+};
 
 Franchise.byId = function(id, callback){
   console.log("Finding with id: " + id);
@@ -58,4 +58,4 @@ Franchise.byId = function(id, callback){
       console.warn(error);
     }
   });
-}
+};
