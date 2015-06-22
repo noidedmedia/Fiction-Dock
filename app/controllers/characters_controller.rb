@@ -10,7 +10,7 @@ class CharactersController < ApplicationController
   ##
   # Show a list of all characters
   def index
-    @characters = Character.all.paginate(page: params[:page])
+    @characters = Character.all.order('created_at DESC').paginate(page: params[:page])
   end
 
   ##

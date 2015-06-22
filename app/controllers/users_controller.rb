@@ -2,10 +2,11 @@
 # Handle all actions on a user.
 class UsersController < ApplicationController
   include Pundit
+  
   ##
   # Display a list of all users
   def index
-    @users = User.all.paginate(page: params[:page])
+    @users = User.all.order('created_at DESC').paginate(page: params[:page])
   end
 
   ##
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
     end
     authorize @user
   end
+
   def update
     if current_user != User.friendly.find(params[:id])
       redirect_to edit_user_path(current_user) and return
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   ##
   # Get all stories written by a given user
   def stories
