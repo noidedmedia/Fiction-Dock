@@ -98,7 +98,7 @@ $footer-link-color: #333;
   .footer-right {
     color: $footer-link-color;
     text-decoration: none;
-    padding-top: 12px;
+    padding-top: 2px;
     position: absolute;
     right: 40px;
 
@@ -108,7 +108,7 @@ $footer-link-color: #333;
       transition: opacity 250ms;
 
       span {
-        font-size: 2.4rem;
+        font-size: 1.4rem;
       }
 
       &:focus,

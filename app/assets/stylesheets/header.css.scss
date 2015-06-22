@@ -119,9 +119,13 @@
 
   label {
     position: absolute;
-    left: 15px;
-    top: 15px;
+    left: 13px;
+    top: 9px;
     color: #aaaab2;
+
+    span {
+      font-size: 1.0rem;
+    }
 
     &:focus {
       color: #333;
@@ -137,8 +141,16 @@
   position: relative;
 }
 
-#create-button .octicon-plus {
-  font-size: 18px;
+#create-button {
+  margin-top: -5px;
+
+  span {
+    font-size: 1.2rem;
+  }
+
+  .dropdown-caret {
+    vertical-align: -8px;
+  }
 }
 
 .dropdown-caret {
@@ -288,7 +300,7 @@
   width: 32px;
   cursor: pointer;
   z-index: 1000;
-  padding: 14px 12px 0;
+  padding: 8px 10px 0;
   transition: background-color 200ms 400ms;
 
   &.active {
