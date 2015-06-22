@@ -50,16 +50,21 @@
       font-weight: 600;
       padding: 10px;
       margin-bottom: 10px;
+      border-color: transparent;
     }
 
     textarea {
       min-height: 300px;
       resize: vertical;
       width: 100%;
-      font-size: 1.4rem;
-      line-height: 2.1rem;
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      border-color: transparent;
       padding: 10px;
-      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+
+      &:hover, &:focus {
+        border-color: transparent;
+      }
     }
   }
 
