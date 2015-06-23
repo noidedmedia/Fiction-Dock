@@ -53,14 +53,21 @@
       border-color: transparent;
     }
 
-    textarea {
+    #plain-text-contenteditable {
       min-height: 300px;
-      resize: vertical;
       width: 100%;
       font-size: 1.6rem;
       line-height: 2.4rem;
-      border-color: transparent;
       padding: 10px;
+      white-space: pre-wrap;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    textarea {
+      display: none;
 
       &:hover, &:focus {
         border-color: transparent;

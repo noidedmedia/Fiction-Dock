@@ -1,4 +1,4 @@
-function markdownEditor() {
+function mediumMarkdownEditor() {
   var markdownelement = document.querySelector(".editor > #markdown");
   var placeholder = $("#rich-text").data("placeholder");
   new MediumEditor(document.querySelector(".editor > #rich-text"), {
@@ -56,10 +56,37 @@ function preventUnloadIfChanged() {
   });
 }
 
+// Throttles function call.
+// First variable is the function itself, second is the length
+// of the "idle time" in milliseconds before the function will run.
+// If the user is typing rapidly, the function won't be spammed
+// constantly, but instead only run once the user finishes typing
+// and doesn't begin again for another X milliseconds.
+function debounce(fn, delay) {
+  var timer = null;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+      fn.apply(context, args);
+    }, delay);
+  };
+}
+
+function plainTextEditor() {
+  $("#plain-text-contenteditable").on("input", debounce(function() {
+    var markdownforsubmit = $("#plain-text-contenteditable").html();
+
+    $("#plain-text-textarea").html(markdownforsubmit);
+  }, 500));
+}
+
+
 // Functions run when the document is "ready".
 var ready = function() {
-  markdownEditor();
+  mediumMarkdownEditor();
   preventUnloadIfChanged();
+  plainTextEditor();
 };
 
 $(document).ready(ready);

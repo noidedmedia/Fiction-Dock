@@ -3,7 +3,8 @@
 <% end %>
 
 <div>
-  <%= link_to "Switch to Plain Editor", url_for(editor: "plain_editor") %>
+  <%= link_to "Plain Editor", url_for(editor: "plain_editor") %>
+  <%= link_to "Rich Editor", url_for(editor: "rich_editor") %>
 </div>
 
 <%= form_for [@story, @chapter] do |f| %>
