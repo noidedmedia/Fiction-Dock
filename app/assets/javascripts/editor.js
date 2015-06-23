@@ -62,7 +62,7 @@ function preventUnloadIfChanged() {
 // If the user is typing rapidly, the function won't be spammed
 // constantly, but instead only run once the user finishes typing
 // and doesn't begin again for another X milliseconds.
-function debounce(fn, delay) {
+function throttle(fn, delay) {
   var timer = null;
   return function() {
     var context = this, args = arguments;
@@ -74,7 +74,7 @@ function debounce(fn, delay) {
 }
 
 function plainTextEditor() {
-  $("#plain-text-contenteditable").on("input", debounce(function() {
+  $("#plain-text-contenteditable").on("input", throttle(function() {
     var markdownforsubmit = $("#plain-text-contenteditable").html();
 
     $("#plain-text-textarea").html(markdownforsubmit);
