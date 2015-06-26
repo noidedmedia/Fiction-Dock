@@ -1,5 +1,6 @@
-function ShipCharacterDisplay(ship){
+function ShipCharacterDisplay(ship, parent){
   this.ship = ship;
+  this.parent = parent;
 }
 
 ShipCharacterDisplay.prototype.getBox = function(label){
@@ -7,9 +8,27 @@ ShipCharacterDisplay.prototype.getBox = function(label){
   if(label){
     this.box.append($("<p>").append(label));
   }
+  this.box.append(this.removeButton());
   this.list = $("<ul>").attr({class: "character-list ship-characters"});
   this.box.append(this.list);
   return this.box;
+}
+ShipCharacterDisplay.prototype.removeButton = function(){
+  var that = this;
+  var btn = $("<button>").attr({class: "remove-ship-button"});
+  btn.append("Remove Ship");
+  btn.click(function(){
+    that.ship.story.removeShip(that.ship);
+    if(that.parent){
+      if(that.parent.renderShips){
+        that.parent.renderShips();
+      }
+      else{
+        that.parent.render();
+      }
+    }
+  });
+  return btn;
 }
 ShipCharacterDisplay.prototype.render = function(){
   console.log("Rendering a ship.");

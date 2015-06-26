@@ -24,7 +24,29 @@ Story.prototype.addFranchise = function(franchise){
     this.franchises.push(franchise);
   }
 };
-
+Story.prototype.formSerialize = function(){
+  var toSubmit = {};
+  var KEYS_AS_IS = [ "name",
+      "license",
+      "language",
+      "blurb",
+      "description"]
+  for(var key in this){
+    if(KEYS_AS_IS.indexOf(key) !== -1){
+      toSubmit[key] = this[key];
+    }
+  }
+  toSubmit.franchise_ids = this.franchises.map(function(fr){return fr.id});
+  toSubmit.character_ids = this.characters.map(function(fr){return fr.id});
+  toSubmit.ship_attrs = [];
+  this.ships.forEach(function(ship){
+    var obj = {};
+    obj.characters = ship.characters.map(function(cr){return cr.id});
+    toSubmit.ship_attrs.push(obj);
+  });
+  console.log(JSON.stringify(toSubmit));
+  return {story: toSubmit};
+}
 Story.prototype.removeFranchise = function(franchise){
   this.franchises.splice(this.franchises.indexOf(franchise), 1);
   var toRemove = this.characters.filter(function(character){
