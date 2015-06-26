@@ -11,17 +11,24 @@ function Ship(obj){
     }
   }
 }
-/*
- * If the ship is given a displayer, this will tell that displayer to
- * `render` itself.
- */
-Ship.prototype.render = function(){
-  if(this.displayer) {
-    this.displayer.render();
+
+Ship.prototype.addCharacter = function(character){
+  if(this.characters.indexOf(character) == -1){
+    this.characters.push(character);
   }
 }
 
-
+Ship.prototype.removeCharacter = function(character){
+  this.characters.splice(this.characters.indexOf(character), 1);
+}
+Ship.addShipButton = function(container, callback){
+  var btn = $("<button>").attr({class: "add-ship-button"}).append("Add a ship");
+  btn.click(function(){
+    container.addShip(new Ship({}));
+    callback();
+  });
+  return btn;
+}
 
 Ship.cache = {};
 

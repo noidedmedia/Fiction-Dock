@@ -1,6 +1,7 @@
-function FranchiseCharacterDisplay(franchise, container){
+function FranchiseCharacterDisplay(franchise, container, parent){
   this.franchise = franchise;
   this.container = container;
+  this.parent = parent;
 }
 
 FranchiseCharacterDisplay.prototype.getBox = function(){
@@ -11,9 +12,11 @@ FranchiseCharacterDisplay.prototype.getBox = function(){
 };
 
 FranchiseCharacterDisplay.prototype.render = function(){
+  var that = this;
   console.log(this);
   this.box.empty();
   this.box.append($("<p>").append(this.franchise.name));
+  this.box.append(this.removeButton());
   var list = $("<ul>");
   var contained = this.container.characters.filter(function(char){
     if(char.franchise_id == this.franchise.id){
@@ -24,41 +27,22 @@ FranchiseCharacterDisplay.prototype.render = function(){
     }
   }, this);
   contained.forEach(function(member){
-    var that = this;
-    var d = new CharacterListItem(member, this.container);
+    var d = new CharacterListItem(member, this.container, true);
     list.append(d.getItem(false, function(){
       that.render();
     }));
   }, this);
   this.box.append(list);
-  this.box.append(this.newCharacterButton());
+  this.box.append(Character.newCharacterButton(this.container,
+        this.charactersNotInContainer(),
+        false,
+        function(){
+          that.render();
+          if(that.parent.renderShips){
+            that.parent.renderShips();
+          }
+        }));
 };
-
-FranchiseCharacterDisplay.prototype.newCharacterButton = function(){
-  console.log("Getting the new character button");
-  var that = this;
-  var btn = $("<button>").append("Add a character");
-  btn.click(function(){
-    btn.replaceWith(that.newCharacterList());
-  });
-  return btn;
-};
-
-FranchiseCharacterDisplay.prototype.newCharacterList = function(){
-  var list = $("<ul>").attr({class: "new-character-list"});
-  this.charactersNotInContainer().forEach(function(char){
-    var that = this;
-    var item = $("<li>");
-    item.append(char.name);
-    item.click(function(){
-      that.container.addCharacter(char);
-      that.render();
-    });
-    list.append(item);
-  },this);
-  return list;
-};
-
 FranchiseCharacterDisplay.prototype.charactersNotInContainer = function(){
   var newChars = this.franchise.characters.filter(function(char){
     return this.container.characters.indexOf(char) == -1;
@@ -68,3 +52,17 @@ FranchiseCharacterDisplay.prototype.charactersNotInContainer = function(){
   console.log(newChars);
   return newChars;
 };
+
+FranchiseCharacterDisplay.prototype.removeButton = function(){
+  var that = this;
+  var btn = $("<button>");
+  btn.click(function(){
+    console.log(that.container);
+    that.container.removeFranchise(that.franchise);
+    if(that.parent && that.parent.render){
+      that.parent.render();
+    }
+  });
+  btn.append("Remove Franchise");
+  return btn;
+}

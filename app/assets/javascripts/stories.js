@@ -25,6 +25,28 @@ Story.prototype.addFranchise = function(franchise){
   }
 };
 
+Story.prototype.removeFranchise = function(franchise){
+  this.franchises.splice(this.franchises.indexOf(franchise), 1);
+  var toRemove = this.characters.filter(function(character){
+    return character.franchise_id == franchise.id;
+  });
+  console.log("Removing contained child characters of parent franchise.");
+  console.log(toRemove);
+  toRemove.forEach(function(character){
+    this.characters.splice(this.characters.indexOf(character));
+    this.ships.forEach(function(ship){
+      ship.removeCharacter(character);
+    });
+  }, this);
+}
+Story.prototype.addShip = function(ship){
+  this.ships.push(ship);
+  ship.story = this;
+}
+
+Story.prototype.removeShip = function(ship){
+  this.ships.splice(this.ships.indexOf(ship), 1);
+}
 Story.prototype.removeCharacter = function(character){
   this.characters.splice(this.characters.indexOf(character), 1);
 };

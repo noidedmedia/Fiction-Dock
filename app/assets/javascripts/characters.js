@@ -26,3 +26,23 @@ Character.getByJson = function(json){
     }
   }
 }
+
+Character.newCharacterButton = function(container, list, showfname, callback){
+  var btn = $("<button>").attr({class: "new-character-button"});
+  btn.click(function(){
+    btn.replaceWith(Character._addList(container, list, showfname, callback));
+  });
+  btn.append("Add a character");
+  return btn;
+}
+
+Character._addList = function(container, list, showfname, callback){
+  var ul = $("<ul>");
+  console.log("list is");
+  console.log(list);
+  list.forEach(function(character){
+    var itm = new CharacterListItem(character, container, false);
+    ul.append(itm.getItem(showfname, callback));
+  });
+  return ul;
+}
