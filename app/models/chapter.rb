@@ -34,7 +34,7 @@ class Chapter < ActiveRecord::Base
   before_validation :sanitize_html
 
   def sanitize_html
-    self.body = ActionView::Base.full_sanitizer.strip_tags(self.body)
+    self.body = ActionView::Base.helpers.strip_tags(self.body)
   end
 
   def next_chapter
