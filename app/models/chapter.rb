@@ -33,7 +33,7 @@ class Chapter < ActiveRecord::Base
   before_validation :fix_chap_num
   before_validation :sanitize_tags
   def sanitize_tags
-    self.body = Sanitize.fragment(self.body)
+    self.body = Sanitize.fragment(self.body, Sanitize::Config::BASIC)
   end
 
   def next_chapter
