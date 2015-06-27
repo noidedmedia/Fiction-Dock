@@ -5,7 +5,7 @@ class FranchiseUserPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.mod_or_higher?
+    @user
   end
   
   def destroy? 

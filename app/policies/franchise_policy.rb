@@ -11,7 +11,7 @@ class FranchisePolicy < ApplicationPolicy
   ##
   # Mods and admins are allowed to create
   def create?
-    @user.mod_or_higher?
+    @user
   end
 
   def update?

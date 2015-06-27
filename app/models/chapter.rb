@@ -32,6 +32,7 @@ class Chapter < ActiveRecord::Base
   validates :chap_num, numericality: {greater_than: 0}
   before_validation :fix_chap_num
   before_validation :sanitize_tags
+  
   def sanitize_tags
     self.body = Sanitize.fragment(self.body, Sanitize::Config::BASIC).gsub('&gt;','>')
   end
