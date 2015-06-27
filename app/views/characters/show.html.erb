@@ -1,11 +1,11 @@
 <%- title @character.name %>
 
-<div class="fd-text-container">
+<div class="fd-text-container fd-padding-top">
 
   <%= link_to @franchise.name, franchise_path(@franchise) %>
 
-  <h2><%= @character.name %></h2>
-  <div><%= markdown_parse @character.description %></div>
+  <h2 class="fd-page-header"><%= @character.name %></h2>
+  <div class="fd-page-subtitle"><%= markdown_parse @character.description %></div>
 
   <% if user_signed_in? %>
     <ul id="character-options" class="fd-page-options">

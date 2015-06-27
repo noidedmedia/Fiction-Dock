@@ -1,9 +1,9 @@
 <%- title @franchise.name %>
 
-<div class="fd-text-container">
+<div class="fd-text-container fd-padding-top">
 
-  <h2><%= @franchise.name %></h2>
-  <div><%= markdown_parse @franchise.description %></div>
+  <h2 class="fd-page-header"><%= @franchise.name %></h2>
+  <div class="fd-page-subtitle"><%= markdown_parse @franchise.description %></div>
 
   <ul id="franchise-options" class="fd-page-options">
     <% if policy(@franchise).update? %>
@@ -13,14 +13,28 @@
     <li><%= link_to t(".add_a_new_character"), new_franchise_character_path(@franchise) %>
   </ul>
 
-  <% @franchise.characters.each do |character| %>
-    <%= link_to character.name, franchise_character_path(@franchise, character) %>
+  <ul id="franchise-character-list" class="fd-list">
 
-    <%= character.stories.count %>
-  <% end %>
+    <div class="fd-list-header"><%= t(".characters") %></div>
+
+    <% @franchise.characters.each do |character| %>
+      <li class="fd-list-item">
+        <p class="fd-list-item-title"><%= link_to character.name, franchise_character_path(@franchise, character) %>
+
+        <p class="fd-list-item-subtitle"><%= character.stories.for_display.count %> stories 
+        <% if !character.description.empty? %>
+          · <%= character.description %>
+        <% end %>
+
+      </li>
+    <% end %>
+  </ul>
 
   <% if @franchise.stories.count > 0 %>
     <ul id="franchise-story-list" class="fd-list">
+
+      <div class="fd-list-header"><%= t(".stories") %></div>
+
       <%= render partial: 'stories/story_stub',  collection: @franchise.stories.for_display, as: "story" %>
     </ul>
   <% else %>
