@@ -3,8 +3,8 @@
 <% end %>
 
 <ul class="editor-tabs">
-  <li><%= link_to "Markdown Editor", url_for(editor: "plain_editor") %></li>
-  <li class="current">Visual Editor</li>
+  <li><span class="icon icon-markdown"></span><%= link_to "Markdown Editor", url_for(editor: "plain_editor") %></li>
+  <li class="current"><span class="icon icon-eye"></span>Visual Editor</li>
 </ul>
 
 <%= form_for [@story, @chapter] do |f| %>

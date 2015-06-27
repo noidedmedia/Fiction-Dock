@@ -43,23 +43,24 @@
   }
 
   &.plain-editor {
+    padding-top: 75px;
 
     input[type=text] {
-      width: 100%;
-      font-size: 3.2rem;
+      font-size: 4.8rem;
+      border: transparent;
       font-weight: 600;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-color: transparent;
+      border: none;
+      width: 100%;
     }
 
     #plain-text-contenteditable {
-      min-height: 300px;
+      min-height: 25px;
       width: 100%;
       font-size: 1.6rem;
-      line-height: 2.4rem;
-      padding: 10px;
+      line-height: 2.6rem;
+      padding: 10px 0;
       white-space: pre-wrap;
+      margin: 25px 0;
 
       &:focus {
         outline: none;
@@ -110,33 +111,49 @@
 .editor-tabs {
   display: block;
   margin: auto;
-  text-align: center;
+  text-align: left;
   padding-top: 50px;
   border-bottom: 1px solid #aaaab2;
-  padding-bottom: 6px;
+  padding-bottom: 7px;
 
   li {
     display: inline-block;
     font-size: 1.4rem;
     margin: 0 30px;
+    position: relative;
+
+    span {
+      font-size: 1.2rem;
+      top: 2px;
+      left: 0px;
+      position: absolute;
+      color: #333;
+      opacity: 0.7;
+    }
 
     a {
       color: #333;
       opacity: 0.7;
       text-decoration: none;
       display: block;
+      padding-left: 35px;
     }
 
     &.current {
       color: #333;
-      cursor: default;
+      cursor: pointer;
+      padding-left: 35px;
+
+      span {
+        opacity: 1;
+      }
 
       &:after {
         content: '';
         background-color: #17cd94;
-        width: calc(100% + 30px);
-        -webkit-transform: translate(-15px, 6px);
-        transform: translate(-15px, 6px);
+        width: calc(100% + 70px);
+        -webkit-transform: translate(-50px, 7px);
+        transform: translate(-50px, 7px);
         height: 3px;
         display: block;
       }
@@ -151,7 +168,7 @@
   content: attr(placeholder);
   display: block; /* For Firefox */
   padding: 0 2px;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   cursor: text;
   opacity: 0.7;
   font-style: italic;
