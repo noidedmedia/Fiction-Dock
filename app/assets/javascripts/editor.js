@@ -81,7 +81,7 @@ function htmlToMarkdown(elem) {
     if (elem.childNodes[x].textContent) {
       output += elem.childNodes[x].textContent;
     } else {
-      output += "\n\r";
+      output += "\r\n";
     }
   }
 
@@ -93,7 +93,7 @@ function plainTextEditor() {
 
     var markdownforsubmit = htmlToMarkdown( document.getElementById("plain-text-contenteditable") );
 
-    $("#plain-text-textarea").html(markdownforsubmit);
+    $("#plain-text-textarea").text(markdownforsubmit);
   }, 500));
 }
 
