@@ -5,6 +5,8 @@ function mediumMarkdownEditor() {
   new MediumEditor(document.querySelector(".editor > #rich-text"), {
     buttons: ["bold", "italic", "orderedlist", "unorderedlist", "header1", "header2", "quote", "anchor"],
     buttonLabels: {
+      "orderedlist": '<span class="icon icon-list-ordered"></span>',
+      "unorderedlist": '<span class="icon icon-list-unordered"></span>',
       "quote": '<span class="icon icon-quote"></span>',
       "anchor": '<span class="icon icon-link"></span>'
     },
