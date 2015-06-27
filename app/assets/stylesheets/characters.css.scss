@@ -1,0 +1,8 @@
+@import "scss-variables";
+
+.character-list-item-title {
+  > span {
+    font-weight: 300;
+    font-size: 1.6rem;
+  }
+}
