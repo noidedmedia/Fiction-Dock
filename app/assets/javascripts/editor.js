@@ -11,8 +11,8 @@ function mediumMarkdownEditor() {
     },
     paste: {
       cleanPastedHTML: true,
-      cleanAttrs: ['style', 'dir'],
-      cleanTags: ['label', 'meta']
+      cleanAttrs: ['class', 'style', 'dir'],
+      cleanTags: ['label', 'meta', 'span']
     },
     placeholder: {
       text: placeholder
