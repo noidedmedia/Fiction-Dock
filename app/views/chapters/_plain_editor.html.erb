@@ -2,19 +2,21 @@
   <%= err %>
 <% end %>
 
-<div>
-  <%= link_to "Plain Editor", url_for(editor: "plain_editor") %>
-  <%= link_to "Rich Editor", url_for(editor: "rich_editor") %>
+<ul class="editor-tabs">
+  <li class="current"><%= link_to "Plain Editor", url_for(editor: "plain_editor") %></li>
+  <li><%= link_to "Rich Editor", url_for(editor: "rich_editor") %></li>
 </div>
 
 <%= form_for [@story, @chapter] do |f| %>
   <div class="editor plain-editor">
     <%= f.text_field :name, placeholder: t(".chapter_title"), autocomplete: "off" %>
 
-    <div id="plain-text-contenteditable" contenteditable="true"><%= @chapter.body %></div>
+    <div id="plain-text-contenteditable" contenteditable="true" placeholder="<%= t('.start_writing_here') %>"><%= @chapter.body %></div>
 
     <%= f.text_area :body, id: "plain-text-textarea" %>
 
+    <hr>
+    
     <%= f.submit t(".save"), id: "plain-editor-submit" %>
   </div>
 <% end %>

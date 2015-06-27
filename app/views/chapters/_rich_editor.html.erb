@@ -2,10 +2,10 @@
   <%= err %>
 <% end %>
 
-<div>
-  <%= link_to "Plain Editor", url_for(editor: "plain_editor") %>
-  <%= link_to "Rich Editor", url_for(editor: "rich_editor") %>
-</div>
+<ul class="editor-tabs">
+  <li><%= link_to "Plain Editor", url_for(editor: "plain_editor") %></li>
+  <li class="current"><%= link_to "Rich Editor", url_for(editor: "rich_editor") %></li>
+</ul>
 
 <%= form_for [@story, @chapter] do |f| %>
   <div class="editor rich-editor">

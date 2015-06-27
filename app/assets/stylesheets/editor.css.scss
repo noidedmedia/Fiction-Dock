@@ -76,7 +76,7 @@
   }
 
   &.rich-editor {
-    padding-top: 120px;
+    padding-top: 75px;
 
     input[type=text] {
       font-size: 4.8rem;
@@ -105,6 +105,56 @@
       outline: none;
     }
   }
+}
+
+.editor-tabs {
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding-top: 40px;
+  border-bottom: 1px solid #aaaab2;
+  padding-bottom: 5px;
+
+  li {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin: 0 30px;
+
+    a {
+      color: #333;
+      opacity: 0.7;
+      text-decoration: none;
+      display: block;
+    }
+
+    &.current {
+      a {
+        opacity: 1;
+      }
+
+      &:after {
+        content: '';
+        background-color: #17cd94;
+        width: calc(100% + 30px);
+        -webkit-transform: translate(-15px, 6px);
+        transform: translate(-15px, 6px);
+        height: 3px;
+        display: block;
+      }
+    }
+  }
+}
+
+// Applies to all elements with contenteditable set to true.
+// When the field is empty, the value of the placeholder attribute
+// will be used as placeholder text.
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  display: block; /* For Firefox */
+  padding: 0 2px;
+  transform: translateY(-2px);
+  cursor: text;
+  opacity: 0.7;
 }
 
 
