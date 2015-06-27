@@ -18,7 +18,8 @@ ShipCharacterDisplay.prototype.removeButton = function(){
   var that = this;
   var btn = $("<button>").attr({class: "remove-ship-button"});
   btn.append("Remove Ship");
-  btn.click(function(){
+  btn.click(function(event){
+    event.preventDefault();
     that.ship.story.removeShip(that.ship);
     if(that.parent){
       if(that.parent.renderShips){

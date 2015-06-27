@@ -56,7 +56,7 @@ SearchControls.prototype.submit = function(){
   var toSubmit = {};
   toSubmit.characters = this.search.characters.map(function(c){return c.id});
   toSubmit.franchises = this.search.franchises.map(function(f){return f.id});
-  toSubmit.ships = this.search.ships[0].characters.map(function(c){return c.id});
+  toSubmit.ship = this.search.ships[0].characters.map(function(c){return c.id});
   console.debug("Attempting to submit a search in SearchControls:",
       this,
       "with search object:",
