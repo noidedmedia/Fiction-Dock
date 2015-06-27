@@ -213,6 +213,11 @@ $medium_editor_placeholder_color:           #333 !default;
         background-color: $medium_editor_hover_color;
         color: $medium_editor_button_active_text_color;
       }
+
+      span {
+        font-size: 1.0rem;
+        line-height: 28px;
+      }
     }
 
     .medium-editor-button-first {
@@ -238,10 +243,11 @@ $medium_editor_placeholder_color:           #333 !default;
   color: #fff;
   border-radius: $medium_editor_border_radius;
 
-  .medium-editor-toolbar-input {
+  input.medium-editor-toolbar-input {
     height: $medium_editor_button_size;
-    background: $medium_editor_bgcolor;
+    background: transparent;
     color: $medium_editor_link_color;
+    padding: 0 12px;
 
     &::-webkit-input-placeholder {
       color: $medium_editor_placeholder_color;
