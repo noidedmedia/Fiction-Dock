@@ -128,9 +128,8 @@
     }
 
     &.current {
-      a {
-        opacity: 1;
-      }
+      color: #333;
+      cursor: default;
 
       &:after {
         content: '';
