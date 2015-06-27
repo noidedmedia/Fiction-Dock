@@ -73,9 +73,25 @@ function throttle(fn, delay) {
   };
 }
 
+
+function htmlToMarkdown(elem) {
+  var output = "";
+
+  for (var x = 0; x < elem.childNodes.length; x++) {
+    if (elem.childNodes[x].textContent) {
+      output += elem.childNodes[x].textContent;
+    } else {
+      output += "\n\r";
+    }
+  }
+
+  return(output);
+}
+
 function plainTextEditor() {
   $("#plain-text-contenteditable").on("input", throttle(function() {
-    var markdownforsubmit = $("#plain-text-contenteditable").html();
+
+    var markdownforsubmit = htmlToMarkdown( document.getElementById("plain-text-contenteditable") );
 
     $("#plain-text-textarea").html(markdownforsubmit);
   }, 500));
