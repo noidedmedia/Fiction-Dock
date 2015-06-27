@@ -8,7 +8,7 @@
 
       <li><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %></li>
       <li><%= t(".published_on", date: @story.created_at.strftime("%B %e, %Y") ) %></li>
-      <li><%= t("languages.#{@story.language}") %> · <%= t("licenses.#{@story.license}") %></li>
+      <li><%= t("languages.#{@story.language}") %> · <%= t("licenses_html.#{@story.license}_html") %></li>
 
       <ul>
         <li class="list-item-header">Franchises</li>
