@@ -303,6 +303,13 @@
   padding: 8px 10px 0;
   transition: background-color 200ms 400ms;
 
+  span {
+    font-size: 2.1rem;
+    top: 22px;
+    left: 14px;
+    position: absolute;
+  }
+
   &.active {
     background-color: #fff;
     box-shadow: 0 -8px 11px 1px rgba(0, 0, 0, 0.15);
