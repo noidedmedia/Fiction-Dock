@@ -13,6 +13,9 @@ function Story(obj){
     this.baseURL = "/stories/" + this.id;
   }
   else{
+    this.franchises = [];
+    this.characters = [];
+    this.ships = [];
     console.log("Made new story with no id.");
   }
 }

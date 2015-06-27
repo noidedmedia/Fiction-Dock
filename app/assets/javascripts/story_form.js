@@ -19,10 +19,16 @@ StoryForm.prototype.takeControl = function(){
       });
     })
   }
+  else{
+    this.story = new Story({});
+    that.finishedControl();
+  }
 }
 
 StoryForm.prototype.finishedControl = function(){
-  this._loadingBar.remove();
+  if(this._loadingBar){
+    this._loadingBar.remove();
+  }
   console.log("Control taken!");
   console.log(this);
   this.franchiseContainer = $("<div>").attr({
@@ -48,16 +54,17 @@ StoryForm.prototype.hijackSubmit = function(){
 StoryForm.prototype.getErrorsObject = function(){
   var obj = {}
   obj.name = $("#story-name-field")
-  obj.language = $("#story-language-select")
-  obj.license = $("story-license-select")
-  obj.blurb = $("#story-blurb-field")
-  obj.description = $("#story-description-field")
-  return obj;
+    obj.language = $("#story-language-select")
+    obj.license = $("story-license-select")
+    obj.blurb = $("#story-blurb-field")
+    obj.description = $("#story-description-field")
+    return obj;
 }
 StoryForm.prototype.submit = function(){
-  var errors = this.getErrorsObject;
+  var that = this;
+  var errors = this.getErrorsObject();
   for(var key in errors){
-    story[key] = errors[key].val();
+    this.story[key] = errors[key].val();
   }
   var serialized = this.story.formSerialize();
   var method = this.story_id ? "PUT" : "POST";
@@ -68,12 +75,35 @@ StoryForm.prototype.submit = function(){
     contentType: "application/json; encoding=utf-8",
     method: method,
     success: function(response){
-      console.log("SUBMITTED!");
+      console.log("Successful submit, redirecting...");
+      window.location.href = "/stories/" + response.id;
     },
     error: function(error){
-             console.log("Error");
+             console.warn("Errors in story submission!");
              console.log(error);
+             that.displayErrors(JSON.parse(error.responseText));
            }});
+}
+
+StoryForm.prototype.errorBox = function(msg){
+  return $("<span>").attr({class: "error"}).append(msg);
+}
+StoryForm.prototype.displayErrors = function(errors){
+  var form = this.getErrorsObject();
+  for(var key in errors){
+    if(form[key] && errors[key]){
+      form[key].before(this.errorBox(key + ": " + errors[key]));
+    }
+  }
+  if(errors.franchises){
+    this.franchiseContainer.before(this.errorBox("Franchises: " + errors.franchises));
+  }
+  if(errors.characters){
+    this.franchiseContainer.before(this.errorBox("Characters: " + errors.characters));
+  }
+  if(errors.ships){
+    this.shipContainer.before(this.errorBox("Ships: " + errors.ships));
+  }
 }
 StoryForm.prototype.render = function(){
   var that = this;
@@ -116,10 +146,8 @@ StoryForm.prototype.addLoadingBar = function(){
 $(function(){
   var container = $($("#story-form")[0]);
   if(container){
-    var id;
-    if(id = container.data("story-id")){
-      var form = new StoryForm(id, container);
-      form.takeControl();
-    }
+    id = container.data("story-id");
+    var form = new StoryForm(id, container);
+    form.takeControl();
   }
 });
