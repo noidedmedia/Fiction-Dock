@@ -145,7 +145,10 @@ StoryForm.prototype.addLoadingBar = function(){
 }
 $(function(){
   var container = $($("#story-form")[0]);
-  if(container){
+  console.log("Container is:");
+  console.log(container);
+  console.log(Object.keys(container));
+  if(Object.keys(container).length !== 0){
     id = container.data("story-id");
     var form = new StoryForm(id, container);
     form.takeControl();

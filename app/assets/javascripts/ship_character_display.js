@@ -1,6 +1,7 @@
 function ShipCharacterDisplay(ship, parent){
   this.ship = ship;
   this.parent = parent;
+  console.log("Made a new ShipCharacterDisplay:",this);
 }
 
 ShipCharacterDisplay.prototype.getBox = function(label){
@@ -31,10 +32,13 @@ ShipCharacterDisplay.prototype.removeButton = function(){
   return btn;
 }
 ShipCharacterDisplay.prototype.render = function(){
-  console.log("Rendering a ship.");
+  console.group();
+  console.debug("Rendering a ShipCharacterDisplay:", this);
   this.list.empty();
   var that = this;
   this.ship.characters.forEach(function(character){
+    console.debug("Rendering CharacterListItem for character:",
+      character);
     var itm = new CharacterListItem(character, this.ship, true);
     var disp = itm.getItem(true, function(){that.render()});
     this.list.append(disp);
@@ -43,13 +47,14 @@ ShipCharacterDisplay.prototype.render = function(){
         this.possibleCharactersToAdd(),
         true,
         function(){that.render()}));
+  console.groupEnd();
 }
 
 ShipCharacterDisplay.prototype.possibleCharactersToAdd = function(){
-  var possible = this.ship.story.characters.filter(function(character){
+  var storyCharacters = this.ship.story.characters;
+  var possible = storyCharacters.filter(function(character){
     return this.ship.characters.indexOf(character) == -1;
   }, this);
-  console.log("The ships that are possible are:");
-  console.log(possible);
+  console.debug("Found possible characters:", possible);
   return possible;
 }

@@ -3,7 +3,6 @@ function Character(obj){
     this[key] = obj[key];
   }
   if(this.id){
-    console.log("Registering character with id: " + this.id);
     Character.cache[this.id] = this;
   }
   this.franchise = Franchise.cache[this.franchise_id];
@@ -28,21 +27,25 @@ Character.getByJson = function(json){
 }
 
 Character.newCharacterButton = function(container, list, showfname, callback){
-  var btn = $("<button>").attr({class: "new-character-button"});
+  
+  var btn = $("<button>").attr({class: "new-character-button"}).append("Add a character");
   btn.click(function(){
     btn.replaceWith(Character._addList(container, list, showfname, callback));
   });
-  btn.append("Add a character");
   return btn;
 }
 
 Character._addList = function(container, list, showfname, callback){
+  console.groupCollapsed();
+  console.log("Generating a list of characters to add.");
+  console.log("Container:", container, "list:", list, "showfname:", showfname,
+      "callback", callback);
   var ul = $("<ul>");
-  console.log("list is");
-  console.log(list);
   list.forEach(function(character){
     var itm = new CharacterListItem(character, container, false);
+    console.log("Made new CharacterListItem:", itm);
     ul.append(itm.getItem(showfname, callback));
   });
+  console.groupEnd();
   return ul;
 }

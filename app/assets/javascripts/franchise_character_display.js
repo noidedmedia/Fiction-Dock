@@ -13,7 +13,6 @@ FranchiseCharacterDisplay.prototype.getBox = function(){
 
 FranchiseCharacterDisplay.prototype.render = function(){
   var that = this;
-  console.log(this);
   this.box.empty();
   this.box.append($("<p>").append(this.franchise.name));
   this.box.append(this.removeButton());
@@ -48,8 +47,6 @@ FranchiseCharacterDisplay.prototype.charactersNotInContainer = function(){
     return this.container.characters.indexOf(char) == -1;
   }, this);
 
-  console.log("Characters not in story:");
-  console.log(newChars);
   return newChars;
 };
 
@@ -57,7 +54,6 @@ FranchiseCharacterDisplay.prototype.removeButton = function(){
   var that = this;
   var btn = $("<button>");
   btn.click(function(){
-    console.log(that.container);
     that.container.removeFranchise(that.franchise);
     if(that.parent && that.parent.render){
       that.parent.render();

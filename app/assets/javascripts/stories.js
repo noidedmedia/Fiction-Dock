@@ -3,21 +3,24 @@
  * Construct with the JSON returned by the API
  */
 function Story(obj){
+  console.group();
+  console.debug("Creating new story with obj:", obj);
   for(var prop in obj){
     this[prop] = obj[prop];
   }
   if(this.id){
+    console.debug("This story has id:", this.id, "putting it in cache");
     Story.cache[this.id] = this;
-    console.log("Story.cache is");
-    console.log(Story.cache);
     this.baseURL = "/stories/" + this.id;
   }
   else{
     this.franchises = [];
     this.characters = [];
     this.ships = [];
-    console.log("Made new story with no id.");
+    console.debug("Story does not have id, creating it anew.");
   }
+  console.debug("At the end of story creation, it looks like:",this);
+  console.groupEnd();
 }
 
 Story.prototype.addFranchise = function(franchise){
@@ -51,18 +54,21 @@ Story.prototype.formSerialize = function(){
   return {story: toSubmit};
 }
 Story.prototype.removeFranchise = function(franchise){
+  console.group();
+  console.debug("Removing franchsie:",franchise,"from story:",this);
   this.franchises.splice(this.franchises.indexOf(franchise), 1);
   var toRemove = this.characters.filter(function(character){
     return character.franchise_id == franchise.id;
   });
-  console.log("Removing contained child characters of parent franchise.");
-  console.log(toRemove);
+  console.log("Removing contained child characters of parent franchise:",
+      toRemove);
   toRemove.forEach(function(character){
     this.characters.splice(this.characters.indexOf(character));
     this.ships.forEach(function(ship){
       ship.removeCharacter(character);
     });
   }, this);
+  console.groupEnd();
 }
 Story.prototype.addShip = function(ship){
   this.ships.push(ship);
@@ -77,9 +83,18 @@ Story.prototype.removeCharacter = function(character){
 };
 
 Story.prototype.addCharacter = function(character){
+  console.group()
+  console.log("Adding character:", character, "to story:", this);
   if(this.characters.indexOf(character) == -1){
+    console.log("Character not already in, adding...");
     this.characters.push(character);
   }
+  console.log("Characters array is:", this.characters,
+      "is that a real array?:",
+      this.characters.constructor == Array,
+      "and has length:",
+      this.characters.length);
+  console.groupEnd();
 };
 
 /*

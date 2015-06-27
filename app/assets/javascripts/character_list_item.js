@@ -1,5 +1,4 @@
 function CharacterListItem(character, container, remove){
-  console.log(container);
   this.character = character;
   this.container = container;
   this.remove = remove;

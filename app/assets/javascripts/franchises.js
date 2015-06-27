@@ -10,7 +10,9 @@ function Franchise(obj){
       var characters = obj.characters;
       this.characters = [];
       for(var character in characters){
-        this.characters.push(Character.getByJson(characters[character]));
+        var charac = (Character.getByJson(characters[character]));
+        charac.franchise = this;
+        this.characters.push(charac);
       }
     }
     else{

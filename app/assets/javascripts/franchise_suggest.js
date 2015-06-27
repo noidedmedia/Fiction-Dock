@@ -59,8 +59,7 @@ FranchiseSuggest.prototype.displayList = function(data){
       Franchise.byId(franc.id, function(fr){
         console.log("Got franchise with id:");
         console.log(fr);
-        that.container.addFranchise(fr);
-        
+        that.container.addFranchise(fr);       
         if(that.renderer){
           console.log("Rendering renderer:");
           console.log(that.renderer);
@@ -68,9 +67,6 @@ FranchiseSuggest.prototype.displayList = function(data){
         }
       });
     });
-
-    console.log("item is:");
-    console.log(item);
     this.list.append(item);
   }, this);
 };
