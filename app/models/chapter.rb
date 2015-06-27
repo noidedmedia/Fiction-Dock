@@ -31,10 +31,10 @@ class Chapter < ActiveRecord::Base
   validates :story, presence: true
   validates :chap_num, numericality: {greater_than: 0}
   before_validation :fix_chap_num
-  before_validation :sanitize_html
+  before_validation :sanitize_tags
 
-  def sanitize_html
-    self.body = ActionView::Helpers::SanitizeHelper.strip_tags(self.body)
+  def sanitize_tags
+    self.body = Sanitize.clean(self.body)
   end
 
   def next_chapter

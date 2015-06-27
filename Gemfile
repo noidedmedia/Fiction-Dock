@@ -21,6 +21,7 @@ gem 'rails_12factor', group: :production
 gem 'rails', '4.2.1'
 gem 'pg'
 
+gem 'sanitize'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
