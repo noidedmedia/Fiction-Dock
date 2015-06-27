@@ -34,6 +34,17 @@ function mediumMarkdownEditor() {
   });
 }
 
+// Only run when one of the editors is open.
+if ( document.querySelector('div[contenteditable="true"]') || document.querySelector('#rich-text') ) {
+  // Check for the Ctrl/⌘ key and "S" (equivalent to keyCode 83) being pressed, prevent save dialog.
+  $(document).on('keydown', function(e) {
+    if ((e.metaKey || (e.ctrlKey && !e.altKey)) && e.keyCode === 83) {
+      e.preventDefault();
+      return false;
+    }
+  });
+}
+
 function preventUnloadIfChanged() {
   $("#rich-text").bind('input', function() {
     // Unbind it so it stops listening, we only need to detect one input to
