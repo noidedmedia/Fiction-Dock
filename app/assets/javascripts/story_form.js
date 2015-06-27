@@ -1,229 +1,156 @@
-/* 
- * THIS FILE CONTIANS TECHNICAL DEBT
- *
- * IT IS A HORRIBLE GOD-OBJECT I FEEL BAD FOR WRITING
- *
- * LOOK AT THE COMMIT HISTORY, IT USED TO BE __WORSE__!
- *
- * I've tried to comment it as best I can. Still, monsters lurk within.
- *
- * Ye have been warned. 
- */
-function StoryForm(){
-  this.container = $("#story-form");
-  this.storyId = parseInt(this.container.data("story-id"));
-  if(isNaN(this.storyId)){
-    this.storyId = undefined;
-  }
+function StoryForm(story_id, container){
+  this.story_id = story_id;
+  this.container = container;
 }
 
-StoryForm.prototype.isNew = function(){
-  return (this.storyId == undefined);
-}
-
-StoryForm.prototype.renderCallback = function(){
+StoryForm.prototype.takeControl = function(){
   var that = this;
-  return function(){
-    console.log("Rendering in callback");
-    that.render();
-  }
-}
-/*
- * The setup function handles one-time setup.
- * These are the things that we don't render on each pass.
- */
-StoryForm.prototype.setup = function(){
-  if(this._hasSetUp){
-    throw "You can't set up twice!";
-  }
-  /*
-   * this is a helper object, which holds jQuery objects representing the
-   * elements of the form. It makes adding errors much, much easier.
-   */
-  this.form = {};
-  
-  this.form.name = $("#story-name-field");
-  this.form.description = $("#story-description-field");
-  this.form.blurb = $("#story-blurb-field");
-  var that = this;
-  /*
-   * Here, we add a franchise-suggestor
-   *
-   * That's in the franchises.js file, so look there for documentation.
-   */
-  var suggestDiv = $("<div>").attr({
-    class: "franchise-suggestor-container"
-  });
-  suggestDiv.append($("<div>").attr({
-    class: "franchise-suggestor-label"
-  }).append("Add a Franchise:"));
-  // Add a franchise suggestor that will add a franchise on selection
-  suggestDiv.append(Franchise.suggestDisplay(function(fr){
-    that.story.addFranchise(fr);
-    that.render();
-  }));
-  this.container.append(suggestDiv);
-  this.form.franchises = $("<ul>").attr({
-    id: "story-franchise-container"
-  });
-  this.container.append(this.form.franchises);
-  this.form.characters = $("<ul>").attr({
-    id: "story-character-container"
-  });
-  this.container.append(this.form.characters);
-  this.submitButton = $("<input>").attr({
-    type: "submit",
-    value: "Submit"
-  });
-  this.submitButton.click(function(e){
-    e.preventDefault();
-    that.submitForm();
-  });
-  this.shipForm = new ShipForm(this.story);
-  this.shipForm.setup(function(shipContainer){
-    that.container.append(shipContainer);
-    that.container.append(Ship.newShipButton(that.story, function(){
-      that.render();
-    }));
-    that._hasSetUp = true;
-    that.container.append(that.submitButton);
-    that.render();
-  });
-}
-StoryForm.prototype.submitForm = function(){
-  console.log("Submitting form!");
-  console.log(this);
-  var toSubmit = {}
-  toSubmit.name = this.form.name.val();
-  toSubmit.description = this.form.description.val();
-  toSubmit.blurb = this.form.blurb.val();
-  toSubmit.language = $("#story-language-select").val();
-  toSubmit.license = $("#story-license-select").val();
-  toSubmit.franchise_ids = [];
-  for(var f in this.story.franchises){
-    toSubmit.franchise_ids.push(this.story.franchises[f].id);
-  }
-  toSubmit.character_ids = [];
-  for(var c in this.story.characters){
-    toSubmit.character_ids.push(this.story.characters[c].id);
-  }
-  toSubmit.ship_attrs = [];
-  for(var s in this.story.ships){
-    var characters = $.map(this.story.ships[s].characters, function(n, i){
-      return n.id;
-    });
-    toSubmit.ship_attrs.push({characters: characters});
-  }
-  console.log("Trying to submit");
-  console.log(toSubmit);
-  if(this.isNew()){
-    var url = "/stories/";
-    var type = "post";
+  if(this.story_id){
+    this.addLoadingBar();
+    console.log(this);
+    Story.byId(this.story_id, function(story){
+      that._loadingBar.attr({value: 10});
+      that.story = story;
+      story.fillAll(function(){
+        that.finishedControl();
+      }, function(progress){
+        console.log("Form progressing to" + progress);
+        that._loadingBar.attr({value: progress*100});
+      });
+    })
   }
   else{
-    var url = "/stories/" + this.storyId;
-    var type = "put";
+    this.story = new Story({});
+    that.finishedControl();
   }
+}
+
+StoryForm.prototype.finishedControl = function(){
+  if(this._loadingBar){
+    this._loadingBar.remove();
+  }
+  console.log("Control taken!");
+  console.log(this);
+  this.franchiseContainer = $("<div>").attr({
+    id: "javascript-form-elements"
+  });
+  this.formContainer = $("#javascript-container");
+  this.shipContainer = $("<div>").attr({id: "javascript-ship-list"});
+  this.formContainer.append(this.franchiseContainer);
+  this.formContainer.append(this.shipContainer);
+  this.suggestor = new FranchiseSuggest(this.story, this);
+  this.render();
+  this.hijackSubmit();
+}
+
+StoryForm.prototype.hijackSubmit = function(){
   var that = this;
-  var success = function(data){
-    console.log("Success!");
-    window.location.href = "/stories/" + data.id;
-  };
-  var error = function(data){
-    console.warn("Error in AJAX request");
-    console.warn(res);
-    var res = data.responseJSON;
-    console.warn(res);
-    that.displayErrors(res);
-  };
-  $.ajax({
-    url: url,
-    type: type,
-    dataType: "json",
-    contentType: 'application/json',
-    processData: false,
-    success: success,
-    error: error,
-    data: JSON.stringify({story: toSubmit})
+  var toHijack = $("#story-form-submit");
+  toHijack.click(function(event){
+    event.preventDefault();
+    that.submit();
   });
-  console.log("Story theoretically AJAXes successfully");
 }
-StoryForm.prototype._makeError = function(err){
-  var container = $("<ul>").attr({
-    class: "errors-list"
-  });
-  for(e in err){
-    container.append($("<li>").append(err[e]));
+StoryForm.prototype.getErrorsObject = function(){
+  var obj = {}
+  obj.name = $("#story-name-field")
+    obj.language = $("#story-language-select")
+    obj.license = $("story-license-select")
+    obj.blurb = $("#story-blurb-field")
+    obj.description = $("#story-description-field")
+    return obj;
+}
+StoryForm.prototype.submit = function(){
+  var that = this;
+  var errors = this.getErrorsObject();
+  for(var key in errors){
+    this.story[key] = errors[key].val();
   }
-  return container;
+  var serialized = this.story.formSerialize();
+  var method = this.story_id ? "PUT" : "POST";
+  var url = "/stories/" + this.story_id;
+  $.ajax(url, {
+    dataType: "json",
+    data: JSON.stringify(serialized),
+    contentType: "application/json; encoding=utf-8",
+    method: method,
+    success: function(response){
+      console.log("Successful submit, redirecting...");
+      window.location.href = "/stories/" + response.id;
+    },
+    error: function(error){
+             console.warn("Errors in story submission!");
+             console.log(error);
+             that.displayErrors(JSON.parse(error.responseText));
+           }});
 }
-StoryForm.prototype.displayErrors = function(err){
-  // Clear our all our old errors first
-  $(".errors-list").empty();
-  for(var prop in err){
-    if(this.form[prop]){
-      this.form[prop].before(this._makeError(err[prop]));
+
+StoryForm.prototype.errorBox = function(msg){
+  return $("<span>").attr({class: "error"}).append(msg);
+}
+StoryForm.prototype.displayErrors = function(errors){
+  var form = this.getErrorsObject();
+  for(var key in errors){
+    if(form[key] && errors[key]){
+      form[key].before(this.errorBox(key + ": " + errors[key]));
     }
+  }
+  if(errors.franchises){
+    this.franchiseContainer.before(this.errorBox("Franchises: " + errors.franchises));
+  }
+  if(errors.characters){
+    this.franchiseContainer.before(this.errorBox("Characters: " + errors.characters));
+  }
+  if(errors.ships){
+    this.shipContainer.before(this.errorBox("Ships: " + errors.ships));
   }
 }
 StoryForm.prototype.render = function(){
-  this._renderFranchises();
-  this._renderCharacters();
-  this.shipForm.render();
-}
-
-StoryForm.prototype._renderCharacters = function(){
   var that = this;
-  this.story.updateCharacters();
-  for(var c in this.story.potentialCharacters){
-    var ch = this.story.potentialCharacters[c];
-    var box;
-    box = ch.formDisplay((this.story.potentialCharacterIndexes.indexOf(c) > -1), this.story, function(){
-      console.log("Rendering...");
-      that.render();
-    });
-    this.form.franchises.find(".franchise-" + ch.franchise_id).append(box);
-  }
+  console.log(this.story.franchises);
+  this.franchiseContainer.empty();
+  this.franchiseContainer.append($("<p>").append("Franchises"));
+  this.story.franchises.forEach(function(franchise){
+    console.log(franchise);
+    var d = new FranchiseCharacterDisplay(franchise, this.story, this);
+    this.franchiseContainer.append(d.getBox());
+    d.render();
+  },this);
+  this.franchiseContainer.append(this.suggestor.toggleButton());
+  this.renderShips();
 }
 
-StoryForm.prototype._addCharacterCallback = function(ch){
+StoryForm.prototype.renderShips = function(){
+  this.shipContainer.empty();
   var that = this;
-  return function(){
-    that.story.addCharacter(ch);
-    that.render();
-  }
-}
+  this.story.ships.forEach(function(ship, index){
+    console.log("Rending ship:");
+    console.log(ship);
+    var s = new ShipCharacterDisplay(ship, this);
+    var label = "Ship #" + (index + 1);
+    this.shipContainer.append(s.getBox(label));
+    s.render();
+  }, this);
+  this.shipContainer.append(Ship.addShipButton(this.story,
+        function(){that.render()}));
 
-StoryForm.prototype._renderFranchises = function(){
-  console.log("Rendering franchises");
-  this.form.franchises.empty();
-  for(var f in this.story.franchises){
-    var franchise = this.story.franchises[f];
-    var box = franchise.listItemWithDelete(this.story, this.renderCallback());
-    this.form.franchises.append(box);
-  }
 }
-StoryForm.prototype.takeControl = function(){
-  if(this.isNew()){
-    console.log("New story detected, taking control");
-    this.story = new Story({});
-    this.setup();
-  }
-  else{
-    var that = this;
-    console.log("Existing story detected, fetching data...");
-    Story.byId(this.storyId, function(story){
-      console.log("In setup, got story:");
-      console.log(story);
-      console.log("Taking control.");
-      that.story = story;
-      that.setup();
-    });
-  }
+StoryForm.prototype.addLoadingBar = function(){
+  console.log("Adding loading bar");
+  this._loadingBar = $("<progress>").attr({
+    value: 0,
+    max: 100
+  });
+  this.container.append(this._loadingBar);
 }
 $(function(){
-  if(document.getElementById("story-form")){
-    var form = new StoryForm();
+  var container = $($("#story-form")[0]);
+  console.log("Container is:");
+  console.log(container);
+  console.log(Object.keys(container));
+  if(Object.keys(container).length !== 0){
+    id = container.data("story-id");
+    var form = new StoryForm(id, container);
     form.takeControl();
   }
 });

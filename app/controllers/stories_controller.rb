@@ -6,8 +6,22 @@ class StoriesController < ApplicationController
   ##
   # Use pundit for authorization
   include Pundit
-  before_filter :authenticate_user!, except: [:show, :index, :search]
+  before_filter :authenticate_user!, except: [:show, :index, :search, :franchises, :characters]
 
+
+  def ships
+    @story = Story.find(params[:id])
+    @ships = @story.ships
+  end
+  def characters
+    @story = Story.find(params[:id])
+    @characters = @story.characters
+  end
+
+  def franchises
+    @story = Story.find(params[:id])
+    @franchises = @story.franchises
+  end
   def publish
     @story = Story.find(params[:id])
     authorize @story

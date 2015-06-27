@@ -1,60 +1,51 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-//
 function Character(obj){
-  for(var key in obj){
+  for(var key in obj) {
     this[key] = obj[key];
   }
+  if(this.id){
+    Character.cache[this.id] = this;
+  }
+  this.franchise = Franchise.cache[this.franchise_id];
 }
 /*
- * Returns a list item for display, with proper callbacks
- *
- * When checked, it will use `removeCharacter` on `c` to remove
- * a character.
- *
- * When checked=false, it will use `addCharacter` on `c` to add a
- * character.
- *
- * The callback `done` is run after either callback has finished.
+ * A cache object
+ * Keys are the character id
+ * Values are the character object
  */
-Character.prototype.formDisplay = function(checked, c, done){
-  var container = $("<li>");
-  var toggle = $("<div>");
-  if(checked == true){
-    container.attr({
-      class: "character-checked"
-    });
-    toggle.attr({
-      class: "character-list-action"
-    }).append("Remove");
-    toggle.click(this.removalCallback(c, done));
-  }
-  else{
-    container.attr({
-      class: "character-unchecked"
-    });
-    toggle.attr({
-      class: "character-list-action character-unchecked"
-    }).append("Add");
-    toggle.click(this.additionCallback(c, done));
-  }
-  container.append(toggle);
-  container.append($("<div>").attr({
-    class: "character-list-name"
-  }).append(this.name));
-  return container;
-}
-Character.prototype.removalCallback = function(c, done){
-  var that = this;
-  return function(){
-    c.removeCharacter(that);
-    done();
+Character.cache = {}
+Character.getByJson = function(json){
+  if(json.id){
+    var c;
+    if(c = Character.cache[json.id]){
+      console.log("Character with id " + json.id + "in cache, returning it");
+      return c;
+    }
+    else{
+      return new Character(json);
+    }
   }
 }
-Character.prototype.additionCallback = function(c, done){
-  var that = this;
-  return function(){
-    c.addCharacter(that);
-    done();
-  }
+
+Character.newCharacterButton = function(container, list, showfname, callback){
+  
+  var btn = $("<button>").attr({class: "new-character-button"}).append("Add a character");
+  btn.click(function(){
+    btn.replaceWith(Character._addList(container, list, showfname, callback));
+  });
+  return btn;
+}
+
+Character._addList = function(container, list, showfname, callback){
+  console.groupCollapsed();
+  console.log("Generating a list of characters to add.");
+  console.log("Container:", container, "list:", list, "showfname:", showfname,
+      "callback", callback);
+  var ul = $("<ul>");
+  list.forEach(function(character){
+    var itm = new CharacterListItem(character, container, false);
+    console.log("Made new CharacterListItem:", itm);
+    ul.append(itm.getItem(showfname, callback));
+  });
+  console.groupEnd();
+  return ul;
 }

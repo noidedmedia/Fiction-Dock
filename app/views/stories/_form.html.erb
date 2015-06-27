@@ -1,24 +1,28 @@
 <div id="story-form" class="fd-form" data-story-id="<%= @story.id %>">
   <%= form_for @story do |f| %>
     
-    <%= f.label :name %>
-    <%= f.text_field :name, id: "story-name-field" %>
+    <%= f.label :name, t(".story_name") %>
+    <%= f.text_field :name, id: "story-name-field", placeholder: t(".story_name") %>
     
     <div class="select-container">
-      <%= f.label :language %>
+      <%= f.label :language, t(".language") %>
       <%= f.select :language, options_for_select(Story.language_attributes_for_select, @story.language), {}, { class: "custom-select", id: "story-language-select" } %>
     </div>
 
     <div class="select-container">
-      <%= f.label :license %>
+      <%= f.label :license, t(".license") %>
       <%= f.select :license, options_for_select(Story.license_attributes_for_select, @story.license), {}, { class: "custom-select", id: "story-license-select" } %>
     </div>
     
-    <%= f.label :blurb %>
-    <%= f.text_area :blurb, id: "story-blurb-field" %>
+    <%= f.label :blurb, t(".blurb") %>
+    <%= f.text_field :blurb, id: "story-blurb-field", placeholder: t(".write_a_very_short_description_of_the_story") %>
 
-    <%= f.label :description %>
-    <%= f.text_area :description, id: "story-description-field" %>
+    <%= f.label :description, t(".description") %>
+    <%= f.text_area :description, id: "story-description-field", placeholder: t(".write_a_description_of_the_story") %>
+    <div id="javascript-container">
+    </div>
+    <%# Submit button string will change depending on the action name (edit, new, etc.)%>
+    <%= f.submit t(".submit.#{action_name}"), id: "story-form-submit" %>
 
   <% end %> 
 </div>
