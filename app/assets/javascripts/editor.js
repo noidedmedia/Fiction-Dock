@@ -80,6 +80,14 @@ function throttle(fn, delay) {
   };
 }
 
+// Paste text as plaintext for Markdown Editor.
+if ( document.querySelector('div[contenteditable="true"]') ) {
+  document.querySelector('div[contenteditable="true"]').addEventListener("paste", function(e) {
+    e.preventDefault();
+    var text = e.clipboardData.getData("text/plain");
+    document.execCommand("insertHTML", false, text);
+  });
+}
 
 function htmlToMarkdown(elem) {
   var output = "";
