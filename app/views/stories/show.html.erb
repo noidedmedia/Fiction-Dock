@@ -1,58 +1,66 @@
 <%- title @story.name %>
 
-<div class="story-directory fd-text-container story-text">
+<div class="story-directory">
 
-  <h2 class="story-title"><%= @story.name %></h2>
-  <div class="story-information">
-    <p><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %> · <%= t(".published_on", date: @story.created_at.strftime("%B %e, %Y") ) %>
-    <p><%= t("languages.#{@story.language}") %> · <%= t("licenses.#{@story.license}") %>
+  <div class="story-extra-information">
+    
+    <ul>
+
+      <li><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %></li>
+      <li><%= t(".published_on", date: @story.created_at.strftime("%B %e, %Y") ) %></li>
+      <li><%= t("languages.#{@story.language}") %> · <%= t("licenses.#{@story.license}") %></li>
+
+      <ul>
+        <li class="list-item-header">Franchises</li>
+
+        <% @story.franchises.each do |franchise| %>
+          <li><%= link_to franchise.name, franchise_path(franchise) %></li>
+        <% end %>
+      </ul>
+
+      <ul>
+        <li class="list-item-header">Characters</li>
+        <% @story.characters.each do |character| %>
+          <li><%= link_to character.name, franchise_character_path(character.franchise, character) %></li>
+        <% end %>
+      </ul>
+    </ul>
   </div>
 
   <div class="story-information">
-    <ul>
-      <% @story.franchises.each do |franchise| %>
-        <li><%= link_to franchise.name, franchise_path(franchise) %></li>
+    <h2 class="story-title"><%= @story.name %></h2>
+
+    <p class="story-description"><%= @story.description %></p>
+
+    <ul id="story-options">
+      <% if current_user == @story.author %>
+        <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
+
+        <% if @story.published %>
+          <li>
+          <%= button_to t(".unpublish"), unpublish_story_path(@story), method: :delete %>
+          </li>
+        <% elsif @story.publishable? %>
+          <li>
+          <%= button_to t(".publish"), publish_story_path(@story), method: :post %>
+          </li>
+        <% else %>
+          <li>
+            <%= button_to t(".publish"), publish_story_path(@story), method: :post, disabled: true, title: t(".you_can't_publish_this_story_without_first_publishing_a_chapter") %>
+          </li>
+        <% end %>
       <% end %>
+
+      <li><%= link_to t(".share"), "#" %></li>
+      <li><%= link_to t(".report"), "#" %></li>
     </ul>
 
-    <ul>
-      <% @story.characters.each do |character| %>
-        <li><%= link_to character.name, franchise_character_path(character.franchise, character) %></li>
+    <ol class="chapter-list">
+      <%= render partial: 'chapter_stub', collection: policy_scope(@story.chapters), as: :chapter %>
+
+      <% if current_user == @story.author %>
+        <li class="add-new-chapter"><%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %></li>
       <% end %>
-    </ul>
+    </ol>
   </div>
-
-  <p class="story-description"><%= @story.description %></p>
-
-  <ul id="story-options" class="fd-page-options">
-    <% if current_user == @story.author %>
-      <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
-
-      <% if @story.published %>
-        <li>
-        <%= button_to t(".unpublish"), unpublish_story_path(@story), method: :delete %>
-        </li>
-      <% elsif @story.publishable? %>
-        <li>
-        <%= button_to t(".publish"), publish_story_path(@story), method: :post %>
-        </li>
-      <% else %>
-        <li>
-          <%= button_to t(".publish"), publish_story_path(@story), method: :post, disabled: true, title: t(".you_can't_publish_this_story_without_first_publishing_a_chapter") %>
-        </li>
-      <% end %>
-    <% end %>
-
-    <li><%= link_to t(".share"), "#" %></li>
-    <li><%= link_to t(".report"), "#" %></li>
-  </ul>
-
-  <ol class="chapter-list">
-    <%= render partial: 'chapter_stub', collection: policy_scope(@story.chapters), as: :chapter %>
-
-    <% if current_user == @story.author %>
-      <li class="add-new-chapter"><%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %></li>
-    <% end %>
-  </ol>
-
 </div>
