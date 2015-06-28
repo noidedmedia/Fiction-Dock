@@ -73,6 +73,12 @@
           <ul>
             <li><%= link_to t(".profile"), user_path(current_user) %></li>
 
+            <li><%= link_to t(".settings"), "#" %></li>
+            
+            <% if current_user.level === "admin" %>
+              <li><%= link_to t(".admin"), franchise_creation_requests_path %></li>
+            <% end %>
+
             <li><%= button_to t(".sign_out"), destroy_user_session_path, method: :delete %></li>
           </ul>
         </div>
