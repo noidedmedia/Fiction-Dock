@@ -9,4 +9,8 @@ class StaticStuffController < ApplicationController
     @franchise_count = Franchise.count
     @character_count = Character.count
   end
+
+  def rules
+    
+  end
 end

@@ -44,3 +44,24 @@
     padding-top: 2px;
   }
 }
+
+#rules{
+  padding-top: 10vh;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  h1, h2{
+    width: 100%;
+    border-bottom: 1px solid black;
+  }
+  h2{
+    font-size: 1.5rem;
+  }
+  h1{
+    font-size: 2.0rem;
+  }
+  font-size: 14pt;
+  ol{
+    padding-left: 5%;
+    padding-top: 1.2rem;
+  }
+}
