@@ -55,8 +55,13 @@
 
         <div id="create-tooltip" class="tooltip" data-showon="#create-button">
           <ul>
-            <li><%= link_to t(".create_new_story"), new_story_path %>
-            <li><%= link_to t(".create_new_franchise"), new_franchise_path %>
+            <li><%= link_to t(".create_new_story"), new_story_path %>       
+            
+            <% if current_user.level === "admin" %>
+              <li><%= link_to t(".create_new_franchise"), new_franchise_path %>
+            <% else %>
+              <li><%= link_to t(".request_new_franchise"), new_franchise_creation_request_path %>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -67,6 +72,12 @@
         <div id="user-flyout" class="flyout">
           <ul>
             <li><%= link_to t(".profile"), user_path(current_user) %></li>
+
+            <li><%= link_to t(".settings"), "#" %></li>
+            
+            <% if current_user.level === "admin" %>
+              <li><%= link_to t(".admin"), franchise_creation_requests_path %></li>
+            <% end %>
 
             <li><%= button_to t(".sign_out"), destroy_user_session_path, method: :delete %></li>
           </ul>
