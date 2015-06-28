@@ -2,11 +2,11 @@
 <li class="fd-list-item">
   <p class="fd-list-item-title"><%= request.name %></p>
 
-  <p class="fd-list-item-subtitle request-queue-subtitle"><%= link_to t(".requested_by", username: request.user.name), request.user %>
+  <p class="fd-list-item-subtitle request-queue-subtitle"><%= t(".requested_by_html", username: (link_to request.user.name, request.user)) %>
 
     <% if policy(request).accept? %>
-      <span><%= link_to t(".approve"), accept_franchise_creation_request_path(request), method: :post %></span>
-      <span><%= link_to t(".reject"), franchise_creation_request_path(request), method: :delete %></span>
+      <span class="approve"><%= link_to t(".approve"), accept_franchise_creation_request_path(request), method: :post %></span>
+      <span class="reject"><%= link_to t(".reject"), franchise_creation_request_path(request), method: :delete %></span>
     <% end %>
   </p>
 

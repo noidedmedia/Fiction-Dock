@@ -7,6 +7,14 @@
     float: right;
     padding-left: 20px;
 
+    &.approve a {
+      color: $color-success;
+    }
+
+    &.reject a {
+      color: $color-danger;
+    }
+
     a {
       text-decoration: none;
       opacity: 0.7;

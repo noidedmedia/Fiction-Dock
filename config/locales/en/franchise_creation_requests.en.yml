@@ -18,7 +18,7 @@ en:
         new: "Submit request"
         edit: "Save changes"
     franchise_creation_request:
-      requested_by: "Requested by %{username}"
+      requested_by_html: "Requested by %{username}"
       description: "Description:"
       reason: "Reason:"
       approve: "Approve"
