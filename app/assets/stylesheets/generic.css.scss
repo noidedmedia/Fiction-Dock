@@ -38,10 +38,6 @@
   .fd-list-item {
     padding: 15px 0;
     display: block;
-    
-    span {
-      font-weight: 600;
-    }
 
     &:not(:first-of-type) {
       border-top: 1px solid rgba(#333,0.2);
@@ -66,6 +62,10 @@
     .fd-list-item-subtitle {
       font-size: 1.5em;
       padding-top: 2px;
+      
+      span {
+        font-weight: 600;
+      }
     }
   }
 
