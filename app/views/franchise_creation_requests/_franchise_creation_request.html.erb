@@ -1,18 +1,15 @@
 <li>
-<h3> <%= req.name %> </h3>
-<div>
-  <%= req.description %>
-</div>
-<div>
-  <%= req.reason %>
-</div>
-<div>
-  <%= link_to req.user.name, req.user %>
-</div>
-<% if policy(req).accept? %>
-  <%= link_to "Accept Request", accept_franchise_creation_request_path(req),
-    method: :post %>
-  <%= link_to "Remove Request", franchise_creation_request_path(req),
-    method: :delete %>
-<% end %>
+  <h3><%= request.name %></h3>
+  <div><%= request.description %></div>
+  
+  <div><%= request.reason %></div>
+  
+  <div><%= link_to request.user.name, request.user %></div>
+
+  <% if policy(request).accept? %>
+    <%= link_to t(".approve_request"), accept_franchise_creation_request_path(request),
+      method: :post %>
+    <%= link_to t(".reject_request"), franchise_creation_request_path(request),
+      method: :delete %>
+  <% end %>
 </li>

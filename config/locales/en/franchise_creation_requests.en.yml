@@ -2,12 +2,11 @@
 
 en:
   franchise_creation_requests:
-    show:
-      edit: "Edit"
+    index:
+      franchise_creation_requests: "Franchise creation requests"
+      no_franchise_requests_are_in_the_queue_right_now: "No franchise requests are in the queue right now."
     new:
       request_a_new_franchise_page_title: "Request a new franchise"
-    edit:
-      edit_request_new_franchise_page_title: "Editing your franchise request"
     form:
       franchise_title: "Franchise title"
       description: "Description"
@@ -17,3 +16,6 @@ en:
       submit: 
         new: "Submit request"
         edit: "Save changes"
+    franchise_creation_request:
+      approve_request: "Approve Request"
+      reject_request: "Reject Request"

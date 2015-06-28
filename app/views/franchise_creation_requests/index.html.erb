@@ -1,9 +1,11 @@
+<%- title t(".franchise_creation_requests") %>
+
 <ul>
   <% unless @requests.blank? %>
     <%= render partial: "franchise_creation_request", collection: @requests,
-      as: :req %>
+      as: :request %>
   <% else %> 
-    <h5>No Requests Found</h5>
+    <p><%= t(".no_franchise_requests_are_in_the_queue_right_now") %></p>
   <% end %> 
 </ul>
 
