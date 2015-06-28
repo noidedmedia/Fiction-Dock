@@ -7,7 +7,7 @@ class CharacterPolicy < ApplicationPolicy
   end
 
   def create?
-    @user
+    moderated?
   end
 
   def update?
