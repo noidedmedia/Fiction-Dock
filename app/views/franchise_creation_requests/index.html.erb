@@ -1,0 +1,9 @@
+<ul>
+  <% unless @requests.blank? %>
+    <%= render partial: "franchise_creation_request", collection: @requests,
+      as: :req %>
+  <% else %> 
+    <h5>No Requests Found</h5>
+  <% end %> 
+</ul>
+
