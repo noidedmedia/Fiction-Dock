@@ -35,4 +35,5 @@ class Character < ActiveRecord::Base
   validates :franchise, presence: true
   validates :name, presence: true, length: {in: (1..40)}, uniqueness: {case_sensative: false,
                                                 scope: :franchise}
+  validates :description, length: { maximum: 1500 }
 end
