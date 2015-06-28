@@ -142,6 +142,20 @@
   padding-top: 10px;
 }
 
+.fd-page-backlink {
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding-bottom: 5px;
+
+  a {
+    text-decoration: none;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
 .fd-form {
   margin: auto;
   width: 100%;
