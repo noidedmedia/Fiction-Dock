@@ -10,8 +10,12 @@ For example, the *Star Wars* expanded universe material is in the same franchise
 For example, the series of *Batman* films directed by Christopher Nolan are a distinct Franchise from the *Arkham* games, which are in turn distinct from the series of comic books published by DC.
 
 
-Now, you're writing a story, and wish to add Franchises.
-In order to do that, you know probably know the qualifications for doing so:
+If you want to add a Franchise to your story, remember: the franchise must be present in a *significent way*. 
+We define *significent* as follows:
 
-1. The franchise must appear in the story in some significent way. 
-The characters stepping through a wardrobe and into Narnia, then immediately back out, is not enough to qualify adding the *Chronicles of Narnia* franchise to the story.
+1. The Franchsie must actually appear.
+Randomly tagging stores with unrelated franchises is a good way to get banned.
+2. The Franchise must play some kind of role that is central to the plot.
+Throwaway gags, such as the characters walking through a wardrobe into Narnia and immediately back out, do not count.
+3. The Franchise must be recognizable. 
+If a character finds a normal crowbar, but it's actually Gordon Freeman's crowbar, you still cannot add the *Half-Life* Franchise unless the fact that the crowbar belongs to Gordon plays a significent role in the story.
