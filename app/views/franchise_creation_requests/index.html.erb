@@ -1,11 +1,14 @@
 <%- title t(".franchise_creation_requests") %>
 
-<ul>
+<ul class="fd-list fd-browse-list">
+
+  <div class="fd-list-header"><%= t(".request_queue") %></div>
+  
   <% unless @requests.blank? %>
     <%= render partial: "franchise_creation_request", collection: @requests,
       as: :request %>
-  <% else %> 
+  <% else %>
     <p><%= t(".no_franchise_requests_are_in_the_queue_right_now") %></p>
-  <% end %> 
+  <% end %>
 </ul>
 

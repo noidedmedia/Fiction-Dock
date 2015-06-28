@@ -1,15 +1,16 @@
-<li>
-  <h3><%= request.name %></h3>
-  <div><%= request.description %></div>
-  
-  <div><%= request.reason %></div>
-  
-  <div><%= link_to request.user.name, request.user %></div>
 
-  <% if policy(request).accept? %>
-    <%= link_to t(".approve_request"), accept_franchise_creation_request_path(request),
-      method: :post %>
-    <%= link_to t(".reject_request"), franchise_creation_request_path(request),
-      method: :delete %>
-  <% end %>
+<li class="fd-list-item">
+  <p class="fd-list-item-title"><%= request.name %></p>
+
+  <p class="fd-list-item-subtitle request-queue-subtitle"><%= link_to t(".requested_by", username: request.user.name), request.user %>
+
+    <% if policy(request).accept? %>
+      <span><%= link_to t(".approve"), accept_franchise_creation_request_path(request), method: :post %></span>
+      <span><%= link_to t(".reject"), franchise_creation_request_path(request), method: :delete %></span>
+    <% end %>
+  </p>
+
+  <p class="fd-list-item-subtitle"><span><%= t(".description") %></span> <%= request.description %></p>
+  
+  <p class="fd-list-item-subtitle"><span><%= t(".reason") %></span> <%= request.reason %></p>
 </li>

@@ -4,6 +4,7 @@ en:
   franchise_creation_requests:
     index:
       franchise_creation_requests: "Franchise creation requests"
+      request_queue: "Request queue"
       no_franchise_requests_are_in_the_queue_right_now: "No franchise requests are in the queue right now."
     new:
       request_a_new_franchise_page_title: "Request a new franchise"
@@ -17,5 +18,8 @@ en:
         new: "Submit request"
         edit: "Save changes"
     franchise_creation_request:
-      approve_request: "Approve Request"
-      reject_request: "Reject Request"
+      requested_by: "Requested by %{username}"
+      description: "Description:"
+      reason: "Reason:"
+      approve: "Approve"
+      reject: "Reject"
