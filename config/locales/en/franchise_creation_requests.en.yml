@@ -1,0 +1,19 @@
+# Franchises strings.
+
+en:
+  franchise_creation_requests:
+    show:
+      edit: "Edit"
+    new:
+      request_a_new_franchise_page_title: "Request a new franchise"
+    edit:
+      edit_request_new_franchise_page_title: "Editing your franchise request"
+    form:
+      franchise_title: "Franchise title"
+      description: "Description"
+      write_a_short_description_of_the_franchise: "Write a short description of the franchise."
+      reason: "Reason"
+      your_reason_for_submitting_this_request: "Your reason for submitting this request."
+      submit: 
+        new: "Submit request"
+        edit: "Save changes"

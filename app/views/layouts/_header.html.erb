@@ -55,8 +55,13 @@
 
         <div id="create-tooltip" class="tooltip" data-showon="#create-button">
           <ul>
-            <li><%= link_to t(".create_new_story"), new_story_path %>
-            <li><%= link_to t(".create_new_franchise"), new_franchise_path %>
+            <li><%= link_to t(".create_new_story"), new_story_path %>       
+            
+            <% if current_user.level === "admin" %>
+              <li><%= link_to t(".create_new_franchise"), new_franchise_path %>
+            <% else %>
+              <li><%= link_to t(".request_new_franchise"), new_franchise_creation_request_path %>
+            <% end %>
           </ul>
         </div>
       </div>

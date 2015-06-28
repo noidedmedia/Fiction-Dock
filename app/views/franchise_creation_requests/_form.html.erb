@@ -1,9 +1,15 @@
-<%= form_for request do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  <%= f.label :reason %>
-  <%= f.text_area :reason %>
-  <%= f.submit %>
-<% end %>
+<div id="franchise-request-form" class="fd-form">
+  <%= form_for request do |f| %>
+    <%= f.label :name, t(".franchise_title") %>
+    <%= f.text_field :name, placeholder: t(".franchise_title"), autocomplete: "off" %>
+    
+    <%= f.label :description, t(".description") %>
+    <%= f.text_area :description, placeholder: t(".write_a_short_description_of_the_franchise")  %>
+    
+    <%= f.label :reason, t(".reason") %>
+    <%= f.text_area :reason, placeholder: t(".your_reason_for_submitting_this_request") %>
+    
+    <%# Submit button string will change depending on the action name (edit, new, etc.)%>
+    <%= f.submit t(".submit.#{action_name}") %>
+  <% end %>
+</div>
