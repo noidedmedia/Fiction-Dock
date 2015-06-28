@@ -1,0 +1,18 @@
+<li>
+<h3> <%= req.name %> </h3>
+<div>
+  <%= req.description %>
+</div>
+<div>
+  <%= req.reason %>
+</div>
+<div>
+  <%= link_to req.user.name, req.user %>
+</div>
+<% if policy(req).accept? %>
+  <%= link_to "Accept Request", accept_franchise_creation_request_path(req),
+    method: :post %>
+  <%= link_to "Remove Request", franchise_creation_request_path(req),
+    method: :delete %>
+<% end %>
+</li>

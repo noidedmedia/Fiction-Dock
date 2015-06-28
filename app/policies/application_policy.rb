@@ -1,7 +1,14 @@
 ##
 # Default policy
 class ApplicationPolicy
- 
+  class Scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+    attr_accessor :user
+    attr_accessor :scope
+  end
   ##
   # Default initializer
   def initialize(user, record)
@@ -42,5 +49,5 @@ class ApplicationPolicy
   # By default, disallow destroy
   def destroy?
     false
-  end 
+  end
 end

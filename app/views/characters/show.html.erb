@@ -2,7 +2,7 @@
 
 <div class="fd-text-container fd-padding-top">
 
-  <%= link_to @franchise.name, franchise_path(@franchise) %>
+  <p class="fd-page-backlink"><%= link_to @franchise.name, franchise_path(@franchise) %></p>
 
   <h2 class="fd-page-header"><%= @character.name %></h2>
   <div class="fd-page-subtitle"><%= markdown_parse @character.description %></div>
