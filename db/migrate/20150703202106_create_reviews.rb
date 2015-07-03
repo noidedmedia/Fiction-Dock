@@ -7,7 +7,7 @@ class CreateReviews < ActiveRecord::Migration
       t.string :name
       t.timestamps null: false
     end
-    add_foreign_key :stories, :reviews, on_delete: :cascade
-    add_foreign_key :users, :reviews, on_delete: :cascade
+    add_foreign_key :reviews, :stories, on_delete: :cascade
+    add_foreign_key :reviews, :users, on_delete: :cascade
   end
 end
