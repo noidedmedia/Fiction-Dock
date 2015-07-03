@@ -59,7 +59,7 @@ class StoriesController < ApplicationController
   
   def search
     @stories = Searcher.new(params, content: accepted_content)
-      .resolve(page: params[:page])
+      .resolve(page: params[:page] || 1)
   end
 
   ##
