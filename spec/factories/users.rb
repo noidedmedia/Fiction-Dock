@@ -18,6 +18,7 @@
 #  last_sign_in_ip        :inet
 #  level                  :integer          default(0), not null
 #  slug                   :string
+#  content_pref           :jsonb
 #
 
 FactoryGirl.define do

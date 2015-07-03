@@ -7,6 +7,10 @@ en:
     show:
       this_bookshelf_doesn't_have_any_stories_yet: "This bookshelf doesn't have any stories yet."
       edit: "Edit"
+    new:
+      create_a_bookshelf_page_title: "Create a new bookshelf"
+    edit: 
+      edit_bookshelf_page_title: "Editing %{bookshelf}"
     form:
       bookshelf_name: "Bookshelf name"
       write_a_short_description_of_this_bookshelf: "Write a short description of this bookshelf."
