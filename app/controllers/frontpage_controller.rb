@@ -3,8 +3,15 @@
 class FrontpageController < ApplicationController
   ##
   # Display the frontpage
+  #
+  # @recent_stories is a list of the 5 most recent published stories.
+  #
+  # @current_user_stories are displayed only if a user is logged in,
+  # and are all stories belonging to the current user, regardless of
+  # published state.
+  #
   def index
-    @stories = Story.for_content(accepted_content)
+    @recent_stories = Story.for_content(accepted_content)
       .for_display
       .limit(5)
 

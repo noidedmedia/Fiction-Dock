@@ -18,12 +18,12 @@
   <% end %>
 
   <%# If at least one published story exists on the site, the stories will be displayed under the "Recently published stories" header. %>
-  <% unless @stories.blank? %>
+  <% unless @recent_stories.blank? %>
     <div class="frontpage-column">
       <ul id="frontpage-recent-story-list" class="fd-list">
         <div class="frontpage-list-header"><%= t(".recently_published_stories") %></div>
 
-        <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
+        <%= render partial: 'stories/story_stub', collection: @recent_stories, as: :story %>
       </ul>
     </div>
   <% end %>
