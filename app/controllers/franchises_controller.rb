@@ -6,7 +6,6 @@ class FranchisesController < ApplicationController
   after_action :verify_authorized, except: [:complete, :index, :show, :stories]
   ##
   # Get all stories under this franchise
-  # TODO: paginate this
   def stories
     @franchise = Franchise.friendly.find(params[:id])
     @stories = Story.for_content(accepted_content)
@@ -50,7 +49,7 @@ class FranchisesController < ApplicationController
     @franchise = Franchise.friendly.find(params[:id])
     @stories = Story.for_content(accepted_content)
       .for_display
-      .joins(:franchise).where(franchise: {id: @franchise.id})
+      .joins(:franchises).where(franchises: {id: @franchise.id})
       .paginate(page: page, per_page: per_page)
   end
 

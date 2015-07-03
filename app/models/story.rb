@@ -64,9 +64,6 @@ class Story < ActiveRecord::Base
   # Join table of `Story` to `Franchise`
   # Allows us to place this story within several franchises
   has_many :story_franchises
-  ##
-  # All the franchises our story takes place in
-  # @return [ActiveRecord::Relation<Franchise>]
   has_many :franchises, through: :story_franchises
   has_many :story_ships, autosave: true
   has_many :ships, through: :story_ships

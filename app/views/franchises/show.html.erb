@@ -30,7 +30,7 @@
     <% end %>
   </ul>
 
-  <% if @franchise.stories.count > 0 %>
+  <% unless @stories.blank? %>
     <ul id="franchise-story-list" class="fd-list">
 
       <div class="fd-list-header"><%= t(".stories") %></div>
