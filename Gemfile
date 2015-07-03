@@ -65,10 +65,10 @@ gem 'unicorn'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-#
+
+
 group :development do
   gem 'better_errors'
-  gem 'pry-rails'
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'yard'
@@ -85,5 +85,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'pry-rails'
   gem 'shoulda-matchers'
 end
