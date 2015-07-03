@@ -7,19 +7,18 @@
   margin-top: 100px;
   position: relative;
   text-align: left;
-  width: 350px;
+  width: 100%;
+
+  > form {
+    width: 350px;
+    margin: auto;
+  }
 
   /* "Header" for the registration pages that acts as a page title. */
   .sign-in-header {
     padding: 10px 0;
     text-align: center;
     margin: 30px auto;
-
-    img {
-      width: 200px;
-      pointer-events: none;
-      margin: auto;
-    }
 
     h4 {
       font-weight: 200;

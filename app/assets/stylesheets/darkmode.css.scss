@@ -2,14 +2,9 @@
 
 #dark-mode-toggle {
   cursor: pointer;
-  position: relative;
-  margin-top: -4px;
-  padding-right: 15px;
-
-  > span {
-    position: absolute;
-    padding: 5px;
-  }
+  padding-right: 0;
+  padding-top: 8px;
+  display: inline-block;
 }
 
 // Only apply dark mode styles for "screen" devices, e.g. not print.
