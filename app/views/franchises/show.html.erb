@@ -35,7 +35,7 @@
 
       <div class="fd-list-header"><%= t(".stories") %></div>
 
-      <%= render partial: 'stories/story_stub',  collection: @franchise.stories.for_display, as: "story" %>
+      <%= render partial: 'stories/story_stub', collection: @stories, as: "story" %>
     </ul>
   <% else %>
     <p><%= t(".no_stories_have_been_written_for_this_franchise_yet") %></p>
