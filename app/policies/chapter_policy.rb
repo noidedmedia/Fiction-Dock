@@ -7,6 +7,7 @@ class ChapterPolicy < ApplicationPolicy
       @user = user
       @scope = scope
     end
+
     def resolve
       if (s = scope.first) and @user and Story.find(s.story_id).user_id == @user.id
         scope.all
@@ -15,12 +16,14 @@ class ChapterPolicy < ApplicationPolicy
       end
     end
   end
+
   ##
   # Set up with the user trying to edit, and the chapter
   def initialize(user, chapter)
     @user = user
     @chapter = chapter
   end
+
   ##
   # Make it a bit easier to get the chapter
   attr_accessor :chapter
@@ -51,7 +54,9 @@ class ChapterPolicy < ApplicationPolicy
   def update?
     owned?
   end
+
   protected
+  
   def owned?
     @chapter.story.user == @user
   end

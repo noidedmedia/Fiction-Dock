@@ -6,16 +6,18 @@
     <h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
   </div>
 
-  <% if user_signed_in? && !current_user.stories.blank? %>
+  <%# If the user is signed in, and the user has at least one story, a list of the user's stories is displayed under the "Your stories" header. %>
+  <% unless @current_user_stories.blank? %>
     <div class="frontpage-column">
       <ul id="frontpage-user-story-list" class="fd-list">
         <div class="frontpage-list-header"><%= t(".your_stories") %></div>
 
-        <%= render partial: 'stories/story_stub', collection: current_user.stories.reverse_order, as: :story %>
+        <%= render partial: 'stories/story_stub', collection: @current_user_stories, as: :story %>
       </ul>
     </div>
   <% end %>
 
+  <%# If at least one published story exists on the site, the stories will be displayed under the "Recently published stories" header. %>
   <% unless @stories.blank? %>
     <div class="frontpage-column">
       <ul id="frontpage-recent-story-list" class="fd-list">
