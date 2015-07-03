@@ -56,6 +56,8 @@ class Story < ActiveRecord::Base
 
   has_many :chapters
   has_many :story_characters
+  has_many :bookshelf_stories
+  has_many :bookshelves, through: :bookshelf_stories
   ##
   # All the characters in this story
   # @return [ActiveRecord::Relation<Character>]

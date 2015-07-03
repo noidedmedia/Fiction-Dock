@@ -1,0 +1,3 @@
+<h1> <%= @bookshelf.name %> </h1>
+<h3><%= link_to @user.name, @user %></h3>
+<%= render 'stories/story_stub', collection: @stories, as: 'story' %>

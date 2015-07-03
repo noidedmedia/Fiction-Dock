@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :bookshelf_story do
-    bookshelf nil
-story nil
+   bookshelf 
+  story 
   end
 
 end

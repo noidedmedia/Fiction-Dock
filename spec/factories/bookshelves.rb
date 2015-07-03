@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :bookshelf do
-    name "MyString"
-description "MyText"
-user nil
+    name { Faker::Lorem.word}
+    description {Faker::Lorem.paragraph}
+    user
   end
 
 end

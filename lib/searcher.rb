@@ -12,9 +12,6 @@ class Searcher
     resolve_characters if @chars && @chars.length > 0
     resolve_content
     resolve_published
-    puts ""
-    puts @query.to_sql
-    puts ""
     if page
       Story.paginate_by_sql(@query.to_sql, page: page)
     else

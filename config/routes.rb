@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   resources :users, except: [:new, :create, :destroy] do
     get 'stories', on: :member
+    resources :bookshelves
   end
 
   devise_for :users, path: "accounts"

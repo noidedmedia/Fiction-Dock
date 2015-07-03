@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+RSpec.describe Searcher do
+
+end
 ##
 # I am officially giving up on this test, for now.
 # I have manually tested the functionality on the actual /search page and it
