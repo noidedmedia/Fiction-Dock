@@ -15,8 +15,8 @@ RSpec.describe Searcher do
     ship.characters.each do |car|
       story_with_both.characters << car
     end
-    ship.stories << story_with_ship
-    ship.stories << story_with_both
+    story_with_both.ships << ship
+    story_with_ship << ship
   end
   it "finds via ships" do
     hs = {
