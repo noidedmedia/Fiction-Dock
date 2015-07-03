@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   devise_for :users, path: "accounts"
 
   get '/about', to: "static_stuff#about"
+  get '/rules', to: "static_stuff#rules"
 
   root 'frontpage#index'
 
