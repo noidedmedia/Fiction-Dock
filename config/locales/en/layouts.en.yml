@@ -4,6 +4,7 @@ en:
   layouts:
     application:
       fiction_dock_title: "Fiction Dock: A better place for your fan fiction"
+      fan_fiction_needed_a_better_place_to_call_home: "Fan fiction needed a better place to call home, this is it."
     header:
       search: "Search"
       browse: "Browse"
@@ -26,5 +27,5 @@ en:
       terms_and_conditions: "Terms and Conditions"
       privacy_policy: "Privacy Policy"
     footer:
-      fiction_dock_description: "A better place for your fan fiction."
+      fiction_dock_description: "Fan fiction needed a better place to call home, this is it."
       fiction_dock_copyright: "© 2015 Noided Media"
