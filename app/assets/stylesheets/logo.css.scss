@@ -17,7 +17,7 @@
     cursor: pointer;
     margin-top: -10px;
 
-    @media all and (max-width: $mobile-width) {
+    @media screen and (max-width: $mobile-width) {
       font-size: 4.0rem;
       color: transparent;
       width: 40px;
@@ -43,14 +43,14 @@
     text-align: center;
     cursor: default;
 
-    @media all and (max-width: $mobile-width) {
+    @media screen and (max-width: $mobile-width) {
       transform: translateX(0);
       -webkit-transform: translateX(0);
       max-width: 100vw;
       font-size: 4.2rem;
     }
 
-    @media all and (max-width: 400px) {
+    @media screen and (max-width: 400px) {
       font-size: 3.2rem;
     }
   }

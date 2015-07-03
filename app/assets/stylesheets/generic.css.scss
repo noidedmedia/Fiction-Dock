@@ -8,7 +8,7 @@
   width: 100%;
   max-width: 700px;
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     width: calc(100vw - 40px);
     max-width: 100vw;
   }
@@ -23,7 +23,7 @@
   &.fd-browse-list {
     padding-top: 50px;
 
-    @media all and (max-width: $mobile-width) {
+    @media screen and (max-width: $mobile-width) {
       padding-top: 10px;
     }
   }
@@ -69,7 +69,7 @@
     }
   }
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     width: calc(100vw - 40px);
     max-width: 100vw;
     margin: auto;
@@ -95,7 +95,7 @@
     padding-top: 60px;
   }
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     width: calc(100vw - 40px);
     max-width: 100vw;
   }
@@ -239,7 +239,7 @@
     }
   }
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     width: calc(100vw - 20px);
     max-width: 100vw;
     padding-top: 10px;
