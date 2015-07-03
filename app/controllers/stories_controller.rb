@@ -8,11 +8,11 @@ class StoriesController < ApplicationController
   include Pundit
   before_filter :authenticate_user!, except: [:show, :index, :search, :franchises, :characters]
 
-
   def ships
     @story = Story.find(params[:id])
     @ships = @story.ships
   end
+
   def characters
     @story = Story.find(params[:id])
     @characters = @story.characters
@@ -22,6 +22,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @franchises = @story.franchises
   end
+  
   def publish
     @story = Story.find(params[:id])
     authorize @story
@@ -33,7 +34,6 @@ class StoriesController < ApplicationController
         format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   def unpublish
@@ -214,6 +214,5 @@ class StoriesController < ApplicationController
       characters: []      
     })
         .merge(user_id: current_user.id)
-
   end
 end
