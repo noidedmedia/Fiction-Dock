@@ -1,0 +1,27 @@
+@media print {
+
+  /* Styles applicable to all pages. */
+  html, body {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    color: #333;
+    margin: 0;
+    font-size: 10pt;
+  }
+
+  #main-header {
+    background-color: transparent;
+    position: relative;
+
+    .header-right,
+    .header-search,
+    .header-item:not(:first-of-type) {
+      display: none;
+    }
+  }
+
+  #footer {
+    display: none;
+  }
+}

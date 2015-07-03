@@ -34,7 +34,7 @@ html, body {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     /* Fix for iOS Safari messing with the text size. */
     -webkit-text-size-adjust: none;
   }
@@ -154,7 +154,7 @@ blockquote {
   min-height: calc(100vh - 105px);
   margin-top: 45px;
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     min-height: calc(100vh - 110px);
     margin-top: 50px;
   }

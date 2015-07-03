@@ -12,207 +12,210 @@
   }
 }
 
-body.dark-mode {
-  background-color: #444;
-  color: #fff;
-
-  * {
-    transition: color 0ms;
-  }
-
-  a, h1, h2, h3, h4, h5,
-  #sign-in-container .sign-in-header h4,
-  input, label {
+// Only apply dark mode styles for "screen" devices, e.g. not print.
+@media screen {
+  body.dark-mode {
+    background-color: #444;
     color: #fff;
-  }
 
-  input[type=text],
-  input[type=email],
-  input[type=password],
-  input[type=checkbox],
-  input[type=checkbox]:checked,
-  input[type=number],
-  textarea {
-    border: 1px solid #fff;
-    color: #fff;
-    background-color: transparent;
+    * {
+      transition: color 0ms;
+    }
 
-    &:hover, &:focus {
+    a, h1, h2, h3, h4, h5,
+    #sign-in-container .sign-in-header h4,
+    input, label {
+      color: #fff;
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=password],
+    input[type=checkbox],
+    input[type=checkbox]:checked,
+    input[type=number],
+    textarea {
       border: 1px solid #fff;
       color: #fff;
+      background-color: transparent;
+
+      &:hover, &:focus {
+        border: 1px solid #fff;
+        color: #fff;
+      }
     }
-  }
 
-  input[type=submit] {
-    color: #fff;
-  }
-
-  blockquote {
-    border-left-color: #fff;
-  }
-
-  select {
-    color: #fff;
-    border: 1px solid #fff;
-  }
-
-  #main-header {
-    background-color: #333;
-    border-bottom: 0;
-
-    .header-item,
-    .header-item a,
-    .header-item input {
+    input[type=submit] {
       color: #fff;
     }
-  }
 
-  #header-search input[type=search] {
-    border: 1px solid rgba(#fff,0.7);
+    blockquote {
+      border-left-color: #fff;
+    }
 
-    &:focus {
+    select {
+      color: #fff;
       border: 1px solid #fff;
     }
-  }
 
-  #footer {
-    background-color: #333;
-    color: #fff;
-    border-top-color: transparent;
+    #main-header {
+      background-color: #333;
+      border-bottom: 0;
 
-    ul li,
-    ul li a {
-      color: #fff;
+      .header-item,
+      .header-item a,
+      .header-item input {
+        color: #fff;
+      }
     }
-  }
 
-  .fiction-dock-logo {
-    color: #fff;
+    #header-search input[type=search] {
+      border: 1px solid rgba(#fff,0.7);
 
-    @media all and (max-width: $mobile-width) {
-      &.logo-header {
-        color: transparent;
+      &:focus {
+        border: 1px solid #fff;
+      }
+    }
 
-        &:first-letter {
-          color: #fff;
+    #footer {
+      background-color: #333;
+      color: #fff;
+      border-top-color: transparent;
+
+      ul li,
+      ul li a {
+        color: #fff;
+      }
+    }
+
+    .fiction-dock-logo {
+      color: #fff;
+
+      @media all and (max-width: $mobile-width) {
+        &.logo-header {
+          color: transparent;
+
+          &:first-letter {
+            color: #fff;
+          }
         }
       }
     }
-  }
 
-  .editor input[type=text] {
-    border-color: transparent;
-  }
+    .editor input[type=text] {
+      border-color: transparent;
+    }
 
-  .stats {
-    li {
-      border-right-color: #fff;
+    .stats {
+      li {
+        border-right-color: #fff;
+        color: #fff;
+      }
+      
+      span {
+        color: #fff;
+      }
+    }
+
+    .tooltip, .flyout,
+    #general-info-flyout {
+      background-color: #444;
+      border-color: rgba(255,255,255,0.15);
+
+      &:before {
+        border-bottom-color: rgba(255,255,255,0.3);
+      }
+
+      &:after {
+        border-bottom-color: #444;
+      }
+
+      ul li a:hover,
+      ul li input:hover {
+        background-color: #666;
+      }
+    }
+
+    #general-info.active,
+    #username:hover,
+    .header-item-with-flyout:hover {
+      background-color: #444;
+    }
+
+    .chapter-list .add-new-chapter a {
       color: #fff;
     }
-    
-    span {
-      color: #fff;
-    }
-  }
 
-  .tooltip, .flyout,
-  #general-info-flyout {
-    background-color: #444;
-    border-color: rgba(255,255,255,0.15);
-
-    &:before {
-      border-bottom-color: rgba(255,255,255,0.3);
+    .fd-list-header, .frontpage-list-header {
+      border-bottom: 1px solid rgba(#fff,0.6);
     }
 
-    &:after {
-      border-bottom-color: #444;
+    .fd-list-item:not(:first-of-type) {
+      border-top: 1px solid rgba(#fff,0.3);
     }
 
-    ul li a:hover,
-    ul li input:hover {
-      background-color: #666;
-    }
-  }
 
-  #general-info.active,
-  #username:hover,
-  .header-item-with-flyout:hover {
-    background-color: #444;
-  }
+    /* ==============================================
+        Medium Editor
+       ============================================== */
 
-  .chapter-list .add-new-chapter a {
-    color: #fff;
-  }
+    $medium_editor_bgcolor:                     #333 !default;
+    $medium_editor_border_color:                #222 !default;
+    $medium_editor_button_size:                 60px !default;
+    $medium_editor_button_active_text_color:    #fff !default;
+    $medium_editor_hover_color:                 #444 !default;
+    $medium_editor_link_color:                  #fff !default;
+    $medium_editor_border_radius:               4px !default;
+    $medium_editor_placeholder_color:           #fff !default;
 
-  .fd-list-header, .frontpage-list-header {
-    border-bottom: 1px solid rgba(#fff,0.6);
-  }
+    .medium-editor-toolbar {
+      border: 1px solid $medium_editor_border_color;
+      background-color: $medium_editor_bgcolor;
 
-  .fd-list-item:not(:first-of-type) {
-    border-top: 1px solid rgba(#fff,0.3);
-  }
+      li {
+        button {
+          border: none;
+          border-right: 1px solid $medium_editor_border_color;
+          background-color: transparent;
+          color: $medium_editor_link_color;
+          box-sizing: border-box;
+          transition: background-color .2s ease-in, color .2s ease-in;
 
+          &:hover {
+            background-color: $medium_editor_hover_color;
+            color: $medium_editor_button_active_text_color;
+          }
+        }
 
-  /* ==============================================
-      Medium Editor
-     ============================================== */
+        .medium-editor-button-last {
+          border-right: none;
+        }
 
-  $medium_editor_bgcolor:                     #333 !default;
-  $medium_editor_border_color:                #222 !default;
-  $medium_editor_button_size:                 60px !default;
-  $medium_editor_button_active_text_color:    #fff !default;
-  $medium_editor_hover_color:                 #444 !default;
-  $medium_editor_link_color:                  #fff !default;
-  $medium_editor_border_radius:               4px !default;
-  $medium_editor_placeholder_color:           #fff !default;
-
-  .medium-editor-toolbar {
-    border: 1px solid $medium_editor_border_color;
-    background-color: $medium_editor_bgcolor;
-
-    li {
-      button {
-        border: none;
-        border-right: 1px solid $medium_editor_border_color;
-        background-color: transparent;
-        color: $medium_editor_link_color;
-        box-sizing: border-box;
-        transition: background-color .2s ease-in, color .2s ease-in;
-
-        &:hover {
+        .medium-editor-button-active {
           background-color: $medium_editor_hover_color;
           color: $medium_editor_button_active_text_color;
         }
       }
-
-      .medium-editor-button-last {
-        border-right: none;
-      }
-
-      .medium-editor-button-active {
-        background-color: $medium_editor_hover_color;
-        color: $medium_editor_button_active_text_color;
-      }
     }
-  }
 
-  .medium-toolbar-arrow-under:before {
-    border-color: $medium_editor_border_color transparent transparent transparent;
-  }
+    .medium-toolbar-arrow-under:before {
+      border-color: $medium_editor_border_color transparent transparent transparent;
+    }
 
-  .medium-toolbar-arrow-under:after {
-    border-color: $medium_editor_bgcolor transparent transparent transparent;
-  }
+    .medium-toolbar-arrow-under:after {
+      border-color: $medium_editor_bgcolor transparent transparent transparent;
+    }
 
-  .medium-toolbar-arrow-over:before {
-    border-color: transparent transparent $medium_editor_border_color transparent;
-  }
+    .medium-toolbar-arrow-over:before {
+      border-color: transparent transparent $medium_editor_border_color transparent;
+    }
 
-  .medium-toolbar-arrow-over:after {
-    border-color: transparent transparent $medium_editor_bgcolor transparent;
-  }
+    .medium-toolbar-arrow-over:after {
+      border-color: transparent transparent $medium_editor_bgcolor transparent;
+    }
 
-  .medium-editor-placeholder:after {
-    color: #fff;
+    .medium-editor-placeholder:after {
+      color: #fff;
+    }
   }
 }

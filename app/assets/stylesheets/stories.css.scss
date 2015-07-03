@@ -59,7 +59,7 @@
     font-weight: 500;
   }
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     width: calc(100vw - 40px);
     max-width: 100vw;
   }
