@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628000028) do
+ActiveRecord::Schema.define(version: 20150628010605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookshelf_stories", force: :cascade do |t|
+    t.integer  "bookshelf_id"
+    t.integer  "story_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "bookshelf_stories", ["bookshelf_id"], name: "index_bookshelf_stories_on_bookshelf_id", using: :btree
+  add_index "bookshelf_stories", ["story_id"], name: "index_bookshelf_stories_on_story_id", using: :btree
+
+  create_table "bookshelves", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "bookshelves", ["user_id"], name: "index_bookshelves_on_user_id", using: :btree
 
   create_table "chapters", force: :cascade do |t|
     t.text     "body"
@@ -192,6 +212,9 @@ ActiveRecord::Schema.define(version: 20150628000028) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
+  add_foreign_key "bookshelf_stories", "bookshelves", on_delete: :cascade
+  add_foreign_key "bookshelf_stories", "stories", on_delete: :cascade
+  add_foreign_key "bookshelves", "users", on_delete: :cascade
   add_foreign_key "chapters", "stories", on_delete: :cascade
   add_foreign_key "characters", "franchises"
   add_foreign_key "comments", "users", on_delete: :cascade

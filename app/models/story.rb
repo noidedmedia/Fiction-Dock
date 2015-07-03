@@ -56,6 +56,8 @@ class Story < ActiveRecord::Base
 
   has_many :chapters
   has_many :story_characters
+  has_many :bookshelf_stories
+  has_many :bookshelves, through: :bookshelf_stories
   ##
   # All the characters in this story
   # @return [ActiveRecord::Relation<Character>]
@@ -91,7 +93,7 @@ class Story < ActiveRecord::Base
   # See if this story can be published
   # @returns [Boolean] if the story can be published
   def publishable?
-    chapters.published.count > 0 
+    chapters.to_a.select(&:published?).length > 0
   end
   ##
   # Returns a localized list of all license options for use

@@ -42,6 +42,8 @@ class User < ActiveRecord::Base
   # All the Stories this user has written
   # @return [ActiveRecord::Relation<Story>]
   has_many :stories
+
+  has_many :bookshelves
   ##
   # A join table of `Franchise` to `User`.
   # This is allows us to see what franchises this user manages.
