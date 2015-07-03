@@ -20,3 +20,6 @@ en:
     cc_by_nd_html: "<a href='https://creativecommons.org/licenses/by-nd/4.0/'>CC-BY-ND</a>"
     cc_by_nc_html: "<a href='https://creativecommons.org/licenses/by-nc/4.0'>CC-BY-NC</a>"
     cc_by_nc_nd_html: "<a href='https://creativecommons.org/licenses/by-nc-nd/4.0'>CC-BY-NC-ND</a>"
+  notices:
+    franchise_updated_successfully: "Franchise updated successfully"
+    franchise_created_successfully: "Franchise created successfully"

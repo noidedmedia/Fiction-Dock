@@ -59,7 +59,7 @@ class FranchisesController < ApplicationController
     authorize @franchise
     respond_to do |format|
       if @franchise.update(franchise_params)
-        format.html { redirect_to @franchise, notice: 'franchise updated' }
+        format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_updated_successfully") }
         format.json { render :show, status: :created, location: @franchise}
       else
         format.json { render :edit }
@@ -76,7 +76,7 @@ class FranchisesController < ApplicationController
     authorize @franchise
     respond_to do |format|
       if @franchise.save
-        format.html { redirect_to @franchise, notice: 'franchise created' }
+        format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_created_successfully") }
         format.json { render :show, status: :created, location: @franchise }
       else
         format.html { render :new }
