@@ -1,4 +1,4 @@
-FictionDock's ships are incredibly fully-featured.
+Fiction Dock ships are incredibly fully-featured.
 They allow not only for cross-franchise ships, but also ships with more than two characters.
 
 So, when should you put characters into ships? Follow these guidelines.

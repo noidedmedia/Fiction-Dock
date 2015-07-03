@@ -10,8 +10,8 @@ For example, the *Star Wars* expanded universe material is in the same franchise
 For example, the series of *Batman* films directed by Christopher Nolan are a distinct Franchise from the *Arkham* games, which are in turn distinct from the series of comic books published by DC.
 
 
-If you want to add a Franchise to your story, remember: the franchise must be present in a *significent way*. 
-We define *significent* as follows:
+If you want to add a Franchise to your story, remember: the franchise must be present in a *significant way*. 
+We define *significant* as follows:
 
 1. The Franchise must actually appear.
 Randomly tagging stores with unrelated franchises is a good way to get banned.
