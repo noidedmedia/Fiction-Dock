@@ -1,0 +1,16 @@
+# Bookshelves strings.
+
+en:
+  bookshelves:
+    index:
+      browse_bookshelves: "Browse bookshelves"
+    show:
+      this_bookshelf_doesn't_have_any_stories_yet: "This bookshelf doesn't have any stories yet."
+      edit: "Edit"
+    form:
+      bookshelf_name: "Bookshelf name"
+      write_a_short_description_of_this_bookshelf: "Write a short description of this bookshelf."
+      description: "Description"
+      submit:
+        new: "Submit"
+        edit: "Save changes"
