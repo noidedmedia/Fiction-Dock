@@ -9,6 +9,6 @@ And here's an example of constructive criticism:
 > Your story really needs to work on the characterization of The Pyro.
 > I don't think there is any situation where sh- h- they would actually put out a fire, especially not just because "it's unsafe"
 
-Note that you don't neccisarily need to be polite.
+Note that you don't necessarily need to be polite.
 You just need to be mildly civil.
 

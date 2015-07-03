@@ -1,6 +1,6 @@
-FictionDock is a website for Fan Fiction---that is, stories written in worlds and with characters created by other people.
+Fiction Dock is a website for Fan Fiction---that is, stories written in worlds and with characters created by other people.
 As such, we need to know what world (or worlds) your story is set in.
-FictionDock organizes those worlds into Franchises.
+Fiction Dock organizes those worlds into Franchises.
 
 It's useful to first start with our qualifications for a Franchise.
 
@@ -13,7 +13,7 @@ For example, the series of *Batman* films directed by Christopher Nolan are a di
 If you want to add a Franchise to your story, remember: the franchise must be present in a *significent way*. 
 We define *significent* as follows:
 
-1. The Franchsie must actually appear.
+1. The Franchise must actually appear.
 Randomly tagging stores with unrelated franchises is a good way to get banned.
 2. The Franchise must play some kind of role that is central to the plot.
 Throwaway gags, such as the characters walking through a wardrobe into Narnia and immediately back out, do not count.
