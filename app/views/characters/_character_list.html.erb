@@ -3,7 +3,14 @@
 
   <% characters.each do |character| %>
     <li class="fd-list-item">
-      <p class="fd-list-item-title character-list-item-title"><%= link_to character.name, franchise_character_path(character.franchise_id, character) %> <span><%= link_to "(" + character.franchise.name + ")", franchise_path(character.franchise) %></span>
+
+      <%# Character name %>
+      <p class="fd-list-item-title character-list-item-title"><%= link_to character.name, franchise_character_path(character.franchise_id, character) %>
+
+      <%# Franchise the character belongs to %>
+      <span><%= link_to "(" + character.franchise.name + ")", franchise_path(character.franchise) %></span>
+
+      <%# Character description, limited to a length of 200 characters, will be cut off on the nearest space. %>
       <p class="fd-list-item-subtitle character-list-item-description"><%= truncate(character.description, length: 200, separator: ' ') %>
     </li>
   <% end %>

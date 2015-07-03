@@ -22,20 +22,20 @@
   </div>
 
   <%# If the user has at least one published story, display them to all users. %>
-  <% if @user.stories.for_display.count > 0 %>
+  <% if !@stories.blank? %>
     <ul id="user-story-list" class="fd-list">
-      <%= render partial: 'stories/story_stub', collection: @user.stories.for_display, as: :story %>
+      <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
     </ul>
 
   <%# If the user has any stories, published or otherwise, and is on their own userpage, display those stories. %>
-  <% elsif @user.stories.count > 0 && current_user === @user %>
+  <% elsif !@user.stories.blank? && current_user === @user %>
     <ul id="user-story-list" class="fd-list">
       <%= render partial: 'stories/story_stub', collection: @user.stories, as: :story %>
     </ul>
 
   <%# If the user has no published stories, or no stories at all if logged-in, display a message saying as much. %>
   <% else %>
-    <p><%= t(".this_user_hasn't_published_anything_yet") %></p>
+    <p class="fd-list-empty-note"><%= t(".this_user_hasn't_published_anything_yet") %></p>
   <% end %>
 
 </div>

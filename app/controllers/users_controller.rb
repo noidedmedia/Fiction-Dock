@@ -13,6 +13,10 @@ class UsersController < ApplicationController
   # Show a given user's profile
   def show
     @user = User.friendly.find(params[:id])
+    @stories = Story.for_content(accepted_content)
+      .where(user_id: @user.id)
+      .for_display
+      .paginate(page: page, per_page: per_page)
   end
 
   ##
@@ -42,14 +46,6 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  ##
-  # Get all stories written by a given user
-  def stories
-    @user = User.friendly.find(params[:id])
-    @stories = Story.for_content(accepted_content)
-      .where(user_id: @user.id)
   end
 
   protected
