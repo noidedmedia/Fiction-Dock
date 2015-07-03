@@ -1,6 +1,6 @@
 class BookshelvesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :load_user
+  before_action :load_user, only: [:index, :new, :create]
   include Pundit
   def show
     @bookshelf = Bookshelf.find(params[:id])
@@ -12,12 +12,26 @@ class BookshelvesController < ApplicationController
       .paginate(page: page, per_page: per_page)
   end
 
+  def add
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+    @bookshelf.stories << Story.find(params[:story][:id])
+    redirect_to @bookshelf
+  end
+
+  def remove
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+    @bookshelf.stories.delete(Story.find(params[:story][:id]))
+    redirect_to @bookshelf
+  end
+
   def index
     @bookshelves = @user.bookshelves
   end
 
   def edit
-    @bookshelf = @user.bookshelves.find(params[:id])
+    @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
   end
 
@@ -27,11 +41,11 @@ class BookshelvesController < ApplicationController
   end
   
   def update
-    @bookshelf = @user.bookshelves.find(params[:id])
+    @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
     respond_to do |format|
       if @bookshelf.update(bookshelf_params)
-        format.html{redirect_to [@user, @bookshelf]}
+        format.html{redirect_to @bookshelf}
       else
         format.html{render 'edit'}
       end
@@ -42,7 +56,7 @@ class BookshelvesController < ApplicationController
     authorize @bookshelf
     respond_to do |format|
       if @bookshelf.save
-        format.html {redirect_to [@user, @bookshelf]}
+        format.html {redirect_to  @bookshelf}
       else
         format.html {render 'new'}
       end

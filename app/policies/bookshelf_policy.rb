@@ -4,6 +4,18 @@ class BookshelfPolicy < ApplicationPolicy
     @bookshelf = bookshelf
   end
 
+  def add?
+    owned?
+  end
+
+  def delete?
+    owned?
+  end
+
+  def contains?
+    owned?
+  end
+
   def show?
     true
   end

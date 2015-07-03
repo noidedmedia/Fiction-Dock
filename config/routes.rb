@@ -29,16 +29,20 @@ Rails.application.routes.draw do
     resources :users, controller: :franchise_users, except: [:show, :edit, :update]
   end
 
+  resources :bookshelves, except: [:index, :new, :create] do
+    member do 
+      post 'add'
+      delete 'remove'
+      get 'contains'
+    end
+  end
   resources :characters do
     get 'stories', on: :member
   end
 
   resources :users, except: [:new, :create, :destroy] do
     get 'stories', on: :member
-    resources :bookshelves do
-      post 'add'
-      delete 'remove'
-    end
+    resources :bookshelves, shallow: true
   end
 
   devise_for :users, path: "accounts"
