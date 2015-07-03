@@ -21,7 +21,7 @@
       <li class="fd-list-item">
         <p class="fd-list-item-title"><%= link_to character.name, franchise_character_path(@franchise, character) %>
 
-        <p class="fd-list-item-subtitle"><%= character.stories.for_display.count %> stories 
+        <p class="fd-list-item-subtitle"><%= t(".stories_count", count: character.stories.for_display.count) %> 
         <% if !character.description.empty? %>
           · <%= character.description %>
         <% end %>
