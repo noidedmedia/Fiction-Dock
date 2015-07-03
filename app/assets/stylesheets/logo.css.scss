@@ -15,7 +15,7 @@
   &.logo-header {
     font-size: 3.2rem;
     cursor: pointer;
-    margin-top: -10px;
+    margin-top: -9px;
 
     @media screen and (max-width: $mobile-width) {
       font-size: 4.0rem;
@@ -35,17 +35,12 @@
   }
 
   &.logo-large {
-    // Why does this work? I honestly don't know.
-    transform: translateX(-25%);
-    -webkit-transform: translateX(-25%);
-    width: 200%;
     font-size: 7.2rem;
     text-align: center;
     cursor: default;
+    white-space: nowrap;
 
     @media screen and (max-width: $mobile-width) {
-      transform: translateX(0);
-      -webkit-transform: translateX(0);
       max-width: 100vw;
       font-size: 4.2rem;
     }

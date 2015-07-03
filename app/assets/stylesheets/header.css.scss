@@ -14,7 +14,7 @@
     display: block;
   }
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     height: 50px;
   }
 }
@@ -31,7 +31,7 @@
     }
   }
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     left: 20px;
   }
 }
@@ -40,7 +40,7 @@
   position: absolute;
   right: 90px;
 
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     left: 20px;
   }
 }
@@ -50,7 +50,7 @@
   display: inline-block;
   font-size: 1.4rem;
   font-weight: 400;
-  padding: 14px 15px 0;
+  padding: 0 15px;
   transition: color 300ms ease-in-out;
   vertical-align: top;
   height: auto;
@@ -65,9 +65,15 @@
     }
   }
 
+  > a {
+    padding: 13px 0;
+    display: inline-block;
+  }
+
   > .header-item-title {
     cursor: pointer;
-    height: 32px;
+    height: 45px;
+    padding: 13px 0;
   }
 
   &.header-item-with-flyout {
@@ -86,7 +92,7 @@
     }
   }
   
-  @media all and (max-width: $mobile-width) {
+  @media screen and (max-width: $mobile-width) {
     padding: 15px 15px;
   }
 }
@@ -139,10 +145,11 @@
   display: block;
   cursor: pointer;
   position: relative;
+  padding-top: 14px;
 }
 
 #create-button {
-  margin-top: -5px;
+  margin-top: -6px;
 
   span {
     font-size: 1.2rem;
@@ -300,14 +307,13 @@
   width: 32px;
   cursor: pointer;
   z-index: 1000;
-  padding: 8px 10px 0;
+  padding: 15px 10px 0;
   transition: background-color 200ms 400ms;
 
   span {
-    font-size: 2.1rem;
-    top: 22px;
-    left: 14px;
-    position: absolute;
+    font-size: 2.0rem;
+    margin-top: -5px;
+    padding: 0 4px;
   }
 
   &.active {
