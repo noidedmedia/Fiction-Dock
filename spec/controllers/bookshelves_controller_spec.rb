@@ -8,7 +8,7 @@ RSpec.describe BookshelvesController, type: :controller do
       sign_in @user
     end
     describe "get #show" do
-      let(:story){FactoryGirl.create(:story)}
+      let(:story){FactoryGirl.create(:published_story)}
       let(:bookshelf){FactoryGirl.create(:bookshelf,
                                          stories: [story])}
       it "is successful" do

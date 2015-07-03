@@ -36,5 +36,14 @@ FactoryGirl.define do
       story.franchises.each(&:save)
       story.characters.each(&:save)
     end
+    factory :published_story do
+      after(:build) do |story, ev|
+        story.chapters << FactoryGirl.create(:chapter, published: true)
+      end
+      after(:create) do |story, ev|
+        story.chapters.each(&:save)
+      end
+      published true
+    end
   end
 end

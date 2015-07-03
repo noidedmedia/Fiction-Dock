@@ -96,7 +96,7 @@ class Story < ActiveRecord::Base
   # See if this story can be published
   # @returns [Boolean] if the story can be published
   def publishable?
-    chapters.published.count > 0 
+    chapters.to_a.select(&:published?).length > 0
   end
   ##
   # Returns a localized list of all license options for use
