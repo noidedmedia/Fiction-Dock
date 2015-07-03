@@ -10,6 +10,7 @@ en:
       chapters: "Chapters"
       characters: "Characters"
     rules:
+      rules_page_title: "Rules"
       rules: "Rules"
       introduction: "Introduction"
       stories_and_their_content: "Stories and their content"

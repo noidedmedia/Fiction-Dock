@@ -1,38 +1,42 @@
-<article id="rules">
-  <h1><%= t(".rules") %></h1>
+<%- title t(".rules_page_title") %>
 
-  <section id="rules-intro">
-    <h2><%= t(".introduction") %></h2>
-    <%= render 'intro' %>
-  </section>
+<div class="fd-text-container">
+  <article id="rules" class="story-text chapter-body">
+    <h1><%= t(".rules") %></h1>
 
-  <section id="rules-stories">
-    <h2><%= t(".stories_and_their_content") %></h2>
-    <%= render 'stories' %>
-  </section>
+    <section id="rules-intro">
+      <h2><%= t(".introduction") %></h2>
+      <%= render 'intro' %>
+    </section>
 
-  <section id="rules-legal">
-    <h2><%= t(".legal") %></h2>
-    <%= render 'legal' %>
-  </section>
+    <section id="rules-stories">
+      <h2><%= t(".stories_and_their_content") %></h2>
+      <%= render 'stories' %>
+    </section>
 
-  <section id="rules-franchises">
-    <h2><%= t(".franchises") %></h2>
-    <%= render 'franchises' %>
-  </section>
+    <section id="rules-legal">
+      <h2><%= t(".legal") %></h2>
+      <%= render 'legal' %>
+    </section>
 
-  <section id="rules-characters">
-    <h2><%= t(".characters") %></h2>
-    <%= render 'characters' %>
-  </section>
+    <section id="rules-franchises">
+      <h2><%= t(".franchises") %></h2>
+      <%= render 'franchises' %>
+    </section>
 
-  <section id="rules-ships">
-    <h2><%= t(".ships") %></h2>
-    <%= render 'ships' %>
-  </section>
-  
-  <section id='rules-community'>
-    <h2><%= t(".community") %></h2>
-    <%= render 'community' %>
-  </section>
-</article>
+    <section id="rules-characters">
+      <h2><%= t(".characters") %></h2>
+      <%= render 'characters' %>
+    </section>
+
+    <section id="rules-ships">
+      <h2><%= t(".ships") %></h2>
+      <%= render 'ships' %>
+    </section>
+    
+    <section id='rules-community'>
+      <h2><%= t(".community") %></h2>
+      <%= render 'community' %>
+    </section>
+  </article>
+</div>
