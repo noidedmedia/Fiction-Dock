@@ -265,7 +265,8 @@
 
     li {
       height: 32px;
-      transform: translate(-15px,-5px);
+      -webkit-transform: translate(-15px,-5px);
+              transform: translate(-15px,-5px);
       width: calc(100% + 30px);
     
       a, input {
