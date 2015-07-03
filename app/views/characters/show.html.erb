@@ -13,12 +13,12 @@
     </ul>
   <% end %>
 
-  <% unless @character.stories.for_display.blank? %>
+  <% unless @stories.blank? %>
     <ul id="character-story-list" class="fd-list">
-      <%= render partial: 'stories/story_stub', collection: @character.stories.for_display, as: :story %>
+      <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
     </ul>
   <% else %>
-    <p><%= t(".this_character_hasn't_been_included_in_any_published_stories_yet") %>
+    <p class="list-empty-note"><%= t(".this_character_hasn't_been_included_in_any_published_stories_yet") %></p>
   <% end %>
 
 </div>

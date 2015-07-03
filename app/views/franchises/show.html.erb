@@ -38,7 +38,7 @@
       <%= render partial: 'stories/story_stub', collection: @stories, as: "story" %>
     </ul>
   <% else %>
-    <p><%= t(".no_stories_have_been_written_for_this_franchise_yet") %></p>
+    <p class="list-empty-note"><%= t(".no_stories_have_been_written_for_this_franchise_yet") %></p>
   <% end %>
 
 </div>
