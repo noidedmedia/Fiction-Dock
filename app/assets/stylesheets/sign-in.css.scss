@@ -86,7 +86,7 @@
     cursor: pointer;
 
     &:after {
-      content: $icon-checkmark;
+      content: '✓';
       opacity: 0.3;
       position: relative;
       bottom: 3px;
@@ -111,7 +111,7 @@
 
   /* Black square on-checked. */
   &:after {
-    content: $icon-checkmark;
+    content: '✓';
     opacity: 1;
     font-size: 1.8rem;
     line-height: 16px;
