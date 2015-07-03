@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
 
   validates :name,
     presence: true,
-    format: {with: /\A[[:alpha:]]+\z/},
+    format: {with: /\A[[:alpha:]]+|\w+\z/},
     uniqueness: {case_sensative: false},
     length: {in: 2..25}
   enum level: [:normal, :mod, :admin]
