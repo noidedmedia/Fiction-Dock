@@ -73,6 +73,7 @@ class CharactersController < ApplicationController
   end
 
   protected
+
   ##
   # Always load a franchise into `@franchise` from `params[:franchise_id]`
   def load_franchise
