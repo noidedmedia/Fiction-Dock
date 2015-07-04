@@ -24,6 +24,15 @@ $footer-link-color: #333;
 
     a {
       text-decoration: none;
+      
+      > p {
+        opacity: 0.8;
+        transition: 200ms opacity;
+        
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
 
     @media all and (min-width: $mobile-width) {
@@ -106,6 +115,9 @@ $footer-link-color: #333;
       text-decoration: none;
       opacity: 0.6;
       transition: opacity 250ms;
+      width: 25px;
+      height: 25px;
+      display: block;
 
       span {
         font-size: 1.4rem;
