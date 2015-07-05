@@ -19,10 +19,12 @@
 
     <%= f.label :description, t(".description") %>
     <%= f.text_area :description, id: "story-description-field", placeholder: t(".write_a_description_of_the_story") %>
-    <div id="javascript-container">
-    </div>
+    
+    <%= react_component('FranchisesInput', render(template: 'stories/franchises.json.jbuilder')) %>
+
+
     <%# Submit button string will change depending on the action name (edit, new, etc.)%>
     <%= f.submit t(".submit.#{action_name}"), id: "story-form-submit" %>
 
-  <% end %> 
+  <% end %>
 </div>
