@@ -27,13 +27,21 @@
     </div>
 
     <%= react_component('GenericLabel', props={text: t(".franchises"), elementfor: "franchises-input"} ) %>
-    <%= react_component('FranchisesInput', render(template: 'stories/franchises.json.jbuilder'),
+    <%= react_component('FranchisesInput',
       
       html_options={
         id: "franchises-input",
         tag: "input",
         type: "text",
         placeholder: t(".franchises")
+      }
+    ) %>
+
+    <%= react_component('FranchiseList', render(template: 'stories/franchises.json.jbuilder'),
+      
+      html_options={
+        id: "franchises-list",
+        type: "text"
       }
     ) %>
 

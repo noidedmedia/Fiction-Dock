@@ -13,3 +13,24 @@ var GenericLabel = React.createClass({
     );
   }
 });
+
+var FranchiseItem = React.createClass({
+  render: function() {
+    return (
+      <li>{this.props.data.name}</li>
+    );
+  }
+});
+
+var FranchiseList = React.createClass({
+  render: function() {
+    return (
+      <ul>
+        {this.props.franchises.map(function(franchise) {
+          return <FranchiseItem key={franchise.id} data={franchise} />;
+        })}
+      </ul>
+    );
+  }
+});
+
