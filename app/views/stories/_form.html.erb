@@ -26,34 +26,22 @@
       <%= f.text_area :description, id: "story-description-field", placeholder: t(".write_a_description_of_the_story") %>
     </div>
 
-    <%= react_component('GenericLabel', props={text: t(".franchises"), elementfor: "franchises-input"} ) %>
-    <%= react_component('FranchisesInput', render(template: 'stories/franchises.json.jbuilder'),
-      
-      html_options={
-        id: "franchises-input",
-        tag: "input",
-        type: "text",
-        placeholder: t(".franchises")
-      }
-    ) %>
 
-    <%= react_component('FranchiseList', {franchises: @story.franchises},
-      
-      html_options={
-        id: "franchises-list"
-      }
-    ) %>
+    <%= react_component('Franchises', props={
+      elementid: "franchises-input",
+      label: t(".franchises"),
+      placeholder: t(".franchises"),
+      franchises: @story.franchises
+    } ) %>
 
-    <%= react_component('GenericLabel', props={text: t(".characters"), elementfor: "characters-input"} ) %>
-    <%= react_component('CharactersInput', render(template: 'stories/characters.json.jbuilder'),
-      
-      html_options={
-        id: "characters-input",
-        tag: "input",
-        type: "text",
-        placeholder: t(".characters")
-      }
-    ) %>
+    
+    <%= react_component('Franchises', props={
+      elementid: "character-input",
+      label: t(".characters"),
+      placeholder: t(".characters"),
+      franchises: @story.characters
+    } ) %>
+
 
     <%= react_component('GenericLabel', props={text: t(".ships"), elementfor: "ships-input"} ) %>
     <%= react_component('ShipsInput', render(template: 'stories/ships.json.jbuilder'),
