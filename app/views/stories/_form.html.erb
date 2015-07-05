@@ -27,32 +27,17 @@
     </div>
 
 
-    <%= react_component('Franchises', props={
-      elementid: "franchises-input",
-      label: t(".franchises"),
-      placeholder: t(".franchises"),
-      franchises: @story.franchises
+    <%= react_component('ReactFormElements', props={
+      franchises_elementid: "franchises-input",
+      franchises_label: t(".franchises"),
+      franchises_placeholder: t(".franchises"),
+      franchises: @story.franchises,
+      characters_elementid: "characters-input",
+      characters_label: t(".characters"),
+      characters_placeholder: t(".characters"),
+      characters: @story.characters
     } ) %>
 
-    
-    <%= react_component('Franchises', props={
-      elementid: "character-input",
-      label: t(".characters"),
-      placeholder: t(".characters"),
-      franchises: @story.characters
-    } ) %>
-
-
-    <%= react_component('GenericLabel', props={text: t(".ships"), elementfor: "ships-input"} ) %>
-    <%= react_component('ShipsInput', render(template: 'stories/ships.json.jbuilder'),
-      
-      html_options={
-        id: "ships-input",
-        tag: "input",
-        type: "text",
-        placeholder: t(".ships")
-      }
-    ) %>
 
 
     <%# Submit button string will change depending on the action name (edit, new, etc.)%>
