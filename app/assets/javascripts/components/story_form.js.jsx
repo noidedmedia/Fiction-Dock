@@ -3,10 +3,8 @@ var Franchises = React.createClass({
     return (
       <div>
         <GenericLabel elementfor={this.props.franchises_elementid} label={this.props.franchises_label} />
-        
-        <input id={this.props.franchises_elementid} type="text" placeholder={this.props.franchises_placeholder} />
 
-        <FranchiseList franchises={this.props.franchises} />
+        <FranchiseList franchises={this.props.franchises} elementid={this.props.franchises_elementid} placeholder={this.props.franchises_placeholder} />
       </div>
     );
   }
@@ -32,21 +30,37 @@ var GenericLabel = React.createClass({
   }
 });
 
-var FranchiseItem = React.createClass({
+var ListItem = React.createClass({
   render: function() {
     return (
-      <li>{this.props.data.name}</li>
+      <li>
+        <div>
+          <span className="icon icon-close"></span>
+
+          {this.props.data.name}
+        </div>
+      </li>
     );
   }
 });
 
 var FranchiseList = React.createClass({
+  getInitialState: function() {
+    return { show: 'hidden' };
+  },
+  handleClick: function() {
+    this.setState({show: this.state.show === 'shown' ? 'hidden' : 'shown' });
+  },
   render: function() {
     return (
       <ul>
         {this.props.franchises.map(function(franchise) {
-          return <FranchiseItem key={franchise.id} data={franchise} />;
+          return <ListItem key={franchise.id} data={franchise} />;
         })}
+
+        <input id={this.props.elementid} className={this.state.show} type="text" placeholder={this.props.placeholder} />
+
+        <li onClick={this.handleClick}><span className="icon icon-plus"></span>Add a new franchise</li>
       </ul>
     );
   }

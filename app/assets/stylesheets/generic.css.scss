@@ -194,6 +194,10 @@
     display: block;
     padding: 8px;
     font-size: 1.4rem;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   input[type=submit] {
