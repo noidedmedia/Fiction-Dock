@@ -26,9 +26,9 @@ var FranchiseList = React.createClass({
   render: function() {
     return (
       <ul>
-        {this.props.franchises.map(function(franchise) {
-          return <FranchiseItem key={franchise.id} data={franchise} />;
-        })}
+      {this.props.franchises.map(function(franchise) {
+        return <FranchiseItem key={franchise.id} data={franchise} />;
+      })}
       </ul>
     );
   }
