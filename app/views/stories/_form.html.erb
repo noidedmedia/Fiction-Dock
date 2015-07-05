@@ -1,9 +1,11 @@
 <div id="story-form" class="fd-form" data-story-id="<%= @story.id %>">
   <%= form_for @story do |f| %>
     
-    <%= f.label :name, t(".story_name") %>
-    <%= f.text_field :name, id: "story-name-field", placeholder: t(".story_name") %>
-    
+    <div class="field-container">
+      <%= f.label :name, t(".story_name") %>
+      <%= f.text_field :name, id: "story-name-field", placeholder: t(".story_name") %>
+    </div>
+
     <div class="select-container">
       <%= f.label :language, t(".language") %>
       <%= f.select :language, options_for_select(Story.language_attributes_for_select, @story.language), {}, { class: "custom-select", id: "story-language-select" } %>
@@ -14,13 +16,48 @@
       <%= f.select :license, options_for_select(Story.license_attributes_for_select, @story.license), {}, { class: "custom-select", id: "story-license-select" } %>
     </div>
     
-    <%= f.label :blurb, t(".blurb") %>
-    <%= f.text_field :blurb, id: "story-blurb-field", placeholder: t(".write_a_very_short_description_of_the_story") %>
+    <div class="field-container">
+      <%= f.label :blurb, t(".blurb") %>
+      <%= f.text_field :blurb, id: "story-blurb-field", placeholder: t(".write_a_very_short_description_of_the_story") %>
+    </div>
 
-    <%= f.label :description, t(".description") %>
-    <%= f.text_area :description, id: "story-description-field", placeholder: t(".write_a_description_of_the_story") %>
-    
-    <%= react_component('FranchisesInput', render(template: 'stories/franchises.json.jbuilder')) %>
+    <div class="field-container">
+      <%= f.label :description, t(".description") %>
+      <%= f.text_area :description, id: "story-description-field", placeholder: t(".write_a_description_of_the_story") %>
+    </div>
+
+    <%= react_component('GenericLabel', props={text: t(".franchises"), elementfor: "franchises-input"} ) %>
+    <%= react_component('FranchisesInput', render(template: 'stories/franchises.json.jbuilder'),
+      
+      html_options={
+        id: "franchises-input",
+        tag: "input",
+        type: "text",
+        placeholder: t(".franchises")
+      }
+    ) %>
+
+    <%= react_component('GenericLabel', props={text: t(".characters"), elementfor: "characters-input"} ) %>
+    <%= react_component('CharactersInput', render(template: 'stories/characters.json.jbuilder'),
+      
+      html_options={
+        id: "characters-input",
+        tag: "input",
+        type: "text",
+        placeholder: t(".characters")
+      }
+    ) %>
+
+    <%= react_component('GenericLabel', props={text: t(".ships"), elementfor: "ships-input"} ) %>
+    <%= react_component('ShipsInput', render(template: 'stories/ships.json.jbuilder'),
+      
+      html_options={
+        id: "ships-input",
+        tag: "input",
+        type: "text",
+        placeholder: t(".ships")
+      }
+    ) %>
 
 
     <%# Submit button string will change depending on the action name (edit, new, etc.)%>

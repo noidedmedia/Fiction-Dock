@@ -29,6 +29,8 @@ en:
       description: "Description"
       write_a_description_of_the_story: "Write a description of the story"
       franchises: "Franchises"
+      characters: "Characters"
+      ships: "Ships"
       submit: 
         new: "Submit"
         edit: "Save changes"
