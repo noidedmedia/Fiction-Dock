@@ -7,10 +7,14 @@ Rails.application.routes.draw do
       get :published
     end
   end
+
+  concern :commentable do 
+    resources :comments, only: [:create, :index]
+  end
   resources :franchise_creation_requests do
     post 'accept', on: :member
   end
-  resources :stories, concerns: [:publishable] do
+  resources :stories, concerns: [:publishable, :commentable] do
     # see if currently subscribed
     get 'subscribed'
     # subscribe if not currently subscribed
@@ -22,6 +26,7 @@ Rails.application.routes.draw do
     get 'ships', on: :member
     get 'characters', on: :member
     resources :chapters, concerns: [:publishable]
+    resources :reviews
   end
 
   resources :franchises do

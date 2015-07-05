@@ -1,0 +1,8 @@
+<div id="comments-container">
+  <ul id="comments-list">
+    <%= render @comments.where("comments.id IS NOT NULL") %>
+  </ul>
+  <% if current_user %>
+    <%= render 'comments/form' %>
+  <% end %>
+</div>

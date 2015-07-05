@@ -1,0 +1,5 @@
+<h1><%= @review.name %></h1>
+<h2>By: <%= link_to @review.user.name, @review.user %></h2>
+<div id="review-body">
+  <%= @review.body %>
+</div>

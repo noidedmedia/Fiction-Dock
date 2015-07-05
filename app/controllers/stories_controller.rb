@@ -6,6 +6,7 @@ class StoriesController < ApplicationController
   ##
   # Use pundit for authorization
   include Pundit
+  include ControllerCommentable
   before_filter :authenticate_user!, except: [:show, :index, :search, :franchises, :characters]
 
   def ships

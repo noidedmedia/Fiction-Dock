@@ -1,0 +1,9 @@
+<li>
+<div class="comment-header">
+  <%= comment.user ? (link_to comment.user.name, comment.user) : "nobody" %>
+  posted <%= time_ago_in_words(comment.created_at) %> ago...
+</div>
+<div class="comment-body">
+  <%= markdown_parse comment.body %>
+</div>
+</li>

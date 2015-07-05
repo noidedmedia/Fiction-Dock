@@ -53,7 +53,7 @@ class Story < ActiveRecord::Base
   # The user who wrote the story
   # @return [User]
   belongs_to :user
-
+  has_many :reviews
   has_many :chapters
   has_many :story_characters
   has_many :bookshelf_stories
