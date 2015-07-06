@@ -30,13 +30,14 @@
     <%= react_component('ReactFormElements', props={
       franchises_elementid: "franchises-input",
       franchises_label: t(".franchises"),
-      franchises_placeholder: t(".franchises"),
+      franchises_placeholder: t(".franchise"),
       franchises: @story.franchises,
+      franchise_add: t(".add_a_new_franchise"),
       characters_elementid: "characters-input",
       characters_label: t(".characters"),
       characters_placeholder: t(".characters"),
       characters: @story.characters
-    } ) %>
+    }, id: "react-form-elements" ) %>
 
 
 
