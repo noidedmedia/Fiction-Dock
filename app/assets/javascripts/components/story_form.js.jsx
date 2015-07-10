@@ -53,6 +53,14 @@ var AddFranchiseButton = React.createClass({
   preventBubbling: function(e) {
     e.stopPropagation();
   },
+  addFranchise: function(e) {
+    console.log(e.target.data);
+
+    // Hide input, remove suggestions
+    this.props.onChange("");
+    this.setState({showinput: false});
+    this.props.suggestions.length = 0;
+  },
   render: function () {
     return (
       <li>
@@ -67,7 +75,7 @@ var AddFranchiseButton = React.createClass({
           <ul className="suggestions">
             {this.props.suggestions.map(function(franchise, i) {
               return (
-                <li key={franchise.id} data={franchise} ref={'franchise' + i}>{franchise.name}</li>
+                <li key={franchise.id} data={franchise} ref={'franchise' + i} onClick={this.addFranchise}>{franchise.name}</li>
               );
             }, this)}
           </ul>
@@ -89,24 +97,28 @@ var FranchiseList = React.createClass({
 
     var _this = this;
 
-    $.ajax("/franchises/complete.json?query=" + query, {
-      dataType: "json",
-      error: function() {
-        console.log("ERROR");
-      },
-      success: function(data) {
+    if (query === "") {
+      this.setState({ suggestions: [] });
+    } else {
+      $.ajax("/franchises/complete.json?query=" + query, {
+        dataType: "json",
+        error: function() {
+          console.log("ERROR");
+        },
+        success: function(data) {
 
-        var suggestions = [];
+          var suggestions = [];
 
-        data.map(function(franchise, i) {
-          suggestions.push(franchise);
-        });
+          data.map(function(franchise, i) {
+            suggestions.push(franchise);
+          });
 
-        console.log(suggestions);
+          console.log(suggestions);
 
-        _this.setState({ suggestions: suggestions });
-      }
-    });
+          _this.setState({ suggestions: suggestions });
+        }
+      });
+    }
   },
   render: function() {
     return (
@@ -118,7 +130,7 @@ var FranchiseList = React.createClass({
           );
         }, this)}
         
-        <AddFranchiseButton query={this.state.query} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} />
+        <AddFranchiseButton query={this.state.query} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} />
 
       </ul>
     );

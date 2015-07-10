@@ -264,6 +264,9 @@
   width: 100%;
   max-width: 300px;
   margin: 0;
+  position: absolute;
+  max-height: 300px;
+  overflow: auto;
 
   &.active {
     border: 1px solid #aaaab2;
