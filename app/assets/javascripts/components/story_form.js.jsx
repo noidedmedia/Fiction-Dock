@@ -66,7 +66,7 @@ var FranchiseList = React.createClass({
       showinput: false
     };
   },
-  handleAdd: function() {
+  handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
       React.findDOMNode(this.refs.franchiseInput).focus();
     });
@@ -82,7 +82,7 @@ var FranchiseList = React.createClass({
             <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} />
           );
         }, this)}
-        <li ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "hidden" : "shown"} onClick={this.handleAdd} >
+        <li ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "hidden" : "shown"} onClick={this.handleClick} >
           <div>
             <span className="icon icon-plus"></span>
             {this.props.franchise_add}
