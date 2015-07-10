@@ -36,12 +36,14 @@ var ListItem = React.createClass({
   }
 });
 
-var FranchiseList = React.createClass({
+var AddFranchiseButton = React.createClass({
   getInitialState: function() {
     return { 
-      showinput: false,
-      query: "",
+      showinput: false
     };
+  },
+  onChange: function(e) {
+    this.props.onChange(e.target.value);
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
@@ -51,51 +53,73 @@ var FranchiseList = React.createClass({
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  handleChange: function(e) {
-    this.setState({ query: e.target.value });
+  render: function () {
+    return (
+      <li>
+        <div ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "add-new-franchise hidden" : "add-new-franchise shown"} onClick={this.handleClick} >
+          <span className="icon icon-plus"></span>
+          {this.props.franchise_add}
 
-    var that = this;
+          <input ref="franchiseInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} onChange={this.onChange} />
+        </div>
+
+        <div className={this.props.suggestions.length > 0 ? "suggestions-container active" : "suggestions-container inactive"} >
+          <ul className="suggestions">
+            {this.props.suggestions.map(function(franchise, i) {
+              return (
+                <li key={franchise.id} data={franchise} ref={'franchise' + i}>{franchise.name}</li>
+              );
+            }, this)}
+          </ul>
+        </div>
+      </li>
+    );
+  }
+});
+
+var FranchiseList = React.createClass({
+  getInitialState: function() {
+    return {
+      query: "",
+      suggestions: []
+    };
+  },
+  handleChange: function(e) {
+    this.setState({ query: e });
+
+    var _this = this;
 
     $.ajax("/franchises/complete.json?query=" + this.state.query, {
       dataType: "json",
+      error: function() {
+        console.log("ERROR");
+      },
       success: function(data) {
+
         var suggestions = [];
 
         data.map(function(franchise, i) {
-          suggestions[i] = franchise.name;
-
-          that.franchiseSuggest(suggestions);
+          suggestions.push(franchise);
         });
+
+        console.log(suggestions);
+
+        _this.setState({ suggestions: suggestions });
       }
     });
-  },
-  franchiseSuggest: function(suggestions) {
-    if (suggestions) {
-      return (
-        suggestions.map(function(franchise, i) {
-          return (
-            <li>{franchise.name}</li>
-          );
-        })
-      );
-    }
   },
   render: function() {
     return (
       <ul className="franchise-list">
+
         {this.props.franchises.map(function(franchise, i) {
           return (
             <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} />
           );
         }, this)}
-        <li ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "hidden" : "shown"} onClick={this.handleClick} >
-          <div>
-            <span className="icon icon-plus"></span>
-            {this.props.franchise_add}
+        
+        <AddFranchiseButton query={this.state.query} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} />
 
-            <input ref="franchiseInput" id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} onChange={this.handleChange} />
-          </div>
-        </li>
       </ul>
     );
   }
