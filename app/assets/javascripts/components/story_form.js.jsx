@@ -1,27 +1,3 @@
-var Franchises = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <GenericLabel elementfor={this.props.franchises_elementid} label={this.props.franchises_label} />
-
-        <FranchiseList franchises={this.props.franchises} elementid={this.props.franchises_elementid} placeholder={this.props.franchises_placeholder} franchise_add={this.props.franchise_add} />
-      </div>
-    );
-  }
-});
-
-var Characters = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <GenericLabel elementfor={this.props.characters_elementid} label={this.props.characters_label} />
-        
-        <input id={this.props.characters_elementid} type="text" placeholder={this.props.characters_placeholder} />
-      </div>
-    );
-  }
-});
-
 var GenericLabel = React.createClass({
   render: function() {
     return (
@@ -99,9 +75,17 @@ var ReactFormElements = React.createClass({
   render: function() {
     return (
       <div>
-        {/* Pass forward all the props to the other React classes. */}
-        <Franchises {...this.props} />
-        <Characters {...this.props} />
+        <div>
+          <GenericLabel elementfor={this.props.franchises_elementid} label={this.props.franchises_label} />
+
+          <FranchiseList franchises={this.props.franchises} elementid={this.props.franchises_elementid} placeholder={this.props.franchises_placeholder} franchise_add={this.props.franchise_add} />
+        </div>
+
+        <div>
+          <GenericLabel elementfor={this.props.characters_elementid} label={this.props.characters_label} />
+          
+          <input id={this.props.characters_elementid} type="text" placeholder={this.props.characters_placeholder} />
+        </div>
       </div>
     );
   }

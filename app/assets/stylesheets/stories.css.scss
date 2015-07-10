@@ -212,9 +212,13 @@
   }
 
   &.hidden {
+    overflow: auto;
+    cursor: default;
+
     div {
       padding: 0;
       width: 100%;
+      max-width: 300px;
 
       span {
         display: none;
@@ -236,8 +240,8 @@
     cursor: default;
 
     div {
-      border-radius: 3px;
       border: 1px solid #aaaab2;
+      border-radius: 3px;
       display: inline-block;
       padding: 8px;
     }
