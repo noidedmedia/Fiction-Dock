@@ -39,7 +39,9 @@ var ListItem = React.createClass({
 var FranchiseList = React.createClass({
   getInitialState: function() {
     return { 
-      showinput: false
+      showinput: false,
+      query: "",
+      suggestions: []
     };
   },
   handleClick: function() {
@@ -49,6 +51,35 @@ var FranchiseList = React.createClass({
   },
   preventBubbling: function(e) {
     e.stopPropagation();
+  },
+  handleChange: function(e) {
+    this.setState({ query: e.target.value });
+
+    var that = this;
+
+    $.ajax("/franchises/complete.json?query=" + this.state.query, {
+      dataType: "json",
+      success: function(data) {
+        data.map(function(franchise, i) {
+          that.state.suggestions[i] = franchise.name;
+
+          that.franchiseSuggest(that.state.suggestions, that);
+        });
+      }
+    });
+  },
+  franchiseSuggest: function(suggestions, that) {
+    if (suggestions) {
+      return (
+        suggestions.map(function(franchise, i, that) {
+          console.log(franchise + " " + i);
+          console.log(that.state.query);
+          return (
+            <li>{franchise.name}</li>
+          );
+        })
+      );
+    }
   },
   render: function() {
     return (
@@ -63,7 +94,7 @@ var FranchiseList = React.createClass({
             <span className="icon icon-plus"></span>
             {this.props.franchise_add}
 
-            <input ref="franchiseInput" id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} />
+            <input ref="franchiseInput" id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} onChange={this.handleChange} />
           </div>
         </li>
       </ul>
