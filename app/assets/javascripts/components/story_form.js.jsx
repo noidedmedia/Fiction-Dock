@@ -84,12 +84,12 @@ var FranchiseList = React.createClass({
       suggestions: []
     };
   },
-  handleChange: function(e) {
-    this.setState({ query: e });
+  handleChange: function(query) {
+    this.setState({ query: query });
 
     var _this = this;
 
-    $.ajax("/franchises/complete.json?query=" + this.state.query, {
+    $.ajax("/franchises/complete.json?query=" + query, {
       dataType: "json",
       error: function() {
         console.log("ERROR");
