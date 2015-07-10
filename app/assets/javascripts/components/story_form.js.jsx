@@ -41,7 +41,6 @@ var FranchiseList = React.createClass({
     return { 
       showinput: false,
       query: "",
-      suggestions: []
     };
   },
   handleClick: function() {
@@ -60,20 +59,20 @@ var FranchiseList = React.createClass({
     $.ajax("/franchises/complete.json?query=" + this.state.query, {
       dataType: "json",
       success: function(data) {
-        data.map(function(franchise, i) {
-          that.state.suggestions[i] = franchise.name;
+        var suggestions = [];
 
-          that.franchiseSuggest(that.state.suggestions, that);
+        data.map(function(franchise, i) {
+          suggestions[i] = franchise.name;
+
+          that.franchiseSuggest(suggestions);
         });
       }
     });
   },
-  franchiseSuggest: function(suggestions, that) {
+  franchiseSuggest: function(suggestions) {
     if (suggestions) {
       return (
-        suggestions.map(function(franchise, i, that) {
-          console.log(franchise + " " + i);
-          console.log(that.state.query);
+        suggestions.map(function(franchise, i) {
           return (
             <li>{franchise.name}</li>
           );
