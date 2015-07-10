@@ -50,16 +50,17 @@ var ListItem = React.createClass({
 
 var FranchiseList = React.createClass({
   getInitialState: function() {
-    return { show: 'hidden' };
+    return { 
+      showinput: false,
+    };
   },
   handleClick: function() {
-    this.setState({show: this.state.show === 'input-shown' ? 'input-hidden' : 'input-shown' });
-    $("#add-franchise-button").toggleClass("hidden");
+    this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
+      React.findDOMNode(this.refs.franchiseInput).focus();
+    });
   },
   render: function() {
-    if (!this.state.show) {
-      var classString = "hidden";
-    }
+    var classString = this.state.showinput ? "hidden" : "shown";
     var preventbubbling = function(e) {
       e.stopPropagation();
     };
@@ -68,12 +69,12 @@ var FranchiseList = React.createClass({
         {this.props.franchises.map(function(franchise) {
           return <ListItem key={franchise.id} data={franchise} />;
         })}
-        <li id="add-franchise-button" className={classString} onClick={this.handleClick}>
+        <li ref="addFranchiseButton" id="add-franchise-button" className={classString} onClick={this.handleClick}>
           <div>
             <span className="icon icon-plus"></span>
             {this.props.franchise_add}
 
-            <input id={this.props.elementid} className={this.state.show} type="text" placeholder={this.props.placeholder} onClick={preventbubbling} />
+            <input ref="franchiseInput" id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={preventbubbling} />
           </div>
         </li>
       </ul>
