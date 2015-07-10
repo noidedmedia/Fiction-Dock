@@ -31,17 +31,29 @@ var GenericLabel = React.createClass({
 });
 
 var ListItem = React.createClass({
-  handleClick: function() {
-    this.props.data = null;
-    onChange();
+  getInitialState: function() {
+    return {
+      name: this.props.data.name,
+      style: {
+        display: 'block'
+      }
+    };
+  },
+  handleDelete: function() {
+    this.setState({
+      name: null,
+      style: {
+        display: 'none'
+      }
+    });
   },
   render: function() {
     return (
-      <li>
+      <li style={this.state.style}>
         <div>
-          <span className="icon icon-close" onClick={this.handleClick}></span>
+          <span className="icon icon-close" onClick={this.handleDelete}></span>
 
-          {this.props.data.name}
+          {this.state.name}
         </div>
       </li>
     );
@@ -51,30 +63,31 @@ var ListItem = React.createClass({
 var FranchiseList = React.createClass({
   getInitialState: function() {
     return { 
-      showinput: false,
+      showinput: false
     };
   },
-  handleClick: function() {
+  handleAdd: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
       React.findDOMNode(this.refs.franchiseInput).focus();
     });
   },
+  preventBubbling: function(e) {
+    e.stopPropagation();
+  },
   render: function() {
-    var classString = this.state.showinput ? "hidden" : "shown";
-    var preventbubbling = function(e) {
-      e.stopPropagation();
-    };
     return (
       <ul className="franchise-list">
-        {this.props.franchises.map(function(franchise) {
-          return <ListItem key={franchise.id} data={franchise} />;
-        })}
-        <li ref="addFranchiseButton" id="add-franchise-button" className={classString} onClick={this.handleClick}>
+        {this.props.franchises.map(function(franchise, i) {
+          return (
+            <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} />
+          );
+        }, this)}
+        <li ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "hidden" : "shown"} onClick={this.handleAdd} >
           <div>
             <span className="icon icon-plus"></span>
             {this.props.franchise_add}
 
-            <input ref="franchiseInput" id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={preventbubbling} />
+            <input ref="franchiseInput" id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} />
           </div>
         </li>
       </ul>
@@ -93,10 +106,3 @@ var ReactFormElements = React.createClass({
     );
   }
 });
-
-var onChange = function() {
-  React.render(
-    <ReactFormElements {...this.props} />,
-    document.getElementById('react-form-elements')
-  );
-};
