@@ -193,45 +193,61 @@
 }
 
 #react-form-elements {
-  margin-top: 20px;
+  margin-top: 30px;
+
+  .section-header {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #aaaab2;
+  }
 }
 
 .franchise-list {
   list-style: none;
 
-  > div > li {
-    display: block;
-    margin: 6px 0 0;
-    cursor: default;
+  > li:last-of-type {
     position: relative;
+    margin-top: 20px;
 
     input {
       border: 1px solid #aaaab2;
     }
+  }
 
-    div:not(.suggestions-container) {
-      display: inline-block;
-      padding: 8px 0;
-      font-weight: 500;
-    }
+  > div {
+    margin-bottom: 25px;
 
-    span.icon-close {
-      font-size: 10px;
-      margin-right: 8px;
-      color: #aaaab2;
-      cursor: pointer;
-      transition: color 200ms;
-      position: absolute;
-      left: -25px;
-      top: 12px;
+    > li {
+      display: block;
+      margin: 6px 0 0;
+      cursor: default;
+      position: relative;
 
-      &:hover {
-        color: $color-danger;
+      div:not(.suggestions-container) {
+        display: inline-block;
+        padding: 8px 0;
+        font-weight: 500;
+      }
+
+      span.icon-close {
+        font-size: 10px;
+        margin-right: 8px;
+        color: #aaaab2;
+        cursor: pointer;
+        transition: color 200ms;
+        position: absolute;
+        left: -25px;
+        top: 12px;
+
+        &:hover {
+          color: $color-danger;
+        }
       }
     }
   }
 }
-
 
 #add-franchise-button {
   cursor: pointer;
@@ -244,7 +260,6 @@
   position: relative;
   display: inline-block;
   font-weight: 400;
-  margin-top: 20px;
 
   span.icon {
     font-size: 10px;
@@ -342,6 +357,7 @@
 
     &:last-of-type {
       display: block;
+      margin-top: 0;
     }
   }
 }

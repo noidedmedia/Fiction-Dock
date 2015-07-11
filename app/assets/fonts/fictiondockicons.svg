@@ -1,11 +1,11 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <!--
-2015-7-3: Created with FontForge (http://fontforge.org)
+2015-7-10: Created with FontForge (http://fontforge.org)
 -->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <metadata>
-Created by FontForge 20150618 at Fri Jul  3 16:17:32 2015
+Created by FontForge 20150618 at Fri Jul 10 19:20:13 2015
  By Connor Shea
 Copyright (c) 2015, Connor Shea
 </metadata>
@@ -37,8 +37,8 @@ v-192h256z" />
     <glyph glyph-name="uniF113" unicode="&#xf113;" 
 d="M384 384l512 -512l-384 -384l-512 512v256l128 128h256zM64 32l448 -448l288 288l-448 448h-192l-96 -96v-192zM448 128l256 -256l-192 -192l-256 256zM352 -64l160 -160l96 96l-160 160zM320 160c0 -53 -43 -96 -96 -96s-96 43 -96 96s43 96 96 96s96 -43 96 -96z
 M224 128c18 0 32 14 32 32s-14 32 -32 32s-32 -14 -32 -32s14 -32 32 -32z" />
-    <glyph glyph-name="uniF101" unicode="&#xf101;" horiz-adv-x="640" 
-d="M640 128l-192 -192l192 -192l-128 -128l-192 192l-192 -192l-128 128l192 192l-192 192l128 128l192 -192l192 192z" />
+    <glyph glyph-name="uniF101" unicode="&#xf101;" horiz-adv-x="660" 
+d="M660 209l-264 -263l264 -264l-67 -66l-263 264l-264 -264l-66 66l264 264l-264 263l66 67l264 -264l263 264z" />
     <glyph glyph-name="uniF110" unicode="&#xf110;" 
 d="M128 -320v512h640v-512h-640zM256 64v-256h384v256h-384zM64 256v-192h-64v256h256v-64h-192zM64 -192v-192h192v-64h-256v256h64zM640 320h256v-256h-64v192h-192v64zM832 -384v0v192h64v-256h-256v64h192z" />
     <glyph glyph-name="uniF109" unicode="&#xf109;" horiz-adv-x="768" 
@@ -54,8 +54,8 @@ l128 128v64l-64 -64l-64 64l-64 -64l-64 64v-64z" />
 d="M640 256l128 -128l-512 -512l-256 256l128 128l128 -128z" />
     <glyph glyph-name="uniF114" unicode="&#xf114;" horiz-adv-x="768" 
 d="M0 256h768v-128h-768v128zM0 -128v128h768v-128h-768zM0 -384v128h768v-128h-768z" />
-    <glyph glyph-name="uniF10E" unicode="&#xf10e;" horiz-adv-x="640" 
-d="M384 0h256v-128h-256v-256h-128v256h-256v128h256v256h128v-256z" />
+    <glyph glyph-name="uniF10E" unicode="&#xf10e;" horiz-adv-x="722" 
+d="M722 -106h-310v-309h-103v309h-309v103h309v310h103v-310h310v-103z" />
     <glyph glyph-name="uniF10D" unicode="&#xf10d;" 
 d="M704 384l192 -192l-128 -128l-192 192zM0 -320l512 512l192 -192l-512 -512l-191 -1zM192 -448v64h-64v64h-64v-128h128z" />
     <glyph glyph-name="uniF105" unicode="&#xf105;" 

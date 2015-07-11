@@ -138,6 +138,9 @@ var Franchises = React.createClass({
   render: function() {
     return (
       <div>
+
+        <div className="section-header">{this.props.franchises_label}</div>
+
         <ul className="franchise-list">
 
           {this.state.franchises.map(function(franchise, i) {
@@ -249,8 +252,6 @@ var ReactFormElements = React.createClass({
     console.log(this.props.franchises);
     return (
       <div>
-        <GenericLabel elementfor={this.props.franchises_elementid} label={this.props.franchises_label} />
-
         <Franchises {...this.props} />
       </div>
     );
