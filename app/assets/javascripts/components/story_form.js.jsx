@@ -9,19 +9,11 @@ var GenericLabel = React.createClass({
 var ListItem = React.createClass({
   getInitialState: function() {
     return {
-      name: this.props.data.name,
-      style: {
-        display: 'block'
-      }
+      name: this.props.data.name
     };
   },
-  handleDelete: function() {
-    this.setState({
-      name: null,
-      style: {
-        display: 'none'
-      }
-    });
+  handleDelete: function(e) {
+    this.props.remove(this.props.data);
   },
   render: function() {
     return (
@@ -54,14 +46,15 @@ var AddFranchiseButton = React.createClass({
     e.stopPropagation();
   },
   addFranchise: function(e) {
-    console.log(e.target.data);
+    // Forward the chosen franchise along to the main React class.
+    this.props.addFranchise(e.target.data);
 
     // Hide input, remove suggestions
     this.props.onChange("");
     this.setState({showinput: false});
     this.props.suggestions.length = 0;
   },
-  render: function () {
+  render: function() {
     return (
       <li>
         <div ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "add-new-franchise hidden" : "add-new-franchise shown"} onClick={this.handleClick} >
@@ -85,11 +78,12 @@ var AddFranchiseButton = React.createClass({
   }
 });
 
-var FranchiseList = React.createClass({
+var Franchises = React.createClass({
   getInitialState: function() {
     return {
-      query: "",
-      suggestions: []
+      franchisequery: "",
+      suggestions: [],
+      franchises: this.props.franchises
     };
   },
   handleChange: function(query) {
@@ -113,6 +107,7 @@ var FranchiseList = React.createClass({
             suggestions.push(franchise);
           });
 
+          console.log("Suggestions:");
           console.log(suggestions);
 
           _this.setState({ suggestions: suggestions });
@@ -120,38 +115,142 @@ var FranchiseList = React.createClass({
       });
     }
   },
+  addFranchise: function(franchise) {
+    var franchises = this.state.franchises.push(franchise);
+
+    console.log("Franchises:");
+    console.log(this.state.franchises);
+
+    console.log("Adding:");
+    console.log(franchise);
+  },
+  removeFranchise: function(franchise) {
+    var franchises = this.state.franchises.filter(function(f) {
+      return franchise.id !== f.id;
+    });
+
+    console.log("Removing:");
+    console.log(franchise);
+
+    this.setState({franchises: franchises});
+  },
   render: function() {
     return (
-      <ul className="franchise-list">
+      <div>
+        <ul className="franchise-list">
 
-        {this.props.franchises.map(function(franchise, i) {
+          {this.state.franchises.map(function(franchise, i) {
+            var characters = this.props.characters.filter(function(character) {
+              return franchise.id == character.franchise_id;
+            });
+            return (
+              <div>
+                <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
+                <Characters characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} />
+              </div>
+            );
+          }, this)}
+          
+          <AddFranchiseButton query={this.state.query} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} addFranchise={this.addFranchise} />
+
+        </ul>
+
+        <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} />
+      </div>
+    );
+  }
+});
+
+var AddCharacterButton = React.createClass({
+  getInitialState: function() {
+    return { 
+      showinput: false
+    };
+  },
+  onChange: function(e) {
+    this.props.onChange(e.target.value);
+  },
+  handleClick: function() {
+    this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
+      React.findDOMNode(this.refs.characterInput).focus();
+    });
+  },
+  preventBubbling: function(e) {
+    e.stopPropagation();
+  },
+  addCharacter: function(e) {
+    // Forward the chosen franchise along to the main React class.
+    this.props.addCharacter(e.target.data);
+
+    // Hide input, remove suggestions
+    this.props.onChange("");
+    this.setState({showinput: false});
+    this.props.suggestions.length = 0;
+  },
+  render: function() {
+    return (
+      <li>
+        <div ref="addCharacterButton" id="add-character-button" className={this.state.showinput ? "add-new-character hidden" : "add-new-character shown"} onClick={this.handleClick} >
+          <span className="icon icon-plus"></span>
+          {this.props.character_add}
+
+          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} onChange={this.onChange} />
+        </div>
+      </li>
+    );
+  }
+});
+
+var Characters = React.createClass({
+  getInitialState: function() {
+    return {
+      suggestions: [],
+      characters: this.props.characters
+    };
+  },
+  removeCharacter: function(character) {
+    var characters = this.state.characters.filter(function(c) {
+      return character.id !== c.id;
+    });
+
+    console.log("Removing:");
+    console.log(character);
+
+    this.setState({characters: characters});
+  },
+  render: function() {
+    return (
+      <ul className="character-list">
+        {this.state.characters.map(function(character, i) {
           return (
-            <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} />
+            <ListItem key={character.id} data={character} ref={'character' + i} remove={this.removeCharacter} />
           );
         }, this)}
-        
-        <AddFranchiseButton query={this.state.query} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} />
 
+        <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} />
       </ul>
+    );
+  }
+});
+
+var SubmitButton = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <input type="submit" name="commit" value={this.props.submit} id={this.props.elementid} />
+      </div>
     );
   }
 });
 
 var ReactFormElements = React.createClass({
   render: function() {
+    console.log(this.props.franchises);
     return (
       <div>
-        <div>
-          <GenericLabel elementfor={this.props.franchises_elementid} label={this.props.franchises_label} />
+        <GenericLabel elementfor={this.props.franchises_elementid} label={this.props.franchises_label} />
 
-          <FranchiseList franchises={this.props.franchises} elementid={this.props.franchises_elementid} placeholder={this.props.franchises_placeholder} franchise_add={this.props.franchise_add} />
-        </div>
-
-        <div>
-          <GenericLabel elementfor={this.props.characters_elementid} label={this.props.characters_label} />
-          
-          <input id={this.props.characters_elementid} type="text" placeholder={this.props.characters_placeholder} />
-        </div>
+        <Franchises {...this.props} />
       </div>
     );
   }
