@@ -83,7 +83,8 @@ var Franchises = React.createClass({
     return {
       franchisequery: "",
       suggestions: [],
-      franchises: this.props.franchises
+      franchises: this.props.franchises,
+      characters: this.props.characters
     };
   },
   handleChange: function(query) {
@@ -140,7 +141,7 @@ var Franchises = React.createClass({
         <ul className="franchise-list">
 
           {this.state.franchises.map(function(franchise, i) {
-            var characters = this.props.characters.filter(function(character) {
+            var characters = this.state.characters.filter(function(character) {
               return franchise.id == character.franchise_id;
             });
             return (

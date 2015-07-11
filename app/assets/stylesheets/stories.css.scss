@@ -192,79 +192,8 @@
   }
 }
 
-#add-franchise-button {
-  cursor: pointer;
-  overflow: hidden;
-  background-color: rgba(#5bb289,0.8);
-  color: #fff;
-  transition: background-color 200ms;
-  border-radius: 3px;
-  padding: 10px 14px 10px 34px;
-  position: relative;
-  font-weight: 400;
-
-  span.icon {
-    font-size: 10px;
-    color: #fff;
-    position: absolute;
-    left: 12px;
-    top: 13px;
-  }
-
-  &:hover {
-    background-color: #5bb289;
-  }
-
-  &.hidden {
-    overflow: auto;
-    cursor: default;
-    margin-bottom: 0;
-    padding: 0;
-    width: 100%;
-    max-width: 300px;
-    border-radius: 0;
-
-    span {
-      display: none;
-    }
-  }
-}
-
-.character-list {
-  list-style: none;
-
-  > li {
-    display: inline-block;
-    margin: 6px 6px 6px 0;
-    cursor: default;
-    position: relative;
-
-    input {
-      border: 1px solid #aaaab2;
-    }
-
-    div {
-      display: inline-block;
-      padding: 8px 48px 8px 10px;
-      font-weight: 500;
-      border: 1px solid #aaaab2;
-      border-radius: 3px;
-    }
-
-    span.icon-close {
-      font-size: 10px;
-      color: #aaaab2;
-      cursor: pointer;
-      transition: color 200ms;
-      position: absolute;
-      right: 10px;
-      top: 13px;
-
-      &:hover {
-        color: $color-danger;
-      }
-    }
-  }
+#react-form-elements {
+  margin-top: 20px;
 }
 
 .franchise-list {
@@ -272,7 +201,7 @@
 
   > div > li {
     display: block;
-    margin: 6px 0;
+    margin: 6px 0 0;
     cursor: default;
     position: relative;
 
@@ -299,6 +228,47 @@
       &:hover {
         color: $color-danger;
       }
+    }
+  }
+}
+
+
+#add-franchise-button {
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(#5bb289,0.8);
+  color: #fff;
+  transition: background-color 200ms;
+  border-radius: 3px;
+  padding: 10px 14px 10px 34px;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  margin-top: 20px;
+
+  span.icon {
+    font-size: 10px;
+    color: #fff;
+    position: absolute;
+    left: 12px;
+    top: 13px;
+  }
+
+  &:hover {
+    background-color: #5bb289;
+  }
+
+  &.hidden {
+    overflow: auto;
+    cursor: default;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 0;
+
+    span {
+      display: none;
     }
   }
 }
@@ -335,27 +305,70 @@
   }
 }
 
+.character-list {
+  list-style: none;
+
+  > li {
+    display: inline-block;
+    margin: 6px 6px 6px 0;
+    cursor: default;
+    position: relative;
+
+    input {
+      border: 1px solid #aaaab2;
+    }
+
+    div {
+      display: inline-block;
+      padding: 8px 48px 8px 10px;
+      font-weight: 400;
+      border: 1px solid #aaaab2;
+      border-radius: 3px;
+    }
+
+    span.icon-close {
+      font-size: 10px;
+      color: #aaaab2;
+      cursor: pointer;
+      transition: color 200ms;
+      position: absolute;
+      right: 10px;
+      top: 13px;
+
+      &:hover {
+        color: $color-danger;
+      }
+    }
+
+    &:last-of-type {
+      display: block;
+    }
+  }
+}
+
 #add-character-button {
   cursor: pointer;
   overflow: hidden;
-  background-color: rgba(#aaaab2,0.7);
-  color: #fff;
-  transition: background-color 200ms;
+  background-color: transparent;
+  color: rgba(#5bb289,0.8);
+  border: 1px solid rgba(#5bb289,0.8);
   border-radius: 3px;
-  padding: 8px 8px 8px 30px;
+  padding: 8px 12px 8px 32px;
   position: relative;
-  display: inline;
+  display: inline-block;
+  transition: border-color 200ms, color 200ms;
 
   span.icon {
     font-size: 10px;
-    color: #fff;
+    color: #5bb289;
     position: absolute;
-    left: 8px;
-    top: 12px;
+    left: 10px;
+    top: 11px;
   }
 
   &:hover {
-    background-color: #aaaab2;
+    color: #5bb289;
+    border-color: #5bb289;
   }
 
   &.hidden {
