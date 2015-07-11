@@ -150,7 +150,7 @@ var Franchises = React.createClass({
             return (
               <div>
                 <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} />
+                <Characters characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise_id={franchise.id} />
               </div>
             );
           }, this)}
@@ -222,6 +222,32 @@ var Characters = React.createClass({
 
     this.setState({characters: characters});
   },
+  handleChange: function(query) {
+    this.setState({ query: query });
+
+    var _this = this;
+    var franchise_id = this.props.franchise_id;
+
+    if (query === "") {
+      this.setState({ suggestions: [] });
+    } else {
+      $.ajax("/franchises/" + franchise_id + "/characters.json", {
+        dataType: "json",
+        success: function(data) {
+
+          console.log(data);
+
+          var suggestions = [];
+
+          data.map(function(franchise, i) {
+            suggestions.push(franchise);
+          });
+
+          // _this.setState({ suggestions: suggestions });
+        }
+      });
+    }
+  },
   render: function() {
     return (
       <ul className="character-list">
@@ -231,7 +257,7 @@ var Characters = React.createClass({
           );
         }, this)}
 
-        <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} />
+        <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} franchise_id={this.props.franchise_id} />
       </ul>
     );
   }
