@@ -88,7 +88,7 @@ var Franchises = React.createClass({
     };
   },
   handleChange: function(query) {
-    this.setState({ query: query });
+    this.setState({ franchisequery: query });
 
     var _this = this;
 
@@ -150,7 +150,7 @@ var Franchises = React.createClass({
             return (
               <div>
                 <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise_id={franchise.id} />
+                <Characters characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} />
               </div>
             );
           }, this)}
@@ -168,11 +168,20 @@ var Franchises = React.createClass({
 var AddCharacterButton = React.createClass({
   getInitialState: function() {
     return { 
-      showinput: false
+      showinput: false,
+      inputfocus: false
     };
   },
   onChange: function(e) {
     this.props.onChange(e.target.value);
+  },
+  onFocus: function(e) {
+    this.setState({inputfocus: true});
+
+    this.props.onChange(e.target.value);
+  },
+  onBlur: function() {
+    this.setState({inputfocus: false});
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
@@ -186,9 +195,8 @@ var AddCharacterButton = React.createClass({
     // Forward the chosen franchise along to the main React class.
     this.props.addCharacter(e.target.data);
 
-    // Hide input, remove suggestions
-    this.props.onChange("");
-    this.setState({showinput: false});
+    this.props.onChange(false);
+    this.setState({showinput: false, inputfocus: false});
     this.props.suggestions.length = 0;
   },
   render: function() {
@@ -198,8 +206,19 @@ var AddCharacterButton = React.createClass({
           <span className="icon icon-plus"></span>
           {this.props.character_add}
 
-          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} onChange={this.onChange} />
+          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
         </div>
+
+        <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
+          <ul className="suggestions">
+            {this.props.suggestions.map(function(character, i) {
+              return (
+                <li key={character.id} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
+              );
+            }, this)}
+          </ul>
+        </div>
+
       </li>
     );
   }
@@ -222,36 +241,44 @@ var Characters = React.createClass({
 
     this.setState({characters: characters});
   },
+  addCharacter: function(character) {
+    var characters = this.state.characters.push(character);
+  },
   handleChange: function(query) {
-    this.setState({ query: query });
-
     var _this = this;
-    var franchise_id = this.props.franchise_id;
+    var franchise = this.props.franchise;
 
-    if (query === "") {
+    if (query === false) {
       this.setState({ suggestions: [] });
     } else {
-      $.ajax("/franchises/" + franchise_id + "/characters.json", {
+      $.ajax("/franchises/" + franchise.slug + ".json", {
         dataType: "json",
         success: function(data) {
 
           console.log(data);
 
           var suggestions = [];
+          data = data.characters;
 
-          data.map(function(franchise, i) {
-            suggestions.push(franchise);
+          console.log(data);
+
+          data.map(function(character, i) {
+            suggestions.push(character);
           });
 
-          // _this.setState({ suggestions: suggestions });
+          console.log(suggestions);
+
+          _this.setState({ suggestions: suggestions });
         }
       });
     }
   },
   render: function() {
+    console.log(this.state.characters);
     return (
       <ul className="character-list">
         {this.state.characters.map(function(character, i) {
+          console.log(character);
           return (
             <ListItem key={character.id} data={character} ref={'character' + i} remove={this.removeCharacter} />
           );

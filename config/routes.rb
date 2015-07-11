@@ -7,9 +7,11 @@ Rails.application.routes.draw do
       get :published
     end
   end
+  
   resources :franchise_creation_requests do
     post 'accept', on: :member
   end
+
   resources :stories, concerns: [:publishable] do
     # see if currently subscribed
     get 'subscribed'
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
       get 'contains'
     end
   end
+  
   resources :characters do
     get 'stories', on: :member
   end
