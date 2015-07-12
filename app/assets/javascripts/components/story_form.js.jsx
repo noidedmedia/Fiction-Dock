@@ -130,10 +130,21 @@ var Franchises = React.createClass({
       return franchise.id !== f.id;
     });
 
+    console.log("Characters:");
+    console.log(this.state.characters);
+
+    var characters = this.state.characters.filter(function(c) {
+      return franchise.id !== c.franchise_id;
+    });
+
+    console.log("Characters2:");
+    console.log(characters);
+
     console.log("Removing:");
     console.log(franchise);
 
     this.setState({franchises: franchises});
+
   },
   render: function() {
     return (
@@ -148,9 +159,9 @@ var Franchises = React.createClass({
               return franchise.id == character.franchise_id;
             });
             return (
-              <div>
+              <div key={'container' + franchise.id}>
                 <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} />
+                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} />
               </div>
             );
           }, this)}
@@ -178,10 +189,8 @@ var AddCharacterButton = React.createClass({
   onFocus: function(e) {
     this.setState({inputfocus: true});
 
+    console.log(e.target.value);
     this.props.onChange(e.target.value);
-  },
-  onBlur: function() {
-    this.setState({inputfocus: false});
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
@@ -192,12 +201,15 @@ var AddCharacterButton = React.createClass({
     e.stopPropagation();
   },
   addCharacter: function(e) {
+    console.log(e.target.data);
+    console.log(e.target);
+
     // Forward the chosen franchise along to the main React class.
     this.props.addCharacter(e.target.data);
 
-    this.props.onChange(false);
     this.setState({showinput: false, inputfocus: false});
     this.props.suggestions.length = 0;
+    this.props.onChange(false);
   },
   render: function() {
     return (
@@ -206,14 +218,14 @@ var AddCharacterButton = React.createClass({
           <span className="icon icon-plus"></span>
           {this.props.character_add}
 
-          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
         </div>
 
         <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
           <ul className="suggestions">
             {this.props.suggestions.map(function(character, i) {
               return (
-                <li key={character.id} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
+                <li key={character.id + "character" + i} character={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
               );
             }, this)}
           </ul>
@@ -242,7 +254,11 @@ var Characters = React.createClass({
     this.setState({characters: characters});
   },
   addCharacter: function(character) {
+    console.log(character);
+
+    console.log(this.state.characters);
     var characters = this.state.characters.push(character);
+    console.log(this.state.characters);
   },
   handleChange: function(query) {
     var _this = this;
@@ -255,15 +271,9 @@ var Characters = React.createClass({
         dataType: "json",
         success: function(data) {
 
-          console.log(data);
-
-          var suggestions = [];
-          data = data.characters;
-
-          console.log(data);
-
-          data.map(function(character, i) {
-            suggestions.push(character);
+          var suggestions = data.characters.map(function(character, i) {
+            console.log(character);
+            return character;
           });
 
           console.log(suggestions);
@@ -274,19 +284,24 @@ var Characters = React.createClass({
     }
   },
   render: function() {
-    console.log(this.state.characters);
-    return (
-      <ul className="character-list">
-        {this.state.characters.map(function(character, i) {
-          console.log(character);
-          return (
-            <ListItem key={character.id} data={character} ref={'character' + i} remove={this.removeCharacter} />
-          );
-        }, this)}
+    if (this.state.characters) {
+      return (
+        <ul className="character-list">
+          {this.state.characters.forEach(function(character, i) {
+            console.log(character);
+            return (
+              <ListItem key={character.id} data={character} ref={'character' + i} remove={this.removeCharacter} />
+            );
+          }, this)}
 
-        <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} franchise_id={this.props.franchise_id} />
-      </ul>
-    );
+          <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} franchise_id={this.props.franchise_id} />
+        </ul>
+      );
+    } else {
+      return (
+        <ul></ul>
+      );
+    }
   }
 });
 
