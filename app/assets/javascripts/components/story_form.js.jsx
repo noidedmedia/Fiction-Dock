@@ -143,6 +143,19 @@ var Franchises = React.createClass({
 
     this.setState({ franchises: franchises });
   },
+  updateCharacters: function(characters) {
+    var newcharacters = [];
+
+    this.state.characters.map(function(character, i) {
+      newcharacters.push(character);
+    });
+
+    characters.map(function(character, i) {
+      newcharacters.push(character);
+    });
+
+    this.setState({ characters: newcharacters });
+  },
   render: function() {
     console.log(this.props.characters);
     return (
@@ -159,7 +172,7 @@ var Franchises = React.createClass({
             return (
               <div key={'container' + franchise.id}>
                 <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} />
+                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} updateCharacters={this.updateCharacters} />
               </div>
             );
           }, this)}
@@ -168,7 +181,7 @@ var Franchises = React.createClass({
 
         </ul>
 
-        <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} />
+        <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
       </div>
     );
   }
@@ -194,7 +207,6 @@ var AddCharacterButton = React.createClass({
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
       $(React.findDOMNode(this.refs.characterInput)).focus();
-      console.log("TEST");
     });
     var characterinput = React.findDOMNode(this.refs.characterInput);
     console.log(characterinput);
@@ -275,7 +287,9 @@ var Characters = React.createClass({
     characters.push(character);
     console.log(characters);
 
-    this.setState({characters: characters});
+    this.setState({characters: characters}, function() {
+      this.props.updateCharacters(this.state.characters);
+    });
 
     this.emptySuggestions();
   },
@@ -334,10 +348,51 @@ var Characters = React.createClass({
 });
 
 var SubmitButton = React.createClass({
+  handleClick: function(e) {
+    e.preventDefault();
+
+    var Story = {};
+
+    var storyid = $("#story-form").data("story-id");
+
+    Story.franchise_ids = this.props.franchises.map(function(franchise) {
+      return franchise.id;
+    });
+
+    Story.character_ids = this.props.characters.map(function(character) {
+      return character.id;
+    });
+
+    console.log(Story);
+    console.log(storyid);
+
+    console.log(JSON.stringify(Story));
+
+    Story = {story: Story};
+
+    console.log(JSON.stringify(Story));
+
+    var method = storyid ? "PUT" : "POST";
+    console.log(method);
+
+    $.ajax("/stories/" + storyid, {
+      dataType: "json",
+      data: JSON.stringify(Story),
+      contentType: "application/json; encoding=utf-8",
+      method: method,
+      success: function(data) {
+        window.location.href = "/stories/" + data.id;
+      },
+      error: function(error) {
+        console.log(error);
+        console.log(JSON.parse(error.responseText));
+      }
+    });
+  },
   render: function() {
     return (
       <div>
-        <input type="submit" name="commit" value={this.props.submit} id={this.props.elementid} />
+        <input type="submit" name="commit" value={this.props.submit} id={this.props.elementid} onClick={this.handleClick} />
       </div>
     );
   }
