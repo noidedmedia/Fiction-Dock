@@ -210,9 +210,6 @@ var AddCharacterButton = React.createClass({
     // Forward the chosen franchise along to the main React class.
     this.props.addCharacter(e.target.data);
 
-    this.setState({showinput: false, inputfocus: false});
-    this.props.suggestions.length = 0;
-    this.props.onChange(false);
   },
   render: function() {
     return (
@@ -221,14 +218,14 @@ var AddCharacterButton = React.createClass({
           <span className="icon icon-plus"></span>
           {this.props.character_add}
 
-          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} onFocus={this.onFocus} />
         </div>
 
         <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
           <ul className="suggestions">
             {this.props.suggestions.map(function(character, i) {
               return (
-                <li key={character.id + "character" + i} character={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
+                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
               );
             }, this)}
           </ul>
@@ -268,7 +265,7 @@ var Characters = React.createClass({
     var franchise = this.props.franchise;
 
     if (query === false) {
-      this.setState({ suggestions: [] });
+      console.log("test");
     } else {
       $.ajax("/franchises/" + franchise.slug + ".json", {
         dataType: "json",
