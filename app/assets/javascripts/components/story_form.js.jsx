@@ -31,20 +31,21 @@ var AddFranchiseButton = React.createClass({
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
-      React.findDOMNode(this.refs.franchiseInput).focus();
+      $(React.findDOMNode(this.refs.franchiseInput)).val("").focus();
     });
   },
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  addFranchise: function(x, e) {
-    console.log(e);
-    console.log(e.target);
+  addFranchise: function(x, i, e) {
+    console.log(e.target.data);
+
+    var franchise = e.target.data;
+
     // Forward the chosen franchise along to the main React class.
-    this.props.addFranchise(e.target.data);
+    this.props.addFranchise(franchise);
 
     // Hide input, remove suggestions
-    this.props.onChange("");
     this.setState({showinput: false});
   },
   render: function() {
@@ -60,10 +61,8 @@ var AddFranchiseButton = React.createClass({
         <div className={this.props.suggestions.length > 0 ? "suggestions-container active" : "suggestions-container inactive"} >
           <ul className="suggestions">
             {this.props.suggestions.map(function(franchise, i) {
-              console.log(i);
-              console.log(franchise);
               return (
-                <li key={franchise.id} data={franchise} ref={'franchise' + i} onClick={this.addFranchise.bind(null, franchise)}>{franchise.name}</li>
+                <li key={franchise.id} data={franchise} ref={'franchise' + i} onClick={this.addFranchise.bind(null, franchise, i)}>{franchise.name}</li>
               );
             }, this)}
           </ul>
@@ -90,29 +89,25 @@ var Franchises = React.createClass({
     console.log(query);
     console.log(this.state.franchisequery);
 
-      if (query === "") {
-        _this.setState({ suggestions: [] });
-      } else {
-        $.ajax("/franchises/complete.json?query=" + query, {
-          dataType: "json",
-          error: function() {
-            console.log("ERROR");
-          },
-          success: function(data) {
+    $.ajax("/franchises/complete.json?query=" + query, {
+      dataType: "json",
+      error: function() {
+        console.log("ERROR");
+      },
+      success: function(data) {
 
-            var suggestions = [];
+        var suggestions = [];
 
-            data.map(function(franchise, i) {
-              suggestions.push(franchise);
-            });
-
-            console.log("Suggestions:");
-            console.log(suggestions);
-
-            _this.setState({ suggestions: suggestions });
-          }
+        data.map(function(franchise, i) {
+          suggestions.push(franchise);
         });
+
+        console.log("Suggestions:");
+        console.log(suggestions);
+
+        _this.setState({ suggestions: suggestions });
       }
+    });
   },
   addFranchise: function(franchise) {
     var franchises = this.state.franchises;
@@ -124,7 +119,9 @@ var Franchises = React.createClass({
     console.log("Adding:");
     console.log(franchise);
 
-    this.setState({ franchises: franchises });
+    this.setState({ franchises: franchises }, function() {
+      this.setState({ suggestions: [] });
+    }.bind(this));
   },
   removeFranchise: function(franchise) {
     var franchises = this.state.franchises.filter(function(f) {
@@ -144,7 +141,7 @@ var Franchises = React.createClass({
     console.log("Removing:");
     console.log(franchise);
 
-    this.setState({franchises: franchises});
+    this.setState({ franchises: franchises });
   },
   render: function() {
     console.log(this.props.characters);
