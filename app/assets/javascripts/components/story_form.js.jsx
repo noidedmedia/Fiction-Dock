@@ -356,6 +356,8 @@ var SubmitButton = React.createClass({
     var storyid = $("#story-form").data("story-id");
 
     Story.name = $("#story-name-field").val();
+    Story.language = $("#story-language-select").val();
+    Story.license = $("#story-license-select").val();
     Story.blurb = $("#story-blurb-field").val();
     Story.description = $("#story-description-field").val();
 
