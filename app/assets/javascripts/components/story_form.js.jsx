@@ -144,7 +144,6 @@ var Franchises = React.createClass({
     console.log(franchise);
 
     this.setState({franchises: franchises});
-
   },
   render: function() {
     return (
@@ -190,7 +189,10 @@ var AddCharacterButton = React.createClass({
     this.setState({inputfocus: true});
 
     console.log(e.target.value);
-    this.props.onChange(e.target.value);
+
+    if (e.target.value !== "") {
+      this.props.onChange(e.target.value);
+    }
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
@@ -203,6 +205,7 @@ var AddCharacterButton = React.createClass({
   addCharacter: function(e) {
     console.log(e.target.data);
     console.log(e.target);
+    console.trace();
 
     // Forward the chosen franchise along to the main React class.
     this.props.addCharacter(e.target.data);
@@ -287,7 +290,7 @@ var Characters = React.createClass({
     if (this.state.characters) {
       return (
         <ul className="character-list">
-          {this.state.characters.forEach(function(character, i) {
+          {this.state.characters.map(function(character, i) {
             console.log(character);
             return (
               <ListItem key={character.id} data={character} ref={'character' + i} remove={this.removeCharacter} />
