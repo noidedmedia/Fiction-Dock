@@ -330,7 +330,7 @@
 
   > li {
     display: inline-block;
-    margin: 6px 6px 6px 0;
+    margin: 6px 6px 0 0;
     cursor: default;
     position: relative;
 
@@ -362,7 +362,6 @@
 
     &:last-of-type {
       display: block;
-      margin-top: 0;
     }
   }
 }
