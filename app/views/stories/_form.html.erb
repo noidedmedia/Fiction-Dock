@@ -3,7 +3,7 @@
     
     <div class="field-container">
       <%= f.label :name, t(".story_name") %>
-      <%= f.text_field :name, id: "story-name-field", placeholder: t(".story_name") %>
+      <%= f.text_field :name, id: "story-name-field", placeholder: t(".story_name"), autocomplete: "off" %>
     </div>
 
     <div class="select-container">
@@ -20,14 +20,13 @@
     
     <div class="field-container">
       <%= f.label :blurb, t(".blurb") %>
-      <%= f.text_field :blurb, id: "story-blurb-field", placeholder: t(".write_a_very_short_description_of_the_story") %>
+      <%= f.text_field :blurb, id: "story-blurb-field", placeholder: t(".write_a_very_short_description_of_the_story"), autocomplete: "off" %>
     </div>
 
     <div class="field-container">
       <%= f.label :description, t(".description") %>
       <%= f.text_area :description, id: "story-description-field", placeholder: t(".write_a_description_of_the_story") %>
     </div>
-
 
     <%= react_component('ReactFormElements', props={
       franchises: @story.franchises,
