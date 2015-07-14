@@ -37,16 +37,15 @@ var AddFranchiseButton = React.createClass({
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  addFranchise: function(e) {
+  addFranchise: function(x, e) {
+    console.log(e);
+    console.log(e.target);
     // Forward the chosen franchise along to the main React class.
     this.props.addFranchise(e.target.data);
 
     // Hide input, remove suggestions
     this.props.onChange("");
     this.setState({showinput: false});
-    this.props.suggestions.length = 0;
-
-    $(React.findDOMNode(this.refs.franchiseInput)).val("");
   },
   render: function() {
     return (
@@ -61,8 +60,10 @@ var AddFranchiseButton = React.createClass({
         <div className={this.props.suggestions.length > 0 ? "suggestions-container active" : "suggestions-container inactive"} >
           <ul className="suggestions">
             {this.props.suggestions.map(function(franchise, i) {
+              console.log(i);
+              console.log(franchise);
               return (
-                <li key={franchise.id} data={franchise} ref={'franchise' + i} onClick={this.addFranchise}>{franchise.name}</li>
+                <li key={franchise.id} data={franchise} ref={'franchise' + i} onClick={this.addFranchise.bind(null, franchise)}>{franchise.name}</li>
               );
             }, this)}
           </ul>
@@ -86,29 +87,32 @@ var Franchises = React.createClass({
 
     var _this = this;
 
-    if (query === "") {
-      this.setState({ suggestions: [] });
-    } else {
-      $.ajax("/franchises/complete.json?query=" + query, {
-        dataType: "json",
-        error: function() {
-          console.log("ERROR");
-        },
-        success: function(data) {
+    console.log(query);
+    console.log(this.state.franchisequery);
 
-          var suggestions = [];
+      if (query === "") {
+        _this.setState({ suggestions: [] });
+      } else {
+        $.ajax("/franchises/complete.json?query=" + query, {
+          dataType: "json",
+          error: function() {
+            console.log("ERROR");
+          },
+          success: function(data) {
 
-          data.map(function(franchise, i) {
-            suggestions.push(franchise);
-          });
+            var suggestions = [];
 
-          console.log("Suggestions:");
-          console.log(suggestions);
+            data.map(function(franchise, i) {
+              suggestions.push(franchise);
+            });
 
-          _this.setState({ suggestions: suggestions });
-        }
-      });
-    }
+            console.log("Suggestions:");
+            console.log(suggestions);
+
+            _this.setState({ suggestions: suggestions });
+          }
+        });
+      }
   },
   addFranchise: function(franchise) {
     var franchises = this.state.franchises;
@@ -204,8 +208,6 @@ var AddCharacterButton = React.createClass({
   },
   addCharacter: function(e) {
     console.log(e.target.data);
-    this.forceUpdate();
-    console.log(e.target.data);
 
     // Forward the chosen franchise along to the main React class.
     this.props.addCharacter(e.target.data);
@@ -279,7 +281,6 @@ var Characters = React.createClass({
     this.setState({characters: characters});
 
     this.emptySuggestions();
-    this.forceUpdate();
   },
   emptySuggestions: function() {
     this.setState({ suggestions: [] });
