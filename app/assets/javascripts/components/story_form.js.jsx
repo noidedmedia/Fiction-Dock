@@ -195,14 +195,14 @@ var AddCharacterButton = React.createClass({
       $(React.findDOMNode(this.refs.characterInput)).focus();
       console.log("TEST");
     });
-    this.props.onChange(React.findDOMNode(this.refs.characterInput));
+    var characterinput = React.findDOMNode(this.refs.characterInput);
+    console.log(characterinput);
+    this.props.onChange(characterinput);
   },
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  addCharacter: function(i, e) {
-    console.log(i);
-    console.log(e);
+  addCharacter: function(e) {
     console.log(e.target.data);
     this.forceUpdate();
     console.log(e.target.data);
@@ -233,7 +233,7 @@ var AddCharacterButton = React.createClass({
             {this.props.suggestions.map(function(character, i) {
               console.log(character);
               return (
-                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter.bind(null, i)}>{character.name}</li>
+                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
               );
             }, this)}
           </ul>
