@@ -188,22 +188,24 @@ var AddCharacterButton = React.createClass({
 
     console.log(e.target.value);
 
-    if (e.target.value !== "") {
-      this.props.onChange(e.target.value);
-    }
+    this.props.onChange(e.target.value);
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
       $(React.findDOMNode(this.refs.characterInput)).focus();
       console.log("TEST");
     });
+    this.props.onChange(React.findDOMNode(this.refs.characterInput));
   },
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  addCharacter: function(e) {
+  addCharacter: function(i, e) {
+    console.log(i);
+    console.log(e);
     console.log(e.target.data);
-    console.log(e.target);
+    this.forceUpdate();
+    console.log(e.target.data);
 
     // Forward the chosen franchise along to the main React class.
     this.props.addCharacter(e.target.data);
@@ -229,8 +231,9 @@ var AddCharacterButton = React.createClass({
         <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
           <ul className="suggestions">
             {this.props.suggestions.map(function(character, i) {
+              console.log(character);
               return (
-                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
+                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter.bind(null, i)}>{character.name}</li>
               );
             }, this)}
           </ul>
@@ -245,8 +248,15 @@ var Characters = React.createClass({
   getInitialState: function() {
     return {
       suggestions: [],
-      characters: this.props.characters
+      characters: []
     };
+  },
+  componentWillMount: function() {
+    if (this.props.characters) {
+      this.setState({ characters: this.props.characters });
+    } else {
+      this.setState({ characters: [] });
+    }
   },
   removeCharacter: function(character) {
     var characters = this.state.characters.filter(function(c) {
@@ -274,30 +284,33 @@ var Characters = React.createClass({
   emptySuggestions: function() {
     this.setState({ suggestions: [] });
   },
-  handleChange: function(query) {
+  handleChange: function() {
     var _this = this;
     var franchise = this.props.franchise;
-    console.log(query);
 
-    if (query === false) {
-      this.emptySuggestions();
-      console.log("test");
-    } else {
-      $.ajax("/franchises/" + franchise.slug + ".json", {
-        dataType: "json",
-        success: function(data) {
+    $.ajax("/franchises/" + franchise.slug + ".json", {
+      dataType: "json",
+      success: function(data) {
 
-          var suggestions = data.characters.map(function(character, i) {
-            console.log(character);
-            return character;
-          });
+        var suggestions = [];
 
-          console.log(suggestions);
+        console.log("Data.characters:");
+        console.log(data.characters);
 
-          _this.setState({ suggestions: suggestions });
-        }
-      });
-    }
+        data.characters.map(function(character, i) {
+          console.log(character.name);
+          console.log(character.id);
+          suggestions.push(character);
+        });
+
+        console.log(suggestions);
+
+        _this.setState({ suggestions: suggestions });
+
+        console.log("Suggestions state:");
+        console.log(_this.state.suggestions);
+      }
+    });
   },
   render: function() {
     if (this.state.characters) {

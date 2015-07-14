@@ -1,4 +1,4 @@
 json.extract! @franchise, :id, :name, :description, :slug
 json.characters @franchise.characters do |character|
-  json.extract! character, :name, :id, :slug, :franchise_id
+  json.extract! character, :created_at, :description, :franchise_id, :id, :name, :slug, :updated_at
 end
