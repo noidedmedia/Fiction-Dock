@@ -355,6 +355,10 @@ var SubmitButton = React.createClass({
 
     var storyid = $("#story-form").data("story-id");
 
+    Story.name = $("#story-name-field").val();
+    Story.blurb = $("#story-blurb-field").val();
+    Story.description = $("#story-description-field").val();
+
     Story.franchise_ids = this.props.franchises.map(function(franchise) {
       return franchise.id;
     });
