@@ -1,3 +1,7 @@
+// Generic ListItem class
+// Used to list the Franchises and Characters items.
+// Styles differ between Franchise ListItems and Character ListItems
+// because they're placed in different containers.
 var ListItem = React.createClass({
   getInitialState: function() {
     return {
@@ -9,7 +13,7 @@ var ListItem = React.createClass({
   },
   render: function() {
     return (
-      <li style={this.state.style}>
+      <li>
         <div>
           <span className="icon icon-close" onClick={this.handleDelete}></span>
 
@@ -20,6 +24,7 @@ var ListItem = React.createClass({
   }
 });
 
+// The "Add a new franchise" button
 var AddFranchiseButton = React.createClass({
   getInitialState: function() {
     return { 
@@ -33,6 +38,18 @@ var AddFranchiseButton = React.createClass({
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
       $(React.findDOMNode(this.refs.franchiseInput)).val("").focus();
     });
+  },
+  hideInput: function(e) {
+    // Make sure that clicking on the close button doesn't cause it to immediately reopen itself.
+    this.preventBubbling(e);
+
+    // Hide input, empty input field value.
+    this.setState({showinput: false}, function() {
+      $(React.findDOMNode(this.refs.franchiseInput)).val("");
+    });
+
+    // Remove suggestions.
+    this.props.onChange("");
   },
   preventBubbling: function(e) {
     e.stopPropagation();
@@ -51,11 +68,13 @@ var AddFranchiseButton = React.createClass({
   render: function() {
     return (
       <li>
-        <div ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "add-new-franchise hidden" : "add-new-franchise shown"} onClick={this.handleClick} >
+        <div ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "add-new-franchise hidden" : "add-new-franchise shown"} onClick={this.handleClick}>
           <span className="icon icon-plus"></span>
           {this.props.franchise_add}
 
-          <input ref="franchiseInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onClick={this.preventBubbling} onChange={this.onChange} />
+          <input ref="franchiseInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} />
+
+          <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
         <div className={this.props.suggestions.length > 0 ? "suggestions-container active" : "suggestions-container inactive"} >
@@ -89,25 +108,29 @@ var Franchises = React.createClass({
     console.log(query);
     console.log(this.state.franchisequery);
 
-    $.ajax("/franchises/complete.json?query=" + query, {
-      dataType: "json",
-      error: function() {
-        console.log("ERROR");
-      },
-      success: function(data) {
+    if (query === "") {
+      _this.setState({ suggestions: [] });
+    } else {
+      $.ajax("/franchises/complete.json?query=" + query, {
+        dataType: "json",
+        error: function() {
+          console.log("ERROR");
+        },
+        success: function(data) {
 
-        var suggestions = [];
+          var suggestions = [];
 
-        data.map(function(franchise, i) {
-          suggestions.push(franchise);
-        });
+          data.map(function(franchise, i) {
+            suggestions.push(franchise);
+          });
 
-        console.log("Suggestions:");
-        console.log(suggestions);
+          console.log("Suggestions:");
+          console.log(suggestions);
 
-        _this.setState({ suggestions: suggestions });
-      }
-    });
+          _this.setState({ suggestions: suggestions });
+        }
+      });
+    }
   },
   addFranchise: function(franchise) {
     var franchises = this.state.franchises;

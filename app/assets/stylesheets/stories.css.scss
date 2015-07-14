@@ -213,6 +213,7 @@
 
     input {
       border: 1px solid #aaaab2;
+      padding-right: 32px;
     }
   }
 
@@ -267,6 +268,13 @@
     position: absolute;
     left: 12px;
     top: 13px;
+
+    &.icon-close {
+      display: none;
+      top: 12px;
+      right: 10px;
+      left: auto;
+    }
   }
 
   &:hover {
@@ -282,8 +290,18 @@
     max-width: 300px;
     border-radius: 0;
 
-    span {
+    span:not(.icon-close) {
       display: none;
+    }
+
+    span.icon-close {
+      display: block;
+      color: #aaaab2;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
     }
   }
 }
