@@ -146,6 +146,7 @@ var Franchises = React.createClass({
     this.setState({franchises: franchises});
   },
   render: function() {
+    console.log(this.props.characters);
     return (
       <div>
 
@@ -205,11 +206,12 @@ var AddCharacterButton = React.createClass({
   addCharacter: function(e) {
     console.log(e.target.data);
     console.log(e.target);
-    console.trace();
+    var _this = this;
 
     // Forward the chosen franchise along to the main React class.
     this.props.addCharacter(e.target.data);
-
+    
+    this.setState({showinput: false, inputfocus: false});
   },
   render: function() {
     return (
@@ -263,8 +265,10 @@ var Characters = React.createClass({
   handleChange: function(query) {
     var _this = this;
     var franchise = this.props.franchise;
+    console.log(query);
 
     if (query === false) {
+      this.setState({ suggestions: [] });
       console.log("test");
     } else {
       $.ajax("/franchises/" + franchise.slug + ".json", {
