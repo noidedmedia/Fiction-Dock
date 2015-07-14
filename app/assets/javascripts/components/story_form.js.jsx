@@ -1,11 +1,3 @@
-var GenericLabel = React.createClass({
-  render: function() {
-    return (
-      <label htmlFor={this.props.elementfor}>{this.props.label}</label>
-    );
-  }
-});
-
 var ListItem = React.createClass({
   getInitialState: function() {
     return {
@@ -53,6 +45,8 @@ var AddFranchiseButton = React.createClass({
     this.props.onChange("");
     this.setState({showinput: false});
     this.props.suggestions.length = 0;
+
+    $(React.findDOMNode(this.refs.franchiseInput)).val("");
   },
   render: function() {
     return (
@@ -117,13 +111,16 @@ var Franchises = React.createClass({
     }
   },
   addFranchise: function(franchise) {
-    var franchises = this.state.franchises.push(franchise);
+    var franchises = this.state.franchises;
+    franchises.push(franchise);
 
     console.log("Franchises:");
     console.log(this.state.franchises);
 
     console.log("Adding:");
     console.log(franchise);
+
+    this.setState({ franchises: franchises });
   },
   removeFranchise: function(franchise) {
     var franchises = this.state.franchises.filter(function(f) {
@@ -166,7 +163,7 @@ var Franchises = React.createClass({
             );
           }, this)}
           
-          <AddFranchiseButton query={this.state.query} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} addFranchise={this.addFranchise} />
+          <AddFranchiseButton query={this.state.franchisequery} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} addFranchise={this.addFranchise} />
 
         </ul>
 
@@ -197,7 +194,8 @@ var AddCharacterButton = React.createClass({
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
-      React.findDOMNode(this.refs.characterInput).focus();
+      $(React.findDOMNode(this.refs.characterInput)).focus();
+      console.log("TEST");
     });
   },
   preventBubbling: function(e) {
@@ -206,12 +204,17 @@ var AddCharacterButton = React.createClass({
   addCharacter: function(e) {
     console.log(e.target.data);
     console.log(e.target);
-    var _this = this;
 
     // Forward the chosen franchise along to the main React class.
     this.props.addCharacter(e.target.data);
     
     this.setState({showinput: false, inputfocus: false});
+    
+    $(React.findDOMNode(this.refs.characterInput)).val("");
+
+    console.log("test");
+
+    this.forceUpdate();
   },
   render: function() {
     return (
@@ -259,8 +262,17 @@ var Characters = React.createClass({
     console.log(character);
 
     console.log(this.state.characters);
-    var characters = this.state.characters.push(character);
-    console.log(this.state.characters);
+    var characters = this.state.characters;
+    characters.push(character);
+    console.log(characters);
+
+    this.setState({characters: characters});
+
+    this.emptySuggestions();
+    this.forceUpdate();
+  },
+  emptySuggestions: function() {
+    this.setState({ suggestions: [] });
   },
   handleChange: function(query) {
     var _this = this;
@@ -268,7 +280,7 @@ var Characters = React.createClass({
     console.log(query);
 
     if (query === false) {
-      this.setState({ suggestions: [] });
+      this.emptySuggestions();
       console.log("test");
     } else {
       $.ajax("/franchises/" + franchise.slug + ".json", {
@@ -303,7 +315,8 @@ var Characters = React.createClass({
       );
     } else {
       return (
-        <ul></ul>
+        <ul>
+        </ul>
       );
     }
   }
