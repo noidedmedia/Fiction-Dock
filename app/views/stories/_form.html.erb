@@ -9,11 +9,13 @@
     <div class="select-container">
       <%= f.label :language, t(".language") %>
       <%= f.select :language, options_for_select(Story.language_attributes_for_select, @story.language), {}, { class: "custom-select", id: "story-language-select" } %>
+      <span class="icon icon-down"></span>
     </div>
 
     <div class="select-container">
       <%= f.label :license, t(".license") %>
       <%= f.select :license, options_for_select(Story.license_attributes_for_select, @story.license), {}, { class: "custom-select", id: "story-license-select" } %>
+      <span class="icon icon-down"></span>
     </div>
     
     <div class="field-container">

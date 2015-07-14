@@ -218,6 +218,7 @@
   .select-container {
     display: inline-block;
     width: calc(50% - 2px);
+    position: relative;
 
     &:first-of-type {
       margin-right: 10px;
@@ -237,10 +238,25 @@
     cursor: pointer;
     position: relative;
     transition: 200ms;
+    font-weight: 300;
 
-    &:focus {
+    + span {
+      position: absolute;
+      top: 50px;
+      right: 12px;
+      pointer-events: none;
+      color: #aaaab2;
+      font-size: 1.6rem;
+      transition: color 200ms;
+    }
+
+    &:hover, &:focus {
       border-color: #333;
       outline: transparent;
+
+      + span {
+        color: #333;
+      }
     }
   }
 
