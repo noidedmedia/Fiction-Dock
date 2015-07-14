@@ -37,7 +37,7 @@ var AddFranchiseButton = React.createClass({
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  addFranchise: function(x, i, e) {
+  addFranchise: function(x, e) {
     console.log(e.target.data);
 
     var franchise = e.target.data;
@@ -62,7 +62,7 @@ var AddFranchiseButton = React.createClass({
           <ul className="suggestions">
             {this.props.suggestions.map(function(franchise, i) {
               return (
-                <li key={franchise.id} data={franchise} ref={'franchise' + i} onClick={this.addFranchise.bind(null, franchise, i)}>{franchise.name}</li>
+                <li key={franchise.id} data={franchise} ref={'franchise' + i} onClick={this.addFranchise.bind(null, franchise)}>{franchise.name}</li>
               );
             }, this)}
           </ul>

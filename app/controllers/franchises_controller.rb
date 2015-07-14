@@ -20,7 +20,7 @@ class FranchisesController < ApplicationController
   # Only really useful with JSON
   # Names are case-insensitive
   def complete
-    @franchises = Franchise.where(["name ILIKE ?", "#{params[:query]}%"])
+    @franchises = Franchise.where(["name ILIKE ?", "#{params[:query]}%"]).limit(8)
   end
 
   ##
