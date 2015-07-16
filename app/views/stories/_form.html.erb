@@ -1,33 +1,41 @@
 <div id="story-form" class="fd-form" data-story-id="<%= @story.id %>">
   <%= form_for @story do |f| %>
-    
+
+    <%# Story name field %>    
     <div class="field-container">
       <%= f.label :name, t(".story_name") %>
       <%= f.text_field :name, id: "story-name-field", placeholder: t(".story_name"), autocomplete: "off" %>
     </div>
 
+    <%# Language select %>
     <div class="select-container">
       <%= f.label :language, t(".language") %>
       <%= f.select :language, options_for_select(Story.language_attributes_for_select, @story.language), {}, { class: "custom-select", id: "story-language-select" } %>
       <span class="icon icon-down"></span>
     </div>
 
+    <%# License select %>
     <div class="select-container">
       <%= f.label :license, t(".license") %>
       <%= f.select :license, options_for_select(Story.license_attributes_for_select, @story.license), {}, { class: "custom-select", id: "story-license-select" } %>
       <span class="icon icon-down"></span>
     </div>
     
+    <%# Blurb field %>
     <div class="field-container">
       <%= f.label :blurb, t(".blurb") %>
       <%= f.text_field :blurb, id: "story-blurb-field", placeholder: t(".write_a_very_short_description_of_the_story"), autocomplete: "off" %>
     </div>
 
+    <%# Description field %>
     <div class="field-container">
       <%= f.label :description, t(".description") %>
       <%= f.text_area :description, id: "story-description-field", placeholder: t(".write_a_description_of_the_story") %>
     </div>
 
+    <%# React component helper %>
+    <%# The ReactFormElements component can be found in story_form.js.jsx. %>
+    <%# i18n strings and story franchises/characters are passed to the JS as props, which is why this is such a large block. %>
     <%= react_component('ReactFormElements', props={
       franchises: @story.franchises,
       franchises_elementid: "franchises-input",
