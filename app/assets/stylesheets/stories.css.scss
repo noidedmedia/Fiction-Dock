@@ -405,6 +405,14 @@
     top: 6px;
   }
 
+  span.icon-close {
+    display: none;
+    top: 7px;
+    position: absolute;
+    right: 10px;
+    left: auto;
+  }
+
   &:hover {
     color: #5bb289;
     border-color: #5bb289;
@@ -421,8 +429,18 @@
     border: 0;
     display: block;
 
-    span {
+    span:not(.icon-close) {
       display: none;
+    }
+
+    .icon-close {
+      display: block;
+      color: #aaaab2;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
     }
   }
 }

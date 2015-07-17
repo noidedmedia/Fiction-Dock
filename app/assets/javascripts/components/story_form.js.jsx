@@ -302,6 +302,17 @@ var AddCharacterButton = React.createClass({
     console.log(characterinput);
     this.props.onChange(characterinput);
   },
+  hideInput: function(e) {
+    // Make sure that clicking on the close button doesn't cause it to immediately reopen itself.
+    this.preventBubbling(e);
+
+    // Hide input, empty input field value.
+    this.setState({showinput: false, inputfocus: false});
+    $(React.findDOMNode(this.refs.characterInput)).val("");
+
+    // Remove suggestions.
+    this.props.emptySuggestions();
+  },
   preventBubbling: function(e) {
     e.stopPropagation();
   },
@@ -327,6 +338,8 @@ var AddCharacterButton = React.createClass({
           {this.props.character_add}
 
           <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.handleChange} onFocus={this.onFocus} />
+
+          <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
         <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
@@ -448,7 +461,7 @@ var Characters = React.createClass({
             );
           }, this)}
 
-          <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} franchise_id={this.props.franchise_id} />
+          <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} franchise_id={this.props.franchise_id} emptySuggestions={this.emptySuggestions} />
         </ul>
       );
     } else {
