@@ -256,11 +256,7 @@ var Franchises = React.createClass({
 
         </ul>
 
-        <div className="section-header">{this.props.ships_label}</div>
-
-        <ul className="ship-list">
-          <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} />
-        </ul>
+        <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
 
         <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
       </div>
@@ -576,19 +572,23 @@ var Ships = React.createClass({
   render: function() {
     if (this.props.characters.length >= 2) {
       return (
-        <ul className="ship-list">
-          {this.state.ships.map(function(ship, i) {
-            console.log(ship);
-            return (
-              <ListItem key={'ship' + i} data={ship} remove={this.removeShip} />
-            );
-          }, this)}
+        <div>
+          <div className="section-header">{this.props.ships_label}</div>
 
-          <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} />
-        </ul>
+          <ul className="ship-list">
+            {this.state.ships.map(function(ship, i) {
+              console.log(ship);
+              return (
+                <ListItem key={'ship' + i} data={ship} remove={this.removeShip} />
+              );
+            }, this)}
+
+            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} />
+          </ul>
+        </div>
       );
     } else {
-      return <ul></ul>;
+      return <div></div>;
     }
   }
 });
