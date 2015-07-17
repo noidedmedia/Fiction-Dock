@@ -537,8 +537,6 @@ var Ships = React.createClass({
   componentWillMount: function() {
     if (this.props.ships) {
       this.setState({ ships: this.props.ships });
-    } else {
-      this.setState({ ships: [] });
     }
   },
   removeShip: function(ship) {
