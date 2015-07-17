@@ -140,9 +140,12 @@ var Franchises = React.createClass({
         },
         success: function(data) {
 
+          console.log(data);
+
           var suggestions = [];
 
           data.map(function(franchise, i) {
+            console.log(franchise);
             suggestions.push(franchise);
           });
 
@@ -156,6 +159,7 @@ var Franchises = React.createClass({
   },
   addFranchise: function(franchise) {
     var franchises = this.state.franchises;
+
     franchises.push(franchise);
 
     console.log("Franchises:");
@@ -187,19 +191,29 @@ var Franchises = React.createClass({
     console.log(franchise);
 
     this.setState({ franchises: franchises });
+    this.setState({ characters: characters });
   },
-  updateCharacters: function(characters) {
-    var newcharacters = [];
+  addCharacter: function(character) {
+    var characters = [];
 
     this.state.characters.map(function(character, i) {
-      newcharacters.push(character);
+      characters.push(character);
     });
 
-    characters.map(function(character, i) {
-      newcharacters.push(character);
+    characters.push(character);
+
+    console.log(characters);
+
+    this.setState({ characters: characters });
+  },
+  removeCharacter: function(character) {
+    var characters = this.state.characters.filter(function(c) {
+      return character.id !== c.id;
     });
 
-    this.setState({ characters: newcharacters });
+    console.log(characters);
+
+    this.setState({ characters: characters });
   },
   updateShips: function(ships) {
     // Create an empty array called "newships".
@@ -219,7 +233,6 @@ var Franchises = React.createClass({
     this.setState({ ships: newships });
   },
   render: function() {
-    console.log(this.props.characters);
     return (
       <div>
 
@@ -234,7 +247,7 @@ var Franchises = React.createClass({
             return (
               <div key={'container' + franchise.id}>
                 <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} updateCharacters={this.updateCharacters} />
+                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} />
               </div>
             );
           }, this)}
@@ -366,7 +379,9 @@ var Characters = React.createClass({
     console.log(character);
 
     // The characters array is passed up to the characters state for the Characters React class..
-    this.setState({characters: characters});
+    this.setState({characters: characters}, function() {
+      this.props.removeCharacter(character);
+    });
   },
   // Adds the passed character to the characters state in the React class.
   addCharacter: function(character) {
@@ -382,7 +397,7 @@ var Characters = React.createClass({
     // Sets the characters state to be equivalent to the characters array created above.
     // Then sends the new character "upstream" to the main Franchises React class.
     this.setState({characters: characters}, function() {
-      this.props.updateCharacters(this.state.characters);
+      this.props.addCharacter(character);
     });
 
     // Empty suggestions
@@ -520,7 +535,6 @@ var Ships = React.createClass({
   getInitialState: function() {
     return {
       suggestions: [],
-      characters: this.props.characters,
       ships: []
     };
   },
@@ -560,7 +574,7 @@ var Ships = React.createClass({
 
   },
   render: function() {
-    if (this.state.characters.length >= 2) {
+    if (this.props.characters.length >= 2) {
       return (
         <ul className="ship-list">
           {this.state.ships.map(function(ship, i) {
