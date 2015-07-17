@@ -193,11 +193,12 @@
 }
 
 #react-form-elements {
-  margin-top: 30px;
+  margin-top: 10px;
 
   .section-header {
     width: 100%;
     display: block;
+    margin-top: 20px;
     margin-bottom: 10px;
     padding-bottom: 6px;
     border-bottom: 1px solid #aaaab2;
@@ -422,6 +423,110 @@
 
     span {
       display: none;
+    }
+  }
+}
+
+
+#add-ship-button {
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(#5bb289,0.8);
+  color: #fff;
+  transition: background-color 200ms;
+  border-radius: 3px;
+  padding: 10px 14px 10px 34px;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+
+  span.icon {
+    font-size: 10px;
+    color: #fff;
+    position: absolute;
+    left: 12px;
+    top: 13px;
+
+    &.icon-close {
+      display: none;
+      top: 12px;
+      right: 10px;
+      left: auto;
+    }
+  }
+
+  &:hover {
+    background-color: #5bb289;
+  }
+
+  &.hidden {
+    overflow: auto;
+    cursor: default;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 0;
+
+    span:not(.icon-close) {
+      display: none;
+    }
+
+    span.icon-close {
+      display: block;
+      color: #aaaab2;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+}
+
+
+.ship-list {
+  list-style: none;
+
+  > li:last-of-type {
+    position: relative;
+    margin-top: 20px;
+
+    input {
+      border: 1px solid #aaaab2;
+      padding-right: 32px;
+    }
+  }
+
+  > div {
+    margin-bottom: 25px;
+
+    > li {
+      display: block;
+      margin: 6px 0 0;
+      cursor: default;
+      position: relative;
+
+      div:not(.suggestions-container) {
+        display: inline-block;
+        padding: 8px 0;
+        font-weight: 500;
+      }
+
+      span.icon-close {
+        font-size: 10px;
+        margin-right: 8px;
+        color: #aaaab2;
+        cursor: pointer;
+        transition: color 200ms;
+        position: absolute;
+        left: -25px;
+        top: 12px;
+
+        &:hover {
+          color: $color-danger;
+        }
+      }
     }
   }
 }

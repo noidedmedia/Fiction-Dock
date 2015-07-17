@@ -9,6 +9,7 @@
 // by the react_component helper used in the react-rails gem.
 //
 
+
 // Generic ListItem class
 // Used to list the Franchises and Characters items.
 // Styles differ between Franchise ListItems and Character ListItems
@@ -19,6 +20,8 @@ var ListItem = React.createClass({
       name: this.props.data.name
     };
   },
+  // Sends data to parent component depending on what function was sent in the
+  // "remove" property for the ListItem component.
   handleDelete: function(e) {
     this.props.remove(this.props.data);
   },
@@ -34,6 +37,12 @@ var ListItem = React.createClass({
     );
   }
 });
+
+
+
+/* ==============================================
+   Franchises
+   ============================================== */
 
 // The "Add a new franchise" button
 var AddFranchiseButton = React.createClass({
@@ -102,13 +111,15 @@ var AddFranchiseButton = React.createClass({
   }
 });
 
+// Franchises component
 var Franchises = React.createClass({
   getInitialState: function() {
     return {
       franchisequery: "",
       suggestions: [],
       franchises: this.props.franchises,
-      characters: this.props.characters
+      characters: this.props.characters,
+      ships: this.props.ships
     };
   },
   handleChange: function(query) {
@@ -190,6 +201,23 @@ var Franchises = React.createClass({
 
     this.setState({ characters: newcharacters });
   },
+  updateShips: function(ships) {
+    // Create an empty array called "newships".
+    var newships = [];
+
+    // All the ships already in the React state are pushed to the newships array.
+    this.state.ships.map(function(ship, i) {
+      newships.push(ship);
+    });
+
+    // New ships passed to updateShips are then added to the newships array.
+    ships.map(function(ship, i) {
+      newships.push(ship);
+    });
+
+    // The React state is updated to reflect the newships array we've just created.
+    this.setState({ ships: newships });
+  },
   render: function() {
     console.log(this.props.characters);
     return (
@@ -215,22 +243,41 @@ var Franchises = React.createClass({
 
         </ul>
 
+        <div className="section-header">{this.props.ships_label}</div>
+
+        <ul className="ship-list">
+          <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} />
+        </ul>
+
         <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
       </div>
     );
   }
 });
 
+
+
+/* ==============================================
+   Characters
+   ============================================== */
+
+// AddCharacterButton component
 var AddCharacterButton = React.createClass({
+  // The Initial State of the AddCharacterButton React class.
   getInitialState: function() {
     return { 
       showinput: false,
       inputfocus: false
     };
   },
-  onChange: function(e) {
+  // When the onChange event is called on the input, handleChange is run.
+  // This passes the value of the input element to the parent Characters component.
+  handleChange: function(e) {
     this.props.onChange(e.target.value);
   },
+  // When the input element fires the onFocus event, the "inputfocus" class is 
+  // set to true and the the value of the input element is passed on to the
+  // parent Characters component.
   onFocus: function(e) {
     this.setState({inputfocus: true});
 
@@ -270,7 +317,7 @@ var AddCharacterButton = React.createClass({
           <span className="icon icon-plus"></span>
           {this.props.character_add}
 
-          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} onFocus={this.onFocus} />
+          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.handleChange} onFocus={this.onFocus} />
         </div>
 
         <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
@@ -289,21 +336,28 @@ var AddCharacterButton = React.createClass({
   }
 });
 
+// Characters component
 var Characters = React.createClass({
+  // The Initial State of the Characters React class.
   getInitialState: function() {
     return {
       suggestions: [],
       characters: []
     };
   },
+  // If there is a characters property passed to the Characters React class,
+  // the characters state is set to be equivalent to that property.
+  // Otherwise, nothing happens.
   componentWillMount: function() {
     if (this.props.characters) {
       this.setState({ characters: this.props.characters });
-    } else {
-      this.setState({ characters: [] });
     }
   },
+  // Function for removing a character.
   removeCharacter: function(character) {
+    // The variable characters is created and set to be equivalent to
+    // the React class' "characters" state after the character sent in
+    // the removeCharacter function is filtered out.
     var characters = this.state.characters.filter(function(c) {
       return character.id !== c.id;
     });
@@ -311,22 +365,30 @@ var Characters = React.createClass({
     console.log("Removing:");
     console.log(character);
 
+    // The characters array is passed up to the characters state for the Characters React class..
     this.setState({characters: characters});
   },
+  // Adds the passed character to the characters state in the React class.
   addCharacter: function(character) {
     console.log(character);
 
+    // Creates an array out of the characters array already in the React class' state,
+    // then appends the character we're adding to that array.
     console.log(this.state.characters);
     var characters = this.state.characters;
     characters.push(character);
     console.log(characters);
 
+    // Sets the characters state to be equivalent to the characters array created above.
+    // Then sends the new character "upstream" to the main Franchises React class.
     this.setState({characters: characters}, function() {
       this.props.updateCharacters(this.state.characters);
     });
 
+    // Empty suggestions
     this.emptySuggestions();
   },
+  // Empties the suggestions array, as the name would suggest.
   emptySuggestions: function() {
     this.setState({ suggestions: [] });
   },
@@ -334,23 +396,29 @@ var Characters = React.createClass({
     var _this = this;
     var franchise = this.props.franchise;
 
+    // Sends an AJAX request to the current franchise's URL.
+    // This returns some data about the franchise, most importantly a list of characters.
     $.ajax("/franchises/" + franchise.slug + ".json", {
       dataType: "json",
       success: function(data) {
 
+        // Creates an empty suggestions array for the characters to be pushed into.
         var suggestions = [];
 
         console.log("Data.characters:");
         console.log(data.characters);
 
+        // The data returned by the AJAX request is then evaluated and the
+        // franchise's characters are added to the suggestions array.
         data.characters.map(function(character, i) {
           console.log(character.name);
-          console.log(character.id);
           suggestions.push(character);
         });
 
         console.log(suggestions);
 
+        // The suggestions array we've created is then pushed up to the
+        // suggestions state in the React class.
         _this.setState({ suggestions: suggestions });
 
         console.log("Suggestions state:");
@@ -373,32 +441,175 @@ var Characters = React.createClass({
         </ul>
       );
     } else {
-      return (
-        <ul>
-        </ul>
-      );
+      return <ul></ul>;
     }
   }
 });
 
+
+
+/* ==============================================
+   Ships
+   ============================================== */
+
+var AddShipButton = React.createClass({
+  getInitialState: function() {
+    return { 
+      showinput: false,
+      inputfocus: false
+    };
+  },
+  onChange: function(e) {
+    this.props.onChange(e.target.value);
+  },
+  onFocus: function(e) {
+    this.setState({inputfocus: true});
+
+    console.log(e.target.value);
+
+    this.props.onChange(e.target.value);
+  },
+  handleClick: function() {
+    this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
+      $(React.findDOMNode(this.refs.shipInput)).focus();
+    });
+    var shipinput = React.findDOMNode(this.refs.shipInput);
+    console.log(shipinput);
+    this.props.onChange(shipinput);
+  },
+  preventBubbling: function(e) {
+    e.stopPropagation();
+  },
+  addShip: function(e) {
+    console.log(e.target.data);
+
+    // Forward the chosen franchise along to the main React class.
+    this.props.addShip(e.target.data);
+    
+    this.setState({showinput: false, inputfocus: false});
+    
+    $(React.findDOMNode(this.refs.shipInput)).val("");
+  },
+  render: function() {
+    return (
+      <li>
+        <div ref="addShipButton" id="add-ship-button" className={this.state.showinput ? "add-new-ship hidden" : "add-new-ship shown"} onClick={this.handleClick} >
+          <span className="icon icon-plus"></span>
+          {this.props.ship_add}
+
+          <input ref="shipInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} onFocus={this.onFocus} />
+        </div>
+
+        <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
+          <ul className="suggestions">
+            {this.props.suggestions.map(function(character, i) {
+              console.log(character);
+              return (
+                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
+              );
+            }, this)}
+          </ul>
+        </div>
+
+      </li>
+    );
+  }
+});
+
+var Ships = React.createClass({
+  getInitialState: function() {
+    return {
+      suggestions: [],
+      characters: this.props.characters,
+      ships: []
+    };
+  },
+  componentWillMount: function() {
+    if (this.props.ships) {
+      this.setState({ ships: this.props.ships });
+    } else {
+      this.setState({ ships: [] });
+    }
+  },
+  removeShip: function(ship) {
+    var ships = this.state.ships.filter(function(s) {
+      return ship.id !== s.id;
+    });
+
+    console.log("Removing:");
+    console.log(ship);
+
+    this.setState({ships: ships});
+  },
+  addShip: function(ship) {
+    console.log(ship);
+
+    console.log(this.state.ships);
+    var ships = this.state.ships;
+    ships.push(ships);
+    console.log(ships);
+
+    this.setState({ships: ships}, function() {
+      this.props.updateShips(this.state.ships);
+    });
+  },
+  emptySuggestions: function() {
+    this.setState({ suggestions: [] });
+  },
+  handleChange: function() {
+
+  },
+  render: function() {
+    if (this.state.characters.length >= 2) {
+      return (
+        <ul className="ship-list">
+          {this.state.ships.map(function(ship, i) {
+            console.log(ship);
+            return (
+              <ListItem key={'ship' + i} data={ship} remove={this.removeShip} />
+            );
+          }, this)}
+
+          <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} />
+        </ul>
+      );
+    } else {
+      return <ul></ul>;
+    }
+  }
+});
+
+// SubmitButton component.
+// This intervenes and handles the submission of the story form.
 var SubmitButton = React.createClass({
+  // Function is run when the submit input is clicked.
   handleClick: function(e) {
+    // Prevents default HTML input submission flow from occurring.
     e.preventDefault();
 
+    // A "Story" object is created to pass data to.
     var Story = {};
 
+    // The storyid is derived from the story-form element's
+    // "data-story-id" attribute.
     var storyid = $("#story-form").data("story-id");
 
+    // Takes the name, language, license, blurb, and description values
+    // from their respective input fields/spinners.
+    // Each is made to be a property of the Story object created above.
     Story.name = $("#story-name-field").val();
     Story.language = $("#story-language-select").val();
     Story.license = $("#story-license-select").val();
     Story.blurb = $("#story-blurb-field").val();
     Story.description = $("#story-description-field").val();
 
+    // An array is created out of the franchises passed from parent components
+    // and then made a property of the Story object.
     Story.franchise_ids = this.props.franchises.map(function(franchise) {
       return franchise.id;
     });
 
+    // Ditto above, albeit with characters instead of franchises.
     Story.character_ids = this.props.characters.map(function(character) {
       return character.id;
     });
@@ -408,21 +619,39 @@ var SubmitButton = React.createClass({
 
     console.log(JSON.stringify(Story));
 
+    // Our Rails backend requests that the story be submitted in the form of
+    //
+    // {
+    //    story: {
+    //      *properties go here*
+    //    }
+    // }
+    //
+    // So the Story object is converted into that format.
     Story = {story: Story};
 
     console.log(JSON.stringify(Story));
 
+    // Depending on whether or not the storyid variable returns null,
+    // meaning that no story ID was present when the form was created,
+    // the method used in the AJAX submission is either "PUT" or "POST",
+    // depending on whether or not the story is being created or edited.
     var method = storyid ? "PUT" : "POST";
+
     console.log(method);
 
+    // AJAX is used to submit the story as JSON.
     $.ajax("/stories/" + storyid, {
       dataType: "json",
       data: JSON.stringify(Story),
       contentType: "application/json; encoding=utf-8",
       method: method,
+      // If the AJAX request responds with a success header, the user is
+      // redirected to the page for the story they've just submitted.
       success: function(data) {
         window.location.href = "/stories/" + data.id;
       },
+      // Otherwise throw some errors.
       error: function(error) {
         console.log(error);
         console.log(JSON.parse(error.responseText));
@@ -438,9 +667,12 @@ var SubmitButton = React.createClass({
   }
 });
 
+// ReactFormElements component used in the Rails view.
 var ReactFormElements = React.createClass({
   render: function() {
     console.log(this.props.franchises);
+    // All properties passed from the Rails helper are forwarded onto
+    // the Franchises component by the {...this.props} line.
     return (
       <div>
         <Franchises {...this.props} />

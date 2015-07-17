@@ -34,6 +34,7 @@ en:
       characters: "Characters"
       add_a_new_character: "Add a new character"
       ships: "Ships"
+      add_a_new_ship: "Add a new ship"
       submit: 
         new: "Submit"
         edit: "Save changes"
