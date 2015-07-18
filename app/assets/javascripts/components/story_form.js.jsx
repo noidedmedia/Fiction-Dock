@@ -77,6 +77,9 @@ var AddFranchiseButton = React.createClass({
     // Remove suggestions.
     this.props.onChange("");
   },
+  // Stops "bubbling up" of click events on the input field,
+  // preventing handleClick from being called when the input
+  // field is acted upon.
   preventBubbling: function(e) {
     e.stopPropagation();
   },
@@ -159,7 +162,7 @@ var Franchises = React.createClass({
 
           var suggestions = [];
 
-          data.map(function(franchise, i) {
+          data.forEach(function(franchise, i) {
             console.log(franchise);
             suggestions.push(franchise);
           });
