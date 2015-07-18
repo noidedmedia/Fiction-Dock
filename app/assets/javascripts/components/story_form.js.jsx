@@ -11,11 +11,6 @@
  * because they're placed in different containers.
  */
 var ListItem = React.createClass({
-  getInitialState: function() {
-    return {
-      name: this.props.data.name
-    };
-  },
   // Sends data to parent component depending on what function was sent in the
   // "remove" property for the ListItem component.
   handleDelete: function(e) {
@@ -27,7 +22,7 @@ var ListItem = React.createClass({
         <div>
           <span className="icon icon-close" onClick={this.handleDelete}></span>
 
-          {this.state.name}
+          {this.props.data.name}
         </div>
       </li>
     );
@@ -162,6 +157,8 @@ var Franchises = React.createClass({
 
           var suggestions = [];
 
+          // Pushes each suggestion returned from the AJAX request
+          // into the new suggestions array.
           data.forEach(function(franchise, i) {
             console.log(franchise);
             suggestions.push(franchise);
@@ -170,6 +167,7 @@ var Franchises = React.createClass({
           console.log("Suggestions:");
           console.log(suggestions);
 
+          // Updates suggestions state with new suggestions.
           this.setState({ suggestions: suggestions });
         }.bind(this),
         error: function() {
@@ -178,9 +176,11 @@ var Franchises = React.createClass({
       });
     }
   },
+  // Adds a new franchise to the franchises state.
   addFranchise: function(franchise) {
     var franchises = this.state.franchises;
 
+    // Push franchise argument into the franchises array created above.
     franchises.push(franchise);
 
     console.log("Franchises:");
@@ -189,11 +189,17 @@ var Franchises = React.createClass({
     console.log("Adding:");
     console.log(franchise);
 
+    // Franchises state is updated to match the franchises array we've
+    // just created.
     this.setState({ franchises: franchises }, function() {
+      // Empty franchise suggestions after adding a franchise.
       this.setState({ suggestions: [] });
     }.bind(this));
   },
+  // Removes a franchise from the franchises state.
   removeFranchise: function(franchise) {
+    // Creates a new franchises variable out of the franchises state
+    // after filtering the removed franchise out of the array.
     var franchises = this.state.franchises.filter(function(f) {
       return franchise.id !== f.id;
     });
@@ -201,6 +207,8 @@ var Franchises = React.createClass({
     console.log("Characters:");
     console.log(this.state.characters);
 
+    // Any characters that belong to the franchise being removed
+    // are also removed.
     var characters = this.state.characters.filter(function(c) {
       return franchise.id !== c.franchise_id;
     });
@@ -211,29 +219,40 @@ var Franchises = React.createClass({
     console.log("Removing:");
     console.log(franchise);
 
+    // Passes the updated franchises and characters arrays to their
+    // respective states. 
     this.setState({ franchises: franchises });
     this.setState({ characters: characters });
   },
+  // Adds a character to the characters state.
   addCharacter: function(character) {
     var characters = [];
 
-    this.state.characters.map(function(character, i) {
+    // Passes each character in the characters state to the
+    // characters array.
+    this.state.characters.forEach(function(character, i) {
       characters.push(character);
     });
 
+    // Appends the new character to the characters array.
     characters.push(character);
 
     console.log(characters);
 
+    // Passes the updated characters array to the characters state.
     this.setState({ characters: characters });
   },
+  // Removes a character from the characters state.
   removeCharacter: function(character) {
+    // Creates a new array out of the characters state
+    // without the character we're removing.
     var characters = this.state.characters.filter(function(c) {
       return character.id !== c.id;
     });
 
     console.log(characters);
 
+    // Passes the updated characters array to the characters state.
     this.setState({ characters: characters });
   },
   updateShips: function(ships) {
