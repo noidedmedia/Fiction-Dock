@@ -221,8 +221,12 @@ var Franchises = React.createClass({
 
     // Passes the updated franchises and characters arrays to their
     // respective states. 
-    this.setState({ franchises: franchises });
-    this.setState({ characters: characters });
+    this.setState({ franchises: franchises }, function() {
+      this.props.updateFranchises(franchises);
+    });
+    this.setState({ characters: characters }, function() {
+      this.props.updateCharacters(characters);
+    });
   },
   render: function() {
     return (
@@ -690,6 +694,12 @@ var ReactFormElements = React.createClass({
       ships: this.props.ships
     };
   },
+  updateFranchises: function(franchises) {
+    this.setState({ franchises: franchises });
+  },
+  updateCharacters: function(characters) {
+    this.setState({ characters: characters });
+  },
   // Adds a character to the characters state.
   addCharacter: function(character) {
     var characters = [];
@@ -742,7 +752,7 @@ var ReactFormElements = React.createClass({
     // the Franchises component by the {...this.props} line.
     return (
       <div>
-        <Franchises addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} >
+        <Franchises updateFranchises={this.updateFranchises} updateCharacters={this.updateCharacters} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} >
           <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
 
           <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
