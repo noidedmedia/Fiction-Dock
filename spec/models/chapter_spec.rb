@@ -36,4 +36,13 @@ RSpec.describe Chapter, type: :model do
       expect(current.prev_chapter).to eq(prev_c)
     end
   end
+  describe "word count" do
+    let(:story){FactoryGirl.create(:story)}
+    it "counts the words" do
+      chapter = FactoryGirl.create(:chapter,
+                                   story: story,
+                                   body: "This has four words.")
+      expect(chapter.word_count).to eq(4)
+    end
+  end
 end
