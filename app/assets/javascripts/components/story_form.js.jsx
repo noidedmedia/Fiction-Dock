@@ -1,19 +1,15 @@
-// Create New Story/Edit Story JavaScript
-// Page is highly dynamic, so we went with using React.js for this.
-// 
-// Some very helpful links if you're interested in learning React:
-// * [React.js Documentation](https://facebook.github.io/react/docs/getting-started.html)
-// * [React.js Introduction For People Who Know Just Enough JQuery To Get By](http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/)
-//
-// If you can't figure out where a property is coming from, it may have been passed
-// by the react_component helper used in the react-rails gem.
-//
+/* Create New Story/Edit Story JavaScript
+ * Page is highly dynamic, so we went with using React.js for this.
+ *If you can't figure out where a property is coming from, it may have been passed
+ * by the react_component helper used in the react-rails gem.
+*/
 
 
-// Generic ListItem class
-// Used to list the Franchises and Characters items.
-// Styles differ between Franchise ListItems and Character ListItems
-// because they're placed in different containers.
+/* Generic ListItem class
+ * Used to list the Franchises and Characters items.
+ * Styles differ between Franchise ListItems and Character ListItems
+ * because they're placed in different containers.
+ */
 var ListItem = React.createClass({
   getInitialState: function() {
     return {
@@ -216,19 +212,15 @@ var Franchises = React.createClass({
     this.setState({ characters: characters });
   },
   updateShips: function(ships) {
-    // Create an empty array called "newships".
     var newships = [];
-
     // All the ships already in the React state are pushed to the newships array.
-    this.state.ships.map(function(ship, i) {
+    this.state.ships.forEach(function(ship, i) {
       newships.push(ship);
     });
-
     // New ships passed to updateShips are then added to the newships array.
-    ships.map(function(ship, i) {
+    ships.forEach(function(ship, i) {
       newships.push(ship);
     });
-
     // The React state is updated to reflect the newships array we've just created.
     this.setState({ ships: newships });
   },
