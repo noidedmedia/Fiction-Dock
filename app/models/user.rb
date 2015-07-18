@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :name, use: :slugged
-  
+
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
   has_many :stories
 
@@ -32,8 +32,11 @@ class User < ActiveRecord::Base
   # update word count accordingly
   def read_chapter(chapter)
     with_lock do
-      self.read_words += chapter.word_count
-      self.save
+      if ReadChapter.new(chapter: chapter,
+                         user: self).save
+        self.read_words += chapter.word_count
+        self.save
+      end
     end
   end
 end

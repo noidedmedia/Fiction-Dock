@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     get 'franchises', on: :member
     get 'ships', on: :member
     get 'characters', on: :member
-    resources :chapters, concerns: [:publishable]
+    resources :chapters, concerns: [:publishable] do
+      post 'read'
+    end
   end
 
   resources :franchises do

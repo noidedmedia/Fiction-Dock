@@ -6,6 +6,11 @@ class ChaptersController < ApplicationController
   before_action :load_story
   before_action :authenticate_user!, except: [:show]
 
+  def read
+    @chapter = @story.chapters.friendly.find(params[:id])
+    current_user.read_chapter @chapter
+  end
+
   def publish
     @chapter = @story.chapters.friendly.find(params[:id])
     @chapter.publish
