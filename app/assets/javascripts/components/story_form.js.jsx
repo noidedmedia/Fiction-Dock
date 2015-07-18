@@ -224,53 +224,6 @@ var Franchises = React.createClass({
     this.setState({ franchises: franchises });
     this.setState({ characters: characters });
   },
-  // Adds a character to the characters state.
-  addCharacter: function(character) {
-    var characters = [];
-
-    // Passes each character in the characters state to the
-    // characters array.
-    this.state.characters.forEach(function(character, i) {
-      characters.push(character);
-    });
-
-    // Appends the new character to the characters array.
-    characters.push(character);
-
-    console.log(characters);
-
-    // Passes the updated characters array to the characters state.
-    this.setState({ characters: characters });
-  },
-  // Removes a character from the characters state.
-  removeCharacter: function(character) {
-    // Creates a new array out of the characters state
-    // without the character we're removing.
-    var characters = this.state.characters.filter(function(c) {
-      return character.id !== c.id;
-    });
-
-    console.log(characters);
-
-    // Passes the updated characters array to the characters state.
-    this.setState({ characters: characters });
-  },
-  updateShips: function(ships) {
-    var newships = [];
-
-    // All the ships already in the React state are pushed to the newships array.
-    this.state.ships.forEach(function(ship, i) {
-      newships.push(ship);
-    });
-
-    // New ships passed to updateShips are then added to the newships array.
-    ships.forEach(function(ship, i) {
-      newships.push(ship);
-    });
-    
-    // The React state is updated to reflect the newships array we've just created.
-    this.setState({ ships: newships });
-  },
   render: function() {
     return (
       <div>
@@ -285,7 +238,7 @@ var Franchises = React.createClass({
             return (
               <div key={'container' + franchise.id}>
                 <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} />
+                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} addCharacter={this.props.addCharacter} removeCharacter={this.props.removeCharacter} />
               </div>
             );
           }, this)}
@@ -294,9 +247,7 @@ var Franchises = React.createClass({
 
         </ul>
 
-        <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
-
-        <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
+        {this.props.children}
       </div>
     );
   }
@@ -389,7 +340,6 @@ var AddCharacterButton = React.createClass({
             }, this)}
           </ul>
         </div>
-
       </li>
     );
   }
@@ -731,13 +681,72 @@ var SubmitButton = React.createClass({
 
 // ReactFormElements component used in the Rails view.
 var ReactFormElements = React.createClass({
+  getInitialState: function() {
+    // "Global" values for the franchises, characters, and ships
+    // passed when submitting the story.
+    return {
+      franchises: this.props.franchises,
+      characters: this.props.characters,
+      ships: this.props.ships
+    };
+  },
+  // Adds a character to the characters state.
+  addCharacter: function(character) {
+    var characters = [];
+
+    // Passes each character in the characters state to the
+    // characters array.
+    this.state.characters.forEach(function(character, i) {
+      characters.push(character);
+    });
+
+    // Appends the new character to the characters array.
+    characters.push(character);
+
+    console.log(characters);
+
+    // Passes the updated characters array to the characters state.
+    this.setState({ characters: characters });
+  },
+  // Removes a character from the characters state.
+  removeCharacter: function(character) {
+    // Creates a new array out of the characters state
+    // without the character we're removing.
+    var characters = this.state.characters.filter(function(c) {
+      return character.id !== c.id;
+    });
+
+    console.log(characters);
+
+    // Passes the updated characters array to the characters state.
+    this.setState({ characters: characters });
+  },
+  updateShips: function(ships) {
+    var newships = [];
+
+    // All the ships already in the React state are pushed to the newships array.
+    this.state.ships.forEach(function(ship, i) {
+      newships.push(ship);
+    });
+
+    // New ships passed to updateShips are then added to the newships array.
+    ships.forEach(function(ship, i) {
+      newships.push(ship);
+    });
+    
+    // The React state is updated to reflect the newships array we've just created.
+    this.setState({ ships: newships });
+  },
   render: function() {
-    console.log(this.props.franchises);
     // All properties passed from the Rails helper are forwarded onto
     // the Franchises component by the {...this.props} line.
     return (
       <div>
-        <Franchises {...this.props} />
+        <Franchises addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} >
+          <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
+
+          <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
+        </Franchises>
       </div>
     );
   }
