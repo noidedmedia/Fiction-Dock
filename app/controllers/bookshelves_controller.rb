@@ -49,7 +49,7 @@ class BookshelvesController < ApplicationController
       if @bookshelf.update(bookshelf_params)
         format.html{redirect_to @bookshelf}
       else
-        format.html{render 'edit'}
+        format.html { redirect_to :back, warning: @bookshelf.errors.full_messages.join(", ") }
       end
     end
   end
@@ -59,9 +59,9 @@ class BookshelvesController < ApplicationController
     authorize @bookshelf
     respond_to do |format|
       if @bookshelf.save
-        format.html {redirect_to  @bookshelf}
+        format.html { redirect_to @bookshelf }
       else
-        format.html {render 'new'}
+        format.html { redirect_to :back, warning: @bookshelf.errors.full_messages.join(", ") }
       end
     end
   end
