@@ -53,9 +53,12 @@ var AddFranchiseButton = React.createClass({
     // Used for suggesting a franchise.
     this.props.onChange(e.target.value);
   },
+  // Handles clicks on the AddFranchiseButton.
   handleClick: function() {
-    // 
-    this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
+    // Sets showinput to 'input-shown', which applies it as a class
+    // to the DOM node, modifying the style to appear as though
+    // the button has been replaced by an input field.
+    this.setState({ showinput: 'input-shown' }, function() {
       // "React.findDOMNode" returns the DOM element, which is then taken by JQuery
       // and given an empty value and a focus state.
       // This ensures that the input field won't have any old data in it.
