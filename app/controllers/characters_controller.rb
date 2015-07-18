@@ -51,6 +51,9 @@ class CharactersController < ApplicationController
       else
         format.html { render 'new' }
         format.json { render json: @character.errors, status: :unprocessable_entity }
+        @character.errors.full_messages.each do |message|
+          flash[:warning] = message
+        end
       end
     end
   end
@@ -68,6 +71,9 @@ class CharactersController < ApplicationController
       else
         format.html { render 'new' }
         format.json { render json: @character.errors, status: :unprocessable_entity }
+        @character.errors.full_messages.each do |message|
+          flash[:warning] = message
+        end
       end
     end
   end
