@@ -47,9 +47,9 @@ class CharactersController < ApplicationController
     respond_to do |format|
       if @character.save
         format.html { redirect_to [@franchise, @character] }
-        format.json { render 'show' }
+        format.json { render :show }
       else
-        format.html { render 'new' }
+        format.html { redirect_to :back, warning: @character.errors.full_messages.join(", ") }
         format.json { render json: @character.errors, status: :unprocessable_entity }
       end
     end
@@ -64,9 +64,9 @@ class CharactersController < ApplicationController
     respond_to do |format|
       if @character.update(character_params)
         format.html { redirect_to [@franchise, @character] }
-        format.json { render 'show' }
+        format.json { render :show }
       else
-        format.html { render 'new' }
+        format.html { redirect_to :back, warning: @character.errors.full_messages.join(", ") }
         format.json { render json: @character.errors, status: :unprocessable_entity }
       end
     end

@@ -20,7 +20,7 @@ class FranchisesController < ApplicationController
   # Only really useful with JSON
   # Names are case-insensitive
   def complete
-    @franchises = Franchise.where(["name ILIKE ?", "#{params[:query]}%"])
+    @franchises = Franchise.where(["name ILIKE ?", "#{params[:query]}%"]).limit(8)
   end
 
   ##
@@ -62,7 +62,7 @@ class FranchisesController < ApplicationController
         format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_updated_successfully") }
         format.json { render :show, status: :created, location: @franchise}
       else
-        format.json { render :edit }
+        format.json { redirect_to :back, warning: @franchise.errors.full_messages.join(", ") }
         format.json { render json: @franchise.errors, status: :unprocessable_entity }
       end
     end
@@ -79,7 +79,7 @@ class FranchisesController < ApplicationController
         format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_created_successfully") }
         format.json { render :show, status: :created, location: @franchise }
       else
-        format.html { render :new }
+        format.html { redirect_to :back, warning: @franchise.errors.full_messages.join(", ") }
         format.json { render json: @franchise.errors, status: :unprocessable_entity }
       end
     end
