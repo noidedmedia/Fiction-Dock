@@ -106,16 +106,24 @@ var AddFranchiseButton = React.createClass({
           <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
-        <div className={this.props.suggestions.length > 0 ? "suggestions-container active" : "suggestions-container inactive"} >
-          <ul className="suggestions">
-            {this.props.suggestions.map(function(franchise, i) {
-              return (
-                <li key={franchise.id} data={franchise} ref={'franchise' + i} onClick={this.addFranchise.bind(null, franchise)}>{franchise.name}</li>
-              );
-            }, this)}
-          </ul>
-        </div>
+        <Suggestions suggestions={this.props.suggestions} itemOnClick={this.addFranchise} itemtype="franchise" />
       </li>
+    );
+  }
+});
+
+var Suggestions = React.createClass({
+  render: function() {
+    return (
+      <div className={this.props.suggestions.length > 0 ? "suggestions-container active" : "suggestions-container inactive"}>
+        <ul className="suggestions">
+          {this.props.suggestions.map(function(item, i) {
+            return (
+              <li key={this.props.itemtype + '-' + item.id} data={item} onClick={this.props.itemOnClick.bind(null, item)}>{item.name}</li>
+            );
+          }, this)}
+        </ul>
+      </div>
     );
   }
 });
