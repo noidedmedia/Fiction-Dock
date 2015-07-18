@@ -189,16 +189,7 @@ var AddCharacterButton = React.createClass({
           <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
-        <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
-          <ul className="suggestions">
-            {this.props.suggestions.map(function(character, i) {
-              console.log(character);
-              return (
-                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
-              );
-            }, this)}
-          </ul>
-        </div>
+        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addCharacter} itemtype="character" bindnull={false} />
       </li>
     );
   }

@@ -215,7 +215,7 @@ var AddFranchiseButton = React.createClass({
           <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
-        <Suggestions suggestions={this.props.suggestions} itemOnClick={this.addFranchise} itemtype="franchise" />
+        <Suggestions showsuggestions={ this.props.suggestions.length > 0 ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addFranchise} itemtype="franchise" bindnull={true} />
       </li>
     );
   }
