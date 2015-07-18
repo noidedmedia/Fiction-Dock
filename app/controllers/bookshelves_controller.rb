@@ -6,7 +6,7 @@ class BookshelvesController < ApplicationController
   def show
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
-    @user = User.friendly.find(params[:id])
+    @user = User.friendly.find(params[:user_id])
     @stories = Story.for_content(accepted_content)
       .joins(:bookshelves)
       .where(bookshelves: {id: params[:id]})
