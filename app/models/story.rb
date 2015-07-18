@@ -80,7 +80,11 @@ class Story < ActiveRecord::Base
   before_validation :save_ship_attrs
   enum license: [:all_rights_reserved, :cc_zero, :cc_by, :cc_by_sa, :cc_by_nd, :cc_by_nc, :cc_by_nc_nd]
   enum language: [:en, :es]
-
+  ##
+  # The total number of words in this story
+  def total_word_count
+    chapters.map(&:count).collect(:+)
+  end
   ##
   # My designer wanted to use `@story.author` in views
   # So this exists

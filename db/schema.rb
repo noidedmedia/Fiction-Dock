@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628010605) do
+ActiveRecord::Schema.define(version: 20150718181332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150628010605) do
     t.string   "name"
     t.boolean  "published",  default: false, null: false
     t.string   "slug"
+    t.integer  "word_count"
   end
 
   add_index "chapters", ["slug", "story_id"], name: "index_chapters_on_slug_and_story_id", unique: true, using: :btree
@@ -116,6 +117,26 @@ ActiveRecord::Schema.define(version: 20150628010605) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "read_chapters", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "chapter_id"
+  end
+
+  add_index "read_chapters", ["chapter_id"], name: "index_read_chapters_on_chapter_id", using: :btree
+  add_index "read_chapters", ["user_id"], name: "index_read_chapters_on_user_id", using: :btree
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviews", ["story_id"], name: "index_reviews_on_story_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "ship_characters", force: :cascade do |t|
     t.integer  "ship_id"
@@ -206,6 +227,7 @@ ActiveRecord::Schema.define(version: 20150628010605) do
     t.integer  "level",                  default: 0,  null: false
     t.string   "slug"
     t.jsonb    "content_pref"
+    t.integer  "read_words"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -221,6 +243,10 @@ ActiveRecord::Schema.define(version: 20150628010605) do
   add_foreign_key "franchise_creation_requests", "users", on_delete: :cascade
   add_foreign_key "franchise_users", "franchises"
   add_foreign_key "franchise_users", "users"
+  add_foreign_key "read_chapters", "chapters", on_delete: :cascade
+  add_foreign_key "read_chapters", "users", on_delete: :cascade
+  add_foreign_key "reviews", "stories", on_delete: :cascade
+  add_foreign_key "reviews", "users", on_delete: :cascade
   add_foreign_key "ship_characters", "characters", on_delete: :cascade
   add_foreign_key "ship_characters", "ships", on_delete: :cascade
   add_foreign_key "stories", "users"

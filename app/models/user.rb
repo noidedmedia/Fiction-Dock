@@ -1,31 +1,6 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer          not null, primary key
-#  name                   :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
-#  level                  :integer          default(0), not null
-#  slug                   :string
-#  content_pref           :jsonb
-#
-
-#
+##
 # A user is exactly what it says on the tin: somebody who uses FictionDock.
 # We use `Devise` for our authentication, so check out their docs as well.
-# 
-# @attr [String] name this user's name
 class User < ActiveRecord::Base
 
   extend FriendlyId
@@ -51,5 +26,14 @@ class User < ActiveRecord::Base
 
   def mod_or_higher?
     level == "mod" || level == "admin"
+  end
+  ##
+  # Mark a chapter as read by this user if it has not been already
+  # update word count accordingly
+  def read_chapter(chapter)
+    with_lock do
+      self.read_words += chapter.word_count
+      self.save
+    end
   end
 end
