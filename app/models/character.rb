@@ -33,7 +33,8 @@ class Character < ActiveRecord::Base
   # Stories with this character in them
   has_many :stories, through: :story_characters
   validates :franchise, presence: true
-  validates :name, presence: true, length: {in: (1..40)}, uniqueness: {case_sensative: false,
-                                                scope: :franchise}
+  validates :name, presence: true, 
+    length: {in: (1..40)}, 
+    uniqueness: {case_sensative: false, scope: :franchise_id}
   validates :description, length: { maximum: 1500 }
 end
