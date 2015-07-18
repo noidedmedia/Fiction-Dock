@@ -32,7 +32,7 @@
   }
 
   @media screen and (max-width: $mobile-width) {
-    left: 20px;
+    left: 0;
   }
 }
 
@@ -41,7 +41,7 @@
   right: 90px;
 
   @media screen and (max-width: $mobile-width) {
-    left: 20px;
+    right: 0;
   }
 }
 
@@ -97,6 +97,20 @@
   }
 }
 
+.logo {
+  @media screen and (max-width: $mobile-width) {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 0;
+
+    > a {
+      padding: 10px 0;
+      height: 45px;
+    }
+  }
+}
+
 #header-search {
   position: relative;
   width: 245px;
@@ -137,6 +151,19 @@
       color: #333;
     }
   }
+
+  @media screen and (max-width: $mobile-width) {
+    display: none;
+  }
+}
+
+.browse {
+  @media screen and (max-width: $mobile-width) {
+    position: absolute;
+    top: 0;
+    padding: 4px 10px 10px;
+    left: 60px;
+  }
 }
 
 #browse-button,
@@ -148,6 +175,22 @@
   padding-top: 14px;
 }
 
+.header-item.dark-mode {
+  @media screen and (max-width: $mobile-width) {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding: 2px;
+  }
+}
+
+#dark-mode-toggle {
+  cursor: pointer;
+  padding-right: 0;
+  padding-top: 8px;
+  display: inline-block;
+}
+
 #create-button {
   margin-top: -6px;
 
@@ -157,6 +200,10 @@
 
   .dropdown-caret {
     vertical-align: -8px;
+  }
+
+  @media screen and (max-width: $mobile-width) {
+    display: none;
   }
 }
 
@@ -170,6 +217,12 @@
   border-right-color: transparent;
   border-left-color: transparent;
   border-bottom-color: transparent;
+}
+
+#username {
+  @media screen and (max-width: $mobile-width) {
+    display: none;
+  }
 }
 
 .tooltip {
@@ -321,6 +374,10 @@
     background-color: #fff;
     box-shadow: 0 -8px 11px 1px rgba(0, 0, 0, 0.15);
     transition: background-color 0ms;
+  }
+
+  @media screen and (max-width: $mobile-width) {
+    display: none;
   }
 }
 

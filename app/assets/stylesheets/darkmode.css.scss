@@ -1,12 +1,5 @@
 @import "scss-variables";
 
-#dark-mode-toggle {
-  cursor: pointer;
-  padding-right: 0;
-  padding-top: 8px;
-  display: inline-block;
-}
-
 // Only apply dark mode styles for "screen" devices, e.g. not print.
 @media screen {
   body.dark-mode {
@@ -86,7 +79,7 @@
     .fiction-dock-logo {
       color: #fff;
 
-      @media all and (max-width: $mobile-width) {
+      @media screen and (max-width: $mobile-width) {
         &.logo-header {
           color: transparent;
 

@@ -1,7 +1,7 @@
 /* Create New Story/Edit Story JavaScript
  * Page is highly dynamic, so we went with using React.js for this.
- *If you can't figure out where a property is coming from, it may have been passed
- * by the react_component helper used in the react-rails gem.
+ * If you can't figure out where a property is coming from, it may have been passed
+ * by the react_component helper used by the react-rails gem.
 */
 
 
@@ -48,10 +48,17 @@ var AddFranchiseButton = React.createClass({
     };
   },
   onChange: function(e) {
+    // Passes the value of the input field to the "onChange" property
+    // passed from the parent component.
+    // Used for suggesting a franchise.
     this.props.onChange(e.target.value);
   },
   handleClick: function() {
+    // 
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
+      // "React.findDOMNode" returns the DOM element, which is then taken by JQuery
+      // and given an empty value and a focus state.
+      // This ensures that the input field won't have any old data in it.
       $(React.findDOMNode(this.refs.franchiseInput)).val("").focus();
     });
   },
@@ -70,9 +77,14 @@ var AddFranchiseButton = React.createClass({
   preventBubbling: function(e) {
     e.stopPropagation();
   },
+  // First argument passed to function through .bind() has to be null,
+  // because React.js is weird.
+  // Source: https://groups.google.com/forum/#!topic/reactjs/Xv9_kVoJJOw
   addFranchise: function(x, e) {
     console.log(e.target.data);
 
+    // Event target data is the franchise object the user is trying
+    // to add.
     var franchise = e.target.data;
 
     // Forward the chosen franchise along to the main React class.
@@ -110,6 +122,8 @@ var AddFranchiseButton = React.createClass({
 // Franchises component
 var Franchises = React.createClass({
   getInitialState: function() {
+    // "Global" values for the franchises, characters, and ships
+    // passed when submitting the story.
     return {
       franchisequery: "",
       suggestions: [],
@@ -118,22 +132,24 @@ var Franchises = React.createClass({
       ships: this.props.ships
     };
   },
+  // When the value of the FranchisesInput is modified, handleChange
+  // is called with the value of the input as an argument.
   handleChange: function(query) {
     this.setState({ franchisequery: query });
-
-    var _this = this;
 
     console.log(query);
     console.log(this.state.franchisequery);
 
+    // If query is empty, the suggestions state is emptied.
     if (query === "") {
-      _this.setState({ suggestions: [] });
+      this.setState({ suggestions: [] });
     } else {
+      // An AJAX request which returns franchises with names similar
+      // to the value of the input field.
+      // These franchises are then used as suggestions for the
+      // Franchises field.
       $.ajax("/franchises/complete.json?query=" + query, {
         dataType: "json",
-        error: function() {
-          console.log("ERROR");
-        },
         success: function(data) {
 
           console.log(data);
@@ -148,7 +164,10 @@ var Franchises = React.createClass({
           console.log("Suggestions:");
           console.log(suggestions);
 
-          _this.setState({ suggestions: suggestions });
+          this.setState({ suggestions: suggestions });
+        }.bind(this),
+        error: function() {
+          console.log("Error");
         }
       });
     }
@@ -213,21 +232,23 @@ var Franchises = React.createClass({
   },
   updateShips: function(ships) {
     var newships = [];
+
     // All the ships already in the React state are pushed to the newships array.
     this.state.ships.forEach(function(ship, i) {
       newships.push(ship);
     });
+
     // New ships passed to updateShips are then added to the newships array.
     ships.forEach(function(ship, i) {
       newships.push(ship);
     });
+    
     // The React state is updated to reflect the newships array we've just created.
     this.setState({ ships: newships });
   },
   render: function() {
     return (
       <div>
-
         <div className="section-header">{this.props.franchises_label}</div>
 
         <ul className="franchise-list">
@@ -316,9 +337,8 @@ var AddCharacterButton = React.createClass({
     
     this.setState({showinput: false, inputfocus: false});
     
+    // Empty the characterInput field.
     $(React.findDOMNode(this.refs.characterInput)).val("");
-
-    console.log("test");
 
     this.forceUpdate();
   },
