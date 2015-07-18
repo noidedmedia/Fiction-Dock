@@ -5,8 +5,95 @@
 */
 
 
-/* Generic ListItem class
- * Used to list the Franchises and Characters items.
+
+/* ReactFormElements
+   ============================================== */
+
+// ReactFormElements component used in the Rails view.
+var ReactFormElements = React.createClass({
+  getInitialState: function() {
+    // "Global" values for the franchises, characters, and ships
+    // passed when submitting the story.
+    return {
+      franchises: this.props.franchises,
+      characters: this.props.characters,
+      ships: this.props.ships
+    };
+  },
+  updateFranchises: function(franchises) {
+    this.setState({ franchises: franchises });
+  },
+  updateCharacters: function(characters) {
+    this.setState({ characters: characters });
+  },
+  // Adds a character to the characters state.
+  addCharacter: function(character) {
+    var characters = [];
+
+    // Passes each character in the characters state to the
+    // characters array.
+    this.state.characters.forEach(function(character, i) {
+      characters.push(character);
+    });
+
+    // Appends the new character to the characters array.
+    characters.push(character);
+
+    console.log(characters);
+
+    // Passes the updated characters array to the characters state.
+    this.setState({ characters: characters });
+  },
+  // Removes a character from the characters state.
+  removeCharacter: function(character) {
+    // Creates a new array out of the characters state
+    // without the character we're removing.
+    var characters = this.state.characters.filter(function(c) {
+      return character.id !== c.id;
+    });
+
+    console.log(characters);
+
+    // Passes the updated characters array to the characters state.
+    this.setState({ characters: characters });
+  },
+  updateShips: function(ships) {
+    var newships = [];
+
+    // All the ships already in the React state are pushed to the newships array.
+    this.state.ships.forEach(function(ship, i) {
+      newships.push(ship);
+    });
+
+    // New ships passed to updateShips are then added to the newships array.
+    ships.forEach(function(ship, i) {
+      newships.push(ship);
+    });
+    
+    // The React state is updated to reflect the newships array we've just created.
+    this.setState({ ships: newships });
+  },
+  render: function() {
+    // All properties passed from the Rails helper are forwarded onto
+    // the Franchises component by the {...this.props} line.
+    return (
+      <div>
+        <Franchises updateFranchises={this.updateFranchises} updateCharacters={this.updateCharacters} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} >
+          <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
+
+          <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
+        </Franchises>
+      </div>
+    );
+  }
+});
+
+
+
+/* ListItem
+   ============================================== */
+
+/* Used to list the Franchises and Characters items.
  * Styles differ between Franchise ListItems and Character ListItems
  * because they're placed in different containers.
  */
@@ -31,579 +118,9 @@ var ListItem = React.createClass({
 
 
 
-/* ==============================================
-   Franchises
+/* Submit Button
    ============================================== */
 
-// The "Add a new franchise" button
-var AddFranchiseButton = React.createClass({
-  getInitialState: function() {
-    return { 
-      showinput: false
-    };
-  },
-  onChange: function(e) {
-    // Passes the value of the input field to the "onChange" property
-    // passed from the parent component.
-    // Used for suggesting a franchise.
-    this.props.onChange(e.target.value);
-  },
-  // Handles clicks on the AddFranchiseButton.
-  handleClick: function() {
-    // Sets showinput to 'input-shown', which applies it as a class
-    // to the DOM node, modifying the style to appear as though
-    // the button has been replaced by an input field.
-    this.setState({ showinput: 'input-shown' }, function() {
-      // "React.findDOMNode" returns the DOM element, which is then taken by JQuery
-      // and given an empty value and a focus state.
-      // This ensures that the input field won't have any old data in it.
-      $(React.findDOMNode(this.refs.franchiseInput)).val("").focus();
-    });
-  },
-  hideInput: function(e) {
-    // Make sure that clicking on the close button doesn't cause it to immediately reopen itself.
-    this.preventBubbling(e);
-
-    // Hide input, empty input field value.
-    this.setState({showinput: false}, function() {
-      $(React.findDOMNode(this.refs.franchiseInput)).val("");
-    });
-
-    // Remove suggestions.
-    this.props.onChange("");
-  },
-  // Stops "bubbling up" of click events on the input field,
-  // preventing handleClick from being called when the input
-  // field is acted upon.
-  preventBubbling: function(e) {
-    e.stopPropagation();
-  },
-  // First argument passed to function through .bind() has to be null,
-  // because React.js is weird.
-  // Source: https://groups.google.com/forum/#!topic/reactjs/Xv9_kVoJJOw
-  addFranchise: function(x, e) {
-    console.log(e.target.data);
-
-    // Event target data is the franchise object the user is trying
-    // to add.
-    var franchise = e.target.data;
-
-    // Forward the chosen franchise along to the main React class.
-    this.props.addFranchise(franchise);
-
-    // Hide input, remove suggestions
-    this.setState({showinput: false});
-  },
-  render: function() {
-    return (
-      <li>
-        <div ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "add-new-franchise hidden" : "add-new-franchise shown"} onClick={this.handleClick}>
-          <span className="icon icon-plus"></span>
-          {this.props.franchise_add}
-
-          <input ref="franchiseInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} />
-
-          <span className="icon icon-close" onClick={this.hideInput}></span>
-        </div>
-
-        <Suggestions suggestions={this.props.suggestions} itemOnClick={this.addFranchise} itemtype="franchise" />
-      </li>
-    );
-  }
-});
-
-var Suggestions = React.createClass({
-  render: function() {
-    return (
-      <div className={this.props.suggestions.length > 0 ? "suggestions-container active" : "suggestions-container inactive"}>
-        <ul className="suggestions">
-          {this.props.suggestions.map(function(item, i) {
-            return (
-              <li key={this.props.itemtype + '-' + item.id} data={item} onClick={this.props.itemOnClick.bind(null, item)}>{item.name}</li>
-            );
-          }, this)}
-        </ul>
-      </div>
-    );
-  }
-});
-
-// Franchises component
-var Franchises = React.createClass({
-  getInitialState: function() {
-    // "Global" values for the franchises, characters, and ships
-    // passed when submitting the story.
-    return {
-      franchisequery: "",
-      suggestions: [],
-      franchises: this.props.franchises,
-      characters: this.props.characters,
-      ships: this.props.ships
-    };
-  },
-  // When the value of the FranchisesInput is modified, handleChange
-  // is called with the value of the input as an argument.
-  handleChange: function(query) {
-    this.setState({ franchisequery: query });
-
-    console.log(query);
-    console.log(this.state.franchisequery);
-
-    // If query is empty, the suggestions state is emptied.
-    if (query === "") {
-      this.setState({ suggestions: [] });
-    } else {
-      // An AJAX request which returns franchises with names similar
-      // to the value of the input field.
-      // These franchises are then used as suggestions for the
-      // Franchises field.
-      $.ajax("/franchises/complete.json?query=" + query, {
-        dataType: "json",
-        success: function(data) {
-
-          console.log(data);
-
-          var suggestions = [];
-
-          // Pushes each suggestion returned from the AJAX request
-          // into the new suggestions array.
-          data.forEach(function(franchise, i) {
-            console.log(franchise);
-            suggestions.push(franchise);
-          });
-
-          console.log("Suggestions:");
-          console.log(suggestions);
-
-          // Updates suggestions state with new suggestions.
-          this.setState({ suggestions: suggestions });
-        }.bind(this),
-        error: function() {
-          console.log("Error");
-        }
-      });
-    }
-  },
-  // Adds a new franchise to the franchises state.
-  addFranchise: function(franchise) {
-    var franchises = this.state.franchises;
-
-    // Push franchise argument into the franchises array created above.
-    franchises.push(franchise);
-
-    console.log("Franchises:");
-    console.log(this.state.franchises);
-
-    console.log("Adding:");
-    console.log(franchise);
-
-    // Franchises state is updated to match the franchises array we've
-    // just created.
-    this.setState({ franchises: franchises }, function() {
-      // Empty franchise suggestions after adding a franchise.
-      this.setState({ suggestions: [] });
-    }.bind(this));
-  },
-  // Removes a franchise from the franchises state.
-  removeFranchise: function(franchise) {
-    // Creates a new franchises variable out of the franchises state
-    // after filtering the removed franchise out of the array.
-    var franchises = this.state.franchises.filter(function(f) {
-      return franchise.id !== f.id;
-    });
-
-    console.log("Characters:");
-    console.log(this.state.characters);
-
-    // Any characters that belong to the franchise being removed
-    // are also removed.
-    var characters = this.state.characters.filter(function(c) {
-      return franchise.id !== c.franchise_id;
-    });
-
-    console.log("Characters2:");
-    console.log(characters);
-
-    console.log("Removing:");
-    console.log(franchise);
-
-    // Passes the updated franchises and characters arrays to their
-    // respective states. 
-    this.setState({ franchises: franchises }, function() {
-      this.props.updateFranchises(franchises);
-    });
-    this.setState({ characters: characters }, function() {
-      this.props.updateCharacters(characters);
-    });
-  },
-  render: function() {
-    return (
-      <div>
-        <div className="section-header">{this.props.franchises_label}</div>
-
-        <ul className="franchise-list">
-
-          {this.state.franchises.map(function(franchise, i) {
-            var characters = this.state.characters.filter(function(character) {
-              return franchise.id == character.franchise_id;
-            });
-            return (
-              <div key={'container' + franchise.id}>
-                <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} addCharacter={this.props.addCharacter} removeCharacter={this.props.removeCharacter} />
-              </div>
-            );
-          }, this)}
-          
-          <AddFranchiseButton query={this.state.franchisequery} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} addFranchise={this.addFranchise} />
-
-        </ul>
-
-        {this.props.children}
-      </div>
-    );
-  }
-});
-
-
-
-/* ==============================================
-   Characters
-   ============================================== */
-
-// AddCharacterButton component
-var AddCharacterButton = React.createClass({
-  // The Initial State of the AddCharacterButton React class.
-  getInitialState: function() {
-    return { 
-      showinput: false,
-      inputfocus: false
-    };
-  },
-  // When the onChange event is called on the input, handleChange is run.
-  // This passes the value of the input element to the parent Characters component.
-  handleChange: function(e) {
-    this.props.onChange(e.target.value);
-  },
-  // When the input element fires the onFocus event, the "inputfocus" class is 
-  // set to true and the the value of the input element is passed on to the
-  // parent Characters component.
-  onFocus: function(e) {
-    this.setState({inputfocus: true});
-
-    console.log(e.target.value);
-
-    this.props.onChange(e.target.value);
-  },
-  handleClick: function() {
-    this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
-      $(React.findDOMNode(this.refs.characterInput)).focus();
-    });
-    var characterinput = React.findDOMNode(this.refs.characterInput);
-    console.log(characterinput);
-    this.props.onChange(characterinput);
-  },
-  hideInput: function(e) {
-    // Make sure that clicking on the close button doesn't cause it to immediately reopen itself.
-    this.preventBubbling(e);
-
-    // Hide input, empty input field value.
-    this.setState({showinput: false, inputfocus: false});
-    $(React.findDOMNode(this.refs.characterInput)).val("");
-
-    // Remove suggestions.
-    this.props.emptySuggestions();
-  },
-  preventBubbling: function(e) {
-    e.stopPropagation();
-  },
-  addCharacter: function(e) {
-    console.log(e.target.data);
-
-    // Forward the chosen franchise along to the main React class.
-    this.props.addCharacter(e.target.data);
-    
-    this.setState({showinput: false, inputfocus: false});
-    
-    // Empty the characterInput field.
-    $(React.findDOMNode(this.refs.characterInput)).val("");
-
-    this.forceUpdate();
-  },
-  render: function() {
-    return (
-      <li>
-        <div ref="addCharacterButton" id="add-character-button" className={this.state.showinput ? "add-new-character hidden" : "add-new-character shown"} onClick={this.handleClick} >
-          <span className="icon icon-plus"></span>
-          {this.props.character_add}
-
-          <input ref="characterInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.handleChange} onFocus={this.onFocus} />
-
-          <span className="icon icon-close" onClick={this.hideInput}></span>
-        </div>
-
-        <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
-          <ul className="suggestions">
-            {this.props.suggestions.map(function(character, i) {
-              console.log(character);
-              return (
-                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
-              );
-            }, this)}
-          </ul>
-        </div>
-      </li>
-    );
-  }
-});
-
-// Characters component
-var Characters = React.createClass({
-  // The Initial State of the Characters React class.
-  getInitialState: function() {
-    return {
-      suggestions: [],
-      characters: []
-    };
-  },
-  // If there is a characters property passed to the Characters React class,
-  // the characters state is set to be equivalent to that property.
-  // Otherwise, nothing happens.
-  componentWillMount: function() {
-    if (this.props.characters) {
-      this.setState({ characters: this.props.characters });
-    }
-  },
-  // Function for removing a character.
-  removeCharacter: function(character) {
-    // The variable characters is created and set to be equivalent to
-    // the React class' "characters" state after the character sent in
-    // the removeCharacter function is filtered out.
-    var characters = this.state.characters.filter(function(c) {
-      return character.id !== c.id;
-    });
-
-    console.log("Removing:");
-    console.log(character);
-
-    // The characters array is passed up to the characters state for the Characters React class..
-    this.setState({characters: characters}, function() {
-      this.props.removeCharacter(character);
-    });
-  },
-  // Adds the passed character to the characters state in the React class.
-  addCharacter: function(character) {
-    console.log(character);
-
-    // Creates an array out of the characters array already in the React class' state,
-    // then appends the character we're adding to that array.
-    console.log(this.state.characters);
-    var characters = this.state.characters;
-    characters.push(character);
-    console.log(characters);
-
-    // Sets the characters state to be equivalent to the characters array created above.
-    // Then sends the new character "upstream" to the main Franchises React class.
-    this.setState({characters: characters}, function() {
-      this.props.addCharacter(character);
-    });
-
-    // Empty suggestions
-    this.emptySuggestions();
-  },
-  // Empties the suggestions array, as the name would suggest.
-  emptySuggestions: function() {
-    this.setState({ suggestions: [] });
-  },
-  handleChange: function() {
-    var _this = this;
-    var franchise = this.props.franchise;
-
-    // Sends an AJAX request to the current franchise's URL.
-    // This returns some data about the franchise, most importantly a list of characters.
-    $.ajax("/franchises/" + franchise.slug + ".json", {
-      dataType: "json",
-      success: function(data) {
-
-        // Creates an empty suggestions array for the characters to be pushed into.
-        var suggestions = [];
-
-        console.log("Data.characters:");
-        console.log(data.characters);
-
-        // The data returned by the AJAX request is then evaluated and the
-        // franchise's characters are added to the suggestions array.
-        data.characters.map(function(character, i) {
-          console.log(character.name);
-          suggestions.push(character);
-        });
-
-        console.log(suggestions);
-
-        // The suggestions array we've created is then pushed up to the
-        // suggestions state in the React class.
-        _this.setState({ suggestions: suggestions });
-
-        console.log("Suggestions state:");
-        console.log(_this.state.suggestions);
-      }
-    });
-  },
-  render: function() {
-    if (this.state.characters) {
-      return (
-        <ul className="character-list">
-          {this.state.characters.map(function(character, i) {
-            console.log(character);
-            return (
-              <ListItem key={character.id} data={character} ref={'character' + i} remove={this.removeCharacter} />
-            );
-          }, this)}
-
-          <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} franchise_id={this.props.franchise_id} emptySuggestions={this.emptySuggestions} />
-        </ul>
-      );
-    } else {
-      return <ul></ul>;
-    }
-  }
-});
-
-
-
-/* ==============================================
-   Ships
-   ============================================== */
-
-var AddShipButton = React.createClass({
-  getInitialState: function() {
-    return { 
-      showinput: false,
-      inputfocus: false
-    };
-  },
-  onChange: function(e) {
-    this.props.onChange(e.target.value);
-  },
-  onFocus: function(e) {
-    this.setState({inputfocus: true});
-
-    console.log(e.target.value);
-
-    this.props.onChange(e.target.value);
-  },
-  handleClick: function() {
-    this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
-      $(React.findDOMNode(this.refs.shipInput)).focus();
-    });
-    var shipinput = React.findDOMNode(this.refs.shipInput);
-    console.log(shipinput);
-    this.props.onChange(shipinput);
-  },
-  preventBubbling: function(e) {
-    e.stopPropagation();
-  },
-  addShip: function(e) {
-    console.log(e.target.data);
-
-    // Forward the chosen franchise along to the main React class.
-    this.props.addShip(e.target.data);
-    
-    this.setState({showinput: false, inputfocus: false});
-    
-    $(React.findDOMNode(this.refs.shipInput)).val("");
-  },
-  render: function() {
-    return (
-      <li>
-        <div ref="addShipButton" id="add-ship-button" className={this.state.showinput ? "add-new-ship hidden" : "add-new-ship shown"} onClick={this.handleClick} >
-          <span className="icon icon-plus"></span>
-          {this.props.ship_add}
-
-          <input ref="shipInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} onFocus={this.onFocus} />
-        </div>
-
-        <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
-          <ul className="suggestions">
-            {this.props.suggestions.map(function(character, i) {
-              console.log(character);
-              return (
-                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
-              );
-            }, this)}
-          </ul>
-        </div>
-
-      </li>
-    );
-  }
-});
-
-var Ships = React.createClass({
-  getInitialState: function() {
-    return {
-      suggestions: [],
-      ships: []
-    };
-  },
-  componentWillMount: function() {
-    if (this.props.ships) {
-      this.setState({ ships: this.props.ships });
-    }
-  },
-  removeShip: function(ship) {
-    var ships = this.state.ships.filter(function(s) {
-      return ship.id !== s.id;
-    });
-
-    console.log("Removing:");
-    console.log(ship);
-
-    this.setState({ships: ships});
-  },
-  addShip: function(ship) {
-    console.log(ship);
-
-    console.log(this.state.ships);
-    var ships = this.state.ships;
-    ships.push(ships);
-    console.log(ships);
-
-    this.setState({ships: ships}, function() {
-      this.props.updateShips(this.state.ships);
-    });
-  },
-  emptySuggestions: function() {
-    this.setState({ suggestions: [] });
-  },
-  handleChange: function() {
-
-  },
-  render: function() {
-    if (this.props.characters.length >= 2) {
-      return (
-        <div>
-          <div className="section-header">{this.props.ships_label}</div>
-
-          <ul className="ship-list">
-            {this.state.ships.map(function(ship, i) {
-              console.log(ship);
-              return (
-                <ListItem key={'ship' + i} data={ship} remove={this.removeShip} />
-              );
-            }, this)}
-
-            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} />
-          </ul>
-        </div>
-      );
-    } else {
-      return <div></div>;
-    }
-  }
-});
-
-// SubmitButton component.
 // This intervenes and handles the submission of the story form.
 var SubmitButton = React.createClass({
   // Function is run when the submit input is clicked.
@@ -686,85 +203,6 @@ var SubmitButton = React.createClass({
     return (
       <div>
         <input type="submit" name="commit" value={this.props.submit} id={this.props.elementid} onClick={this.handleClick} />
-      </div>
-    );
-  }
-});
-
-// ReactFormElements component used in the Rails view.
-var ReactFormElements = React.createClass({
-  getInitialState: function() {
-    // "Global" values for the franchises, characters, and ships
-    // passed when submitting the story.
-    return {
-      franchises: this.props.franchises,
-      characters: this.props.characters,
-      ships: this.props.ships
-    };
-  },
-  updateFranchises: function(franchises) {
-    this.setState({ franchises: franchises });
-  },
-  updateCharacters: function(characters) {
-    this.setState({ characters: characters });
-  },
-  // Adds a character to the characters state.
-  addCharacter: function(character) {
-    var characters = [];
-
-    // Passes each character in the characters state to the
-    // characters array.
-    this.state.characters.forEach(function(character, i) {
-      characters.push(character);
-    });
-
-    // Appends the new character to the characters array.
-    characters.push(character);
-
-    console.log(characters);
-
-    // Passes the updated characters array to the characters state.
-    this.setState({ characters: characters });
-  },
-  // Removes a character from the characters state.
-  removeCharacter: function(character) {
-    // Creates a new array out of the characters state
-    // without the character we're removing.
-    var characters = this.state.characters.filter(function(c) {
-      return character.id !== c.id;
-    });
-
-    console.log(characters);
-
-    // Passes the updated characters array to the characters state.
-    this.setState({ characters: characters });
-  },
-  updateShips: function(ships) {
-    var newships = [];
-
-    // All the ships already in the React state are pushed to the newships array.
-    this.state.ships.forEach(function(ship, i) {
-      newships.push(ship);
-    });
-
-    // New ships passed to updateShips are then added to the newships array.
-    ships.forEach(function(ship, i) {
-      newships.push(ship);
-    });
-    
-    // The React state is updated to reflect the newships array we've just created.
-    this.setState({ ships: newships });
-  },
-  render: function() {
-    // All properties passed from the Rails helper are forwarded onto
-    // the Franchises component by the {...this.props} line.
-    return (
-      <div>
-        <Franchises updateFranchises={this.updateFranchises} updateCharacters={this.updateCharacters} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} >
-          <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
-
-          <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
-        </Franchises>
       </div>
     );
   }
