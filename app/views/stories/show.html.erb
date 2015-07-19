@@ -3,10 +3,7 @@
 <div class="story-toolbar-container">
   <div class="story-toolbar">
     <ul class="story-toolbar-left">
-      <li>
-        <p><%= link_to(@story.author.name, user_path(@story.author)) %>
-        <p><%= @story.created_at.strftime("%B %e, %Y") %>
-      </li>
+    
     </ul>
     <ul class="story-toolbar-right">
       <% if current_user == @story.author %>
