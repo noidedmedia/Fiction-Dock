@@ -21,11 +21,16 @@
       font-size: 4.0rem;
       color: transparent;
       width: 40px;
+      height: 45px;
       overflow: hidden;
       padding-left: 6px;
 
       &:first-letter {
         color: #333;
+      }
+
+      &:not(:first-letter) {
+        color: transparent;
       }
     }
   }

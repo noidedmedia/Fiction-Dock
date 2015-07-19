@@ -50,7 +50,7 @@
   <meta name="theme-color" content="#333333">
 
   <%# Description for search engine results, e.g. Google and DuckDuckGo. %>
-  <meta name="description" content="Fan fiction needed a better place to call home, this is it.">
+  <meta name="description" content="<%= t(".fan_fiction_needed_a_better_place_to_call_home") %>">
 
   <style>
     @font-face {
@@ -69,23 +69,27 @@
   <%= render 'layouts/header' %>
   <% if notice %>
     <div class="alert alert-success">
+      <span class="icon icon-check"></span>
       <p><%= notice %></p>
-      <div id="alert-close"></div>
+      <div id="alert-close"><span class="icon icon-close"></span></div>
     </div>
   <% elsif info %>
     <div class="alert alert-info">
+      <span class="icon icon-info"></span>
       <p><%= info %></p>
-      <div id="alert-close"></div>
+      <div id="alert-close"><span class="icon icon-close"></span></div>
     </div>
   <% elsif alert %>
     <div class="alert alert-danger">
+      <span class="icon icon-danger"></span>
       <p><%= alert %></p>
-      <div id="alert-close"></div>
+      <div id="alert-close"><span class="icon icon-close"></span></div>
     </div>
   <% elsif warning %>
     <div class="alert alert-warning">
+      <span class="icon icon-warning"></span>
       <p><%= warning %></p>
-      <div id="alert-close"></div>
+      <div id="alert-close"><span class="icon icon-close"></span></div>
     </div>
   <% end %>
 

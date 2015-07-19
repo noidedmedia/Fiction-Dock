@@ -30,7 +30,7 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.publish
         format.html { redirect_to @story } 
-        format.json{ render json: true }
+        format.json { render json: true }
       else
         format.json { render json: @story.errors, status: :unprocessable_entity }
       end
@@ -42,7 +42,7 @@ class StoriesController < ApplicationController
     authorize @story
     respond_to do |format|
       if @story.unpublish
-        format.json{ render json: true }
+        format.json { render json: true }
         format.html { redirect_to @story }
       else
         format.json { render json: @story.errors, status: :unprocessable_entity }
@@ -81,7 +81,7 @@ class StoriesController < ApplicationController
       respond_to do |format|
         # TODO: fix this
         format.html { redirect_to story_path(params[:id]) }
-        format.json { render json: false}
+        format.json { render json: false }
       end
     end
   end
@@ -94,12 +94,12 @@ class StoriesController < ApplicationController
                            user_id: current_user.id)
     respond_to do |format|
       if s.try(:destroy)
-        format.html { redirect_to story_path(params[:id])}
-        format.json { render json: true}
+        format.html { redirect_to story_path(params[:id]) }
+        format.json { render json: true }
       else
         # TODO: Fix this
-        format.html { redirect_to story_path(params[:id])}
-        format.json { render json: false}
+        format.html { redirect_to story_path(params[:id]) }
+        format.json { render json: false }
       end
     end
   end
@@ -141,10 +141,10 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.save
         format.html { redirect_to @story }
-        format.json { render :show, status: :ok, location: @story}
+        format.json { render :show, status: :ok, location: @story }
       else
-        format.html { render :edit}
-        format.json { render json: @story.errors, status: :unprocessable_entity}
+        format.html { render :edit }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
   end

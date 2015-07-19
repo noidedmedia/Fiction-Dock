@@ -1,15 +1,13 @@
-#
+##
 # A user is exactly what it says on the tin: somebody who uses FictionDock.
 # We use `Devise` for our authentication, so check out their docs as well.
-# 
-# @attr [String] name this user's name
 class User < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :name, use: :slugged
-  
+
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
   has_many :stories
 
@@ -28,5 +26,17 @@ class User < ActiveRecord::Base
 
   def mod_or_higher?
     level == "mod" || level == "admin"
+  end
+  ##
+  # Mark a chapter as read by this user if it has not been already
+  # update word count accordingly
+  def read_chapter(chapter)
+    with_lock do
+      if ReadChapter.new(chapter: chapter,
+                         user: self).save
+        self.read_words += chapter.word_count
+        self.save
+      end
+    end
   end
 end

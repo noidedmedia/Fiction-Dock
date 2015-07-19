@@ -46,6 +46,9 @@ gem 'turbolinks'
 # Fixes issues with JQuery and Turbolinks, read more: https://github.com/kossnocorp/jquery.turbolinks
 gem 'jquery-turbolinks'
 
+# React for Rails
+gem 'react-rails'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.

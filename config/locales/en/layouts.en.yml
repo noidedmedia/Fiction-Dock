@@ -4,6 +4,7 @@ en:
   layouts:
     application:
       fiction_dock_title: "Fiction Dock: A better place for your fan fiction"
+      fan_fiction_needed_a_better_place_to_call_home: "Fan fiction needed a better place to call home, this is it."
     header:
       search: "Search"
       browse: "Browse"
@@ -14,6 +15,7 @@ en:
       create_new_franchise: "Create new franchise"
       request_new_franchise: "Request new franchise"
       create_new_story: "Create new story"
+      create_new_bookshelf: "Create new bookshelf"
       sign_in: "Sign in"
       create_an_account: "Create an account"
       profile: "Profile"
@@ -22,9 +24,9 @@ en:
       sign_out: "Sign out"
       about: "About"
       faq: "FAQ"
-      blog: "Blog"
+      rules: "Rules"
       terms_and_conditions: "Terms and Conditions"
       privacy_policy: "Privacy Policy"
     footer:
-      fiction_dock_description: "A better place for your fan fiction."
+      fiction_dock_description: "Fan fiction needed a better place to call home, this is it."
       fiction_dock_copyright: "© 2015 Noided Media"

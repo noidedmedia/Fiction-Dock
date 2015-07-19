@@ -1,3 +1,28 @@
-<h1> <%= @bookshelf.name %> </h1>
-<h3><%= link_to @user.name, @user %></h3>
-<%= render partial: 'stories/story_stub', collection: @stories, as: 'story' %>
+<%- title @bookshelf.name %>
+
+<div id="bookshelf-page" class="fd-text-container fd-padding-top">
+  <h2 class="fd-page-header"><%= @bookshelf.name %></h2>
+  <div class="fd-page-subtitle">
+    <p><%= @bookshelf.description %>
+    <p><%= link_to @user.name, @user %>
+  </div>
+
+  <% if policy(@bookshelf).update? %>
+    <ul id="bookshelf-options" class="fd-page-options">
+      <li><%= link_to t(".edit"), edit_bookshelf_path(@bookshelf) %>
+    </ul>
+  <% end %>
+
+  <ul id="bookshelf-story-list" class="fd-list">
+
+    <div class="fd-list-header"><%= t(".stories") %></div>
+    
+    <% unless @stories.blank? %>
+      <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
+    <% else %>
+      <p class="fd-list-empty-note"><%= t(".this_bookshelf_doesn't_have_any_stories_yet") %></p>
+    <% end %>
+
+  </ul>
+
+</div>

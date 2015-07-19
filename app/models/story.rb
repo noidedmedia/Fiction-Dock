@@ -2,16 +2,19 @@
 #
 # Table name: stories
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  blurb       :string
-#  user_id     :integer
-#  published   :boolean          default(FALSE), not null
-#  license     :integer          default(0), not null
-#  language    :integer          default(0), not null
+#  id             :integer          not null, primary key
+#  name           :string
+#  description    :text
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  blurb          :string
+#  user_id        :integer
+#  published      :boolean          default(FALSE), not null
+#  license        :integer          default(0), not null
+#  language       :integer          default(0), not null
+#  content_rating :integer          default(0), not null
+#  sex            :boolean          default(FALSE), not null
+#  violence       :boolean          default(FALSE), not null
 #
 
 ##
@@ -77,7 +80,11 @@ class Story < ActiveRecord::Base
   before_validation :save_ship_attrs
   enum license: [:all_rights_reserved, :cc_zero, :cc_by, :cc_by_sa, :cc_by_nd, :cc_by_nc, :cc_by_nc_nd]
   enum language: [:en, :es]
-
+  ##
+  # The total number of words in this story
+  def total_word_count
+    chapters.map(&:count).collect(:+)
+  end
   ##
   # My designer wanted to use `@story.author` in views
   # So this exists

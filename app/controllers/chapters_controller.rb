@@ -6,6 +6,11 @@ class ChaptersController < ApplicationController
   before_action :load_story
   before_action :authenticate_user!, except: [:show]
 
+  def read
+    @chapter = @story.chapters.friendly.find(params[:id])
+    current_user.read_chapter @chapter
+  end
+
   def publish
     @chapter = @story.chapters.friendly.find(params[:id])
     @chapter.publish
@@ -62,11 +67,11 @@ class ChaptersController < ApplicationController
     authorize @chapter
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to [@story, @chapter]}
-        format.json { render 'show' }
+        format.html { redirect_to [@story, @chapter] }
+        format.json { render :show }
       else
-        format.html {render 'edit'}
-        format.json { render json: @chapter.errors, status: :unprocessable_entity}
+        format.html { redirect_to :back, warning: @chapter.errors.full_messages.join(", ") }
+        format.json { render json: @chapter.errors, status: :unprocessable_entity }
       end
     end 
   end
@@ -80,9 +85,9 @@ class ChaptersController < ApplicationController
     respond_to do |format|
       if @chapter.update(chapter_params)
         format.html { redirect_to [@story, @chapter] }
-        format.json { render 'show' }
+        format.json { render :show }
       else
-        format.html { render 'edit' }
+        format.html { redirect_to :back, warning: @chapter.errors.full_messages.join(", ") }
         format.json { render json: @chapter.errors, status: :entity_not_processable }
       end
     end
@@ -95,8 +100,8 @@ class ChaptersController < ApplicationController
     authorize @chapter
     @chapter.destroy
     respond_to do |format|
-      format.html { redirect_to @story, notice: "successfully deleted"}
-      format.json { render json: true}
+      format.html { redirect_to @story, notice: I18n.t(".notices.chapter_deleted_successfully") }
+      format.json { render json: true }
     end
   end
 

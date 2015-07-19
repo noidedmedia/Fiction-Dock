@@ -1,7 +1,7 @@
 <nav id="main-header">
   <div class="header-left">
 
-    <div class="header-item">
+    <div class="header-item fiction-dock-logo logo">
       <%= link_to root_path do %>
         <p class="fiction-dock-logo logo-header">Fiction Dock</p>
       <% end %>
@@ -19,7 +19,7 @@
       </form>
     </div>
 
-    <div class="header-item">
+    <div class="header-item browse">
       <div id="browse-button">
         <%= t(".browse") %>
         <span class="dropdown-caret"></span>
@@ -41,13 +41,13 @@
     
     <% if user_signed_in? %>
 
-      <div class="header-item">
+      <div class="header-item dark-mode">
         <div id="dark-mode-toggle">
           <span class="icon icon-light-bulb"></span>
         </div>
       </div>
 
-      <div class="header-item">
+      <div class="header-item create">
         <div id="create-button">
           <span class="icon icon-plus"></span>
           <span class="dropdown-caret"></span>
@@ -55,13 +55,14 @@
 
         <div id="create-tooltip" class="tooltip" data-showon="#create-button">
           <ul>
-            <li><%= link_to t(".create_new_story"), new_story_path %>       
+            <li><%= link_to t(".create_new_story"), new_story_path %>
             
             <% if current_user.level === "admin" %>
               <li><%= link_to t(".create_new_franchise"), new_franchise_path %>
             <% else %>
               <li><%= link_to t(".request_new_franchise"), new_franchise_creation_request_path %>
             <% end %>
+            <li><%= link_to t(".create_new_bookshelf"), new_user_bookshelf_path(current_user) %>
           </ul>
         </div>
       </div>
@@ -86,17 +87,17 @@
 
     <% else %>
 
-      <div class="header-item">
+      <div class="header-item dark-mode">
         <div id="dark-mode-toggle">
           <span class="icon icon-light-bulb"></span>
         </div>
       </div>
 
-      <div class="header-item">
+      <div class="header-item create-an-account">
         <%= link_to t(".create_an_account"), new_user_registration_path %>
       </div>
 
-      <div class="header-item">
+      <div class="header-item sign-in">
         <%= link_to t(".sign_in"), new_user_session_path %>
       </div>
 
@@ -112,7 +113,7 @@
     <ul>
       <li><%= link_to t(".about"), about_path %></li>
       <li><%= link_to t(".faq"), "#" %></li>
-      <li><%= link_to t(".blog"), "#" %></li>
+      <li><%= link_to t(".rules"), rules_path %></li>
       <!-- <li><%= link_to t(".terms_and_conditions"), "#" %></li> -->
       <!-- <li><%= link_to t(".privacy_policy"), "#" %></li> -->
     </ul>

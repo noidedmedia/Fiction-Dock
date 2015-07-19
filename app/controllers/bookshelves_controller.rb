@@ -2,9 +2,11 @@ class BookshelvesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :load_user, only: [:index, :new, :create]
   include Pundit
+
   def show
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
+    @user = User.friendly.find(params[:user_id])
     @stories = Story.for_content(accepted_content)
       .joins(:bookshelves)
       .where(bookshelves: {id: params[:id]})
@@ -51,6 +53,7 @@ class BookshelvesController < ApplicationController
       end
     end
   end
+  
   def create
     @bookshelf = @user.bookshelves.build(bookshelf_params)
     authorize @bookshelf
@@ -62,10 +65,13 @@ class BookshelvesController < ApplicationController
       end
     end
   end
+  
   protected
+  
   def load_user
     @user = User.friendly.find(params[:user_id])
   end
+
   def bookshelf_params
     params.require(:bookshelf)
       .permit(:name,

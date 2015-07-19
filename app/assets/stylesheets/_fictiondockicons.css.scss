@@ -30,7 +30,6 @@
   font-weight: normal;
   font-size: 1.4rem;
   font-variant: normal;
-  line-height: 1;
   text-decoration: inherit;
   text-rendering: optimizeLegibility;
   text-transform: none;
@@ -44,10 +43,13 @@
 
 .icon-check:before { content: "\f100"; }
 .icon-close:before { content: "\f101"; }
+.icon-danger:before { content: "\f115"; }
+.icon-down:before { content: "\f118"; }
 .icon-ellipsis:before { content: "\f102"; }
 .icon-eye:before { content: "\f103"; }
 .icon-flame:before { content: "\f104"; }
 .icon-gear:before { content: "\f105"; }
+.icon-info:before { content: "\f116"; }
 .icon-light-bulb:before { content: "\f106"; }
 .icon-link:before { content: "\f107"; }
 .icon-list-ordered:before { content: "\f108"; }
@@ -63,3 +65,4 @@
 .icon-search:before { content: "\f112"; }
 .icon-tag:before { content: "\f113"; }
 .icon-three-bars:before { content: "\f114"; }
+.icon-warning:before { content: "\f117"; }

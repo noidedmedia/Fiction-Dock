@@ -192,38 +192,359 @@
   }
 }
 
+#react-form-elements {
+  margin-top: 10px;
 
-
-.remove-franchise-button {
-  color: red;
-  background-color: #ffeeee;
-  border: 1px solid red;
-  display: inline;
+  .section-header {
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #aaaab2;
+  }
 }
 
-.franchise-list-characters {
-  padding-left: 50px;
+.franchise-list {
+  list-style: none;
+
+  > li:last-of-type {
+    position: relative;
+    margin-top: 20px;
+
+    input {
+      border: 1px solid #aaaab2;
+      padding-right: 32px;
+    }
+  }
+
+  > div {
+    margin-bottom: 25px;
+
+    > li {
+      display: block;
+      margin: 6px 0 0;
+      cursor: default;
+      position: relative;
+
+      div:not(.suggestions-container) {
+        display: inline-block;
+        padding: 8px 0;
+        font-weight: 500;
+      }
+
+      span.icon-close {
+        font-size: 10px;
+        margin-right: 8px;
+        color: #aaaab2;
+        cursor: pointer;
+        transition: color 200ms;
+        position: absolute;
+        left: -25px;
+        top: 7px;
+
+        &:hover {
+          color: $color-danger;
+        }
+      }
+    }
+  }
 }
 
-.franchise-list-name {
-  display: inline;
-  padding-left: 100px;
-}
-
-.character-list-name {
-  display: inline;
-  padding-left: 100px;
-}
-
-.character-list-action {
+#add-franchise-button {
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(#5bb289,0.8);
+  color: #fff;
+  transition: background-color 200ms;
+  border-radius: 3px;
+  padding: 10px 14px 10px 34px;
+  position: relative;
   display: inline-block;
-  width: 100px;
+  font-weight: 400;
+
+  .icon {
+    font-size: 10px;
+    color: #fff;
+    position: absolute;
+    left: 11px;
+    top: 8px;
+
+    &.icon-close {
+      display: none;
+      top: 7px;
+      right: 10px;
+      left: auto;
+    }
+  }
+
+  &:hover {
+    background-color: #5bb289;
+  }
+
+  &.hidden {
+    overflow: auto;
+    cursor: default;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 0;
+
+    span:not(.icon-close) {
+      display: none;
+    }
+
+    .icon-close {
+      display: block;
+      color: #aaaab2;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
 }
 
-.character-unchecked {
-  background-color: #eee;
+.suggestions-container {
+  background-color: #fff;
+  z-index: 100;
+  width: 100%;
+  max-width: 300px;
+  margin: 0;
+  position: absolute;
+  max-height: 300px;
+  overflow: auto;
+  top: 34px;
+  border: 0;
+
+  &.active {
+    border: 1px solid #aaaab2;
+    border-top: 0;
+  }
+
+  &.inactive {
+    visibility: hidden;
+  }
 }
 
-.character-checked {
-  background-color: #eeffee;
+.suggestions {
+  padding: 0;
+
+  li {
+    margin: 0;
+    padding: 12px 8px;
+    cursor: pointer;
+    display: block;
+
+    &:hover {
+      background-color: #f9f9f9;
+    }
+  }
+}
+
+.character-list {
+  list-style: none;
+
+  > li {
+    display: inline-block;
+    margin: 6px 6px 0 0;
+    cursor: default;
+    position: relative;
+
+    input {
+      border: 1px solid #aaaab2;
+    }
+
+    div:not(.suggestions-container) {
+      display: inline-block;
+      padding: 8px 48px 8px 10px;
+      font-weight: 400;
+      border: 1px solid #aaaab2;
+      border-radius: 3px;
+    }
+
+    span.icon-close {
+      font-size: 10px;
+      color: #aaaab2;
+      cursor: pointer;
+      transition: color 200ms;
+      position: absolute;
+      right: 10px;
+      top: 8px;
+
+      &:hover {
+        color: $color-danger;
+      }
+    }
+
+    &:last-of-type {
+      display: block;
+    }
+  }
+}
+
+#add-character-button {
+  cursor: pointer;
+  overflow: hidden;
+  background-color: transparent;
+  color: rgba(#5bb289,0.8);
+  border: 1px solid rgba(#5bb289,0.8);
+  border-radius: 3px;
+  padding: 8px 12px 8px 32px;
+  position: relative;
+  display: inline-block;
+  transition: border-color 200ms, color 200ms;
+
+  span.icon {
+    font-size: 10px;
+    color: #5bb289;
+    position: absolute;
+    left: 10px;
+    top: 6px;
+  }
+
+  span.icon-close {
+    display: none;
+    top: 7px;
+    position: absolute;
+    right: 10px;
+    left: auto;
+  }
+
+  &:hover {
+    color: #5bb289;
+    border-color: #5bb289;
+  }
+
+  &.hidden {
+    overflow: auto;
+    cursor: default;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 0;
+    border: 0;
+    display: block;
+
+    span:not(.icon-close) {
+      display: none;
+    }
+
+    .icon-close {
+      display: block;
+      color: #aaaab2;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+}
+
+
+#add-ship-button {
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(#5bb289,0.8);
+  color: #fff;
+  transition: background-color 200ms;
+  border-radius: 3px;
+  padding: 10px 14px 10px 34px;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+
+  span.icon {
+    font-size: 10px;
+    color: #fff;
+    position: absolute;
+    left: 11px;
+    top: 8px;
+
+    &.icon-close {
+      display: none;
+      top: 12px;
+      right: 10px;
+      left: auto;
+    }
+  }
+
+  &:hover {
+    background-color: #5bb289;
+  }
+
+  &.hidden {
+    overflow: auto;
+    cursor: default;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 0;
+
+    span:not(.icon-close) {
+      display: none;
+    }
+
+    span.icon-close {
+      display: block;
+      color: #aaaab2;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+}
+
+
+.ship-list {
+  list-style: none;
+
+  > li:last-of-type {
+    position: relative;
+    margin-top: 20px;
+
+    input {
+      border: 1px solid #aaaab2;
+      padding-right: 32px;
+    }
+  }
+
+  > div {
+    margin-bottom: 25px;
+
+    > li {
+      display: block;
+      margin: 6px 0 0;
+      cursor: default;
+      position: relative;
+
+      div:not(.suggestions-container) {
+        display: inline-block;
+        padding: 8px 0;
+        font-weight: 500;
+      }
+
+      span.icon-close {
+        font-size: 10px;
+        margin-right: 8px;
+        color: #aaaab2;
+        cursor: pointer;
+        transition: color 200ms;
+        position: absolute;
+        left: -25px;
+        top: 12px;
+
+        &:hover {
+          color: $color-danger;
+        }
+      }
+    }
+  }
 }

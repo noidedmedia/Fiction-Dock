@@ -61,7 +61,8 @@
 
     .fd-list-item-subtitle {
       font-size: 1.5em;
-      padding-top: 2px;
+      line-height: 1.4em;
+      padding-top: 6px;
       
       span {
         font-weight: 600;
@@ -193,6 +194,10 @@
     display: block;
     padding: 8px;
     font-size: 1.4rem;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   input[type=submit] {
@@ -212,7 +217,8 @@
 
   .select-container {
     display: inline-block;
-    width: calc(50% - 7px);
+    width: calc(50% - 2px);
+    position: relative;
 
     &:first-of-type {
       margin-right: 10px;
@@ -232,10 +238,25 @@
     cursor: pointer;
     position: relative;
     transition: 200ms;
+    font-weight: 300;
 
-    &:focus {
+    + span {
+      position: absolute;
+      top: 43px;
+      right: 12px;
+      pointer-events: none;
+      color: #aaaab2;
+      font-size: 1.6rem;
+      transition: color 200ms;
+    }
+
+    &:hover, &:focus {
       border-color: #333;
       outline: transparent;
+
+      + span {
+        color: #333;
+      }
     }
   }
 

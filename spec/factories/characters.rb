@@ -14,7 +14,7 @@
 FactoryGirl.define do
   factory :character do
     franchise
-    name { Faker::Name.name } 
+    name { "#{Faker::Name.name} #{rand}".slice(1..40)}
     description { Faker::Lorem.paragraph }
    
   end

@@ -60,7 +60,8 @@
 .alert {
   animation: alertAnimation 6000ms linear 300ms 1 normal forwards;
     -webkit-animation: alertAnimation 6000ms linear 300ms 1 normal forwards;
-  transform: translateY(-45px);
+  -webkit-transform: translateY(-45px);
+          transform: translateY(-45px);
 
   color: #fff;
   display: block;
@@ -75,6 +76,13 @@
   top: 0;
   width: 100vw;
   z-index: 99;
+
+  span {
+    font-size: 10px;
+    padding: 0 8px;
+    -webkit-transform: translateY(-6px);
+            transform: translateY(-6px);
+  }
 
   p {
     display: inline;
@@ -103,12 +111,6 @@
     right: 55px;
     cursor: pointer;
 
-    &:after {
-      content: $icon-close;
-      font-size: 1.4rem;
-      color: #fff;
-    }
-
     @media all and (max-width: $mobile-width) {
       top: 13px;
       right: 30px;
@@ -129,35 +131,19 @@
 /* Style for positive alerts. */
 .alert-success {
   background-color: $color-success;
-
-  > p:first-of-type::before {
-    content: $icon-checkmark;
-  }
 }
 
 /* Style for informative alerts. */
 .alert-info {
   background-color: $color-info;
-
-  > p:first-of-type::before {
-    content: $icon-info;
-  }
 }
 
 /* Style for less severe errors. */
 .alert-warning {
   background-color: $color-warning;
-
-  > p:first-of-type::before {
-    content: $icon-warning;
-  }
 }
 
 /* Style for "dangerous" errors. */
 .alert-danger {
   background-color: $color-danger;
-
-  > p:first-of-type::before {
-    content: $icon-danger;
-  }
 }

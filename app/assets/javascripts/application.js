@@ -16,4 +16,7 @@
 //= require medium-editor
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require turbolinks
+//= require react
+//= require react_ujs
+//= require_tree ./components
 //= require_tree .

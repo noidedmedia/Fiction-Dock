@@ -30,9 +30,10 @@ class Chapter < ActiveRecord::Base
   belongs_to :story
   validates :story, presence: true
   validates :chap_num, numericality: {greater_than: 0}
+  validates :word_count, presence: true
   before_validation :fix_chap_num
   before_validation :sanitize_tags
-  
+  before_validation :save_word_count
   def sanitize_tags
     self.body = Sanitize.fragment(self.body, Sanitize::Config::BASIC).gsub('&gt;','>')
   end
@@ -46,6 +47,15 @@ class Chapter < ActiveRecord::Base
   end
   
   protected
+  def save_word_count
+    ##
+    # String::split by default uses $1. If $1 is empty, it uses /\s+/.
+    # I did a test and found that passing /\s+/ is quite literally
+    # an order of magnitude slower than just passing nothing. So we use 
+    # .split with no arguments to split on whitespace, then find the count
+    # to determine the word count.
+    self.word_count = body.split.count
+  end
   ##
   # If this chapter is not explicitly assigned an order, we append it to the
   # end of the last chapter.
