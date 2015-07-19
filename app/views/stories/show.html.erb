@@ -1,38 +1,14 @@
 <%- title @story.name %>
 
-<div class="story-directory">
-
-  <div class="story-extra-information">
-    
-    <ul>
-
-      <li><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %></li>
-      <li><%= t(".published_on", date: @story.created_at.strftime("%B %e, %Y") ) %></li>
-      <li><%= t("languages.#{@story.language}") %> · <%= t("licenses_html.#{@story.license}_html") %></li>
-
-      <ul>
-        <li class="list-item-header">Franchises</li>
-
-        <% @story.franchises.each do |franchise| %>
-          <li><%= link_to franchise.name, franchise_path(franchise) %></li>
-        <% end %>
-      </ul>
-
-      <ul>
-        <li class="list-item-header">Characters</li>
-        <% @story.characters.each do |character| %>
-          <li><%= link_to character.name, franchise_character_path(character.franchise, character) %></li>
-        <% end %>
-      </ul>
+<div class="story-toolbar-container">
+  <div class="story-toolbar">
+    <ul class="story-toolbar-left">
+      <li>
+        <p><%= link_to(@story.author.name, user_path(@story.author)) %>
+        <p><%= @story.created_at.strftime("%B %e, %Y") %>
+      </li>
     </ul>
-  </div>
-
-  <div class="story-information">
-    <h2 class="story-title"><%= @story.name %></h2>
-
-    <p class="story-description"><%= @story.description %></p>
-
-    <ul id="story-options">
+    <ul class="story-toolbar-right">
       <% if current_user == @story.author %>
         <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
 
@@ -53,14 +29,68 @@
 
       <li><%= link_to t(".report"), "#" %></li>
     </ul>
-
-    <ol class="chapter-list">
-      <%= render partial: 'chapter_stub', collection: policy_scope(@story.chapters), as: :chapter %>
-
-      <% if current_user == @story.author %>
-        <li class="add-new-chapter"><%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %></li>
-      <% end %>
-    </ol>
   </div>
-  <%= render 'comments/comment_list' %>
+</div>
+
+<div class="story-directory">
+
+  <div class="story-information">
+    
+    <h2 class="story-title"><%= @story.name %></h2>
+
+    <p class="story-description"><%= @story.description %></p>
+
+    <div class="table-of-contents">
+      <h4 class="toc-header">Table of Contents</h4>
+      
+      <ol class="toc-chapter-list">
+        <%= render partial: 'chapter_stub', collection: policy_scope(@story.chapters), as: :chapter %>
+
+        <% if current_user == @story.author %>
+          <li class="add-new-chapter"><%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %></li>
+        <% end %>
+      </ol>
+    </div>
+
+    <div class="story-extra-information">
+
+      <ul class="author">
+        <li class="list-item-header">Author</li>
+        <li><%= link_to(@story.author.name, user_path(@story.author)) %></li>
+      </ul>
+
+      <ul class="published">
+        <li class="list-item-header">Published</li>
+        <li><%= @story.created_at.strftime("%B %e, %Y") %></li>
+      </ul>
+
+      <ul class="language">
+        <li class="list-item-header">Language</li>
+
+        <li><%= t("languages.#{@story.language}") %></li>
+      </ul>
+
+      <ul class="license">
+        <li class="list-item-header">License</li>
+        <li><%= t("licenses_html.#{@story.license}_html") %></li>
+      </ul>
+
+      <ul class="story-franchises-list">
+        <li class="list-item-header">Franchises</li>
+
+        <% @story.franchises.each do |franchise| %>
+          <li><%= link_to franchise.name, franchise_path(franchise) %></li>
+        <% end %>
+      </ul>
+
+      <ul class="story-characters-list">
+        <li class="list-item-header">Characters</li>
+        <% @story.characters.each do |character| %>
+          <li><%= link_to character.name, franchise_character_path(character.franchise, character) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <%# render 'comments/comment_list' %>
 </div>
