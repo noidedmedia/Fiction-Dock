@@ -126,18 +126,6 @@ ActiveRecord::Schema.define(version: 20150718181332) do
   add_index "read_chapters", ["chapter_id"], name: "index_read_chapters_on_chapter_id", using: :btree
   add_index "read_chapters", ["user_id"], name: "index_read_chapters_on_user_id", using: :btree
 
-  create_table "reviews", force: :cascade do |t|
-    t.integer  "story_id"
-    t.integer  "user_id"
-    t.text     "body"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "reviews", ["story_id"], name: "index_reviews_on_story_id", using: :btree
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
-
   create_table "ship_characters", force: :cascade do |t|
     t.integer  "ship_id"
     t.integer  "character_id"
@@ -245,8 +233,6 @@ ActiveRecord::Schema.define(version: 20150718181332) do
   add_foreign_key "franchise_users", "users"
   add_foreign_key "read_chapters", "chapters", on_delete: :cascade
   add_foreign_key "read_chapters", "users", on_delete: :cascade
-  add_foreign_key "reviews", "stories", on_delete: :cascade
-  add_foreign_key "reviews", "users", on_delete: :cascade
   add_foreign_key "ship_characters", "characters", on_delete: :cascade
   add_foreign_key "ship_characters", "ships", on_delete: :cascade
   add_foreign_key "stories", "users"
