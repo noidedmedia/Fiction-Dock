@@ -1,16 +1,16 @@
 <%- title t(".chapter_page_title", story_name: @story.name, chapter_name: @chapter.name) %>
 
-<article id="chapter-text-container" class="fd-text-container">
+<div id="chapter-toolbar-container" class="fd-toolbar-container">
+  <div id="chapter-toolbar" class="fd-toolbar">
+    <ul id="chapter-toolbar-left" class="fd-toolbar-left">
+      <li>
+        <%= link_to @story.name, story_path(@story) %>
+        <span><%= t(".chapter", chapter_number: @chapter.chap_num) %></span>
+      </li>
+    </ul>
 
-  <h5 class="chapter-story-title"><%= link_to @story.name, story_path(@story) %></h5>
-  <h6 class="chapter-number"><%= t(".chapter", chapter_number: @chapter.chap_num) %></h6>
-
-  <div class="story-text">
-
-    <h3 class="chapter-title"><%= @chapter.name %></h3>
-
-    <% if current_user == @story.author %>
-      <ul id="chapter-options" class="fd-page-options">
+    <ul id="chapter-toolbar-right" class="fd-toolbar-right">
+      <% if current_user == @story.author %>
         <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
         <% if @chapter.published %>
           <li>
@@ -21,8 +21,15 @@
           <%= button_to t(".publish"), publish_story_chapter_path(@story, @chapter), method: :post, id: "publish-chapter-button", data: { confirm: "Are you sure?" } %>
           </li>
         <% end %>
-      </ul>
-    <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<article id="chapter-text-container" class="fd-text-container">
+  <div class="story-text">
+
+    <h3 class="chapter-title"><%= @chapter.name %></h3>
 
     <div class="chapter-body">
       <%= markdown_parse @chapter.body %>

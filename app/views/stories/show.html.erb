@@ -1,11 +1,12 @@
 <%- title @story.name %>
 
-<div class="story-toolbar-container">
-  <div class="story-toolbar">
-    <ul class="story-toolbar-left">
-
+<div id="story-toolbar-container" class="fd-toolbar-container">
+  <div id="story-toolbar" class="fd-toolbar">
+    <ul id="story-toolbar-left" class="fd-toolbar-left">
+      <%# This has to be here, because CSS. %>
     </ul>
-    <ul class="story-toolbar-right">
+
+    <ul id="story-toolbar-right" class="fd-toolbar-right">
       <% if current_user == @story.author %>
         <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
 

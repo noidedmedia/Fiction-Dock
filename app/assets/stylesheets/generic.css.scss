@@ -102,6 +102,76 @@
   }
 }
 
+.fd-toolbar-container {
+  width: 100vw;
+  height: 50px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+
+  .fd-toolbar {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    .fd-toolbar-left {
+      li {
+        padding: 16px 20px 14px 0;
+      }
+
+      a {
+        font-size: 1.4rem;
+        color: #333;
+        text-decoration: none;
+
+        &:hover, &:focus {
+          opacity: 1;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .fd-toolbar-right {
+      li {
+        padding: 16px 0 14px 20px;
+      }
+
+      a, input[type=submit] {
+        color: #333;
+        opacity: 0.7;
+        text-decoration: none;
+        font-size: 1.4rem;
+        font-weight: 500;
+        transition: 200ms opacity;
+
+        &:hover, &:focus {
+          opacity: 1;
+          outline: none;
+        }
+      }
+
+      input[type=submit] {
+        background-color: transparent;
+        border: 0;
+
+        &:disabled {
+          cursor: default;
+          opacity: 0.4;
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        display: inline-block;
+      }
+    }
+  }
+}
+
 .fd-page-options {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 600;

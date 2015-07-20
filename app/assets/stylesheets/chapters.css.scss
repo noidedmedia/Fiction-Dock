@@ -1,32 +1,23 @@
 @import "scss-variables";
 
-// Title of the chapter's parent story.
-.chapter-story-title {
-  font-weight: 600;
-  font-size: 1.8rem;
-  text-align: center;
-  margin-top: 30px;
+#chapter-toolbar-left {
+  li {
+    font-size: 1.4rem;
 
-  a {
-    text-decoration: none;
+    a {
+      font-weight: 500;
+      padding-right: 2px;
+    }
 
-    &:hover {
-      text-decoration: underline;
+    span {
+      font-weight: 300;
     }
   }
 }
 
-// Chapter number.
-.chapter-number {
-  margin-top: 5px;
-  margin-bottom: 50px;
-  font-weight: 400;
-  font-size: 1.2rem;
-  text-align: center;
-}
-
 .chapter-title {
   font-weight: 600;
+  margin-top: 40px;
   margin-bottom: 5px;
 }
 
