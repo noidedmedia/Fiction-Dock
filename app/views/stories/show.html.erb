@@ -87,5 +87,8 @@
     </div>
   </div>
 
-  <%# render 'comments/comment_list' %>
+  <%# Only render comments if the story has been published. %>
+  <% if @story.published %>
+    <%= render 'comments/comment_list' %>
+  <% end %>
 </div>
