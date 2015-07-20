@@ -3,7 +3,7 @@
 <div class="story-toolbar-container">
   <div class="story-toolbar">
     <ul class="story-toolbar-left">
-    
+
     </ul>
     <ul class="story-toolbar-right">
       <% if current_user == @story.author %>
@@ -38,8 +38,6 @@
     <p class="story-description"><%= @story.description %></p>
 
     <div class="table-of-contents">
-      <h4 class="toc-header">Table of Contents</h4>
-      
       <ol class="toc-chapter-list">
         <%= render partial: 'chapter_stub', collection: policy_scope(@story.chapters), as: :chapter %>
 

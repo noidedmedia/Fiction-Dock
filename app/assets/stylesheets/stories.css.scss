@@ -261,22 +261,12 @@
   min-height: 120px;
 }
 
-.toc-header {
-  text-align: center;
-  display: block;
-  width: 100%;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 1.4rem;
-  margin: 40px 0 10px;
-  color: #333;
-}
-
 .toc-chapter-list {
   font-size: 1.8rem;
   text-align: left;
   width: 100%;
   margin: auto;
+  margin-top: 40px;
   max-width: 500px;
 
   li {
