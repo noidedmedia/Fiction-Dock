@@ -11,8 +11,6 @@ en:
     edit:
       edit_story_page_title: "Editing %{story_name}"
     show:
-      written_by_html: "Written by %{author}"
-      published_on: "Published on %{date}"
       edit: "Edit"
       publish: "Publish"
       unpublish: "Unpublish"
@@ -20,6 +18,12 @@ en:
       share: "Share"
       report: "Report"
       add_a_new_chapter: "Add a new chapter"
+      author: "Author"
+      published: "Published"
+      language: "Language"
+      license: "License"
+      franchises: "Franchises"
+      characters: "Characters"
     form:
       story_name: "Story name"
       language: "Language"

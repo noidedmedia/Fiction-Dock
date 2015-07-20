@@ -50,28 +50,28 @@
     <div class="story-extra-information">
 
       <ul class="author">
-        <li class="list-item-header">Author</li>
+        <li class="list-item-header"><%= t(".author") %></li>
         <li><%= link_to(@story.author.name, user_path(@story.author)) %></li>
       </ul>
 
       <ul class="published">
-        <li class="list-item-header">Published</li>
+        <li class="list-item-header"><%= t(".published") %></li>
         <li><%= @story.created_at.strftime("%B %e, %Y") %></li>
       </ul>
 
       <ul class="language">
-        <li class="list-item-header">Language</li>
+        <li class="list-item-header"><%= t(".language") %></li>
 
         <li><%= t("languages.#{@story.language}") %></li>
       </ul>
 
       <ul class="license">
-        <li class="list-item-header">License</li>
+        <li class="list-item-header"><%= t(".license") %></li>
         <li><%= t("licenses_html.#{@story.license}_html") %></li>
       </ul>
 
       <ul class="story-franchises-list">
-        <li class="list-item-header">Franchises</li>
+        <li class="list-item-header"><%= t(".franchises") %></li>
 
         <% @story.franchises.each do |franchise| %>
           <li><%= link_to franchise.name, franchise_path(franchise) %></li>
@@ -79,7 +79,7 @@
       </ul>
 
       <ul class="story-characters-list">
-        <li class="list-item-header">Characters</li>
+        <li class="list-item-header"><%= t(".characters") %></li>
         <% @story.characters.each do |character| %>
           <li><%= link_to character.name, franchise_character_path(character.franchise, character) %></li>
         <% end %>
