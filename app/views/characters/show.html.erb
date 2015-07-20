@@ -1,17 +1,23 @@
 <%- title @character.name %>
 
-<div class="fd-text-container fd-padding-top">
+<div id="character-toolbar-container" class="fd-toolbar-container">
+  <div id="character-toolbar" class="fd-toolbar">
+    <ul id="character-toolbar-left" class="fd-toolbar-left">
+      <li class="important"><%= link_to @franchise.name, franchise_path(@franchise) %></li>
+    </ul>
 
-  <p class="fd-page-backlink"><%= link_to @franchise.name, franchise_path(@franchise) %></p>
+    <ul id="character-toolbar-right" class="fd-toolbar-right">
+      <% if user_signed_in? %>
+        <li><%= link_to t(".edit"), edit_franchise_character_path(@franchise, @character) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="fd-text-container fd-padding-top">
 
   <h2 class="fd-page-header"><%= @character.name %></h2>
   <div class="fd-page-subtitle"><%= markdown_parse @character.description %></div>
-
-  <% if user_signed_in? %>
-    <ul id="character-options" class="fd-page-options">
-      <li><%= link_to t(".edit"), edit_franchise_character_path(@franchise, @character) %>
-    </ul>
-  <% end %>
 
   <% unless @stories.blank? %>
     <ul id="character-story-list" class="fd-list">

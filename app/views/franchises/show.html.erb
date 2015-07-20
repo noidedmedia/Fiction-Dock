@@ -1,17 +1,25 @@
 <%- title @franchise.name %>
 
+
+<div id="franchise-toolbar-container" class="fd-toolbar-container">
+  <div id="franchise-toolbar" class="fd-toolbar">
+    <ul id="franchise-toolbar-left" class="fd-toolbar-left">
+    </ul>
+
+    <ul id="franchise-toolbar-right" class="fd-toolbar-right">
+      <% if policy(@franchise).update? %>
+        <li><%= link_to t(".edit"), edit_franchise_path(@franchise) %></li>
+      <% end %>
+
+      <li><%= link_to t(".add_a_new_character"), new_franchise_character_path(@franchise) %></li>
+    </ul>
+  </div>
+</div>
+
 <div class="fd-text-container fd-padding-top">
 
   <h2 class="fd-page-header"><%= @franchise.name %></h2>
   <div class="fd-page-subtitle"><%= markdown_parse @franchise.description %></div>
-
-  <ul id="franchise-options" class="fd-page-options">
-    <% if policy(@franchise).update? %>
-      <li><%= link_to t(".edit"), edit_franchise_path(@franchise) %>
-    <% end %>
-
-    <li><%= link_to t(".add_a_new_character"), new_franchise_character_path(@franchise) %>
-  </ul>
 
   <ul id="franchise-character-list" class="fd-list">
 

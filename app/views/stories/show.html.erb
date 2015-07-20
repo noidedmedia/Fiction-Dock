@@ -1,34 +1,30 @@
 <%- title @story.name %>
 
-<div id="story-toolbar-container" class="fd-toolbar-container">
-  <div id="story-toolbar" class="fd-toolbar">
-    <ul id="story-toolbar-left" class="fd-toolbar-left">
-      <%# This has to be here, because CSS. %>
-    </ul>
+<% if current_user %>
+  <div id="story-toolbar-container" class="fd-toolbar-container">
+    <div id="story-toolbar" class="fd-toolbar">
+      <ul id="story-toolbar-left" class="fd-toolbar-left">
+        <%# This has to be here, because CSS. %>
+      </ul>
 
-    <ul id="story-toolbar-right" class="fd-toolbar-right">
-      <% if current_user == @story.author %>
-        <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
+      <ul id="story-toolbar-right" class="fd-toolbar-right">
+        <% if current_user == @story.author %>
+          <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
 
-        <% if @story.published %>
-          <li>
-          <%= button_to t(".unpublish"), unpublish_story_path(@story), method: :delete %>
-          </li>
-        <% elsif @story.publishable? %>
-          <li>
-          <%= button_to t(".publish"), publish_story_path(@story), method: :post %>
-          </li>
-        <% else %>
-          <li>
-            <%= button_to t(".publish"), publish_story_path(@story), method: :post, disabled: true, title: t(".you_can't_publish_this_story_without_first_publishing_a_chapter") %>
-          </li>
+          <% if @story.published %>
+            <li><%= button_to t(".unpublish"), unpublish_story_path(@story), method: :delete %></li>
+          <% elsif @story.publishable? %>
+            <li><%= button_to t(".publish"), publish_story_path(@story), method: :post %></li>
+          <% else %>
+            <li><%= button_to t(".publish"), publish_story_path(@story), method: :post, disabled: true, title: t(".you_can't_publish_this_story_without_first_publishing_a_chapter") %></li>
+          <% end %>
         <% end %>
-      <% end %>
 
-      <li><%= link_to t(".report"), "#" %></li>
-    </ul>
+        <li><%= link_to t(".report"), "#" %></li>
+      </ul>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div class="story-directory">
 

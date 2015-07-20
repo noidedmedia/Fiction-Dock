@@ -18,7 +18,7 @@
   width: 100%;
   max-width: 700px;
   margin: auto;
-  padding-top: 10px;
+  padding-top: 20px;
 
   &.fd-browse-list {
     padding-top: 50px;
@@ -93,7 +93,7 @@
   padding-bottom: 40px;
 
   &.fd-padding-top {
-    padding-top: 60px;
+    padding-top: 50px;
   }
 
   @media screen and (max-width: $mobile-width) {
@@ -117,7 +117,11 @@
 
     .fd-toolbar-left {
       li {
-        padding: 16px 20px 14px 0;
+        padding: 16px 20px 16px 0;
+
+        &.important {
+          font-weight: 500;
+        }
       }
 
       a {
@@ -134,7 +138,7 @@
 
     .fd-toolbar-right {
       li {
-        padding: 16px 0 14px 20px;
+        padding: 16px 0 16px 20px;
       }
 
       a, input[type=submit] {
