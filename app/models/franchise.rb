@@ -30,6 +30,7 @@ class Franchise < ActiveRecord::Base
   has_many :characters
   
   def moderated_by?(user)
+    return false unless user
     users.include?(user)
   end
 end
