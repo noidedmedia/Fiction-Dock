@@ -2,7 +2,7 @@
 General Guidelines:
 
 - Stories can not depict sexual activity involving minors under any circumstances. 
-- Stories must be fan fiction - fiction set in an established world.
+- Stories must be fan fiction - fiction set in an established world. At least one element of this world must be present at the time of publication.
 - Stories must be readable.
 They should have reasonably correct grammar, punctuation, and capitalization.
 For example, this is not acceptable: 
