@@ -33,6 +33,25 @@
     font-weight: 500;
     border-bottom: 1px solid rgba(#333,0.5);
     padding: 5px 0;
+    position: relative;
+
+    > span {
+      position: absolute;
+      right: 5px;
+      text-align: right;
+      padding: 8px 0;
+      font-size: 1.4rem;
+      font-weight: 400;
+
+      a {
+        opacity: 0.75;
+        text-decoration: none;
+        
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   .fd-list-item {

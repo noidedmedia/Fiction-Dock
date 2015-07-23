@@ -1,5 +1,8 @@
 <ul id="franchise-list" class="fd-list fd-browse-list">
-  <div class="fd-list-header"><%= t(".franchises") %></div>
+  <div class="fd-list-header">
+    <%= t(".franchises") %>
+    <span><%= link_to "Request a new franchise", new_franchise_creation_request_path %></span>
+  </div>
 
   <% franchises.each do |franchise| %>
     <li class="fd-list-item">
