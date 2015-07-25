@@ -59,6 +59,7 @@ var Ships = React.createClass({
               );
             }, this)}
 
+            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} characters={this.props.characters} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} emptySuggestions={this.emptySuggestions} />
           </ul>
         </div>
       );
@@ -99,18 +100,27 @@ var AddShipButton = React.createClass({
     $(React.findDOMNode(this.refs.shipInput)).val("");
 
     // Remove suggestions.
+    this.props.emptySuggestions();
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
       $(React.findDOMNode(this.refs.shipInput)).focus();
     });
+
+    this.setState({showinput: true, inputfocus: true});
+    
+    // Empty the shipInput field.
+    $(React.findDOMNode(this.refs.shipInput)).val("");
   },
   preventBubbling: function(e) {
     e.stopPropagation();
   },
+  addCharacter: function(e) {
     console.log(e.target.data);
+    console.log(e.target);
   },
   render: function() {
+    console.log(this.props.characters);
     return (
       <li>
         <div ref="addShipButton" id="add-ship-button" className={this.state.showinput ? "add-new-ship hidden" : "add-new-ship shown"} onClick={this.handleClick} >
@@ -119,7 +129,10 @@ var AddShipButton = React.createClass({
 
           <input ref="shipInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} onFocus={this.onFocus} />
 
+          <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
+
+        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addCharacter} itemtype="shipcharacter" bindnull={false} />
 
       </li>
     );
