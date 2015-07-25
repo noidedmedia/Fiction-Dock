@@ -174,8 +174,6 @@ var AddCharacterButton = React.createClass({
     
     // Empty the characterInput field.
     $(React.findDOMNode(this.refs.characterInput)).val("");
-
-    this.forceUpdate();
   },
   render: function() {
     return (
