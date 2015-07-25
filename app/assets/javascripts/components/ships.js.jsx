@@ -104,7 +104,7 @@ var AddShipButton = React.createClass({
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
-      $(React.findDOMNode(this.refs.shipInput)).focus();
+      React.findDOMNode(this.refs.shipInput).focus();
     });
 
     this.setState({showinput: true, inputfocus: true});
@@ -115,9 +115,10 @@ var AddShipButton = React.createClass({
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  addCharacter: function(e) {
+  addShipCharacter: function(e) {
     console.log(e.target.data);
     console.log(e.target);
+    console.log(e);
   },
   render: function() {
     console.log(this.props.characters);
@@ -132,7 +133,7 @@ var AddShipButton = React.createClass({
           <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
-        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addCharacter} itemtype="shipcharacter" bindnull={false} />
+        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addShipCharacter} itemtype="shipcharacter" bindnull={false} />
 
       </li>
     );
