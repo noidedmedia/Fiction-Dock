@@ -93,11 +93,11 @@ var ReactFormElements = React.createClass({
     // the Franchises component by the {...this.props} line.
     return (
       <div>
-        <Franchises updateFranchises={this.updateFranchises} updateCharacters={this.updateCharacters} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} >
-          <Ships ship_add={this.props.ship_add} addShip={this.addShip} removeShip={this.removeShip} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
+        <Franchises updateFranchises={this.updateFranchises} updateCharacters={this.updateCharacters} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} />
 
-          <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
-        </Franchises>
+        <Ships ship_add={this.props.ship_add} addShip={this.addShip} removeShip={this.removeShip} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
+
+        <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
       </div>
     );
   }

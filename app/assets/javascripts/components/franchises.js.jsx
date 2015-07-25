@@ -124,7 +124,7 @@ var Franchises = React.createClass({
             return (
               <div key={'container' + franchise.id}>
                 <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} addCharacter={this.props.addCharacter} removeCharacter={this.props.removeCharacter} />
+                <Characters key={'franchisecharacters' + franchise.id} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} addCharacter={this.props.addCharacter} removeCharacter={this.props.removeCharacter} />
               </div>
             );
           }, this)}
@@ -132,8 +132,6 @@ var Franchises = React.createClass({
           <AddFranchiseButton query={this.state.franchisequery} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} addFranchise={this.addFranchise} />
 
         </ul>
-
-        {this.props.children}
       </div>
     );
   }

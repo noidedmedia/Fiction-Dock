@@ -14,8 +14,7 @@ var Suggestions = React.createClass({
       <div className={ this.props.showsuggestions ? "suggestions-container active" : "suggestions-container inactive"}>
         <ul className="suggestions">
           {this.props.suggestions.map(function(item, i) {
-            var itemtype = this.props.itemtype;
-            return <SuggestionsListItem key={itemtype + '-' + item.id} data={item} onClick={ this.props.bindnull ? this.props.itemOnClick.bind(null, item) : this.props.itemOnClick } />;
+            return <SuggestionsListItem key={this.props.itemtype + '-' + item.id} data={item} onClick={ this.props.bindnull ? this.props.itemOnClick.bind(null, item) : this.props.itemOnClick } />;
           }, this)}
         </ul>
       </div>

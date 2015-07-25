@@ -5,7 +5,7 @@
 var Ships = React.createClass({
   getInitialState: function() {
     return {
-      suggestions: this.props.characters,
+      suggestions: [],
       ships: [],
       query: ""
     };
@@ -13,6 +13,13 @@ var Ships = React.createClass({
   componentWillMount: function() {
     if (this.props.ships) {
       this.setState({ ships: this.props.ships });
+    }
+    if (this.props.characters) {
+      console.log(this.state.suggestions);
+
+      this.setState({ suggestions: this.props.characters }, function() {
+        console.log(this.state.suggestions);
+      });
     }
   },
   removeShip: function(ship) {
@@ -43,7 +50,7 @@ var Ships = React.createClass({
     this.setState({ suggestions: [] });
   },
   handleChange: function() {
-
+    console.log("TEST");
   },
   render: function() {
     if (this.props.characters.length >= 2) {
@@ -121,7 +128,6 @@ var AddShipButton = React.createClass({
     console.log(e);
   },
   render: function() {
-    console.log(this.props.characters);
     return (
       <li>
         <div ref="addShipButton" id="add-ship-button" className={this.state.showinput ? "add-new-ship hidden" : "add-new-ship shown"} onClick={this.handleClick} >
@@ -134,7 +140,6 @@ var AddShipButton = React.createClass({
         </div>
 
         <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addShipCharacter} itemtype="shipcharacter" bindnull={false} />
-
       </li>
     );
   }
