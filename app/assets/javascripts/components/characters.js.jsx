@@ -100,7 +100,9 @@ var Characters = React.createClass({
         <ul className="character-list">
           {this.state.characters.map(function(character, i) {
             console.log(character);
-            return <ListItem key={character.id} data={character} ref={'character' + i} remove={this.removeCharacter} />;
+            return (
+              <ListItem key={character.id} data={character} ref={'character' + i} remove={this.removeCharacter} />
+            );
           }, this)}
 
           <AddCharacterButton query={this.state.query} character_add={this.props.character_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.characters_elementid} addCharacter={this.addCharacter} placeholder={this.props.characters_placeholder} franchise_id={this.props.franchise_id} emptySuggestions={this.emptySuggestions} />
@@ -172,6 +174,8 @@ var AddCharacterButton = React.createClass({
     
     // Empty the characterInput field.
     $(React.findDOMNode(this.refs.characterInput)).val("");
+
+    this.forceUpdate();
   },
   render: function() {
     return (

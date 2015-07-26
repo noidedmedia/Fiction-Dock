@@ -3,14 +3,10 @@
    ============================================== */
 
 var Ships = React.createClass({
-  propTypes: {
-    characters: React.PropTypes.arrayOf(React.PropTypes.object)
-  },
   getInitialState: function() {
     return {
-      suggestions: this.props.characters,
-      ships: [],
-      query: ""
+      suggestions: [],
+      ships: []
     };
   },
   componentWillMount: function() {
@@ -26,9 +22,7 @@ var Ships = React.createClass({
     console.log("Removing:");
     console.log(ship);
 
-    this.setState({ ships: ships }, function() {
-      this.props.removeShip(this.state.ships);
-    });
+    this.setState({ships: ships});
   },
   addShip: function(ship) {
     console.log(ship);
@@ -38,12 +32,15 @@ var Ships = React.createClass({
     ships.push(ships);
     console.log(ships);
 
-    this.setState({ ships: ships }, function() {
-      this.props.addShip(this.state.ships);
+    this.setState({ships: ships}, function() {
+      this.props.updateShips(this.state.ships);
     });
   },
+  emptySuggestions: function() {
+    this.setState({ suggestions: [] });
+  },
   handleChange: function() {
-    console.log("TEST");
+
   },
   render: function() {
     if (this.props.characters.length >= 2) {
@@ -59,7 +56,7 @@ var Ships = React.createClass({
               );
             }, this)}
 
-            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} characters={this.props.characters} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} />
+            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} />
           </ul>
         </div>
       );
@@ -75,10 +72,6 @@ var Ships = React.createClass({
    ============================================== */
 
 var AddShipButton = React.createClass({
-  propTypes: {
-    onChange: React.PropTypes.func,
-    suggestions: React.PropTypes.arrayOf(React.PropTypes.object)
-  },
   getInitialState: function() {
     return { 
       showinput: false,
@@ -95,37 +88,26 @@ var AddShipButton = React.createClass({
 
     this.props.onChange(e.target.value);
   },
-  hideInput: function(e) {
-    // Make sure that clicking on the close button doesn't cause it to immediately reopen itself.
-    this.preventBubbling(e);
-
-    // Hide input, empty input field value.
-    this.setState({ showinput: false, inputfocus: false });
-    $(React.findDOMNode(this.refs.shipInput)).val("");
-  },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
-      React.findDOMNode(this.refs.shipInput).focus();
+      $(React.findDOMNode(this.refs.shipInput)).focus();
     });
-
-    this.setState({showinput: true, inputfocus: true});
-    
-    // Empty the shipInput field.
-    $(React.findDOMNode(this.refs.shipInput)).val("");
+    var shipinput = React.findDOMNode(this.refs.shipInput);
+    console.log(shipinput);
+    this.props.onChange(shipinput);
   },
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  addShipCharacter: function(e) {
-    e.persist();
-
+  addShip: function(e) {
     console.log(e.target.data);
 
-    console.log(e.target.dataset);
-    console.log(e.target.attributes);
-    console.log(e.target.attributes.data);
-    console.log(e.target);
-    console.log(e);
+    // Forward the chosen franchise along to the main React class.
+    this.props.addShip(e.target.data);
+    
+    this.setState({showinput: false, inputfocus: false});
+    
+    $(React.findDOMNode(this.refs.shipInput)).val("");
   },
   render: function() {
     return (
@@ -135,11 +117,19 @@ var AddShipButton = React.createClass({
           {this.props.ship_add}
 
           <input ref="shipInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} onFocus={this.onFocus} />
-
-          <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
-        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addShipCharacter} itemtype="shipcharacter" bindnull={false} />
+        <div className={this.state.inputfocus ? "suggestions-container active" : "suggestions-container inactive"} >
+          <ul className="suggestions">
+            {this.props.suggestions.map(function(character, i) {
+              console.log(character);
+              return (
+                <li key={character.id + "character" + i} data={character} ref={'character' + i} onClick={this.addCharacter}>{character.name}</li>
+              );
+            }, this)}
+          </ul>
+        </div>
+
       </li>
     );
   }
