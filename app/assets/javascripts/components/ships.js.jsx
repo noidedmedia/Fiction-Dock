@@ -116,7 +116,8 @@ var AddShipButton = React.createClass({
   preventBubbling: function(e) {
     e.stopPropagation();
   },
-  addShipCharacter: function(e) {
+  addShipCharacter: function(x, e) {
+    e.persist();
     console.log(e.target.data);
     console.log(e.target);
     console.log(e);
@@ -133,7 +134,7 @@ var AddShipButton = React.createClass({
           <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
-        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addShipCharacter} itemtype="shipcharacter" bindnull={false} />
+        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addShipCharacter} itemtype="shipcharacter" bindnull={true} />
       </li>
     );
   }
