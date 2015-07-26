@@ -93,15 +93,12 @@ var AddShipButton = React.createClass({
     this.preventBubbling(e);
 
     // Hide input, empty input field value.
-    this.setState({showinput: false}, function() {
+    this.setState({showinput: false, inputfocus: false}, function() {
       $(React.findDOMNode(this.refs.shipInput)).val("");
     });
   },
   preventBubbling: function(e) {
     e.stopPropagation();
-  },
-  addShipCharacter: function(e) {
-
   },
   render: function() {
     return (
