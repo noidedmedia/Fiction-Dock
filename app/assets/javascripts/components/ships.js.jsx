@@ -3,9 +3,12 @@
    ============================================== */
 
 var Ships = React.createClass({
+  propTypes: {
+    characters: React.PropTypes.arrayOf(React.PropTypes.object)
+  },
   getInitialState: function() {
     return {
-      suggestions: [],
+      suggestions: this.props.characters,
       ships: [],
       query: ""
     };
@@ -13,13 +16,6 @@ var Ships = React.createClass({
   componentWillMount: function() {
     if (this.props.ships) {
       this.setState({ ships: this.props.ships });
-    }
-    if (this.props.characters) {
-      console.log(this.state.suggestions);
-
-      this.setState({ suggestions: this.props.characters }, function() {
-        console.log(this.state.suggestions);
-      });
     }
   },
   removeShip: function(ship) {
@@ -46,9 +42,6 @@ var Ships = React.createClass({
       this.props.addShip(this.state.ships);
     });
   },
-  emptySuggestions: function() {
-    this.setState({ suggestions: [] });
-  },
   handleChange: function() {
     console.log("TEST");
   },
@@ -66,7 +59,7 @@ var Ships = React.createClass({
               );
             }, this)}
 
-            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} characters={this.props.characters} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} emptySuggestions={this.emptySuggestions} />
+            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} characters={this.props.characters} elementid={this.props.ships_elementid} addShip={this.addShip} placeholder={this.props.ships_placeholder} />
           </ul>
         </div>
       );
@@ -82,6 +75,10 @@ var Ships = React.createClass({
    ============================================== */
 
 var AddShipButton = React.createClass({
+  propTypes: {
+    onChange: React.PropTypes.func,
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.object)
+  },
   getInitialState: function() {
     return { 
       showinput: false,
@@ -105,9 +102,6 @@ var AddShipButton = React.createClass({
     // Hide input, empty input field value.
     this.setState({ showinput: false, inputfocus: false });
     $(React.findDOMNode(this.refs.shipInput)).val("");
-
-    // Remove suggestions.
-    this.props.emptySuggestions();
   },
   handleClick: function() {
     this.setState({showinput: this.state.showinput ? 'input-hidden' : 'input-shown' }, function() {
