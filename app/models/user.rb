@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     uniqueness: {case_sensative: false},
     length: {in: 2..25}
   enum level: [:normal, :mod, :admin]
+
+  def has_favorited?(story)
+    favorites.include?(story)
+  end
   def mod_or_higher?
     level == "mod" || level == "admin"
   end

@@ -24,11 +24,16 @@ Rails.application.routes.draw do
     # subscribe if not currently subscribed
     post 'subscribe'
     # unsubscribe if currently subscribed
-    delete 'unsubscribe'
+    delete 'unsubscribe' 
     get 'search', on: :collection
-    get 'franchises', on: :member
-    get 'ships', on: :member
-    get 'characters', on: :member
+    member do
+      get 'franchises'
+      get 'ships'
+      get 'characters'
+      post 'favorite'
+      delete 'unfavorite'
+      get 'favorited'
+    end
     resources :reviews
     resources :chapters, concerns: [:publishable] do
       post 'read'
