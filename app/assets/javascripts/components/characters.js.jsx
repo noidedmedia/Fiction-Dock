@@ -189,7 +189,7 @@ var AddCharacterButton = React.createClass({
           <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
-        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addCharacter} itemtype="character" bindnull={false} />
+        <Suggestions key={"charactersuggestor"} showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addCharacter} itemtype="character" bindnull={false} />
       </li>
     );
   }

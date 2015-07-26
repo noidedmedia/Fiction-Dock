@@ -5,7 +5,7 @@
 var Ships = React.createClass({
   getInitialState: function() {
     return {
-      suggestions: [],
+      suggestions: this.props.characters,
       ships: []
     };
   },
@@ -13,9 +13,9 @@ var Ships = React.createClass({
     if (this.props.ships) {
       this.setState({ ships: this.props.ships });
     }
-
-    characters = this.props.characters;
-    this.setState({ suggestions: characters });
+  },
+  componentWillReceiveProps: function(updatedCharacters) {
+    this.setState({ suggestions: updatedCharacters });
   },
   removeShip: function(ship) {
     var ships = this.state.ships.filter(function(s) {
@@ -28,8 +28,13 @@ var Ships = React.createClass({
     this.setState({ships: ships});
   },
   addShipCharacter: function(e) {
+    console.log("This:");
+    console.log(this);
+    e.persist();
+    console.log(e);
     console.log(e.target.data);
-
+    console.log(e.target.props);
+    console.log(e.target);
   },
   handleChange: function() {
 
@@ -64,6 +69,10 @@ var Ships = React.createClass({
    ============================================== */
 
 var AddShipButton = React.createClass({
+  propTypes: {
+    onChange: React.PropTypes.func,
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.object)
+  },
   getInitialState: function() {
     return { 
       showinput: false,
@@ -112,7 +121,7 @@ var AddShipButton = React.createClass({
           <span className="icon icon-close" onClick={this.hideInput}></span>
         </div>
 
-        <Suggestions showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.props.addShipCharacter} itemtype="shipcharacter" bindnull={false} />
+        <Suggestions key={"shipcharactersuggestor"} showsuggestions={ this.state.inputfocus ? true : false } suggestions={this.props.suggestions} itemOnClick={this.props.addShipCharacter} itemtype="shipcharacter" bindnull={false} />
 
       </li>
     );
