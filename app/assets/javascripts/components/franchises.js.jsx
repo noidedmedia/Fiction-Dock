@@ -187,7 +187,7 @@ var AddFranchiseButton = React.createClass({
   },
   // First argument passed to function through .bind() has to be null,
   // because React.js is weird.
-  // Source: https://groups.google.com/forum/#!topic/reactjs/Xv9_kVoJJOw
+  // Source: https://groups.google.com/d/msg/reactjs/Xv9_kVoJJOw/fqLV06MR77gJ
   addFranchise: function(x, e) {
     console.log(e.target.data);
 

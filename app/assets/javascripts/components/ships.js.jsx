@@ -119,6 +119,8 @@ var AddShipButton = React.createClass({
   addShipCharacter: function(e) {
     e.persist();
 
+    console.log(e.target.data);
+
     console.log(e.target.dataset);
     console.log(e.target.attributes);
     console.log(e.target.attributes.data);
