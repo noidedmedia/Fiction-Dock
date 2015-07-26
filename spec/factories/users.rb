@@ -23,8 +23,8 @@
 
 FactoryGirl.define do
   factory :user do
-    name { Faker::Internet.user_name(nil, ["_"]) }
-    email { Faker::Internet.email } 
+    sequence(:name){|n| "Person_#{n}_#{rand.to_s[2..8]}"}
+    sequence(:email){|n| "person#{n}@#{rand.to_s[2..8]}example.com"}
     password { Faker::Internet.password(8) }
   end
 

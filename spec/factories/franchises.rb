@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :franchise do
-    name { Faker::Commerce.department }
+    sequence(:name){|n| "Franchise ##{n}"}
     description { Faker::Company.bs }
 
     factory :franchise_with_characters do
