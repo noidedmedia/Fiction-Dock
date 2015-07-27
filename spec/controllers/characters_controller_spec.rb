@@ -10,6 +10,7 @@ RSpec.describe CharactersController, type: :controller do
     end
     describe "post #create" do
       it do 
+        @request.env['HTTP_REFERER'] = '/franchises/1/new'
         should permit(:name, :description)
           .for(:create, params: {franchise_id: franchise.id})
       end
