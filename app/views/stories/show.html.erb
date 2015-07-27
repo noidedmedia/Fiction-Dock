@@ -23,6 +23,13 @@
         <li><%= link_to t(".report"), "#" %></li>
       </ul>
     </div>
+    <% if current_user.has_favorited? @story %>
+      
+      <%= link_to "unfavorite", unfavorite_story_path(@story), method: :delete %>
+    <% else %>
+
+      <%= link_to "favorite", favorite_story_path(@story), method: :post %>
+    <% end %>
   </div>
 <% end %>
 

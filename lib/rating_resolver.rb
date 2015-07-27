@@ -14,10 +14,10 @@ class RatingResolver
     end
   end
   RATING_NAMES = Story.content_ratings.keys
-  def resolve
+  def resolve(collection=Story.all)
     # First, resolve content ratings
     prepare_content_ratings
-    Story.where(content_rating: @accepted_content_ratings)
+    collection.where(content_rating: @accepted_content_ratings)
   end
   ##
   # Ammend the conditions we add to an arel query

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718181332) do
+ActiveRecord::Schema.define(version: 20150726175421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20150718181332) do
 
   add_index "bookshelf_stories", ["bookshelf_id"], name: "index_bookshelf_stories_on_bookshelf_id", using: :btree
   add_index "bookshelf_stories", ["story_id"], name: "index_bookshelf_stories_on_story_id", using: :btree
+
+  create_table "bookshelf_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "bookshelf_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "level"
+  end
+
+  add_index "bookshelf_users", ["bookshelf_id"], name: "index_bookshelf_users_on_bookshelf_id", using: :btree
+  add_index "bookshelf_users", ["user_id"], name: "index_bookshelf_users_on_user_id", using: :btree
 
   create_table "bookshelves", force: :cascade do |t|
     t.string   "name"
@@ -73,6 +84,16 @@ ActiveRecord::Schema.define(version: 20150718181332) do
   end
 
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "favorite_stories", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favorite_stories", ["story_id"], name: "index_favorite_stories_on_story_id", using: :btree
+  add_index "favorite_stories", ["user_id"], name: "index_favorite_stories_on_user_id", using: :btree
 
   create_table "franchise_creation_requests", force: :cascade do |t|
     t.integer  "user_id"
@@ -240,6 +261,8 @@ ActiveRecord::Schema.define(version: 20150718181332) do
   add_foreign_key "chapters", "stories", on_delete: :cascade
   add_foreign_key "characters", "franchises"
   add_foreign_key "comments", "users", on_delete: :cascade
+  add_foreign_key "favorite_stories", "stories", on_delete: :cascade
+  add_foreign_key "favorite_stories", "users", on_delete: :cascade
   add_foreign_key "franchise_creation_requests", "users", on_delete: :cascade
   add_foreign_key "franchise_users", "franchises"
   add_foreign_key "franchise_users", "users"

@@ -19,22 +19,6 @@
 
 ##
 # A class representing a story on the site.
-#
-# @attr [Array<Integer>] franchise_ids an array of franchise ids, to be resolved
-#   into a real collection of franchises when the model saves
-# 
-# @attr [Array<Integer>] character_ids an array of character ids, to be
-#   resolved into a real collection of franchises when the model saves.
-#
-# @attr [String] blurb a short description of the story, aka a "blurb"
-#
-# @attr [Text] description a long-form description of the story.
-#
-# @attr [String] name the name of the story
-#
-# @attr [Boolean] published a value indicating if the story is published.
-#   When `false`, this story will not be displayed in any results.
-#
 class Story < ActiveRecord::Base
   include Commentable
   include Publishable
@@ -61,6 +45,7 @@ class Story < ActiveRecord::Base
   has_many :story_characters
   has_many :bookshelf_stories
   has_many :bookshelves, through: :bookshelf_stories
+  has_many :favorite_stories # join table
   ##
   # All the characters in this story
   # @return [ActiveRecord::Relation<Character>]
@@ -93,9 +78,6 @@ class Story < ActiveRecord::Base
     user
   end
 
-  def self.for_content(content=nil)
-    RatingResolver.new(content).resolve
-  end
   ##
   # See if this story can be published
   # @returns [Boolean] if the story can be published
@@ -122,6 +104,17 @@ class Story < ActiveRecord::Base
     end
   end
 
+  def self.for_content(content=nil)
+    RatingResolver.new(content).resolve
+  end
+
+  def self.by_favorites(range=(24.hours.ago..DateTime.now))
+    all.joins(:favorite_stories)
+      .references(:favorite_stories)
+      .where(favorite_stories: {created_at: range})
+      .group('stories.id')
+      .order('COUNT(favorite_stories) DESC')
+  end
   protected
   # please see `save_ship_attrs`
   def destroy_all_story_ships

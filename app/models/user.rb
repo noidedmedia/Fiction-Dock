@@ -2,7 +2,6 @@
 # A user is exactly what it says on the tin: somebody who uses FictionDock.
 # We use `Devise` for our authentication, so check out their docs as well.
 class User < ActiveRecord::Base
-
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -10,7 +9,9 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
   has_many :stories
-
+  has_many :favorite_stories # join table
+  has_many :favorites, through: :favorite_stories,
+    source: :story
   has_many :bookshelves
   has_many :franchise_users
   has_many :franchises, through: :francise_users
@@ -24,6 +25,9 @@ class User < ActiveRecord::Base
     length: {in: 2..25}
   enum level: [:normal, :mod, :admin]
 
+  def has_favorited?(story)
+    favorites.include?(story)
+  end
   def mod_or_higher?
     level == "mod" || level == "admin"
   end

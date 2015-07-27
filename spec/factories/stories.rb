@@ -20,8 +20,8 @@
 FactoryGirl.define do
   factory :story do
     content_rating :everybody
-    user
-    name { Faker::Name.name }
+    user { FactoryGirl.create(:user) }
+    sequence(:name){|n| "Story ##{n}"}
     description { Faker::Lorem.paragraph }
     blurb { Faker::Lorem.sentence }
     transient do

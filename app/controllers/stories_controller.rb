@@ -9,6 +9,23 @@ class StoriesController < ApplicationController
   include ControllerCommentable
   before_filter :authenticate_user!, except: [:show, :index, :search, :franchises, :characters]
 
+  def favorite
+    @story = Story.find(params[:id])
+    current_user.favorites << @story
+    redirect_to @story
+  end
+
+  def unfavorite
+    @story = Story.find(params[:id])
+    current_user.favorites.delete(@story)
+    redirect_to @story
+  end
+  ##
+  # Get back a boolean value indicating if the user has favorited this story
+  def favorited
+    render json: current_user.has_favorited?(Story.find(params[:id]))
+  end
+
   def ships
     @story = Story.find(params[:id])
     @ships = @story.ships
