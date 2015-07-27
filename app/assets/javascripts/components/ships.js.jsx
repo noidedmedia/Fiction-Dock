@@ -4,18 +4,13 @@
 
 var Ships = React.createClass({
   propTypes: {
-    characters: React.PropTypes.arrayOf(React.PropTypes.object)
+    characters: React.PropTypes.arrayOf(React.PropTypes.object) 
   },
   getInitialState: function() {
     return {
       suggestions: this.props.characters,
-      ships: []
+      ships: this.props.ships
     };
-  },
-  componentWillMount: function() {
-    if (this.props.ships) {
-      this.setState({ ships: this.props.ships });
-    }
   },
   removeShip: function(ship) {
     var ships = this.state.ships.filter(function(s) {
@@ -28,8 +23,6 @@ var Ships = React.createClass({
     this.setState({ships: ships});
   },
   addShipCharacter: function(e) {
-    console.log("This:");
-    console.log(this);
     e.persist();
     console.log(e);
     console.log(e.target.data);
@@ -94,7 +87,6 @@ var AddShipButton = React.createClass({
       $(React.findDOMNode(this.refs.shipInput)).focus();
     });
     var shipinput = React.findDOMNode(this.refs.shipInput);
-    console.log(shipinput);
     this.props.onChange(shipinput);
   },
   hideInput: function(e) {

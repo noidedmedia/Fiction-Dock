@@ -85,7 +85,7 @@ var ReactFormElements = React.createClass({
       <div>
         <Franchises updateFranchises={this.updateFranchises} updateCharacters={this.updateCharacters} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} />
         
-        <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
+        <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} ships={this.state.ships} />
 
         <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
       </div>
@@ -103,6 +103,10 @@ var ReactFormElements = React.createClass({
  * because they're placed in different containers.
  */
 var ListItem = React.createClass({
+  propTypes: {
+    data: React.PropTypes.object,
+    remove: React.PropTypes.func
+  },
   // Sends data to parent component depending on what function was sent in the
   // "remove" property for the ListItem component.
   handleDelete: function(e) {

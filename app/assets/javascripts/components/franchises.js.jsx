@@ -111,8 +111,6 @@ var Franchises = React.createClass({
     });
   },
   render: function() {
-    console.log(this.state.franchises);
-    console.log(this.props.franchises);
     return (
       <div>
         <div className="section-header">{this.props.franchises_label}</div>
@@ -196,7 +194,6 @@ var AddFranchiseButton = React.createClass({
   addFranchise: function(x, e) {
     e.persist();
     console.log(e.target.data);
-    console.log(e.target);
 
     // Event target data is the franchise object the user is trying
     // to add.

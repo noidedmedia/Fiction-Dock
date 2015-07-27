@@ -3,6 +3,9 @@
    ============================================== */
 
 var SuggestionsListItem = React.createClass({
+  propTypes: {
+    data: React.PropTypes.object
+  },
   render: function() {
     return <li data={this.props.data} onClick={this.props.itemOnClick}>{this.props.data.name}</li>;
   }
