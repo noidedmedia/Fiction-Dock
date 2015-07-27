@@ -26,17 +26,6 @@ ActiveRecord::Schema.define(version: 20150726175421) do
   add_index "bookshelf_stories", ["bookshelf_id"], name: "index_bookshelf_stories_on_bookshelf_id", using: :btree
   add_index "bookshelf_stories", ["story_id"], name: "index_bookshelf_stories_on_story_id", using: :btree
 
-  create_table "bookshelf_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "bookshelf_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "level"
-  end
-
-  add_index "bookshelf_users", ["bookshelf_id"], name: "index_bookshelf_users_on_bookshelf_id", using: :btree
-  add_index "bookshelf_users", ["user_id"], name: "index_bookshelf_users_on_user_id", using: :btree
-
   create_table "bookshelves", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
