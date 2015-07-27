@@ -31,3 +31,7 @@ Icon font auto-generation technique courtesy of Scott Nelson's post [here](http:
 * These instructions are for OS X, Linux users should be able to do this as well with some messing about, Windows users... sorry.
 
 * Be aware that any icons you add to this repository in the `app/assets/icons` folder can and will subsequently be included in our icon font, which is licensed under the [SIL Open Font License](http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL). As such, you're giving up certain protections of icons you've created. If you didn't create the icons, you shouldn't try to include them in this project.
+
+## License
+
+Fiction Dock is released under the [GNU Affero General Public License](http://opensource.org/licenses/AGPL-3.0).
