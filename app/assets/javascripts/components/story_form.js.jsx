@@ -57,36 +57,21 @@ var ReactFormElements = React.createClass({
     // Passes the updated characters array to the characters state.
     this.setState({ characters: characters });
   },
-  // Adds a ship to the ships state.
-  addShip: function(ship) {
-    var ships = [];
+  updateShips: function(ships) {
+    var newships = [];
 
-    // Passes each ship in the ships state to the
-    // ships array.
+    // All the ships already in the React state are pushed to the newships array.
     this.state.ships.forEach(function(ship, i) {
-      ships.push(ship);
+      newships.push(ship);
     });
 
-    // Appends the new ship to the ships array.
-    ships.push(ship);
-
-    console.log(ships);
-
-    // Passes the updated ships array to the ships state.
-    this.setState({ ships: ships });
-  },
-  // Removes a ship from the ships state.
-  removeShip: function(ship) {
-    // Creates a new array out of the ships state
-    // without the ship we're removing.
-    var ships = this.state.ships.filter(function(s) {
-      return ship.id !== s.id;
+    // New ships passed to updateShips are then added to the newships array.
+    ships.forEach(function(ship, i) {
+      newships.push(ship);
     });
-
-    console.log(ships);
-
-    // Passes the updated ships array to the ships state.
-    this.setState({ ships: ships });
+    
+    // The React state is updated to reflect the newships array we've just created.
+    this.setState({ ships: newships });
   },
   render: function() {
     // All properties passed from the Rails helper are forwarded onto
@@ -94,8 +79,8 @@ var ReactFormElements = React.createClass({
     return (
       <div>
         <Franchises updateFranchises={this.updateFranchises} updateCharacters={this.updateCharacters} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} {...this.props} />
-
-        <Ships ship_add={this.props.ship_add} addShip={this.addShip} removeShip={this.removeShip} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
+        
+        <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} />
 
         <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
       </div>
