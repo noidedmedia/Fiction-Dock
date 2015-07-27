@@ -111,13 +111,15 @@ var Franchises = React.createClass({
     });
   },
   render: function() {
+    console.log(this.state.franchises);
+    console.log(this.props.franchises);
     return (
       <div>
         <div className="section-header">{this.props.franchises_label}</div>
 
         <ul className="franchise-list">
 
-          {this.state.franchises.map(function(franchise, i) {
+          {this.props.franchises.map(function(franchise, i) {
             var characters = this.state.characters.filter(function(character) {
               return franchise.id == character.franchise_id;
             });
@@ -144,6 +146,9 @@ var Franchises = React.createClass({
 
 // The "Add a new franchise" button
 var AddFranchiseButton = React.createClass({
+  propTypes: {
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.object)
+  },
   getInitialState: function() {
     return { 
       showinput: false
@@ -189,7 +194,9 @@ var AddFranchiseButton = React.createClass({
   // because React.js is weird.
   // Source: https://groups.google.com/forum/#!topic/reactjs/Xv9_kVoJJOw
   addFranchise: function(x, e) {
+    e.persist();
     console.log(e.target.data);
+    console.log(e.target);
 
     // Event target data is the franchise object the user is trying
     // to add.

@@ -3,6 +3,9 @@
    ============================================== */
 
 var Ships = React.createClass({
+  propTypes: {
+    characters: React.PropTypes.arrayOf(React.PropTypes.object)
+  },
   getInitialState: function() {
     return {
       suggestions: this.props.characters,
@@ -13,9 +16,6 @@ var Ships = React.createClass({
     if (this.props.ships) {
       this.setState({ ships: this.props.ships });
     }
-  },
-  componentWillReceiveProps: function(updatedCharacters) {
-    this.setState({ suggestions: updatedCharacters });
   },
   removeShip: function(ship) {
     var ships = this.state.ships.filter(function(s) {

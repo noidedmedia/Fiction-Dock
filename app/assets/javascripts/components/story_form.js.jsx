@@ -11,6 +11,11 @@
 
 // ReactFormElements component used in the Rails view.
 var ReactFormElements = React.createClass({
+  propTypes: {
+    franchises: React.PropTypes.arrayOf(React.PropTypes.object),
+    characters: React.PropTypes.arrayOf(React.PropTypes.object),
+    ships: React.PropTypes.arrayOf(React.PropTypes.object)
+  },
   getInitialState: function() {
     // "Global" values for the franchises, characters, and ships
     // passed when submitting the story.

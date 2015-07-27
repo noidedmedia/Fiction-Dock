@@ -120,6 +120,9 @@ var Characters = React.createClass({
    ============================================== */
 
 var AddCharacterButton = React.createClass({
+  propTypes: {
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.object)
+  },
   // The Initial State of the AddCharacterButton React class.
   getInitialState: function() {
     return { 
