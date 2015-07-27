@@ -11,8 +11,7 @@ var Franchises = React.createClass({
       franchisequery: "",
       suggestions: [],
       franchises: this.props.franchises,
-      characters: this.props.characters,
-      ships: this.props.ships
+      characters: this.props.characters
     };
   },
   // When the value of the FranchisesInput is modified, handleChange
@@ -192,7 +191,6 @@ var AddFranchiseButton = React.createClass({
   // because React.js is weird.
   // Source: https://groups.google.com/forum/#!topic/reactjs/Xv9_kVoJJOw
   addFranchise: function(x, e) {
-    e.persist();
     console.log(e.target.data);
 
     // Event target data is the franchise object the user is trying

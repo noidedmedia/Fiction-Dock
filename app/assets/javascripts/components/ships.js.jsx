@@ -8,7 +8,6 @@ var Ships = React.createClass({
   },
   getInitialState: function() {
     return {
-      suggestions: this.props.characters,
       ships: this.props.ships
     };
   },
@@ -23,16 +22,15 @@ var Ships = React.createClass({
     this.setState({ships: ships});
   },
   addShipCharacter: function(e) {
-    e.persist();
     console.log(e);
     console.log(e.target.data);
-    console.log(e.target.props);
     console.log(e.target);
   },
   handleChange: function() {
 
   },
   render: function() {
+    console.log(this.props.characters);
     if (this.props.characters.length >= 2) {
       return (
         <div>
@@ -46,7 +44,7 @@ var Ships = React.createClass({
               );
             }, this)}
 
-            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.ships_elementid} addShipCharacter={this.addShipCharacter} placeholder={this.props.ships_placeholder} />
+            <AddShipButton query={this.state.query} ship_add={this.props.ship_add} onChange={this.handleChange} suggestions={this.props.characters} elementid={this.props.ships_elementid} addShipCharacter={this.addShipCharacter} placeholder={this.props.ships_placeholder} />
           </ul>
         </div>
       );
