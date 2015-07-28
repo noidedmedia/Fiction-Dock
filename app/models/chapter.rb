@@ -1,18 +1,3 @@
-# == Schema Information
-#
-# Table name: chapters
-#
-#  id         :integer          not null, primary key
-#  body       :text
-#  chap_num   :integer
-#  story_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  name       :string
-#  published  :boolean          default(FALSE), not null
-#  slug       :string
-#
-
 ##
 # A chapter is a part of a story. It contains the actual text of that part,
 # as well as a title. 
@@ -34,6 +19,11 @@ class Chapter < ActiveRecord::Base
   before_validation :fix_chap_num
   before_validation :sanitize_tags
   before_validation :save_word_count
+  def notify_published
+    attrs = story.subscribers
+      .pluck(:id).map{|x| {user_id: x, subject: story, event: :subscribed_updated}}
+    Notification.create(attrs)
+  end
   def sanitize_tags
     self.body = Sanitize.fragment(self.body, Sanitize::Config::BASIC).gsub('&gt;','>')
   end
