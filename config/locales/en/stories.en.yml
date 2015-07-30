@@ -12,7 +12,7 @@ en:
       edit_story_page_title: "Editing %{story_name}"
     show:
       favorite: "Favorite"
-      favorited: "Favorited"
+      unfavorite: "Unfavorite"
       edit: "Edit"
       publish: "Publish"
       unpublish: "Unpublish"

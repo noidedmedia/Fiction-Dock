@@ -70,6 +70,51 @@
   margin-bottom: 10px;
 }
 
+.story-favorite-button {
+  top: 16px;
+  left: -32px;
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  overflow: hidden;
+
+  a {
+    text-decoration: none;
+    opacity: 0.8;
+    line-height: 26px;
+    transition: opacity 200ms, color 200ms;
+
+    &:hover {
+      opacity: 1;
+      color: #E95D4B;
+    }
+  }
+
+  span {
+    font-size: 24px;
+  }
+
+  &.favorited {
+    a {
+      color: #E95D4B;
+    }
+  }
+}
+
+// Left margin to allow room for the favorite button.
+@media screen and (max-width: $mobile-width) {
+  .story-favorite-button {
+    left: 0;
+  }
+
+  .story-title,
+  .story-description,
+  .table-of-contents {
+    margin-left: 32px;
+  }
+}
+
+
 .story-information {
   font-size: 1.4rem;
   line-height: 2.4rem;

@@ -8,12 +8,6 @@
       </ul>
 
       <ul id="story-toolbar-right" class="fd-toolbar-right">
-        <% if current_user.has_favorited? @story %>
-          <li><%= link_to t(".favorited"), unfavorite_story_path(@story), method: :delete %></li>
-        <% else %>
-          <li><%= link_to t(".favorite"), favorite_story_path(@story), method: :post %></li>
-        <% end %>
-
         <% if current_user == @story.author %>
           <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
 
@@ -38,6 +32,20 @@
 
   <div class="story-information">
     
+    <% if current_user.has_favorited? @story %>
+      <div class="story-favorite-button favorited">
+        <%= link_to unfavorite_story_path(@story), method: :delete do %>
+          <span class="icon icon-heart" title="<%= t('.unfavorite') %>"></span>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="story-favorite-button favorite">
+        <%= link_to favorite_story_path(@story), method: :post do %>
+          <span class="icon icon-heart-border" title="<%= t('.favorite') %>"></span>
+        <% end %>
+      </div>
+    <% end %>
+
     <h2 class="story-title"><%= @story.name %></h2>
 
     <p class="story-description"><%= @story.description %></p>
