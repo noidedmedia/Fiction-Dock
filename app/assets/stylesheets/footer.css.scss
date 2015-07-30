@@ -18,29 +18,6 @@ $footer-link-color: #333;
     height: 65px;
   }
 
-  .footer-logo {
-    display: block;
-    margin: auto;
-
-    a {
-      text-decoration: none;
-      
-      > p {
-        opacity: 0.8;
-        transition: 200ms opacity;
-        
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
-
-    @media all and (min-width: $mobile-width) {
-      float: left;
-      margin-top: 0;
-    }
-  }
-
   ul {
     line-height: 1.4em;
     margin: 0 0 1em 0;
@@ -96,12 +73,8 @@ $footer-link-color: #333;
   }
 
   .footer-center {
-    display: -webkit-flex;
-    display: flex;
-    position: absolute;
-    width: 50vw;
+    width: 50px;
     margin: auto;
-    left: 25vw;
   }
 
   .footer-right {
@@ -110,6 +83,7 @@ $footer-link-color: #333;
     padding-top: 2px;
     position: absolute;
     right: 40px;
+    top: 6px;
 
     li a {
       text-decoration: none;

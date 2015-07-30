@@ -1,7 +1,7 @@
 <div id="frontpage-container">
 
   <div id="frontpage-header">
-    <h2 class="fiction-dock-logo logo-large">Fiction Dock</h2>
+    <div class="fiction-dock-wordmark logo-large"></div>
 
     <h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
   </div>
@@ -16,6 +16,7 @@
       </ul>
     </div>
   <% end %>
+  
   <% unless @popular_stories.blank? %>
     <div class="frontpage-column">
       <ul id="frontpage-popular-story-list" class="fd-list">
@@ -24,6 +25,7 @@
       </ul>
     </div>
   <% end %>
+
   <%# If at least one published story exists on the site, the stories will be displayed under the "Recently published stories" header. %>
   <% unless @recent_stories.blank? %>
     <div class="frontpage-column">

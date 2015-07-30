@@ -1,37 +1,39 @@
 <%- title t(".about_page_title") %>
 
-<h2 class="fiction-dock-logo logo-large">Fiction Dock</h2>
+<div class="about-page-container">
+  <div class="fiction-dock-wordmark logo-large"></div>
 
-<h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
+  <h5 class="subheader"><%= t(".fiction_dock_tagline") %></h5>
 
-<div class="stats">
-  <ul>
-    <li>
-      <%= link_to stories_path do %>
-        <%= @story_count %>
-        <span><%= t(".stories") %></span>
-      <% end %>
-    </li>
+  <div class="stats">
+    <ul>
+      <li>
+        <%= link_to stories_path do %>
+          <%= @story_count %>
+          <span><%= t(".stories") %></span>
+        <% end %>
+      </li>
 
-    <li>
-      <%= link_to stories_path do %>
-        <%= @chapter_count %>
-        <span><%= t(".chapters") %></span>
-      <% end %>
-    </li>
+      <li>
+        <%= link_to stories_path do %>
+          <%= @chapter_count %>
+          <span><%= t(".chapters") %></span>
+        <% end %>
+      </li>
 
-    <li>
-      <%= link_to franchises_path do %>
-        <%= @franchise_count %>
-        <span><%= t(".franchises") %></span>
-      <% end %>
-    </li>
+      <li>
+        <%= link_to franchises_path do %>
+          <%= @franchise_count %>
+          <span><%= t(".franchises") %></span>
+        <% end %>
+      </li>
 
-    <li>
-      <%= link_to characters_path do %>
-        <%= @character_count %>
-        <span><%= t(".characters") %></span>
-      <% end %>
-    </li>
-  </ul>
+      <li>
+        <%= link_to characters_path do %>
+          <%= @character_count %>
+          <span><%= t(".characters") %></span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -1,57 +1,33 @@
 @import "scss-variables";
 
-.fiction-dock-logo {
-  font-family: 'fiction-dock-logo';
-  letter-spacing: 2px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-user-select: none;
-  text-decoration: none;
-
-  &:first-letter {
-    padding-right: .1em;
-  }
-
-  &.logo-header {
-    font-size: 3.2rem;
-    cursor: pointer;
-    margin-top: -9px;
-
-    @media screen and (max-width: $mobile-width) {
-      font-size: 4.0rem;
-      color: transparent;
-      width: 40px;
-      height: 45px;
-      overflow: hidden;
-      padding-left: 6px;
-
-      &:first-letter {
-        color: #333;
-      }
-
-      &:not(:first-letter) {
-        color: transparent;
-      }
-    }
-  }
-
-  &.logo-f {
-    font-size: 4.0rem;
-  }
+.fiction-dock-wordmark {
+  background: asset-url("fiction-dock-wordmark.svg") 50% / contain no-repeat;
+  width: auto;
 
   &.logo-large {
-    font-size: 7.2rem;
-    text-align: center;
-    cursor: default;
-    white-space: nowrap;
+    height: 60px;
+  }
+}
+
+.fiction-dock-f {
+  background: asset-url("fiction-dock-f.svg") 50% / contain no-repeat;
+
+  &.logo-header {
+    height: 35px;
+    width: 35px;
 
     @media screen and (max-width: $mobile-width) {
-      max-width: 100vw;
-      font-size: 4.2rem;
+      height: 40px;
+      width: 40px;
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      padding: 0;
     }
+  }
 
-    @media screen and (max-width: 400px) {
-      font-size: 3.2rem;
-    }
+  &.logo-footer {
+    height: 45px;
+    width: 45px;
   }
 }
