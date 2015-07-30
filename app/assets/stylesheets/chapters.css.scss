@@ -58,7 +58,7 @@
   border: 1px solid #c9c9c9;
   color: #333;
   opacity: 0.8;
-  transition: opacity 200ms, width 300ms;
+  transition: opacity 200ms, width 300ms cubic-bezier(0, 0, 0, 1);
   overflow: hidden;
 
   a {
