@@ -4,6 +4,10 @@
   background: asset-url("fiction-dock-wordmark.svg") 50% / contain no-repeat;
   width: auto;
 
+  &.logo-medium {
+    height: 40px;
+  }
+
   &.logo-large {
     height: 60px;
   }
@@ -13,7 +17,7 @@
   background: asset-url("fiction-dock-f.svg") 50% / contain no-repeat;
   
   &.logo-large {
-    height: 100px;
+    height: 110px;
   }
 
   &.logo-header {
