@@ -214,6 +214,13 @@
   border-bottom-color: transparent;
 }
 
+.sign-in,
+.create-an-account {
+  @media screen and (max-width: $mobile-width) {
+    display: none;
+  }
+}
+
 #username {
   @media screen and (max-width: $mobile-width) {
     display: none;
