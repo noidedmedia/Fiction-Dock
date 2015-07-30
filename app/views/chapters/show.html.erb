@@ -21,9 +21,27 @@
           <%= button_to t(".publish"), publish_story_chapter_path(@story, @chapter), method: :post, id: "publish-chapter-button", data: { confirm: "Are you sure?" } %>
           </li>
         <% end %>
+
+        <% if current_user == @story.author %>
+          <li><%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
+
+  <% if @chapter.prev_chapter %>
+    <div class="fixed-chapter-nav previous-chapter">
+      <span class="icon icon-left"></span>
+      <%= link_to t(".previous_chapter"), story_chapter_path(@story, @chapter.prev_chapter) %>
+    </div>
+  <% end %>
+
+  <% if @chapter.next_chapter %>
+    <div class="fixed-chapter-nav next-chapter">
+      <span class="icon icon-right"></span>
+      <%= link_to t(".next_chapter"), story_chapter_path(@story, @chapter.next_chapter) %>
+    </div>
+  <% end %>
 </div>
 
 <article id="chapter-text-container" class="fd-text-container">
@@ -33,26 +51,6 @@
 
     <div class="chapter-body">
       <%= markdown_parse @chapter.body %>
-    </div>
-
-    <div class="pagination-absolute">
-
-      <% if @chapter.prev_chapter %>
-        <div class="pagination-left">
-          <%= link_to t(".previous"), story_chapter_path(@story, @chapter.prev_chapter) %>
-        </div>
-      <% end %>
-
-      <% if @chapter.next_chapter %>
-        <div class="pagination-right">
-          <%= link_to t(".next"), story_chapter_path(@story, @chapter.next_chapter) %>
-        </div>
-      <% elsif !@chapter.next_chapter && current_user == @story.author %>
-        <div class="pagination-right">
-          <%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %>
-        </div>
-      <% end %>
-
     </div>
 
     <hr>

@@ -11,6 +11,8 @@ en:
     edit:
       edit_story_page_title: "Editing %{story_name}"
     show:
+      favorite: "Favorite"
+      favorited: "Favorited"
       edit: "Edit"
       publish: "Publish"
       unpublish: "Unpublish"
