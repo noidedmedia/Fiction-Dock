@@ -4,5 +4,9 @@ en:
   comments:
     comment_list:
       comments: "Comments"
+      no_comments_yet: "No comments yet."
+    comment:
+      user_posted_time_ago_html: "%{username} commented %{time} ago"
+      nobody: "Nobody"
     form:
       submit: "Submit"

@@ -1,7 +1,6 @@
-<li>
-  <div class="comment-header">
-    <%= comment.user ? (link_to comment.user.name, comment.user) : "nobody" %>
-    posted <%= time_ago_in_words(comment.created_at) %> ago...
+<li class="comment">
+  <div class="comment-meta">
+    <%= t(".user_posted_time_ago_html", username: comment.user ? (link_to comment.user.name, comment.user) : t(".nobody"), time: time_ago_in_words(comment.created_at) ) %>
   </div>
   
   <div class="comment-body">

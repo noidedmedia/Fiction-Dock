@@ -3,7 +3,11 @@
   <h4><%= t(".comments") %></h4>
 
   <ul class="comments-list">
-    <%= render @comments.where("comments.id IS NOT NULL") %>
+    <% unless @comments.count === 0 %>
+      <%= render @comments.where("comments.id IS NOT NULL") %>
+    <% else %>
+      <p class="fd-list-empty-note"><%= t(".no_comments_yet") %></p>
+    <% end %>
   </ul>
 
   <% if current_user %>

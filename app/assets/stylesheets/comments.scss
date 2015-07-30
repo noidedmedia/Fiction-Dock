@@ -31,3 +31,34 @@
     padding: 0;
   }
 }
+
+.comments-list {
+
+}
+
+.comment {
+  list-style: none;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.comment-meta {
+  padding-bottom: 6px;
+
+  a {
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.comment-body {
+  line-height: 1.6rem;
+
+  p {
+    margin-bottom: 12px;
+  }
+}

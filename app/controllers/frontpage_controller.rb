@@ -16,10 +16,12 @@ class FrontpageController < ApplicationController
       .limit(5)
     @popular_stories = RatingResolver.new(accepted_content)
       .resolve(Story.by_favorites)
+      .for_display
       .limit(5)
 
     if current_user
       @current_user_stories = Story.where(user_id: current_user.id)
+        .limit(5)
     end
   end
 end
