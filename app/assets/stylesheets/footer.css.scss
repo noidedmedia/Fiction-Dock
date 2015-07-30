@@ -15,7 +15,7 @@ $footer-link-color: #333;
   position: relative;
 
   @media all and (max-width: $mobile-width) {
-    height: auto;
+    height: 65px;
   }
 
   .footer-logo {

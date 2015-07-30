@@ -105,6 +105,16 @@
       }
     }
 
+    .fixed-chapter-nav {
+      background-color: #444;
+      border-color: #fff;
+      color: #fff;
+
+      span, a {
+        color: #fff;
+      }
+    }
+
     .tooltip, .flyout,
     #general-info-flyout {
       background-color: #444;
@@ -128,6 +138,18 @@
     #username:hover,
     .header-item-with-flyout:hover {
       background-color: #444;
+    }
+
+    .fd-toolbar-container {
+      color: #fff;
+
+      span {
+        color: #fff;
+      }
+
+      .fd-toolbar-right input[type=submit] {
+        color: #fff;
+      }
     }
 
     .chapter-list .add-new-chapter a {

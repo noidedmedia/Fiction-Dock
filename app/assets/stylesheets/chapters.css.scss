@@ -60,15 +60,17 @@
   opacity: 0.8;
   transition: opacity 200ms, width 300ms cubic-bezier(0, 0, 0, 1);
   overflow: hidden;
+  background-color: #fff;
 
   a {
     display: block;
     width: 100%;
     height: 100%;
-    color: transparent;
+    opacity: 0;
+    color: #333;
     font-size: 1.3rem;
     font-weight: 600;
-    transition: color 50ms;
+    transition: opacity 50ms;
     text-decoration: none;
     text-transform: uppercase;
     padding: 18px 15px;
@@ -79,8 +81,9 @@
     font-size: 3.6rem;
     padding: 16px 10px;
     color: #666;
+    opacity: 1;
     pointer-events: none;
-    transition: color 100ms;
+    transition: opacity 100ms;
   }
 
   &:hover {
@@ -88,12 +91,12 @@
     width: 100px;
 
     a {
-      color: #333;
+      opacity: 1;
       transition: color 300ms 300ms;
     }
 
     span {
-      color: transparent;
+      opacity: 0;
     }
   }
 

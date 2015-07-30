@@ -120,10 +120,10 @@
     display: inline-block;
 
     a {
-      color: #333;
       opacity: 0.6;
       text-decoration: none;
       display: block;
+      transition: opacity 200ms;
     }
 
     &:hover a {
