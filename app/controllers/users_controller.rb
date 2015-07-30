@@ -31,6 +31,8 @@ class UsersController < ApplicationController
         .for_display
         .paginate(page: page, per_page: per_page)
     end
+
+    @bookshelves = Bookshelf.where(user_id: @user.id)
   end
 
   ##
@@ -53,10 +55,10 @@ class UsersController < ApplicationController
     authorize @user
     respond_to do |format|
       if @user.update(user_params)
-        format.html{ redirect_to @user}
-        format.json { render 'show'}
+        format.html { redirect_to @user }
+        format.json { render :show }
       else
-        format.html {render 'edit'}
+        format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

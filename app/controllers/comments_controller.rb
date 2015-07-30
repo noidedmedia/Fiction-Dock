@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  
   def index
     @commentable = find_commentable
     @comments = @commentable.comments
@@ -9,7 +10,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(comment_params)
     respond_to do |format|
       if @comment.save
-        format.html{redirect_to @commentable}
+        format.html { redirect_to @commentable }
       else
         format.html do
           flash[:error] = "Couldn't add comment"
@@ -18,12 +19,15 @@ class CommentsController < ApplicationController
       end # if
     end # respond_to
   end
+  
   protected
+
   def comment_params
     params.require(:comment)
       .permit(:body)
       .merge(user_id: current_user.id)
   end
+
   def find_commentable
     params.each do |name, value|
       if name =~ /(.+)_id$/
