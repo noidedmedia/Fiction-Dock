@@ -19,7 +19,7 @@
   <% unless @popular_stories.blank? %>
     <div class="frontpage-column">
       <ul id="frontpage-popular-story-list" class="fd-list">
-        <div class="frontpage-list-header">Popular</div>
+        <div class="frontpage-list-header"><%= t(".popular_stories") %></div>
         <%= render partial: 'stories/story_stub', collection: @popular_stories, as: :story %>
       </ul>
     </div>
