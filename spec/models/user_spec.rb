@@ -19,6 +19,7 @@
 #  level                  :integer          default(0), not null
 #  slug                   :string
 #  content_pref           :jsonb
+#  read_words             :integer
 #
 
 require 'rails_helper'

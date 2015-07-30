@@ -11,6 +11,7 @@
 #  name       :string
 #  published  :boolean          default(FALSE), not null
 #  slug       :string
+#  word_count :integer
 #
 
 require 'rails_helper'

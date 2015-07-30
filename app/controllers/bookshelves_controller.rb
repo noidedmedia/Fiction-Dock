@@ -38,7 +38,7 @@ class BookshelvesController < ApplicationController
   end
 
   def new
-    @bookshelf = @user.bookshelves.build
+    @bookshelf = Bookshelf.new(user_id: @user.id)
     authorize @bookshelf
   end
   
@@ -47,21 +47,21 @@ class BookshelvesController < ApplicationController
     authorize @bookshelf
     respond_to do |format|
       if @bookshelf.update(bookshelf_params)
-        format.html{redirect_to @bookshelf}
+        format.html { redirect_to @bookshelf }
       else
-        format.html{render 'edit'}
+        format.html { render :edit }
       end
     end
   end
   
   def create
-    @bookshelf = @user.bookshelves.build(bookshelf_params)
+    @bookshelf = Bookshelf.new(bookshelf_params)
     authorize @bookshelf
     respond_to do |format|
       if @bookshelf.save
-        format.html {redirect_to  @bookshelf}
+        format.html { redirect_to @bookshelf }
       else
-        format.html {render 'new'}
+        format.html { render :new }
       end
     end
   end
