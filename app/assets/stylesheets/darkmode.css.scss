@@ -115,6 +115,15 @@
       }
     }
 
+    .story-franchises-list li,
+    .story-characters-list li {
+      border-color: rgba(#fff,0.4);
+      
+      &:hover {
+        border-color: #fff;
+      }
+    }
+
     .tooltip, .flyout,
     #general-info-flyout {
       background-color: #444;
@@ -140,6 +149,10 @@
       background-color: #444;
     }
 
+    .chapter-list .add-new-chapter a {
+      color: #fff;
+    }
+
     .fd-toolbar-container {
       color: #fff;
 
@@ -150,10 +163,6 @@
       .fd-toolbar-right input[type=submit] {
         color: #fff;
       }
-    }
-
-    .chapter-list .add-new-chapter a {
-      color: #fff;
     }
 
     .fd-list-header, .frontpage-list-header {
