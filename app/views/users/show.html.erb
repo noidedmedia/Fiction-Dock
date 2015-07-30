@@ -24,7 +24,8 @@
 
   <ul data-tabs="true" class="fd-tabs">
     <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories") %>
-    <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".bookshelves") %>
+    <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".favorites") %>
+    <li data-tab="tab-3" class="fd-tabs-tab"><%= t(".bookshelves") %>
   </ul>
 
   <div class="tab-content tc-tab-1 fd-tab-content current">
@@ -47,6 +48,14 @@
   </div>
 
   <div class="tab-content tc-tab-2 fd-tab-content">
+    <% unless @favorites.blank? %>
+      <ul class="fd-list">
+        <%= render partial: 'stories/story_stub', collection: @favorites, as: :story %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="tab-content tc-tab-3 fd-tab-content">
     <% unless @bookshelves.blank? %>
       <ul class="fd-list">
         <%= render partial: 'bookshelves/bookshelf', collection: @bookshelves, as: :bookshelf %>

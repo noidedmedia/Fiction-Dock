@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     end
 
     @bookshelves = Bookshelf.where(user_id: @user.id)
+    @favorites = @user.favorites.for_display
   end
 
   ##
