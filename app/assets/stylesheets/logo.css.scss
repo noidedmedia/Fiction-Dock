@@ -11,6 +11,10 @@
 
 .fiction-dock-f {
   background: asset-url("fiction-dock-f.svg") 50% / contain no-repeat;
+  
+  &.logo-large {
+    height: 100px;
+  }
 
   &.logo-header {
     height: 35px;

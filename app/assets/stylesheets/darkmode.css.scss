@@ -53,6 +53,14 @@
       }
     }
 
+    .fiction-dock-wordmark {
+      background-image: asset-url("fiction-dock-wordmark-darkmode.svg")
+    }
+
+    .fiction-dock-f {
+      background-image: asset-url("fiction-dock-f-darkmode.svg")
+    }
+
     #header-search input[type=search] {
       border: 1px solid rgba(#fff,0.7);
 
@@ -69,20 +77,6 @@
       ul li,
       ul li a {
         color: #fff;
-      }
-    }
-
-    .fiction-dock-logo {
-      color: #fff;
-
-      @media screen and (max-width: $mobile-width) {
-        &.logo-header {
-          color: transparent;
-
-          &:first-letter {
-            color: #fff;
-          }
-        }
       }
     }
 
