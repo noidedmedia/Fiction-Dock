@@ -216,6 +216,8 @@
 
 .sign-in,
 .create-an-account {
+  padding-top: 2px;
+  
   @media screen and (max-width: $mobile-width) {
     display: none;
   }
