@@ -35,3 +35,4 @@ Icon font auto-generation technique courtesy of Scott Nelson's post [here](http:
 ## License
 
 Fiction Dock is released under the [GNU Affero General Public License](http://opensource.org/licenses/AGPL-3.0).
+All branding material is copyright 2015 Noided Media LLC. All rights reserved.
