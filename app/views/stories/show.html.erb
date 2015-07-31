@@ -32,7 +32,7 @@
 
   <div class="story-information">
     
-    <% if current_user.has_favorited? @story %>
+    <% if current_user.try(:has_favorited?, @story) %>
       <div class="story-favorite-button favorited">
         <%= link_to unfavorite_story_path(@story), method: :delete do %>
           <span class="icon icon-heart" title="<%= t('.unfavorite') %>"></span>
