@@ -24,14 +24,14 @@
 
   <ul data-tabs="true" class="fd-tabs">
     <% if current_user === @user %>
-      <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".published") %>
+      <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".published", count: @published.count) %>
     <% else %>
-      <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories") %>
+      <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories", count: @published.count) %>
     <% end %>
     
     <%# Only display drafts if the user owns the page. %>
     <% if current_user === @user %>
-      <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".drafts") %>
+      <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".drafts", count: @drafts.count) %>
     <% end %>
 
     <li data-tab="tab-3" class="fd-tabs-tab"><%= t(".favorites") %>

@@ -13,9 +13,9 @@ en:
       joined_on: "Joined on %{date}"
       edit: "Edit"
       this_user_hasn't_published_anything_yet: "This user hasn't published anything yet."
-      stories: "Stories"
-      published: "Published"
-      drafts: "Drafts"
+      stories: "Stories (%{count})"
+      published: "Published (%{count})"
+      drafts: "Drafts (%{count})"
       favorites: "Favorites"
       bookshelves: "Bookshelves"
     edit:
