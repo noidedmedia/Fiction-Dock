@@ -64,7 +64,11 @@
     <%# Date of publishing %>
     <ul class="published">
       <li class="list-item-header"><%= t(".published") %></li>
-      <li><%= @chapter.created_at.strftime("%B %e, %Y") %></li>
+      <% if @chapter.published %>
+        <li><%= @chapter.created_at.strftime("%B %e, %Y") %></li>
+      <% else %>
+        <li><%= t(".na") %></li>
+      <% end%>
     </ul>
   </div>
 </article>

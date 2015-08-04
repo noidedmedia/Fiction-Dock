@@ -73,12 +73,15 @@
 
       <ul class="published">
         <li class="list-item-header"><%= t(".published") %></li>
-        <li><%= @story.created_at.strftime("%B %e, %Y") %></li>
+        <% if @story.published %>
+          <li><%= @story.created_at.strftime("%B %e, %Y") %></li>
+        <% else %>
+          <li><%= t(".na") %></li>
+        <% end%>
       </ul>
 
       <ul class="language">
         <li class="list-item-header"><%= t(".language") %></li>
-
         <li><%= t("languages.#{@story.language}") %></li>
       </ul>
 
