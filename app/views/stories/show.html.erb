@@ -32,18 +32,22 @@
 
   <div class="story-information">
     
-    <% if current_user.try(:has_favorited?, @story) %>
-      <div class="story-favorite-button favorited">
-        <%= link_to unfavorite_story_path(@story), method: :delete do %>
-          <span class="icon icon-heart" title="<%= t('.unfavorite') %>"></span>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="story-favorite-button favorite">
-        <%= link_to favorite_story_path(@story), method: :post do %>
-          <span class="icon icon-heart-border" title="<%= t('.favorite') %>"></span>
-        <% end %>
-      </div>
+    <%# Only display Favorite button if the story has been published. %>
+    <% if @story.published %>
+      <%# Favorite button %>
+      <% if current_user.try(:has_favorited?, @story) %>
+        <div class="story-favorite-button favorited">
+          <%= link_to unfavorite_story_path(@story), method: :delete do %>
+            <span class="icon icon-heart" title="<%= t('.unfavorite') %>"></span>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="story-favorite-button favorite">
+          <%= link_to favorite_story_path(@story), method: :post do %>
+            <span class="icon icon-heart-border" title="<%= t('.favorite') %>"></span>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
 
     <h2 class="story-title"><%= @story.name %></h2>
