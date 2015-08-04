@@ -16,7 +16,7 @@ en:
       stories: "Stories (%{count})"
       published: "Published (%{count})"
       drafts: "Drafts (%{count})"
-      favorites: "Favorites"
+      favorites: "Favorites (%{count})"
       bookshelves: "Bookshelves"
     edit:
       editing_username: "Editing %{username}"
