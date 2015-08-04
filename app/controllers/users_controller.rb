@@ -23,13 +23,18 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
 
     if current_user == @user
-      @stories = Story.where(user_id: @user.id)
+      @published = Story.where(user_id: @user.id)
+        .for_display
         .paginate(page: page, per_page: per_page)
     else
-      @stories = Story.for_content(accepted_content)
+      @published = Story.for_content(accepted_content)
         .where(user_id: @user.id)
         .for_display
         .paginate(page: page, per_page: per_page)
+    end
+
+    if current_user == @user
+      @drafts = Story.where(published: false, user_id: @user.id)
     end
 
     @bookshelves = Bookshelf.where(user_id: @user.id)

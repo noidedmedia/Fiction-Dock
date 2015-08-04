@@ -23,22 +23,26 @@
 
 
   <ul data-tabs="true" class="fd-tabs">
-    <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories") %>
-    <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".favorites") %>
-    <li data-tab="tab-3" class="fd-tabs-tab"><%= t(".bookshelves") %>
+    <% if current_user === @user %>
+      <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".published") %>
+    <% else %>
+      <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories") %>
+    <% end %>
+    
+    <%# Only display drafts if the user owns the page. %>
+    <% if current_user === @user %>
+      <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".drafts") %>
+    <% end %>
+
+    <li data-tab="tab-3" class="fd-tabs-tab"><%= t(".favorites") %>
+    <li data-tab="tab-4" class="fd-tabs-tab"><%= t(".bookshelves") %>
   </ul>
 
   <div class="tab-content tc-tab-1 fd-tab-content current">
     <%# If the user has at least one published story, display them to all users. %>
-    <% if !@stories.blank? %>
+    <% unless @published.blank? %>
       <ul id="user-story-list" class="fd-list">
-        <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
-      </ul>
-
-    <%# If the user has any stories, published or otherwise, and is on their own userpage, display those stories. %>
-    <% elsif !@user.stories.blank? && current_user === @user %>
-      <ul id="user-story-list" class="fd-list">
-        <%= render partial: 'stories/story_stub', collection: @user.stories, as: :story %>
+        <%= render partial: 'stories/story_stub', collection: @published, as: :story %>
       </ul>
 
     <%# If the user has no published stories, or no stories at all if logged-in, display a message saying as much. %>
@@ -47,7 +51,18 @@
     <% end %>
   </div>
 
-  <div class="tab-content tc-tab-2 fd-tab-content">
+  <%# Only display drafts if the user owns the page. %>
+  <% if current_user === @user %>
+    <div class="tab-content tc-tab-2 fd-tab-content">
+      <% unless @drafts.blank? %>
+        <ul class="fd-list">
+          <%= render partial: 'stories/story_stub', collection: @drafts, as: :story %>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <div class="tab-content tc-tab-3 fd-tab-content">
     <% unless @favorites.blank? %>
       <ul class="fd-list">
         <%= render partial: 'stories/story_stub', collection: @favorites, as: :story %>
@@ -55,7 +70,7 @@
     <% end %>
   </div>
 
-  <div class="tab-content tc-tab-3 fd-tab-content">
+  <div class="tab-content tc-tab-4 fd-tab-content">
     <% unless @bookshelves.blank? %>
       <ul class="fd-list">
         <%= render partial: 'bookshelves/bookshelf', collection: @bookshelves, as: :bookshelf %>
