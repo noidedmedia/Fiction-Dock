@@ -6,11 +6,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  rescue_from Pundit::NotAuthorizedError, with: :not_allowed
   # Adds different "flash[:type]" types.
   add_flash_types :warning, :info
   
   before_action :configure_permitted_devise_params, if: :devise_controller?
 
+  def not_allowed
+    respond_to do |format|
+      format.html {render "shared/403", status: :forbidden}
+      format.json {head :forbidden}
+    end
+  end
   def per_page
     params["per_page"] or 20
   end

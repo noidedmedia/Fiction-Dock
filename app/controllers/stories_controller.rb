@@ -51,6 +51,7 @@ class StoriesController < ApplicationController
         format.json { render json: true }
       else
         format.json { render json: @story.errors, status: :unprocessable_entity }
+        format.html { redirect_to @story, flash: {warning: "could not publish" }}
       end
     end
   end
@@ -77,8 +78,7 @@ class StoriesController < ApplicationController
   end
   
   def search
-    @stories = Searcher.new(params, content: accepted_content)
-      .resolve(page: params[:page] || 1)
+    # Do nothing now because this is totally broken
   end
 
   ##

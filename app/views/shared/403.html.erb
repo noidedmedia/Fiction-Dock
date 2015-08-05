@@ -1,0 +1,6 @@
+<div id="forbidden-container">
+<h1 id="forbidden-label">
+  I can't let you do that<%= ", #{current_user.name}" if current_user %>
+</h1>
+<p id="forbidden-msg">You are not authorized to access this page.</p>
+</div>
