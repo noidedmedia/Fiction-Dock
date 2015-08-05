@@ -51,6 +51,7 @@ class StoriesController < ApplicationController
         format.json { render json: true }
       else
         format.json { render json: @story.errors, status: :unprocessable_entity }
+        format.html { redirect_to @story, flash: {warning: "could not publish" }}
       end
     end
   end
