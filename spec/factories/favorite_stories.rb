@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :favorite_story do
-    story nil
-user nil
+    story 
+    user 
   end
 
 end

@@ -7,6 +7,7 @@ class BookshelfStory < ActiveRecord::Base
   def notify_author
     Notification.create(event: :story_added_to_bookshelf,
                         subject: story,
+                        secondary_subject: bookshelf,
                         user: story.user)
   end
 end
