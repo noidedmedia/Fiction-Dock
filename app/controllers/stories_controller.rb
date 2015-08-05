@@ -20,6 +20,7 @@ class StoriesController < ApplicationController
     current_user.favorites.delete(@story)
     redirect_to @story
   end
+  
   ##
   # Get back a boolean value indicating if the user has favorited this story
   def favorited

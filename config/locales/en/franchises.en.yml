@@ -10,8 +10,8 @@ en:
       edit: "Edit"
       add_a_new_character: "Add a new character"
       no_stories_have_been_written_for_this_franchise_yet: "No stories have been written for this franchise yet."
-      characters: "Characters"
-      stories: "Stories"
+      stories: "Stories (%{count})"
+      characters: "Characters (%{count})"
       stories_count:
         zero: "No stories"
         one: "1 story"

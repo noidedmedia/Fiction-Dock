@@ -52,19 +52,29 @@
     <div class="chapter-body">
       <%= markdown_parse @chapter.body %>
     </div>
-
-    <hr>
-
-    <div class="chapter-information">
-      <%# Story author. %>
-      <%# The "html" suffix in the i18n string is so that the link is rendered properly as HTML. %>
-      <%# See also: http://stackoverflow.com/questions/2543936/rails-i18n-translating-text-with-links-inside %>
-      <p class="chapter-author"><%= t(".written_by_html", author: link_to(@story.author.name, user_path(@story.author)) ) %> </p>
-
-      <%# Date of publishing. %>
-      <p class="chapter-published-date"><%= t(".published_on", date: @chapter.created_at.strftime("%B %e, %Y") ) %></p>
-
-    </div>
   </div>
 
+  <div class="story-extra-information">
+    <%# Story author %>
+    <ul class="story-extra-information-block">
+      <li class="list-item-header"><%= t(".author") %></li>
+      <li><%= link_to @story.author.name, user_path(@story.author) %></li>
+    </ul>
+
+    <%# Date of publishing %>
+    <ul class="story-extra-information-block">
+      <li class="list-item-header"><%= t(".published") %></li>
+      <% if @chapter.published %>
+        <li><%= @chapter.created_at.strftime("%B %e, %Y") %></li>
+      <% else %>
+        <li><%= t(".na") %></li>
+      <% end %>
+    </ul>
+
+    <%# Date of publishing %>
+    <ul class="story-extra-information-block">
+      <li class="list-item-header"><%= t(".last_updated") %></li>
+      <li><%= @chapter.updated_at.strftime("%B %e, %Y") %></li>
+    </ul>
+  </div>
 </article>

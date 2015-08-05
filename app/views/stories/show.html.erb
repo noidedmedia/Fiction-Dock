@@ -32,18 +32,22 @@
 
   <div class="story-information">
     
-    <% if current_user.try(:has_favorited?, @story) %>
-      <div class="story-favorite-button favorited">
-        <%= link_to unfavorite_story_path(@story), method: :delete do %>
-          <span class="icon icon-heart" title="<%= t('.unfavorite') %>"></span>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="story-favorite-button favorite">
-        <%= link_to favorite_story_path(@story), method: :post do %>
-          <span class="icon icon-heart-border" title="<%= t('.favorite') %>"></span>
-        <% end %>
-      </div>
+    <%# Only display Favorite button if the story has been published. %>
+    <% if @story.published %>
+      <%# Favorite button %>
+      <% if current_user.try(:has_favorited?, @story) %>
+        <div class="story-favorite-button favorited">
+          <%= link_to unfavorite_story_path(@story), method: :delete do %>
+            <span class="icon icon-heart" title="<%= t('.unfavorite') %>"></span>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="story-favorite-button favorite">
+          <%= link_to favorite_story_path(@story), method: :post do %>
+            <span class="icon icon-heart-border" title="<%= t('.favorite') %>"></span>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
 
     <h2 class="story-title"><%= @story.name %></h2>
@@ -62,23 +66,26 @@
 
     <div class="story-extra-information">
 
-      <ul class="author">
+      <ul class="story-extra-information-block">
         <li class="list-item-header"><%= t(".author") %></li>
         <li><%= link_to(@story.author.name, user_path(@story.author)) %></li>
       </ul>
 
-      <ul class="published">
+      <ul class="story-extra-information-block">
         <li class="list-item-header"><%= t(".published") %></li>
-        <li><%= @story.created_at.strftime("%B %e, %Y") %></li>
+        <% if @story.published %>
+          <li><%= @story.created_at.strftime("%B %e, %Y") %></li>
+        <% else %>
+          <li><%= t(".na") %></li>
+        <% end %>
       </ul>
 
-      <ul class="language">
+      <ul class="story-extra-information-block">
         <li class="list-item-header"><%= t(".language") %></li>
-
         <li><%= t("languages.#{@story.language}") %></li>
       </ul>
 
-      <ul class="license">
+      <ul class="story-extra-information-block">
         <li class="list-item-header"><%= t(".license") %></li>
         <li><%= t("licenses_html.#{@story.license}_html") %></li>
       </ul>

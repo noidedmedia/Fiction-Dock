@@ -21,32 +21,36 @@
   <h2 class="fd-page-header"><%= @franchise.name %></h2>
   <div class="fd-page-subtitle"><%= markdown_parse @franchise.description %></div>
 
-  <ul id="franchise-character-list" class="fd-list">
-
-    <div class="fd-list-header"><%= t(".characters") %></div>
-
-    <% @franchise.characters.each do |character| %>
-      <li class="fd-list-item">
-        <p class="fd-list-item-title"><%= link_to character.name, franchise_character_path(@franchise, character) %>
-
-        <p class="fd-list-item-subtitle"><%= t(".stories_count", count: character.stories.for_display.count) %> 
-        <% if !character.description.empty? %>
-          · <%= character.description %>
-        <% end %>
-
-      </li>
-    <% end %>
+  <ul data-tabs="true" class="fd-tabs">
+    <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories", count: @stories.count) %>
+    <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".characters", count: @franchise.characters.count) %>
   </ul>
 
-  <% unless @stories.blank? %>
-    <ul id="franchise-story-list" class="fd-list">
+  <div class="tab-content tc-tab-1 fd-tab-content current">
+    <% unless @stories.blank? %>
+      <ul id="franchise-story-list" class="fd-list">
 
-      <div class="fd-list-header"><%= t(".stories") %></div>
+        <%= render partial: 'stories/story_stub', collection: @stories, as: "story" %>
+      </ul>
+    <% else %>
+      <p class="fd-list-empty-note"><%= t(".no_stories_have_been_written_for_this_franchise_yet") %></p>
+    <% end %>
+  </div>
 
-      <%= render partial: 'stories/story_stub', collection: @stories, as: "story" %>
+  <div class="tab-content tc-tab-2 fd-tab-content">
+    <ul id="franchise-character-list" class="fd-list">
+      <% @franchise.characters.each do |character| %>
+        <li class="fd-list-item">
+          <p class="fd-list-item-title"><%= link_to character.name, franchise_character_path(@franchise, character) %>
+
+          <p class="fd-list-item-subtitle"><%= t(".stories_count", count: character.stories.for_display.count) %> 
+          <% if !character.description.empty? %>
+            · <%= character.description %>
+          <% end %>
+
+        </li>
+      <% end %>
     </ul>
-  <% else %>
-    <p class="fd-list-empty-note"><%= t(".no_stories_have_been_written_for_this_franchise_yet") %></p>
-  <% end %>
+  </div>
 
 </div>

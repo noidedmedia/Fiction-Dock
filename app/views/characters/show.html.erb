@@ -19,12 +19,18 @@
   <h2 class="fd-page-header"><%= @character.name %></h2>
   <div class="fd-page-subtitle"><%= markdown_parse @character.description %></div>
 
-  <% unless @stories.blank? %>
-    <ul id="character-story-list" class="fd-list">
-      <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
-    </ul>
-  <% else %>
-    <p class="fd-list-empty-note"><%= t(".this_character_hasn't_been_included_in_any_published_stories_yet") %></p>
-  <% end %>
+  <ul data-tabs="true" class="fd-tabs">
+    <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories", count: @stories.count) %>
+  </ul>
+
+  <div class="tab-content tc-tab-1 fd-tab-content current">
+    <% unless @stories.blank? %>
+      <ul id="character-story-list" class="fd-list">
+        <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
+      </ul>
+    <% else %>
+      <p class="fd-list-empty-note"><%= t(".this_character_hasn't_been_included_in_any_published_stories_yet") %></p>
+    <% end %>
+  </div>
 
 </div>

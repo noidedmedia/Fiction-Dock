@@ -81,6 +81,7 @@
   a {
     text-decoration: none;
     opacity: 0.8;
+    padding: 1px;
     line-height: 26px;
     transition: opacity 200ms, color 200ms;
 
@@ -205,10 +206,7 @@
     }
   }
 
-  .author,
-  .published,
-  .language,
-  .license {
+  .story-extra-information-block {
     margin-top: 5px;
     padding-top: 20px;
     position: relative;

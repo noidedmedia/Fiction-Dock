@@ -9,6 +9,7 @@ en:
     show:
       this_character_hasn't_been_included_in_any_published_stories_yet: "This character hasn't been included in any published stories yet."
       edit: "Edit"
+      stories: "Stories (%{count})"
     new:
       add_a_character_page_title: "Add a character"
     edit:
