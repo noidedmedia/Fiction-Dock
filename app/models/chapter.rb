@@ -21,7 +21,7 @@ class Chapter < ActiveRecord::Base
   before_validation :save_word_count
   def notify_published
     attrs = story.subscribers
-      .pluck(:id).map{|x| {user_id: x, subject: story, event: :subscribed_updated}}
+      .pluck(:id).map{|x| {user_id: x, subject: story, event: "subscribed_updated"}}
     Notification.create(attrs)
   end
   def sanitize_tags
