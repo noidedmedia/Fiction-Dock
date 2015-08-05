@@ -1,22 +1,3 @@
-# == Schema Information
-#
-# Table name: stories
-#
-#  id             :integer          not null, primary key
-#  name           :string
-#  description    :text
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  blurb          :string
-#  user_id        :integer
-#  published      :boolean          default(FALSE), not null
-#  license        :integer          default(0), not null
-#  language       :integer          default(0), not null
-#  content_rating :integer          default(0), not null
-#  sex            :boolean          default(FALSE), not null
-#  violence       :boolean          default(FALSE), not null
-#
-
 ##
 # A class representing a story on the site.
 class Story < ActiveRecord::Base
@@ -36,11 +17,13 @@ class Story < ActiveRecord::Base
   validates :user, presence: true
   validates :franchises, presence: true
   validates :characters, presence: true
-  ##
-  # The user who wrote the story
-  # @return [User]
   belongs_to :user
+
+  has_many :subscriptions
+  has_many :subscribers, through: :subscriptions,
+    class_name: "User", source: :user
   has_many :reviews
+  has_many :notifications, as: :subject
   has_many :chapters
   has_many :story_characters
   has_many :bookshelf_stories

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150726175421) do
+ActiveRecord::Schema.define(version: 20150805005111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,21 @@ ActiveRecord::Schema.define(version: 20150726175421) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.integer  "user_id"
+    t.integer  "event",                  null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "secondary_subject_id"
+    t.string   "secondary_subject_type"
+  end
+
+  add_index "notifications", ["secondary_subject_id", "secondary_subject_type"], name: "secondary_subject_index", using: :btree
+  add_index "notifications", ["subject_type", "subject_id"], name: "index_notifications_on_subject_type_and_subject_id", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "read_chapters", force: :cascade do |t|
     t.integer "user_id"
@@ -255,6 +270,7 @@ ActiveRecord::Schema.define(version: 20150726175421) do
   add_foreign_key "franchise_creation_requests", "users", on_delete: :cascade
   add_foreign_key "franchise_users", "franchises"
   add_foreign_key "franchise_users", "users"
+  add_foreign_key "notifications", "users", on_delete: :cascade
   add_foreign_key "read_chapters", "chapters", on_delete: :cascade
   add_foreign_key "read_chapters", "users", on_delete: :cascade
   add_foreign_key "reviews", "stories", on_delete: :cascade

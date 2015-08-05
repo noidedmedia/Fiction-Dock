@@ -1,16 +1,12 @@
-# == Schema Information
-#
-# Table name: bookshelf_stories
-#
-#  id           :integer          not null, primary key
-#  bookshelf_id :integer
-#  story_id     :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#
-
 require 'rails_helper'
 
 RSpec.describe BookshelfStory, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "notifies the author on create" do
+    story = FactoryGirl.create(:story)
+    author = story.user
+    bookshelf = FactoryGirl.create(:bookshelf)
+    expect{
+      bookshelf.stories << story
+    }.to change{author.notifications.count}.by(1)
+  end
 end

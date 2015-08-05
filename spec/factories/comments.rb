@@ -13,7 +13,8 @@
 
 FactoryGirl.define do
   factory :comment do
-    commentable nil
+    commentable { FactoryGirl.create(:story)}
+    user
   end
 
 end

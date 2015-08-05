@@ -40,8 +40,8 @@ class User < ActiveRecord::Base
   has_many :franchise_users
   has_many :franchises, through: :francise_users
   has_many :subscriptions
-  has_many :subscribed_stories, through: :subscriptions, class_name: "Story", foreign_key: "story_id"
-
+  has_many :subscribed_stories, through: :subscriptions, class_name: "Story", source: :story
+  has_many :notifications
   validates :name,
     presence: true,
     format: {with: /\A([[:alpha:]]+|\w+)\z/},
@@ -52,6 +52,15 @@ class User < ActiveRecord::Base
   def has_favorited?(story)
     favorites.include?(story)
   end
+
+  def favorite!(story)
+    favorites << story
+  end
+
+  def subscribe!(story)
+    subscribed_stories << story
+  end
+
   def mod_or_higher?
     level == "mod" || level == "admin"
   end

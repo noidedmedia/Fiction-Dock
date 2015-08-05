@@ -1,19 +1,3 @@
-# == Schema Information
-#
-# Table name: chapters
-#
-#  id         :integer          not null, primary key
-#  body       :text
-#  chap_num   :integer
-#  story_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  name       :string
-#  published  :boolean          default(FALSE), not null
-#  slug       :string
-#  word_count :integer
-#
-
 require 'rails_helper'
 
 RSpec.describe Chapter, type: :model do
@@ -44,6 +28,16 @@ RSpec.describe Chapter, type: :model do
                                    story: story,
                                    body: "This has four words.")
       expect(chapter.word_count).to eq(4)
+    end
+  end
+  describe "notifications" do
+    it "notifies subscribed users when updated" do
+      story = FactoryGirl.create(:story)
+      user = FactoryGirl.create(:user)
+      user.subscribe! story
+      chapter = FactoryGirl.create(:chapter,  story: story,
+                                   published: false)
+      expect{chapter.publish}.to change{user.reload.notifications.count}.by(1)
     end
   end
 end
