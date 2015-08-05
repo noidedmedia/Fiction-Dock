@@ -87,8 +87,32 @@ class Story < ActiveRecord::Base
     end
   end
 
-  def self.for_content(content=nil)
-    RatingResolver.new(content).resolve
+  ########################
+  # METHODS TO SELECT BY #
+  ########################
+  DEFAULT_CONTENT = {
+    "teen" => true,
+    "everybody" => true
+  }
+  def self.for_content(content=DEFAULT_CONTENT)
+    content = DEFAULT_CONTENT unless content # handle nil
+    q = all
+    q = q.without_adult unless content["adult"]
+    q = q.without_teen unless content["teen"]
+    q = q.without_everybody unless content["everybody"]
+    q
+  end
+
+  def self.without_adult
+    where.not(content_rating: content_ratings[:adult])
+  end
+
+  def self.without_teen
+    where.not(content_rating: content_rating[:teen])
+  end
+
+  def self.without_everybody
+    where.not(content_rating: content_rating[:everybody])
   end
 
   def self.by_favorites(range=(24.hours.ago..DateTime.now))

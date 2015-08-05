@@ -77,8 +77,7 @@ class StoriesController < ApplicationController
   end
   
   def search
-    @stories = Searcher.new(params, content: accepted_content)
-      .resolve(page: params[:page] || 1)
+    # Do nothing now because this is totally broken
   end
 
   ##
