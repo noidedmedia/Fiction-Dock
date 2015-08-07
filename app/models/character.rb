@@ -26,4 +26,8 @@ class Character < ActiveRecord::Base
   validates :description, length: { maximum: 1500 }
   has_many :ship_characters
   has_many :ships, through: :ship_characters
+
+  def foreign_ships
+    ships.joins(:characters).where.not(characters: {franchise_id: franchise_id})
+  end
 end

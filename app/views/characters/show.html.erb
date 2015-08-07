@@ -32,9 +32,8 @@
       <p class="fd-list-empty-note"><%= t(".this_character_hasn't_been_included_in_any_published_stories_yet") %></p>
     <% end %>
   </div>
-  <div class="tab-content tc-tab-2 fd-tab-content">
+  <div class="tab-content tc-tab-2 fd-tab-content" data-callback="getCharacterStats", data-json_url="<%= "#{stats_franchise_character_path(@franchise, @character)}.json" %>">
     <div class="stats-section" id="stats-ship-frequency">
-
     </div>
   </div>
 </div>

@@ -32,7 +32,7 @@ class Ship < ActiveRecord::Base
   # Note that this adds a story_count attribute to the ship objects
   def self.by_frequency
     joins(:stories).group(:id)
-      .order("COUNT(stories) DESC") 
+      .order("COUNT(stories) DESC")
       .select("ships.*, COUNT(stories) AS story_count")
   end
   ##################

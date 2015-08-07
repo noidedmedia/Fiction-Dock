@@ -16,6 +16,7 @@ class CharactersController < ApplicationController
   def stats
     @character = @franchise.characters.friendly.find(params[:id])
     @ships_by_frequency = @character.ships.by_frequency
+    @foreign_ships = @character.foreign_ships.by_frequency
   end
   ##
   # Show a bio about this character
