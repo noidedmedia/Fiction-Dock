@@ -21,8 +21,8 @@
 
   <ul data-tabs="true" class="fd-tabs">
     <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories", count: @stories.count) %>
+  <li data-tab="tab-2" class="fd-tabs-tab">Stats
   </ul>
-
   <div class="tab-content tc-tab-1 fd-tab-content current">
     <% unless @stories.blank? %>
       <ul id="character-story-list" class="fd-list">
@@ -32,5 +32,9 @@
       <p class="fd-list-empty-note"><%= t(".this_character_hasn't_been_included_in_any_published_stories_yet") %></p>
     <% end %>
   </div>
+  <div class="tab-content tc-tab-2 fd-tab-content">
+    <div class="stats-section" id="stats-ship-frequency">
 
+    </div>
+  </div>
 </div>

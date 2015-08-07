@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     post 'accept', on: :member
   end
 
+  resources :ships, only: [:index, :show]
+
   resources :stories, concerns: [:publishable, :commentable] do
     # see if currently subscribed
     get 'subscribed'
@@ -41,7 +43,9 @@ Rails.application.routes.draw do
   end
 
   resources :franchises do
-    resources :characters
+    resources :characters do
+      get 'stats', on: :member
+    end
     get 'stories', on: :member
     get 'complete', on: :collection
     resources :users, controller: :franchise_users, except: [:show, :edit, :update]

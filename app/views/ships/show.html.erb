@@ -1,0 +1,15 @@
+<ul>
+<% @ship.characters.each do |c| %>
+  <li>
+  <%= link_to(c.name, c) %> (<%= link_to( c.franchise.name, c.franchise) %>)
+  </li>
+<% end %>
+</ul>
+<ul data-tabs="true" class="fd-tabs">
+  <li class="fd-tabs-tab current" data-tab="tab 1">
+  <%= t(".stories") %>
+  </li>
+</ul>
+<ul class="fd-list tab-content tc-tab-1">
+  <%= render partial: "stories/story_stub", collection: @stories, as: :story %>
+</ul>

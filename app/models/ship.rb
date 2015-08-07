@@ -1,12 +1,3 @@
-# == Schema Information
-#
-# Table name: ships
-#
-#  id         :integer          not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 ##
 # 
 # It wouldn't be a place to park ships without a model for a Ship.
@@ -32,6 +23,21 @@ class Ship < ActiveRecord::Base
   accepts_nested_attributes_for :ship_characters
   validate :has_two_characters
 
+  #################
+  # SCOPE METHODS #
+  #################
+  
+  ##
+  # Get a list of ships order by the frequency in which they appear
+  # Note that this adds a story_count attribute to the ship objects
+  def self.by_frequency
+    joins(:stories).group(:id)
+      .order("COUNT(stories) DESC") 
+      .select("ships.*, COUNT(stories) AS story_count")
+  end
+  ##################
+  # FINDER METHODS #
+  ##################
   def self.with_exact_ids(ids)
     find_by_sql([SQL_SELECT_BY_CHARACTER_IDS, ids, ids.length, ids]).first
   end

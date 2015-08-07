@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: characters
-#
-#  id           :integer          not null, primary key
-#  franchise_id :integer
-#  name         :string
-#  description  :text
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  slug         :string
-#
-
 ##
 # A character represents exactly what it says on the tin: a character in a 
 # fictional work.
@@ -37,4 +24,6 @@ class Character < ActiveRecord::Base
     length: {in: (1..40)}, 
     uniqueness: {case_sensative: false, scope: :franchise_id}
   validates :description, length: { maximum: 1500 }
+  has_many :ship_characters
+  has_many :ships, through: :ship_characters
 end

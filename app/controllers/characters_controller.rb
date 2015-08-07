@@ -13,6 +13,10 @@ class CharactersController < ApplicationController
     @characters = Character.all.order('created_at DESC').paginate(page: params[:page])
   end
 
+  def stats
+    @character = @franchise.characters.friendly.find(params[:id])
+    @ships_by_frequency = @character.ships.by_frequency
+  end
   ##
   # Show a bio about this character
   def show

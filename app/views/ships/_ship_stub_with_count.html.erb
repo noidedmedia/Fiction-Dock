@@ -1,0 +1,7 @@
+<li class="ship-stub">
+<%= link_to "Ship", ship %> (<%= ship.story_count %> <%= t(".stories") %>
+<ul class="ship-characters-list">
+  <% ship.characters.each do |c| %>
+    <li><%= link_to c.name, c %> (<%= link_to c.franchise.name, c.franchise %>)
+  <% end %>
+</li>
