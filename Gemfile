@@ -18,7 +18,7 @@ gem 'will_paginate', "~> 3.0.6"
 gem 'migration_data'
 gem 'rails_12factor', group: :production
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 gem 'pg'
 
 gem 'sanitize'
