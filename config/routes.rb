@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :characters do
       get 'stats', on: :member
     end
+    get 'stats', on: :member
     get 'stories', on: :member
     get 'complete', on: :collection
     resources :users, controller: :franchise_users, except: [:show, :edit, :update]

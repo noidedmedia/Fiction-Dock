@@ -4,7 +4,16 @@ class FranchisesController < ApplicationController
   include Pundit
   before_action :authenticate_user!, only: [:new, :edit]
   after_action :verify_authorized, except: [:complete, :index, :show, :stories]
-  
+ 
+  def stats
+    @franchise = Franchise.friendly.find(params[:id])
+    authorize @franchise
+    @characters = @franchise.characters.by_frequency
+    @ships_by_frequency = @franchise.ships.by_frequency
+      .includes(characters: :franchise).limit(10)
+    @foreign_ships = @franchise.foreign_ships.by_frequency
+      .includes(characters: :franchise).limit(10)
+  end 
   ##
   # Get all stories under this franchise
   def stories

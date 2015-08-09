@@ -8,6 +8,9 @@ class FranchisePolicy < ApplicationPolicy
     @franchise = franchise
   end
 
+  def stats?
+    true
+  end
   ##
   # Mods and admins are allowed to create
   def create?

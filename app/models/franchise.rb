@@ -21,4 +21,12 @@ class Franchise < ActiveRecord::Base
     return false unless user
     users.include?(user)
   end
+
+  def ships
+    Ship.joins(:characters).where(characters: {franchise_id: id}).uniq
+  end
+
+  def foreign_ships
+    Ship.where(id: ships).joins(:characters).where.not(characters: {franchise_id: id})
+  end
 end
