@@ -127,7 +127,6 @@ var Franchises = React.createClass({
               </div>
             );
           }, this)}
-          
           <AddFranchiseButton query={this.state.franchisequery} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} addFranchise={this.addFranchise} />
 
         </ul>

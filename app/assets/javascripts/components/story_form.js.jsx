@@ -62,6 +62,24 @@ var ReactFormElements = React.createClass({
     // Passes the updated characters array to the characters state.
     this.setState({ characters: characters });
   },
+  addShip: function(e){
+    e.preventDefault();
+    var s = this.state.ships;
+    s.push({
+      characters: []
+    });
+    this.setState({
+      ships: s 
+    });
+  },
+  removeShip: function(ship){
+    var s = this.state.ships;
+    delete s[s.indexOf(ship)];
+    this.setState({
+      ships: s
+    });
+    
+  },
   updateShips: function(ships) {
     var newships = [];
 
@@ -95,9 +113,10 @@ var ReactFormElements = React.createClass({
           {...this.props}
           franchises={this.state.franchises}
         />
-        
-        <Ships ship_add={this.props.ship_add} updateShips={this.updateShips} characters={this.state.characters} elementid={this.props.ships_elementid} placeholder={this.props.ships_placeholder} ships_label={this.props.ships_label} ships={this.state.ships} />
-
+        {this.state.characters.length > 1 ? <AddShipButton addShip={this.addShip} /> : <div></div>}
+        {this.state.ships.map(function(ship, i){
+          return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip}/>;
+        }.bind(this))}
         <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
       </div>
     );
