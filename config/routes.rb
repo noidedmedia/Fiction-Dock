@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   concern :commentable do 
     resources :comments, only: [:create, :index]
   end
+  concern :readable do
+    post :read
+  end
   resources :franchise_creation_requests do
     post 'accept', on: :member
   end
@@ -37,9 +40,7 @@ Rails.application.routes.draw do
       get 'favorited'
     end
     resources :reviews
-    resources :chapters, concerns: [:publishable] do
-      post 'read'
-    end
+    resources :chapters, concerns: [:publishable, :readable] 
   end
 
   resources :franchises do

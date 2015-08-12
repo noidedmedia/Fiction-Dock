@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805005111) do
+ActiveRecord::Schema.define(version: 20150812013655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20150805005111) do
 
   add_index "bookshelf_stories", ["bookshelf_id"], name: "index_bookshelf_stories_on_bookshelf_id", using: :btree
   add_index "bookshelf_stories", ["story_id"], name: "index_bookshelf_stories_on_story_id", using: :btree
+
+  create_table "bookshelf_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "bookshelf_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "level"
+  end
+
+  add_index "bookshelf_users", ["bookshelf_id"], name: "index_bookshelf_users_on_bookshelf_id", using: :btree
+  add_index "bookshelf_users", ["user_id"], name: "index_bookshelf_users_on_user_id", using: :btree
 
   create_table "bookshelves", force: :cascade do |t|
     t.string   "name"
@@ -252,7 +263,7 @@ ActiveRecord::Schema.define(version: 20150805005111) do
     t.integer  "level",                  default: 0,  null: false
     t.string   "slug"
     t.jsonb    "content_pref"
-    t.integer  "read_words"
+    t.integer  "read_words",             default: 0,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
