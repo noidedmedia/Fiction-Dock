@@ -9,7 +9,7 @@ class ChaptersController < ApplicationController
   def read
     @chapter = @story.chapters.friendly.find(params[:chapter_id])
     current_user.read_chapter @chapter
-    render :head
+    render nothing: true
   end
 
   def publish
