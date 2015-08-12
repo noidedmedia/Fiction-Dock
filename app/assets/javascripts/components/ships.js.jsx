@@ -1,7 +1,3 @@
-
-/* Ships
-   ============================================== */
-
 var FormShip = React.createClass({
   getInitialState: function(){
     return {characters: this.props.characters};
@@ -14,6 +10,7 @@ var FormShip = React.createClass({
     });
   },
   removeCharacter: function(char){
+    console.log("remove character called on ship");
     var c = this.state.characters;
     c.splice(c.indexOf(char), 1);
     this.setState({
@@ -22,20 +19,41 @@ var FormShip = React.createClass({
   },
   addCharacter: function(char){
     var c = this.state.characters;
+    console.log("add character called on ship");
     c.push(char);
     setState({
       characters: c
     });
   },
+  getCharacterList: function(){
+    var inactive = this.props.potential_characters.filter(function(c){
+      for(var ch in this.state.characters){
+        if(c.id == this.state.characters[ch].id){
+          return false;
+        }
+      }
+      return true;
+    }.bind(this));
+    console.log("inactive characters:",inactive);
+    var active = this.state.characters.map(function(c){
+      return <ActiveCharacter {...c} onAdd={this.addCharacter} key={"ship" + this.props.reactKey + "character" + c.id}/>;
+    }.bind(this));
+
+    console.log("active characters:",this.state.characters);
+    // rinactive is inactive values to return
+    var rinactive = inactive.map(function(c){
+      return <InactiveCharacter {...c} onRemove={this.removeCharacter} key={"ship" + this.props.reactKey + "character" + c.id}/>;
+    }.bind(this));
+    return active.concat(rinactive);
+  },
   render: function(){
     console.log("Ship props:",this.props);
     return (
       <li>
-      <ul>
-      <Characters key={'shipchars' + this.key} characters={this.state.potential_characters} elementid="test" placeholder="test" character_add="test" franchise={{}} addCharacter={this.addCharacter} removeCharacter={this.removeCharacter} />
-      </ul>
-      <input></input>
-      <Suggestions showsuggestions={ this.props.potential_characters.length > 0 ? true : false } suggestions={this.props.potential_characters} itemOnClick={this.addCharacter} itemtype={"ship_" + this.key + "_character"} bindnull={false} />
+        <h1>Ship</h1>
+        <ul>
+          {this.getCharacterList()}
+        </ul>
       </li>
       );
   }

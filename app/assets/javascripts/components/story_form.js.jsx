@@ -3,14 +3,8 @@
  * If you can't figure out where a property is coming from, it may have been passed
  * by the react_component helper used by the react-rails gem.
 */
-
-
-
-/* ReactFormElements
-   ============================================== */
-
 // ReactFormElements component used in the Rails view.
-var ReactFormElements = React.createClass({
+var StoryForm = React.createClass({
   propTypes: {
     franchises: React.PropTypes.arrayOf(React.PropTypes.object),
     characters: React.PropTypes.arrayOf(React.PropTypes.object),
@@ -25,41 +19,38 @@ var ReactFormElements = React.createClass({
       ships: this.props.ships
     };
   },
-  updateFranchises: function(franchises) {
-    this.setState({ franchises: franchises });
+  addFranchise: function(franchise){
+    var f = this.state.franchises;
+    f.push(franchise);
+    this.setState({
+      franchises: f
+    });
   },
-  updateCharacters: function(characters) {
-    this.setState({ characters: characters });
+  removeFranchise: function(franchise){
+    var rem = this.state.franchises.filter(function(f){
+      return franchise.id !== f.id;
+    });
+    this.setState({
+      franchises: rem
+    });
   },
   // Adds a character to the characters state.
   addCharacter: function(character) {
-    var characters = [];
-
-    // Passes each character in the characters state to the
-    // characters array.
-    this.state.characters.forEach(function(character, i) {
-      characters.push(character);
-    });
-
-    // Appends the new character to the characters array.
+    var characters = this.state.characters;
     characters.push(character);
-
     console.log(characters);
-
     // Passes the updated characters array to the characters state.
     this.setState({ characters: characters });
   },
   // Removes a character from the characters state.
   removeCharacter: function(character) {
+    console.log('removing character',character);
     // Creates a new array out of the characters state
     // without the character we're removing.
     var characters = this.state.characters.filter(function(c) {
       return character.id !== c.id;
     });
-
     console.log(characters);
-
-    // Passes the updated characters array to the characters state.
     this.setState({ characters: characters });
   },
   addShip: function(e){
@@ -99,23 +90,31 @@ var ReactFormElements = React.createClass({
   render: function() {
     // All properties passed from the Rails helper are forwarded onto
     // the Franchises component by the {...this.props} line.
+    //
+    console.log("rendering form people");
+    console.log(this.props);
     return (
       <div>
         {/* The franchises property must be declared after the {...this.props}
             to prevent the franchises from being overridden by the franchises
             property forwarded from the Rails helper. */}
-        <Franchises 
-          updateFranchises={this.updateFranchises}
-          updateCharacters={this.updateCharacters}
-          addCharacter={this.addCharacter}
-          removeCharacter={this.removeCharacter}
-          characters={this.state.characters}
-          {...this.props}
-          franchises={this.state.franchises}
-        />
+        {this.state.franchises.map(function(f){
+          var active_characters = this.state.characters.filter(function(c){
+            return c.franchise_id === f.id;
+          });
+          var inactive_characters = f.characters.filter(function(c){
+            // Take all characters from active_characters with an id that
+            // matchies this character's id. If we get none, the character 
+            // is not active, and, thus, inactive.
+            return active_characters.filter(function(ch){
+              return ch.id === c.id;
+            }).length === 0
+          })
+          return <FormFranchise active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} />;
+        }.bind(this))}
         {this.state.characters.length > 1 ? <AddShipButton addShip={this.addShip} /> : <div></div>}
         {this.state.ships.map(function(ship, i){
-          return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip}/>;
+          return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} />
         }.bind(this))}
         <SubmitButton submit={this.props.submit} elementid={this.props.submit_elementid} characters={this.state.characters} franchises={this.state.franchises} />
       </div>
