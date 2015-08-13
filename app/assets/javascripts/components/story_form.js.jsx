@@ -70,6 +70,11 @@ var StoryForm = React.createClass({
   },
   addFranchise: function(franchise){
     var f = this.state.franchises;
+    // check if it's there already, return if so
+    for(var fr in this.state.franchises){
+      if(this.state.franchises.id === franchise.id)
+        return;
+    }
     f.push(franchise);
     this.setState({
       franchises: f
@@ -80,7 +85,10 @@ var StoryForm = React.createClass({
       return franchise.id !== f.id;
     });
     this.setState({
-      franchises: rem
+      franchises: rem,
+      characters: this.state.characters.filter(function(c){
+        return c.franchise_id === franchise.id;
+      })
     });
   },
   // Adds a character to the characters state.

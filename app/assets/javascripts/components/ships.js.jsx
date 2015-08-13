@@ -2,17 +2,27 @@ var FormShip = React.createClass({
   getInitialState: function(){
     return {characters: this.props.characters};
   },
-  componentWillRecieveProps: function(nextProps){
+  componentWillReceiveProps: function(nextProps){
+    var newchars = this.state.characters.filter(function(ch){
+      for(var c in nextProps.potential_characters){
+        if(nextProps.potential_characters[c].id === ch.id){
+          return true;
+        }
+      }
+      return false;
+    }.bind(this))
+    console.log("Transitioning characters to", newchars);
+    console.log("got props:",nextProps);
+    console.log("was:",this.state);
     this.setState({
-      characters: this.state.characters.filter(function(c){
-        return this.props.potential_characters.indexOf(c) !== -1;
-      }.bind(this))
+      characters: newchars
     });
   },
   removeCharacter: function(char){
     console.log("remove character called on ship with character:",char);
-    var c = this.state.characters;
-    c.splice(c.indexOf(char), 1);
+    var c = this.state.characters.filter(function(c){
+      return c.id !== char.id;
+    });
     this.setState({
       characters: c
     });
@@ -57,7 +67,7 @@ var FormShip = React.createClass({
           {this.getCharacterList()}
         </ul>
       </li>
-      );
+    );
   }
 });
 
