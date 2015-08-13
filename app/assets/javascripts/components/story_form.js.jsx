@@ -72,7 +72,7 @@ var StoryForm = React.createClass({
     var f = this.state.franchises;
     // check if it's there already, return if so
     for(var fr in this.state.franchises){
-      if(this.state.franchises.id === franchise.id)
+      if(this.state.franchises[fr].id === franchise.id)
         return;
     }
     f.push(franchise);
@@ -128,9 +128,9 @@ var StoryForm = React.createClass({
       ships: s 
     });
   },
-  removeShip: function(ship){
+  removeShip: function(index){
     var s = this.state.ships;
-    delete s[s.indexOf(ship)];
+    delete s[index];
     this.setState({
       ships: s
     });

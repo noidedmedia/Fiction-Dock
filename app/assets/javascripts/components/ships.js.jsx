@@ -58,11 +58,14 @@ var FormShip = React.createClass({
     }.bind(this));
     return active.concat(rinactive);
   },
+  removeSelf: function(){
+    this.props.onRemove(this.props.reactKey);
+  },
   render: function(){
     console.log("Ship props:",this.props);
     return (
       <li>
-        <h1>Ship</h1>
+        <h1>Ship <span onClick={this.removeSelf} className="icon icon-close"></span></h1>
         <ul>
           {this.getCharacterList()}
         </ul>
