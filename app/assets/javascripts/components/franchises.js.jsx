@@ -14,3 +14,77 @@ var FormFranchise = React.createClass({
     </li>);
   }
 });
+
+
+var FranchiseAdder = React.createClass({
+  getInitialState: function(){
+    return {
+      step: "button"
+    };
+  },
+  displaySuggestor: function(e){
+    e.preventDefault();
+    this.setState({
+      step: "suggestor"
+    });
+  },
+  render: function(){
+    if(this.state.step == "button"){
+      return <button onClick={this.displaySuggestor}>Add a Franchise</button>;
+    }
+    else if(this.state.step == "suggestor"){
+      return <FranchiseSuggestor onAdd={this.props.onAdd} />;
+    }
+  }
+});
+
+var FranchiseSuggestor = React.createClass({
+  getInitialState: function(){
+    return {suggestions: false};
+  },
+  suggest: function(e){
+    var prefix = e.target.value;
+    console.log("getting prefix:",prefix);
+    var url = "/franchises/complete?query=" + prefix;
+    console.log("getting with URL:",url);
+    $.getJSON(url, function(sugg){
+      console.log(sugg);
+      this.setState({
+        suggestions: sugg
+      });
+    }.bind(this));
+  },
+  onAdd: function(f){
+    $.getJSON("/franchises/" + f.id + ".json", function(fr){
+      this.props.onAdd(fr);
+    }.bind(this));
+  },
+  getSuggestionsJSX: function(){
+    if(this.state.suggestions === []){
+      return <div>
+        <ul className="suggestions">
+          <li className="no-suggestions">No suggestions found</li>
+        </ul>
+      </div>;
+    } else if(this.state.suggestions !== false){
+      return <div>
+        <ul className="suggestions">
+          {this.state.suggestions.map(function(f){
+            var callback = function(){
+              this.onAdd(f);
+            }.bind(this);
+            return <li className="suggestion" onClick={callback}>{f.name}</li>
+          }.bind(this))}
+        </ul>
+      </div>;
+    } else {
+      return <div></div>;
+    }
+  },
+  render: function(){
+    return <div>
+      <input onChange={this.suggest}></input>
+      {this.getSuggestionsJSX()}
+    </div>;
+  }
+});

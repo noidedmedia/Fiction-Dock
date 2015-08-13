@@ -10,7 +10,7 @@ var FormShip = React.createClass({
     });
   },
   removeCharacter: function(char){
-    console.log("remove character called on ship");
+    console.log("remove character called on ship with character:",char);
     var c = this.state.characters;
     c.splice(c.indexOf(char), 1);
     this.setState({
@@ -19,9 +19,11 @@ var FormShip = React.createClass({
   },
   addCharacter: function(char){
     var c = this.state.characters;
-    console.log("add character called on ship");
+    console.log("add character called on ship with character:",char);
+    console.log("old characters:",c);
     c.push(char);
-    setState({
+    console.log("new characters:",c);
+    this.setState({
       characters: c
     });
   },
@@ -36,13 +38,13 @@ var FormShip = React.createClass({
     }.bind(this));
     console.log("inactive characters:",inactive);
     var active = this.state.characters.map(function(c){
-      return <ActiveCharacter {...c} onAdd={this.addCharacter} key={"ship" + this.props.reactKey + "character" + c.id}/>;
+      return <ActiveCharacter {...c} onRemove={this.removeCharacter} key={"ship" + this.props.reactKey + "character" + c.id}/>;
     }.bind(this));
 
     console.log("active characters:",this.state.characters);
     // rinactive is inactive values to return
     var rinactive = inactive.map(function(c){
-      return <InactiveCharacter {...c} onRemove={this.removeCharacter} key={"ship" + this.props.reactKey + "character" + c.id}/>;
+      return <InactiveCharacter {...c} onAdd={this.addCharacter} key={"ship" + this.props.reactKey + "character" + c.id}/>;
     }.bind(this));
     return active.concat(rinactive);
   },
