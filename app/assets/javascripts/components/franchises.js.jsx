@@ -1,8 +1,16 @@
 var FormFranchise = React.createClass({
+  // Remove this franchise from the overall list
+  sudoku: function(){
+    this.props.removeFranchise({
+      id: this.props.id,
+      name: this.props.name
+    });
+  },
   render: function(){
     console.log("FormFranchise props:",this.props);
     return (<li>
       <h1>{this.props.name}</h1>
+      <span className="icon icon-close" onClick={this.sudoku}></span>
       <ul>
         {this.props.active_characters.map(function(c){
             return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id}/>;

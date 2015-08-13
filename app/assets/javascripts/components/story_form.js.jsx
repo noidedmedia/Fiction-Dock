@@ -81,13 +81,21 @@ var StoryForm = React.createClass({
     });
   },
   removeFranchise: function(franchise){
+    /*
+     * Grab an array of franchises with the franchise we want to remove removed
+     * We update the franchises to be equal to this later
+     */
+    console.log("removing franchise:",franchise);
     var rem = this.state.franchises.filter(function(f){
-      return franchise.id !== f.id;
+      console.log("checking",f,"against",franchise);
+      var k = franchise.id !== f.id;
+      console.log(k ? "keeping this" : "removing this");
+      return k;
     });
     this.setState({
       franchises: rem,
       characters: this.state.characters.filter(function(c){
-        return c.franchise_id === franchise.id;
+        return c.franchise_id !== franchise.id;
       })
     });
   },
@@ -166,7 +174,7 @@ var StoryForm = React.createClass({
                   return ch.id === c.id;
                 }).length === 0
               })
-              return <FormFranchise active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} />;
+              return <FormFranchise active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} removeFranchise={this.removeFranchise}/>;
             }.bind(this))}
             <FranchiseAdder onAdd={this.addFranchise}/>
             {this.state.characters.length > 1 ? <AddShipButton addShip={this.addShip} /> : <div></div>}
