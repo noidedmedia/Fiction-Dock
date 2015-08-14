@@ -10,7 +10,7 @@ var FormFranchise = React.createClass({
     console.log("FormFranchise props:",this.props);
     return (
       <li>
-        <h1>{this.props.name}</h1>
+        {this.props.name}
         <span className="icon icon-close" onClick={this.sudoku}></span>
         <ul className="character-list">
           {this.props.active_characters.map(function(c) {
@@ -41,7 +41,12 @@ var FranchiseAdder = React.createClass({
   },
   render: function() {
     if (this.state.step == "button") {
-      return <button id="add-franchise-button" onClick={this.displaySuggestor}>Add a Franchise</button>;
+      return (
+        <div id="add-franchise-button" onClick={this.displaySuggestor}>
+          <span className="icon icon-plus"></span>
+          Add a Franchise
+        </div>
+      );
     } else if (this.state.step == "suggestor") {
       return <FranchiseSuggestor onAdd={this.props.onAdd} />;
     }
@@ -74,7 +79,7 @@ var FranchiseSuggestor = React.createClass({
   getSuggestionsJSX: function() {
     if (this.state.suggestions === []) {
       return (
-        <div>
+        <div className="suggestions-container">
           <ul className="suggestions">
             <li className="no-suggestions">No suggestions found</li>
           </ul>
@@ -82,7 +87,7 @@ var FranchiseSuggestor = React.createClass({
       );
     } else if (this.state.suggestions !== false) {
       return (
-        <div>
+        <div className="suggestions-container">
           <ul className="suggestions">
             {this.state.suggestions.map(function(f) {
               var callback = function() {

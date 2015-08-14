@@ -134,7 +134,6 @@ var StoryForm = React.createClass({
     this.setState({
       ships: s
     });
-
   },
   updateShips: function(ships) {
     var newships = [];
@@ -159,33 +158,35 @@ var StoryForm = React.createClass({
     console.log(this.props);
     return (
       <div>
-        {/* The franchises property must be declared after the {...this.props}
-            to prevent the franchises from being overridden by the franchises
-            property forwarded from the Rails helper. */}
-        {this.state.franchises.map(function(f) {
-          var active_characters = this.state.characters.filter(function(c) {
-            return c.franchise_id === f.id;
-          });
-          var inactive_characters = f.characters.filter(function(c) {
-            // Take all characters from active_characters with an id that
-            // matchies this character's id. If we get none, the character 
-            // is not active, and, thus, inactive.
-            return active_characters.filter(function(ch) {
-              return ch.id === c.id;
-            }).length === 0;
-          });
-          return <FormFranchise key={f.name} active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} removeFranchise={this.removeFranchise}/>;
-        }.bind(this))}
+        <ul className="franchise-list">
+          {/* The franchises property must be declared after the {...this.props}
+              to prevent the franchises from being overridden by the franchises
+              property forwarded from the Rails helper. */}
+          {this.state.franchises.map(function(f) {
+            var active_characters = this.state.characters.filter(function(c) {
+              return c.franchise_id === f.id;
+            });
+            var inactive_characters = f.characters.filter(function(c) {
+              // Take all characters from active_characters with an id that
+              // matchies this character's id. If we get none, the character 
+              // is not active, and, thus, inactive.
+              return active_characters.filter(function(ch) {
+                return ch.id === c.id;
+              }).length === 0;
+            });
+            return <FormFranchise key={f.name} active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} removeFranchise={this.removeFranchise}/>;
+          }.bind(this))}
 
-        <FranchiseAdder onAdd={this.addFranchise}/>
-        
-        {this.state.characters.length > 1 ? <AddShipButton addShip={this.addShip} /> : <div></div>}
-        
-        {this.state.ships.map(function(ship, i) {
-          return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} />;
-        }.bind(this))}
-        
-        <input type="submit" value="Submit" id="story-form-submit" onClick={this.submit} />
+          <FranchiseAdder onAdd={this.addFranchise}/>
+          
+          {this.state.characters.length > 1 ? <AddShipButton addShip={this.addShip} /> : <div></div>}
+          
+          {this.state.ships.map(function(ship, i) {
+            return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} />;
+          }.bind(this))}
+          
+          <input type="submit" value="Submit" id="story-form-submit" onClick={this.submit} />
+        </ul>
       </div>
     );
   }
