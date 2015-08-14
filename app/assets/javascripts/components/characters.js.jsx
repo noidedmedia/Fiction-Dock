@@ -1,12 +1,12 @@
 var ActiveCharacter = React.createClass({
-  onRemove: function(){
+  onRemove: function() {
     this.props.onRemove({
       id: this.props.id,
       name: this.props.name,
       franchise_id: this.props.franchise_id
     });
   },
-  render: function(){
+  render: function() {
     return (
       <li className="form-character character-active">
         <span className="form-character-name">{this.props.name}</span>
@@ -17,14 +17,14 @@ var ActiveCharacter = React.createClass({
 });
 
 var InactiveCharacter = React.createClass({
-  onAdd: function(){
+  onAdd: function() {
     this.props.onAdd({
       id: this.props.id,
       name: this.props.name,
       franchise_id: this.props.franchise_id
     });
   },
-  render: function(){
+  render: function() {
     return (
       <li classNmae="form-character character-inactive">
         <span className="form-character-name">{this.props.name}</span>
