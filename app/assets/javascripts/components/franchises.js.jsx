@@ -14,7 +14,7 @@ var FormFranchise = React.createClass({
         <span className="icon icon-close" onClick={this.sudoku}></span>
         <ul className="character-list">
           {this.props.active_characters.map(function(c) {
-            return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id}/>;
+            return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id} />;
           }.bind(this))}
 
           {this.props.inactive_characters.map(function(c) {

@@ -174,7 +174,7 @@ var StoryForm = React.createClass({
               return ch.id === c.id;
             }).length === 0;
           });
-          return <FormFranchise active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} removeFranchise={this.removeFranchise}/>;
+          return <FormFranchise key={f.name} active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} removeFranchise={this.removeFranchise}/>;
         }.bind(this))}
 
         <FranchiseAdder onAdd={this.addFranchise}/>
