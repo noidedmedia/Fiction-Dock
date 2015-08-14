@@ -1,5 +1,5 @@
 var FranchiseStats = React.createClass({
-  render: function(){
+  render: function() {
     console.log(this.props);
     return (
       <div id="franchise-stats">
@@ -9,31 +9,32 @@ var FranchiseStats = React.createClass({
       <ShipList ships={this.props.ships_by_frequency}/>
       <h1>Cross-Franchise Ships by Popularity</h1>
       <ShipList ships={this.props.foreign_ships} />
-      </div>);
+      </div>
+    );
   }
 });
 
 var CharacterPopularity = React.createClass({
-  render: function(){
+  render: function() {
     return (
       <ul class="character-popularity">
-      {this.props.characters.map(function(c){
-        return <CharacterPopularityItem {...c} franchise_slug={this.props.franchise_slug} key={c.id} />;
-      }.bind(this))}
-      
-      </ul>);
+        {this.props.characters.map(function(c) {
+          return <CharacterPopularityItem {...c} franchise_slug={this.props.franchise_slug} key={c.id} />;
+        }.bind(this))}
+      </ul>
+    );
   }
 });
 
 var CharacterPopularityItem = React.createClass({
- render: function(){
-    return(
+ render: function() {
+    return (
       <li>
-      <a href={this.url()}>{this.props.name} ({this.props.stories_count} stories </a>)
+        <a href={this.url()}>{this.props.name} ({this.props.stories_count} stories)</a>
       </li>
-      );
+    );
   },
-  url: function(){
+  url: function() {
     return ["franchises/",
       this.props.franchise_slug,
       "/characters/",
@@ -41,9 +42,9 @@ var CharacterPopularityItem = React.createClass({
   }
 });
 
-function getFranchiseStats(c){
+function getFranchiseStats(c) {
   console.log("getting franchise stats");
-  $.getJSON(c.data("json_url"), function(resp){
+  $.getJSON(c.data("json_url"), function(resp) {
     React.render(
       <FranchiseStats {...resp} />,
       c[0]);

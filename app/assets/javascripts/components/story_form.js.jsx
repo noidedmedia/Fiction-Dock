@@ -19,7 +19,7 @@ var StoryForm = React.createClass({
       ships: this.props.ships
     };
   },
-  submit: function(e){
+  submit: function(e) {
     e.preventDefault();
     var Story = {};
     var storyid = $("#story-form").data("story-id");
@@ -39,9 +39,9 @@ var StoryForm = React.createClass({
     Story.character_ids = this.state.characters.map(function(character) {
       return character.id;
     });
-    Story.ship_attrs = this.state.ships.map(function(ship){
+    Story.ship_attrs = this.state.ships.map(function(ship) {
       return {
-        characters: ship.characters.map(function(c){
+        characters: ship.characters.map(function(c) {
           return c.id;
         })
       };
@@ -68,7 +68,7 @@ var StoryForm = React.createClass({
       }.bind(this)
     });
   },
-  addFranchise: function(franchise){
+  addFranchise: function(franchise) {
     var f = this.state.franchises;
     // check if it's there already, return if so
     for(var fr in this.state.franchises){
@@ -80,13 +80,13 @@ var StoryForm = React.createClass({
       franchises: f
     });
   },
-  removeFranchise: function(franchise){
+  removeFranchise: function(franchise) {
     /*
      * Grab an array of franchises with the franchise we want to remove removed
      * We update the franchises to be equal to this later
      */
     console.log("removing franchise:",franchise);
-    var rem = this.state.franchises.filter(function(f){
+    var rem = this.state.franchises.filter(function(f) {
       console.log("checking",f,"against",franchise);
       var k = franchise.id !== f.id;
       console.log(k ? "keeping this" : "removing this");
@@ -94,7 +94,7 @@ var StoryForm = React.createClass({
     });
     this.setState({
       franchises: rem,
-      characters: this.state.characters.filter(function(c){
+      characters: this.state.characters.filter(function(c) {
         return c.franchise_id !== franchise.id;
       })
     });
@@ -118,7 +118,7 @@ var StoryForm = React.createClass({
     console.log(characters);
     this.setState({ characters: characters });
   },
-  addShip: function(e){
+  addShip: function(e) {
     e.preventDefault();
     var s = this.state.ships;
     s.push({
@@ -128,7 +128,7 @@ var StoryForm = React.createClass({
       ships: s 
     });
   },
-  removeShip: function(index){
+  removeShip: function(index) {
     var s = this.state.ships;
     delete s[index];
     this.setState({
@@ -162,24 +162,24 @@ var StoryForm = React.createClass({
         {/* The franchises property must be declared after the {...this.props}
             to prevent the franchises from being overridden by the franchises
             property forwarded from the Rails helper. */}
-            {this.state.franchises.map(function(f){
-              var active_characters = this.state.characters.filter(function(c){
+            {this.state.franchises.map(function(f) {
+              var active_characters = this.state.characters.filter(function(c) {
                 return c.franchise_id === f.id;
               });
-              var inactive_characters = f.characters.filter(function(c){
+              var inactive_characters = f.characters.filter(function(c) {
                 // Take all characters from active_characters with an id that
                 // matchies this character's id. If we get none, the character 
                 // is not active, and, thus, inactive.
-                return active_characters.filter(function(ch){
+                return active_characters.filter(function(ch) {
                   return ch.id === c.id;
-                }).length === 0
-              })
+                }).length === 0;
+              });
               return <FormFranchise active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} removeFranchise={this.removeFranchise}/>;
             }.bind(this))}
             <FranchiseAdder onAdd={this.addFranchise}/>
             {this.state.characters.length > 1 ? <AddShipButton addShip={this.addShip} /> : <div></div>}
-            {this.state.ships.map(function(ship, i){
-              return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} />
+            {this.state.ships.map(function(ship, i) {
+              return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} />;
               }.bind(this))}
               <button id="story-submit" onClick={this.submit}>
                 Submit
