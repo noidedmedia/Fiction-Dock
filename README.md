@@ -6,6 +6,14 @@ Fiction Dock [ ![Codeship Status for noidedmedia/Fiction-Dock](https://codeship.
 
 ## Development FAQ
 
+## How do I set this up?
+1. Install [RVM](https://rvm.io/) and use it to download Ruby 2.2.2
+2. Install Bundler (`gem install bundler`)
+3. Use your package manager (we recommend [Homebrew](http://brew.sh/) on OSX) to download Postgresql 9.4 (`brew install postgresql`, `apt-get install postgresql`, etc). We recommend using Postgres.app on OSX, although you'll still need to install Postgres traditionally for the header files.
+4. Run `bundle`
+5. Run `gem install rspec`. Bundler should do this, but sometimes it doesn't.
+6. Get to contributing!
+
 ### How do I make myself an admin on my local build?
 
 1. Navigate to your local copy of Fiction-Dock in the Terminal.
