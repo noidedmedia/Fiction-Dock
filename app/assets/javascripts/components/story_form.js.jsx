@@ -158,6 +158,8 @@ var StoryForm = React.createClass({
     console.log(this.props);
     return (
       <div>
+        <div className="section-header">Franchises</div>
+
         <ul className="franchise-list">
           {/* The franchises property must be declared after the {...this.props}
               to prevent the franchises from being overridden by the franchises
@@ -179,7 +181,9 @@ var StoryForm = React.createClass({
 
           <FranchiseAdder onAdd={this.addFranchise}/>
           
-          {this.state.characters.length > 1 ? <AddShipButton addShip={this.addShip} /> : <div></div>}
+          <div className="section-header">Ships</div>
+
+          <AddShipButton addShip={this.addShip} />
           
           {this.state.ships.map(function(ship, i) {
             return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} />;

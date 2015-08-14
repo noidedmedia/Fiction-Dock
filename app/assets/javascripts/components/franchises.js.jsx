@@ -48,7 +48,11 @@ var FranchiseAdder = React.createClass({
         </div>
       );
     } else if (this.state.step == "suggestor") {
-      return <FranchiseSuggestor onAdd={this.props.onAdd} />;
+      return (
+        <div>
+          <FranchiseSuggestor onAdd={this.props.onAdd} />
+        </div>
+      );
     }
   }
 });
