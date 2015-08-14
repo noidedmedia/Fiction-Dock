@@ -12,10 +12,11 @@ var FormFranchise = React.createClass({
       <li>
         <h1>{this.props.name}</h1>
         <span className="icon icon-close" onClick={this.sudoku}></span>
-        <ul>
+        <ul className="character-list">
           {this.props.active_characters.map(function(c) {
-              return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id}/>;
+            return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id}/>;
           }.bind(this))}
+
           {this.props.inactive_characters.map(function(c) {
             return <InactiveCharacter {...c} onAdd={this.props.addCharacter} key={"character" + c.id} />;
           }.bind(this))}
@@ -40,7 +41,7 @@ var FranchiseAdder = React.createClass({
   },
   render: function() {
     if (this.state.step == "button") {
-      return <button onClick={this.displaySuggestor}>Add a Franchise</button>;
+      return <button id="add-franchise-button" onClick={this.displaySuggestor}>Add a Franchise</button>;
     } else if (this.state.step == "suggestor") {
       return <FranchiseSuggestor onAdd={this.props.onAdd} />;
     }
@@ -72,22 +73,26 @@ var FranchiseSuggestor = React.createClass({
   },
   getSuggestionsJSX: function() {
     if (this.state.suggestions === []) {
-      return <div>
-        <ul className="suggestions">
-          <li className="no-suggestions">No suggestions found</li>
-        </ul>
-      </div>;
+      return (
+        <div>
+          <ul className="suggestions">
+            <li className="no-suggestions">No suggestions found</li>
+          </ul>
+        </div>
+      );
     } else if (this.state.suggestions !== false) {
-      return <div>
-        <ul className="suggestions">
-          {this.state.suggestions.map(function(f) {
-            var callback = function() {
-              this.onAdd(f);
-            }.bind(this);
-            return <li className="suggestion" onClick={callback}>{f.name}</li>;
-          }.bind(this))}
-        </ul>
-      </div>;
+      return (
+        <div>
+          <ul className="suggestions">
+            {this.state.suggestions.map(function(f) {
+              var callback = function() {
+                this.onAdd(f);
+              }.bind(this);
+              return <li key={f.name} className="suggestion" onClick={callback}>{f.name}</li>;
+            }.bind(this))}
+          </ul>
+        </div>
+      );
     } else {
       return <div></div>;
     }

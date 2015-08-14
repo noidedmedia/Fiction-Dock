@@ -11,6 +11,13 @@
     padding-bottom: 6px;
     border-bottom: 1px solid #aaaab2;
   }
+
+  button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+  }
 }
 
 .franchise-list {

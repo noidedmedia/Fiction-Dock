@@ -6,8 +6,8 @@ var FormShip = React.createClass({
   },
   componentWillReceiveProps: function(nextProps) {
     var newchars = this.state.characters.filter(function(ch) {
-      for(var c in nextProps.potential_characters){
-        if(nextProps.potential_characters[c].id === ch.id){
+      for (var c in nextProps.potential_characters) {
+        if (nextProps.potential_characters[c].id === ch.id) {
           return true;
         }
       }
@@ -50,13 +50,13 @@ var FormShip = React.createClass({
     }.bind(this));
     console.log("inactive characters:",inactive);
     var active = this.state.characters.map(function(c) {
-      return <ActiveCharacter {...c} onRemove={this.removeCharacter} key={"ship" + this.props.reactKey + "character" + c.id}/>;
+      return <ActiveCharacter {...c} onRemove={this.removeCharacter} key={"ship" + this.props.reactKey + "character" + c.id} />;
     }.bind(this));
 
     console.log("active characters:",this.state.characters);
     // rinactive is inactive values to return
     var rinactive = inactive.map(function(c) {
-      return <InactiveCharacter {...c} onAdd={this.addCharacter} key={"ship" + this.props.reactKey + "character" + c.id}/>;
+      return <InactiveCharacter {...c} onAdd={this.addCharacter} key={"ship" + this.props.reactKey + "character" + c.id} />;
     }.bind(this));
     return active.concat(rinactive);
   },
@@ -82,7 +82,7 @@ var FormShip = React.createClass({
    ============================================== */
 
 var AddShipButton = React.createClass({
-  render: function(){
+  render: function() {
     return <button onClick={this.props.addShip}>Add a Ship</button>;
   }
 });
