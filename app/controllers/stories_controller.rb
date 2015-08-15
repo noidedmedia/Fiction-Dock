@@ -227,6 +227,7 @@ class StoriesController < ApplicationController
     :description,
     :license,
     :language,
+    :content_rating,
     :franchise_ids => [],
     :character_ids => [],
     :ship_attrs => {
