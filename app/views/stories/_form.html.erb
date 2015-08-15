@@ -20,6 +20,13 @@
       <%= f.select :license, options_for_select(Story.license_attributes_for_select, @story.license), {}, { class: "custom-select", id: "story-license-select" } %>
       <span class="icon icon-down"></span>
     </div>
+
+    <%# Rating select %>
+    <div class="select-container">
+      <%= f.label :content_rating, t(".rating") %>
+      <%= f.select :content_rating, options_for_select(Story.rating_attributes_for_select, @story.license), {}, { class: "custom-select", id: "story-rating-select" } %>
+      <span class="icon icon-down"></span>
+    </div>
     
     <%# Blurb field %>
     <div class="field-container">

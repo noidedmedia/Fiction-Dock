@@ -87,6 +87,16 @@ class Story < ActiveRecord::Base
     end
   end
 
+  ##
+  # Returns a localized list of all rating options for use
+  # with the select element on the Story page.
+  #
+  def self.rating_attributes_for_select
+    content_ratings.map do |rating, k|
+      [I18n.t("ratings.#{rating}"), rating]
+    end
+  end
+
   ########################
   # METHODS TO SELECT BY #
   ########################
@@ -94,6 +104,7 @@ class Story < ActiveRecord::Base
     "teen" => true,
     "everybody" => true
   }
+
   def self.for_content(content=DEFAULT_CONTENT)
     content = DEFAULT_CONTENT unless content # handle nil
     q = all
@@ -122,11 +133,13 @@ class Story < ActiveRecord::Base
       .group('stories.id')
       .order('COUNT(favorite_stories) DESC')
   end
+
   protected
   # please see `save_ship_attrs`
   def destroy_all_story_ships
     story_ships.each(&:mark_for_destruction)
   end
+  
   ##
   # TODO: make this less awful
   def save_ship_attrs
@@ -186,9 +199,11 @@ class Story < ActiveRecord::Base
       errors.add(:chapters, "needs to have one published") unless publishable?
     end
   end
+  
   def set_parent_for_ship(ship)
     ship.story ||= self
   end
+
   ##
   # Make sure that all our characters are in valid franchises
   def character_inclusion
@@ -196,11 +211,13 @@ class Story < ActiveRecord::Base
       errors.add(:characters, "Are not all within valid franchises")
     end
   end
+
   ##
   # Resolve the franchises in `franchise_ids` to the actual franchise objects
   def resolve_franchise_ids
     self.franchises = Franchise.where(id: franchise_ids) if franchise_ids && franchise_ids.count > 0
   end
+
   ##
   # Resolve the characters in `character_ids` to the actual character objects
   def resolve_character_ids
