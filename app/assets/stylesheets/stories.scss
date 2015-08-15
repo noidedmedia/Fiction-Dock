@@ -265,4 +265,8 @@
       }
     }
   }
+
+  .ship-list-container:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
 }

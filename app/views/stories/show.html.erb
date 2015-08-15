@@ -118,9 +118,8 @@
       <% unless @story.ships.blank? %>
         <ul class="story-ships-list">
           <li class="list-item-header"><%= t(".ships") %></li>
-          <% @story.ships.each_with_index do |ship, index| %>
+          <% @story.ships.each do |ship| %>
             <div class="ship-list-container">
-              <p>Ship #<%= index + 1 %></p>
               <% ship.characters.each do |character| %>
                 <li>
                   <%= link_to franchise_character_path(character.franchise, character) do %>
