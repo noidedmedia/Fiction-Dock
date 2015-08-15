@@ -29,4 +29,10 @@ class Franchise < ActiveRecord::Base
   def foreign_ships
     Ship.where(id: ships).joins(:characters).where.not(characters: {franchise_id: id})
   end
+
+  def self.popular(time=(1.day.ago..Time.new))
+    join(:stories)
+      .where(stories: {created_at: time})
+      .group(:id).order("COUNT(stories)")
+  end
 end
