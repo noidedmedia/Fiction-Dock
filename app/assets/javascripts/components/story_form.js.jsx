@@ -71,9 +71,10 @@ var StoryForm = React.createClass({
   addFranchise: function(franchise) {
     var f = this.state.franchises;
     // check if it's there already, return if so
-    for(var fr in this.state.franchises){
-      if(this.state.franchises[fr].id === franchise.id)
+    for (var fr in this.state.franchises) {
+      if (this.state.franchises[fr].id === franchise.id) {
         return;
+      }
     }
     f.push(franchise);
     this.setState({

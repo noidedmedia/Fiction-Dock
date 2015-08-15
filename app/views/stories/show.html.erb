@@ -71,13 +71,23 @@
         <li><%= link_to(@story.author.name, user_path(@story.author)) %></li>
       </ul>
 
-      <ul class="story-extra-information-block">
-        <li class="list-item-header"><%= t(".published") %></li>
-        <% if @story.published %>
+      <% if @story.published %>
+        <ul class="story-extra-information-block">
+          <li class="list-item-header"><%= t(".published") %></li>
           <li><%= @story.created_at.strftime("%B %e, %Y") %></li>
-        <% else %>
-          <li><%= t(".na") %></li>
-        <% end %>
+        </ul>
+      <% end %>
+
+      <% if @story.published %>
+        <ul class="story-extra-information-block">
+          <li class="list-item-header"><%= t(".last_updated") %></li>
+          <li><%= @story.updated_at.strftime("%B %e, %Y") %></li>
+        </ul>
+      <% end %>
+
+      <ul class="story-extra-information-block">
+        <li class="list-item-header"><%= t(".rating") %></li>
+        <li><%#= t("ratings.#{@story.rating}") %></li>
       </ul>
 
       <ul class="story-extra-information-block">
@@ -104,6 +114,24 @@
           <li><%= link_to character.name, franchise_character_path(character.franchise, character) %></li>
         <% end %>
       </ul>
+
+      <% unless @story.ships.blank? %>
+        <ul class="story-ships-list">
+          <li class="list-item-header"><%= t(".ships") %></li>
+          <% @story.ships.each_with_index do |ship, index| %>
+            <div class="ship-list-container">
+              <p>Ship #<%= index + 1 %></p>
+              <% ship.characters.each do |character| %>
+                <li>
+                  <%= link_to franchise_character_path(character.franchise, character) do %>
+                    <%= character.name %> (<%= character.franchise.name %>)
+                  <% end %>
+                </li>
+              <% end %>
+            </div>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
 
