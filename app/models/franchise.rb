@@ -31,8 +31,9 @@ class Franchise < ActiveRecord::Base
   end
 
   def self.popular(time=(1.day.ago..Time.new))
-    join(:stories)
+    joins(:stories)
       .where(stories: {created_at: time})
       .group(:id).order("COUNT(stories)")
+      .select("franchises.*, COUNT(stories) as stories_count")
   end
 end

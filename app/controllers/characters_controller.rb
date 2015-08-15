@@ -3,8 +3,8 @@
 # Always loads the franchise from `params[:franchise_id]`
 class CharactersController < ApplicationController
   include Pundit
-
-  before_action :load_franchise, except: [:index]
+  include PopularityQueryable
+  before_action :load_franchise, except: [:index, :popular]
   before_action :authenticate_user!, except: [:show, :index]
 
   ##
