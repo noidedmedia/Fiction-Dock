@@ -166,7 +166,9 @@ var StoryForm = React.createClass({
           }.bind(this))}
 
           <FranchiseAdder onAdd={this.addFranchise} translations={this.props.translations} />
-          
+        </ul>
+
+        <ul className="ship-list">
           <div className="section-header">{this.props.translations.ships_label}</div>
 
           <AddShipButton addShip={this.addShip} translations={this.props.translations} />

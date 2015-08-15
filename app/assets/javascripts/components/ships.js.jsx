@@ -69,7 +69,7 @@ var FormShip = React.createClass({
       <li>
         <h1>Ship <span onClick={this.removeSelf} className="icon icon-close" title={this.props.translations.remove}></span></h1>
         <ul>
-          {this.getCharacterList()}
+          { this.getCharacterList() }
         </ul>
       </li>
     );
