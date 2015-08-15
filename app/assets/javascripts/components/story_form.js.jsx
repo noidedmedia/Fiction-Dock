@@ -137,22 +137,6 @@ var StoryForm = React.createClass({
       ships: s
     });
   },
-  updateShips: function(ships) {
-    var newships = [];
-
-    // All the ships already in the React state are pushed to the newships array.
-    this.state.ships.forEach(function(ship, i) {
-      newships.push(ship);
-    });
-
-    // New ships passed to updateShips are then added to the newships array.
-    ships.forEach(function(ship, i) {
-      newships.push(ship);
-    });
-
-    // The React state is updated to reflect the newships array we've just created.
-    this.setState({ ships: newships });
-  },
   render: function() {
     // All properties passed from the Rails helper are forwarded onto
     // the Franchises component by the {...this.props} line.
