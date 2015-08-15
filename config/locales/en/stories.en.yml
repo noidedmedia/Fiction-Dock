@@ -44,6 +44,8 @@ en:
       add_a_new_character: "Add a new character"
       ships: "Ships"
       add_a_new_ship: "Add a new ship"
+      no_suggestions_found: "No suggestions found"
+      remove: "Remove"
       submit: 
         new: "Submit"
         edit: "Save changes"

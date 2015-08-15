@@ -41,9 +41,9 @@
     </div>
 
     <%# React component helper %>
-    <%# The ReactFormElements component can be found in story_form.js.jsx. %>
+    <%# The StoryForm component can be found in story_form.js.jsx. %>
     <%# i18n strings and story franchises/characters are passed to the JS as props, which is why this is such a large block. %>
-    <%= react_component('StoryForm', render(partial: 'stories/react_form.json.jbuilder'), id: "react-form-elements") %>
+    <%= react_component('StoryForm', render(partial: 'stories/react_form.json.jbuilder', locals: {i18npath: 'stories.form'} ), id: "react-form-elements") %>
 
   <% end %>
 </div>

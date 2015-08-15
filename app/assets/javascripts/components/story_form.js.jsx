@@ -144,7 +144,7 @@ var StoryForm = React.createClass({
     console.log(this.props);
     return (
       <div>
-        <div className="section-header">Franchises</div>
+        <div className="section-header">{this.props.translations.franchises_label}</div>
 
         <ul className="franchise-list">
           {/* The franchises property must be declared after the {...this.props}
@@ -162,21 +162,21 @@ var StoryForm = React.createClass({
                 return ch.id === c.id;
               }).length === 0;
             });
-            return <FormFranchise key={f.name} active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} removeFranchise={this.removeFranchise}/>;
+            return <FormFranchise key={f.name} active_characters={active_characters} inactive_characters={inactive_characters} removeCharacter={this.removeCharacter} addCharacter={this.addCharacter} {...f} removeFranchise={this.removeFranchise} translations={this.props.translations} />;
           }.bind(this))}
 
-          <FranchiseAdder onAdd={this.addFranchise}/>
+          <FranchiseAdder onAdd={this.addFranchise} translations={this.props.translations} />
           
-          <div className="section-header">Ships</div>
+          <div className="section-header">{this.props.translations.ships_label}</div>
 
-          <AddShipButton addShip={this.addShip} />
+          <AddShipButton addShip={this.addShip} translations={this.props.translations} />
           
           {this.state.ships.map(function(ship, i) {
-            return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} />;
-          }.bind(this))}
-          
-          <input type="submit" value="Submit" id="story-form-submit" onClick={this.submit} />
+            return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} translations={this.props.translations} />;
+          }.bind(this))}  
         </ul>
+
+        <input type="submit" value={this.props.translations.submit} id="story-form-submit" onClick={this.submit} />
       </div>
     );
   }

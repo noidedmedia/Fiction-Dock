@@ -11,14 +11,14 @@ var FormFranchise = React.createClass({
     return (
       <li>
         {this.props.name}
-        <span className="icon icon-close" onClick={this.sudoku}></span>
+        <span className="icon icon-close" title={this.props.translations.remove} onClick={this.sudoku}></span>
         <ul className="character-list">
           {this.props.active_characters.map(function(c) {
-            return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id} />;
+            return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id} translations={this.props.translations} />;
           }.bind(this))}
 
           {this.props.inactive_characters.map(function(c) {
-            return <InactiveCharacter {...c} onAdd={this.props.addCharacter} key={"character" + c.id} />;
+            return <InactiveCharacter {...c} onAdd={this.props.addCharacter} key={"character" + c.id} translations={this.props.translations} />;
           }.bind(this))}
         </ul>
       </li>
@@ -44,13 +44,13 @@ var FranchiseAdder = React.createClass({
       return (
         <div id="add-franchise-button" onClick={this.displaySuggestor}>
           <span className="icon icon-plus"></span>
-          Add a Franchise
+          {this.props.translations.add_a_new_franchise}
         </div>
       );
     } else if (this.state.step == "suggestor") {
       return (
         <div>
-          <FranchiseSuggestor onAdd={this.props.onAdd} />
+          <FranchiseSuggestor onAdd={this.props.onAdd} translations={this.props.translations} />
         </div>
       );
     }
@@ -85,7 +85,7 @@ var FranchiseSuggestor = React.createClass({
       return (
         <div className="suggestions-container">
           <ul className="suggestions">
-            <li className="no-suggestions">No suggestions found</li>
+            <li className="no-suggestions">{this.props.translations.no_suggestions_found}</li>
           </ul>
         </div>
       );

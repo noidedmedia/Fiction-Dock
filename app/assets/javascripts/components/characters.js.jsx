@@ -9,7 +9,7 @@ var ActiveCharacter = React.createClass({
   render: function() {
     return (
       <li className="form-character character-active">
-        <span className="icon icon-close" onClick={this.onRemove}></span>
+        <span className="icon icon-close" onClick={this.onRemove} title={this.props.translations.remove}></span>
         {this.props.name}
       </li>
     );
