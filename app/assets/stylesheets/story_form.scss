@@ -66,7 +66,7 @@
   }
 }
 
-#add-franchise-button {
+.add-franchise-button {
   cursor: pointer;
   overflow: hidden;
   background-color: rgba(#5bb289,0.8);
@@ -96,28 +96,40 @@
   &:hover {
     background-color: #5bb289;
   }
+}
 
-  &.hidden {
-    overflow: auto;
-    cursor: default;
-    margin-bottom: 0;
-    padding: 0;
+.add-franchise-input {
+  position: relative;
+  max-width: 300px;
+
+  input {
+    font-size: 1.4rem;
+    padding: 8px;
+    padding-right: 32px;
+    height: 32px;
     width: 100%;
-    max-width: 300px;
-    border-radius: 0;
+    border: 1px solid #aaaab2;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
-    span:not(.icon-close) {
-      display: none;
+    &:focus {
+      outline: none;
     }
+  }
 
-    .icon-close {
-      display: block;
-      color: #aaaab2;
-      cursor: pointer;
+  .icon-close {
+    display: block;
+    position: absolute;
+    font-size: 11px;
+    top: 5px;
+    right: 10px;
+    color: #333;
+    opacity: 0.5;
+    cursor: pointer;
 
-      &:hover {
-        color: #333;
-      }
+    &:hover {
+      opacity: 1;
     }
   }
 }
@@ -131,7 +143,7 @@
   position: absolute;
   max-height: 300px;
   overflow: auto;
-  top: 34px;
+  top: 32px;
   border: 0;
 
   &.active {

@@ -1,6 +1,6 @@
 var FormFranchise = React.createClass({
   // Remove this franchise from the overall list
-  sudoku: function() {
+  removeFranchise: function() {
     this.props.removeFranchise({
       id: this.props.id,
       name: this.props.name
@@ -11,7 +11,7 @@ var FormFranchise = React.createClass({
     return (
       <li>
         {this.props.name}
-        <span className="icon icon-close" title={this.props.translations.remove} onClick={this.sudoku}></span>
+        <span className="icon icon-close" title={this.props.translations.remove} onClick={this.removeFranchise}></span>
         <ul className="character-list">
           {this.props.active_characters.map(function(c) {
             return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id} translations={this.props.translations} />;
@@ -38,11 +38,17 @@ var FranchiseAdder = React.createClass({
     this.setState({
       step: "suggestor"
     });
+    $(React.findDOMNode(this.refs.franchiseInput)).val("").focus();
+  },
+  displayButton: function() {
+    this.setState({
+      step: "button"
+    });
   },
   render: function() {
     if (this.state.step == "button") {
       return (
-        <div id="add-franchise-button" onClick={this.displaySuggestor}>
+        <div className="add-franchise-button" onClick={this.displaySuggestor}>
           <span className="icon icon-plus"></span>
           {this.props.translations.add_a_new_franchise}
         </div>
@@ -50,7 +56,7 @@ var FranchiseAdder = React.createClass({
     } else if (this.state.step == "suggestor") {
       return (
         <div>
-          <FranchiseSuggestor onAdd={this.props.onAdd} translations={this.props.translations} />
+          <FranchiseSuggestor onAdd={this.props.onAdd} displayButton={this.displayButton} translations={this.props.translations} />
         </div>
       );
     }
@@ -79,6 +85,7 @@ var FranchiseSuggestor = React.createClass({
     $.getJSON("/franchises/" + f.id + ".json", function(fr) {
       this.props.onAdd(fr);
     }.bind(this));
+    this.props.displayButton();
   },
   getSuggestionsJSX: function() {
     if (this.state.suggestions === []) {
@@ -91,7 +98,7 @@ var FranchiseSuggestor = React.createClass({
       );
     } else if (this.state.suggestions !== false) {
       return (
-        <div className="suggestions-container">
+        <div className="suggestions-container active">
           <ul className="suggestions">
             {this.state.suggestions.map(function(f) {
               var callback = function() {
@@ -108,8 +115,10 @@ var FranchiseSuggestor = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <input onChange={this.suggest}></input>
+      <div className="add-franchise-input">
+        <input ref="franchiseInput" onChange={this.suggest}></input>
+        <span className="icon icon-close" onClick={ this.props.displayButton }></span>
+
         { this.getSuggestionsJSX() }
       </div>
     );
