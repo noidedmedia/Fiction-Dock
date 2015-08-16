@@ -26,8 +26,8 @@ var InactiveCharacter = React.createClass({
   },
   render: function() {
     return (
-      <li className="form-character inactive">
-        <span className="icon icon-plus" onClick={this.onAdd}></span>
+      <li className="form-character inactive" onClick={this.onAdd}>
+        <span className="icon icon-plus"></span>
         {this.props.name}
       </li>
     );

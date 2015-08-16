@@ -21,7 +21,7 @@ json.translations do
   json.add_a_new_franchise t("#{i18npath}.add_a_new_franchise")
   json.characters_label t("#{i18npath}.characters")
   json.characters_placeholder t("#{i18npath}.characters")
-  json.add_a_new_character t("#{i18npath}.add_a_new_character")
+  json.add_characters t("#{i18npath}.add_characters")
   json.ships_label t("#{i18npath}.ships")
   json.ships_placeholder t("#{i18npath}.ships")
   json.add_a_new_ship t("#{i18npath}.add_a_new_ship")

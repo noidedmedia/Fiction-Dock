@@ -1,9 +1,25 @@
 var FormFranchise = React.createClass({
+  getInitialState: function() {
+    return {
+      addcharacterisactive: false
+    };
+  },
   // Remove this franchise from the overall list
   removeFranchise: function() {
     this.props.removeFranchise({
       id: this.props.id,
       name: this.props.name
+    });
+  },
+  addCharacters: function() {
+    this.setState({
+      addcharacterisactive: true
+    });
+  },
+  closeAddCharacters: function(e) {
+    e.stopPropagation();
+    this.setState({
+      addcharacterisactive: false
     });
   },
   render: function() {
@@ -19,9 +35,19 @@ var FormFranchise = React.createClass({
             return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id} translations={this.props.translations} />;
           }.bind(this))}
 
-          {this.props.inactive_characters.map(function(c) {
-            return <InactiveCharacter {...c} onAdd={this.props.addCharacter} key={"character" + c.id} translations={this.props.translations} />;
-          }.bind(this))}
+          <div className="add-character-container">
+            <div className={this.state.addcharacterisactive ? "add-character-button active" : "add-character-button"} onClick={this.addCharacters}>
+              <span className="icon icon-plus"></span>
+              {this.props.translations.add_characters}
+              <span className="icon icon-close" onClick={this.closeAddCharacters}></span>
+            </div>
+
+            <div className={this.state.addcharacterisactive ? "character-suggestions" : "character-suggestions hidden"}>
+              {this.props.inactive_characters.map(function(c) {
+                return <InactiveCharacter {...c} onAdd={this.props.addCharacter} key={"character" + c.id} translations={this.props.translations} />;
+              }.bind(this))}
+            </div>
+          </div>
         </ul>
       </li>
     );
