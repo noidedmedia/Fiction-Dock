@@ -10,8 +10,10 @@ var FormFranchise = React.createClass({
     console.log("FormFranchise props:",this.props);
     return (
       <li>
-        {this.props.name}
-        <span className="icon icon-close" title={this.props.translations.remove} onClick={this.removeFranchise}></span>
+        <div className="franchise-list-item-header">
+          <p>{this.props.name}</p>
+          <span className="icon icon-close" title={this.props.translations.remove} onClick={this.removeFranchise}></span>
+        </div>
         <ul className="character-list">
           {this.props.active_characters.map(function(c) {
             return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id} translations={this.props.translations} />;

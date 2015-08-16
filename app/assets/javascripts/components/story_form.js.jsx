@@ -170,12 +170,12 @@ var StoryForm = React.createClass({
 
         <ul className="ship-list">
           <div className="section-header">{this.props.translations.ships_label}</div>
-
-          <AddShipButton addShip={this.addShip} translations={this.props.translations} />
           
           {this.state.ships.map(function(ship, i) {
             return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} translations={this.props.translations} />;
-          }.bind(this))}  
+          }.bind(this))}
+          
+          <AddShipButton addShip={this.addShip} translations={this.props.translations} />
         </ul>
 
         <input type="submit" value={this.props.translations.submit} id="story-form-submit" onClick={this.submit} />
