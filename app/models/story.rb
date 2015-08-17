@@ -135,62 +135,14 @@ class Story < ActiveRecord::Base
   end
 
   protected
-  # please see `save_ship_attrs`
-  def destroy_all_story_ships
-    story_ships.each(&:mark_for_destruction)
-  end
-  
+ 
   ##
   # TODO: make this less awful
   def save_ship_attrs
-    destroy_all_story_ships and return unless ship_attrs
-    ##
-    # Originally, this code marked all the story_ships for destruction,
-    # then unmarked them if they no longer needed to be destroyed
-    # That, however, wasn't working——it was still set to
-    # be destroyed, even when I used instance_eval and set 
-    # @marked_for_destruction to false. This was after I used the recommended
-    # way of calling `reload` on the record, of course.
-    #
-    # So this is a placeholder hack until we fix that. Save all the records
-    # we shouldn't destroy in an array, then mark the rest at the end
-    do_not_destroy = []
-    character_ids = ship_attrs.map{|x| x["characters"]}
-    # character_ids is now an array of arrays
-    # each internal array has values representing the characters in a
-    # given ship
-    character_ids.each do |c_ids|
-      logger.debug("Trying to find ship with id: #{c_ids}")
-      # Do sql set division with no remainder to find a ship with EXACTLY
-      # the characters we want
-      if s = Ship.with_exact_ids(c_ids)
-        logger.debug("Found ship that matched exactly")
-        if ss = story_ships.where(ship_id: s.id, story_id: self.id).pluck(:id).first
-          logger.debug("This ship is already associated, by way of #{ss}")
-          logger.debug("We will add that to do_not_destroy")
-          do_not_destroy << ss
-        else
-          logger.debug("This ship is not currently associated.")
-          logger.debug("Associating it now.")
-          built = self.story_ships.build(ship: s)
-          logger.debug("Built story is: #{built.inspect}")
-        end
-        ##
-        # if no such ship exists, build it
-      else
-        logger.debug("No ship exists, building our own...")
-        q = self.ships.build(characters: Character.where(id: c_ids))
-      end
-    end
-    logger.debug("Will not destroy story_ships with id: #{do_not_destroy.inspect}")
-    # Second part of our evil hack
-    # this was originally `story_ships.where.not(id: do_not_destroy), but
-    # Rails didn't like it. 
-    #
-    # So this sadness is the result. 
-    story_ships.each do |story_ship|
-      story_ship.mark_for_destruction unless story_ship.id.in?(do_not_destroy) || story_ship.new_record?
-    end
+    return unless ship_attrs
+    c_ids = ship_attrs.map!{|x| x["character_ids"]}
+    self.ships = c_ids.map!{|x| Ship.find_or_create_by_character_ids(x)}
+    self.ships.map(&:save!)
   end
 
 
@@ -200,10 +152,6 @@ class Story < ActiveRecord::Base
     end
   end
   
-  def set_parent_for_ship(ship)
-    ship.story ||= self
-  end
-
   ##
   # Make sure that all our characters are in valid franchises
   def character_inclusion
@@ -221,6 +169,6 @@ class Story < ActiveRecord::Base
   ##
   # Resolve the characters in `character_ids` to the actual character objects
   def resolve_character_ids
-    self.characters = Character.where(id: character_ids) if character_ids && character_ids.count > 0
+    self.characters = Character.where(id: character_ids) unless character_ids.blank?
   end
 end

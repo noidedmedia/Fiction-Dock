@@ -18,6 +18,7 @@ var ActiveCharacter = React.createClass({
 
 var InactiveCharacter = React.createClass({
   onAdd: function() {
+    console.log("onAdd called for character:",this.props.id);
     this.props.onAdd({
       id: this.props.id,
       name: this.props.name,

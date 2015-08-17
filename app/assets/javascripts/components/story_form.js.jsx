@@ -42,7 +42,7 @@ var StoryForm = React.createClass({
     });
     Story.ship_attrs = this.state.ships.map(function(ship) {
       return {
-        characters: ship.characters.map(function(c) {
+        character_ids: ship.characters.map(function(c) {
           return c.id;
         })
       };

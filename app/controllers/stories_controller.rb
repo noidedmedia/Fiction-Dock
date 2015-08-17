@@ -215,9 +215,7 @@ class StoriesController < ApplicationController
   #       franchise_ids: [franchise_id],
   #       character_ids: [character_id],
   #       ships_attributes: [{
-  #          id: ship_id,
-  #          ship_characters_attributes: [{
-  #            character_id: character_id
+  #           character_ids: [character_ids]
   #          }]
   #       }]
   def story_params
@@ -231,7 +229,7 @@ class StoriesController < ApplicationController
     :franchise_ids => [],
     :character_ids => [],
     :ship_attrs => {
-      characters: []      
+      character_ids: []      
     })
         .merge(user_id: current_user.id)
   end

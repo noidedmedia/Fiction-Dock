@@ -25,6 +25,7 @@ var FormShip = React.createClass({
     var c = this.state.characters.filter(function(c) {
       return c.id !== char.id;
     });
+    console.log("New characters:",c);
     this.setState({
       characters: c
     });
