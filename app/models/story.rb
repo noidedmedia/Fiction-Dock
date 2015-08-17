@@ -105,8 +105,38 @@ class Story < ActiveRecord::Base
     "everybody" => true
   }
 
+  def self.with_franchises(*franchises)
+    c = if franchises[0].is_a? Array
+          franchises[0]
+        else
+          franchises
+        end
+    c.reduce(all) do |memo, franchise|
+      memo.with_franchise(franchise)
+    end 
+  end
+  def self.with_franchise(franchise)
+    where(id: franchise.stories)
+  end
+  def self.with_characters(*characters)
+    ##
+    # let the user pass an array or a comma-seperated list
+    c = if characters[0].is_a? Array
+          characters[0]
+        else
+          characters
+        end
+    c.reduce(all) do |memo, character|
+      memo.with_character(character)
+    end
+  end
+
+  def self.with_character(character)
+    where(id: character.stories)
+  end
+
   def self.for_content(content=DEFAULT_CONTENT)
-    content = DEFAULT_CONTENT unless content # handle nil
+    content = DEFAULT_CONTENT unless content # handle nil being passed
     q = all
     q = q.without_adult unless content["adult"]
     q = q.without_teen unless content["teen"]
@@ -119,7 +149,7 @@ class Story < ActiveRecord::Base
   end
 
   def self.without_teen
-    where.not(content_rating: content_rating[:teen])
+    where.not(content_rating: content_ratings[:teen])
   end
 
   def self.without_everybody

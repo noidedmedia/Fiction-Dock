@@ -40,6 +40,7 @@ class Ship < ActiveRecord::Base
   # FINDER METHODS #
   ##################
   def self.with_exact_ids(ids)
+    return nil unless ids
     find_by_sql([SQL_SELECT_BY_CHARACTER_IDS, ids, ids.length, ids]).first
   end
 

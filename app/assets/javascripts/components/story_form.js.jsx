@@ -41,10 +41,13 @@ var StoryForm = React.createClass({
       return character.id;
     });
     Story.ship_attrs = this.state.ships.map(function(ship) {
+      var ids = ship.characters.map(function(c){
+        console.log("Mapping character:",c);
+        return c.id;
+      });
+      console.log("ids is",ids);
       return {
-        character_ids: ship.characters.map(function(c) {
-          return c.id;
-        })
+        character_ids: ids
       };
     }.bind(this));
     // Rails expects the story to be wrapped in a story label 
