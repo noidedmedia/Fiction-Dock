@@ -1,11 +1,7 @@
 var AddToBookshelves = React.createClass({
   propTypes: {
-    bookshelves: React.PropTypes.arrayOf(React.PropTypes.object)
-  },
-  getInitialState: function() {
-    return {
-      bookshelves: this.props.bookshelves
-    };
+    bookshelves: React.PropTypes.arrayOf(React.PropTypes.object),
+    story: React.PropTypes.object
   },
   render: function() {
     return (
@@ -14,9 +10,9 @@ var AddToBookshelves = React.createClass({
 
         <div>
           <ul>
-            {this.state.bookshelves.map(function(bookshelf, i) {
-              return <li>{bookshelf.name}</li>;
-            })}
+            {this.props.bookshelves.map(function(bookshelf, i) {
+              return <li key={bookshelf.id} onClick={this.addStoryToBookshelf}>{bookshelf.name}</li>;
+            }.bind(this))}
           </ul>
         </div>
       </li>
