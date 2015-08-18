@@ -108,7 +108,7 @@ var StoryForm = React.createClass({
           characters: s.characters.filter(function(c){
             return c.franchise_id !== franchise.id;
           })
-        }
+        };
       })
     });
   },
@@ -129,9 +129,9 @@ var StoryForm = React.createClass({
     });
     // Remove the removed character from our ships
     var ships = this.state.ships;
-    for(var i in ships){
-      c = ships[i].characters.filter(function(ch){
-        if(character.id === ch.id){
+    for (var i in ships) {
+      c = ships[i].characters.filter(function(ch) {
+        if (character.id === ch.id) {
           return false;
         }
         return true;

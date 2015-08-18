@@ -13,6 +13,7 @@ en:
     show:
       favorite: "Favorite"
       unfavorite: "Unfavorite"
+      add_to_bookshelves: "Add to bookshelves"
       edit: "Edit"
       publish: "Publish"
       unpublish: "Unpublish"
