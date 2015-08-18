@@ -37,9 +37,29 @@
       border-left-color: #fff;
     }
 
+    .select-container {
+      > span {
+        color: #fff;
+        opacity: 0.8;
+      }
+
+      &:hover, &:focus {
+        > span {
+        color: #fff;
+          opacity: 1;
+        }
+      }
+    }
+
     select {
       color: #fff;
       border: 1px solid #fff;
+      opacity: 0.8;
+
+      &:hover, &:focus {
+        border: 1px solid #fff;
+        opacity: 1;
+      }
     }
 
     #main-header {
@@ -146,6 +166,7 @@
 
     .fd-toolbar-container {
       color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
 
       span {
         color: #fff;

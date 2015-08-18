@@ -292,6 +292,28 @@
   }
 }
 
+.ship-list {
+  list-style: none;
+
+  .ship-list-item-header {
+    font-weight: 500;
+    position: relative;
+    margin-top: 20px;
+
+    span {
+      position: absolute;
+      top: 0;
+      left: -20px;
+      font-size: 10px;
+      color: #aaaab2;
+      cursor: pointer;
+
+      &:hover {
+        color: $color-danger;
+      }
+    }
+  }
+}
 
 #add-ship-button {
   cursor: pointer;
