@@ -50,6 +50,7 @@ var StoryForm = React.createClass({
         character_ids: ids
       };
     }.bind(this));
+    console.log("Children:",this.props.children);
     // Rails expects the story to be wrapped in a story label 
     Story = {story: Story};
     // Use a PUT if the story exists
@@ -114,14 +115,26 @@ var StoryForm = React.createClass({
   },
   // Removes a character from the characters state.
   removeCharacter: function(character) {
-    console.log('removing character',character);
     // Creates a new array out of the characters state
     // without the character we're removing.
     var characters = this.state.characters.filter(function(c) {
       return character.id !== c.id;
     });
-    console.log(characters);
-    this.setState({ characters: characters });
+    // Remove the removed character from our ships
+    var ships = this.state.ships;
+    for(var i in ships){
+      c = ships[i].characters.filter(function(ch){
+        if(character.id === ch.id){
+          return false;
+        }
+        return true;
+      });
+      ships[i].characters = c;
+    }
+    this.setState({
+      characters: characters,
+      ships: ships
+    });
   },
   addShip: function(e) {
     e.preventDefault();
@@ -136,6 +149,15 @@ var StoryForm = React.createClass({
   removeShip: function(index) {
     var s = this.state.ships;
     delete s[index];
+    this.setState({
+      ships: s
+    });
+  },
+  changeShipCharacters: function(index, characters){
+    var s = this.state.ships;
+    console.log("Updating characters for:",s[index]);
+    s[index].characters = characters;
+    console.log("Changed to:",s[index]);
     this.setState({
       ships: s
     });
@@ -175,7 +197,7 @@ var StoryForm = React.createClass({
           <div className="section-header">{this.props.translations.ships_label}</div>
           
           {this.state.ships.map(function(ship, i) {
-            return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} translations={this.props.translations} />;
+            return <FormShip {...ship} potential_characters={this.state.characters} key={i} onRemove={this.removeShip} reactKey={i} translations={this.props.translations}  onCharacterChange={this.changeShipCharacters} />;
           }.bind(this))}
           
           <AddShipButton addShip={this.addShip} translations={this.props.translations} />

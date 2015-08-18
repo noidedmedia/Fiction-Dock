@@ -26,9 +26,7 @@ var FormShip = React.createClass({
       return c.id !== char.id;
     });
     console.log("New characters:",c);
-    this.setState({
-      characters: c
-    });
+    this.props.onCharacterChange(this.props.reactKey, c);
   },
   addCharacter: function(char) {
     var c = this.state.characters;
@@ -36,9 +34,7 @@ var FormShip = React.createClass({
     console.log("old characters:",c);
     c.push(char);
     console.log("new characters:",c);
-    this.setState({
-      characters: c
-    });
+    this.props.onCharacterChange(this.props.reactKey, c);
   },
   getCharacterList: function() {
     var inactive = this.props.potential_characters.filter(function(c) {
@@ -49,11 +45,9 @@ var FormShip = React.createClass({
       }
       return true;
     }.bind(this));
-    console.log("inactive characters:",inactive);
-    var active = this.state.characters.map(function(c) {
+    var active = this.props.characters.map(function(c) {
       return <ActiveCharacter {...c} onRemove={this.removeCharacter} key={"ship" + this.props.reactKey + "character" + c.id} translations={this.props.translations} />;
     }.bind(this));
-
     console.log("active characters:",this.state.characters);
     // rinactive is inactive values to return
     var rinactive = inactive.map(function(c) {
