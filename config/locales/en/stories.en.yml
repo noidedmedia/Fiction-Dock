@@ -43,6 +43,7 @@ en:
       characters: "Characters"
       add_characters: "Add characters"
       ships: "Ships"
+      ship: "Ship"
       add_a_new_ship: "Add a new ship"
       no_suggestions_found: "No suggestions found"
       remove: "Remove"

@@ -62,8 +62,12 @@ var FormShip = React.createClass({
     console.log("Ship props:",this.props);
     return (
       <li>
-        <h1>Ship <span onClick={this.removeSelf} className="icon icon-close" title={this.props.translations.remove}></span></h1>
-        <ul>
+        <div className="ship-list-item-header">
+          <p>{this.props.translations.ship}</p>
+          <span onClick={this.removeSelf} className="icon icon-close" title={this.props.translations.remove}></span>
+        </div>
+        
+        <ul className="character-list">
           { this.getCharacterList() }
         </ul>
       </li>
