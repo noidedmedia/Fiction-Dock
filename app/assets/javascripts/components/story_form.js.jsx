@@ -102,6 +102,13 @@ var StoryForm = React.createClass({
       franchises: rem,
       characters: this.state.characters.filter(function(c) {
         return c.franchise_id !== franchise.id;
+      }),
+      ships: this.state.ships.map(function(s){
+        return {
+          characters: s.characters.filter(function(c){
+            return c.franchise_id !== franchise.id;
+          })
+        }
       })
     });
   },
