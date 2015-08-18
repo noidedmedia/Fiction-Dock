@@ -155,9 +155,9 @@ var StoryForm = React.createClass({
   },
   changeShipCharacters: function(index, characters){
     var s = this.state.ships;
-    console.log("Updating characters for:",s[index]);
+    console.log("Changing the ship characters for ship:",s[index]);
     s[index].characters = characters;
-    console.log("Changed to:",s[index]);
+    console.log("After change:",s[index]);
     this.setState({
       ships: s
     });
@@ -165,8 +165,6 @@ var StoryForm = React.createClass({
   render: function() {
     // All properties passed from the Rails helper are forwarded onto
     // the Franchises component by the {...this.props} line.
-    console.log("rendering form people");
-    console.log(this.props);
     return (
       <div>
         <div className="section-header">{this.props.translations.franchises_label}</div>

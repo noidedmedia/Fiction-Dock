@@ -23,7 +23,6 @@ var FormFranchise = React.createClass({
     });
   },
   render: function() {
-    console.log("FormFranchise props:",this.props);
     return (
       <li>
         <div className="franchise-list-item-header">
