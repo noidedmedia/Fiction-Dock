@@ -271,6 +271,36 @@
   }
 }
 
+.more-information {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.view-more-information-button {
+  width: 100%;
+  height: 40px;
+  background-color: #f4f4f4;
+  display: block;
+  text-align: center;
+  padding: 8px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: -30px;
+  transition: background-color 200ms;
+
+  &:hover {
+    background-color: darken(#f4f4f4,5%);
+  }
+
+  &.active {
+    display: none;
+  }
+}
+
 #story-toolbar-right .add-to-bookshelves {
   position: relative;
   padding: 0;

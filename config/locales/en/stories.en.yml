@@ -30,6 +30,7 @@ en:
       franchises: "Franchises"
       characters: "Characters"
       ships: "Ships"
+      view_more_information: "View more information..."
     form:
       story_name: "Story name"
       language: "Language"
