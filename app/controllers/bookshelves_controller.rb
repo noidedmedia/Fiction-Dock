@@ -24,7 +24,7 @@ class BookshelvesController < ApplicationController
   def remove
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
-    @bookshelf.stories.delete(Story.find(params[:story][:id]))
+    @bookshelf.stories.delete(Story.find(story_id_param))
     redirect_to @bookshelf
   end
 
@@ -70,6 +70,11 @@ class BookshelvesController < ApplicationController
   
   def load_user
     @user = User.friendly.find(params[:user_id])
+  end
+
+  def story_id_param
+    params.require(:story)
+      .permit(:id)
   end
 
   def bookshelf_params
