@@ -21,4 +21,8 @@ class Bookshelf < ActiveRecord::Base
   def self.without_story(story)
     all.where.not(id: story.bookshelves)
   end
+
+  def self.with_story(story)
+    all.where(id: story.bookshelves)
+  end
 end
