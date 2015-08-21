@@ -272,5 +272,25 @@
 }
 
 .add-to-bookshelves {
+  position: relative;
 
+  > div {
+    border: solid 1px #aaaab2;
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    background-color: #fff;
+
+    li {
+      list-style: none;
+      display: block;
+    }
+  }
+
+  &.active {
+    > div {
+      visibility: visible;
+    }
+  }
 }
