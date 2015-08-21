@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       post 'favorite'
       delete 'unfavorite'
       get 'favorited'
+      get 'bookshelves'
     end
     resources :reviews
     resources :chapters, concerns: [:publishable, :readable] 

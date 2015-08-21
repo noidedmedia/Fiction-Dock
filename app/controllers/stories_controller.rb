@@ -27,6 +27,11 @@ class StoriesController < ApplicationController
     render json: current_user.has_favorited?(Story.find(params[:id]))
   end
 
+  def bookshelves
+    @story = Story.find(params[:id])
+    @bookshelves = @story.bookshelves
+  end
+
   def ships
     @story = Story.find(params[:id])
     @ships = @story.ships
