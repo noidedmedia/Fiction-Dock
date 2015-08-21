@@ -61,11 +61,11 @@ var StoryForm = React.createClass({
       data: JSON.stringify(Story),
       contentType: "application/json; encoding=utf-8",
       method: method,
-      success: function(data){
+      success: function(data) {
         console.log("Returned successful submit:",data);
         window.location.href = "/stories/" + data.id;
       },
-      error: function(error){
+      error: function(error) {
         console.warn("Story form submission errored");
         this.setState({
           error: JSON.parse(error.responseText)
