@@ -3,6 +3,20 @@ var AddToBookshelves = React.createClass({
     bookshelves: React.PropTypes.arrayOf(React.PropTypes.object),
     story: React.PropTypes.object
   },
+  getInitialState: function() {
+    return ({
+      active: false
+    });
+  },
+  toggleActive: function(e) {
+    e.preventDefault();
+    
+    if (this.state.active) {
+      this.setState({active: false});
+    } else {
+      this.setState({active: true});
+    }
+  },
   addStoryToBookshelf: function(bookshelf) {
     console.log(this.props.story.id);
     console.log(bookshelf);
@@ -24,8 +38,8 @@ var AddToBookshelves = React.createClass({
   },
   render: function() {
     return (
-      <li>
-        {this.props.translations.add_to_bookshelves}
+      <li className={ this.state.active ? "add-to-bookshelves active" : "add-to-bookshelves" }>
+        <a href="#" onClick={this.toggleActive}>{this.props.translations.add_to_bookshelves}</a>
 
         <div>
           <ul>
