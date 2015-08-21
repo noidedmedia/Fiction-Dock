@@ -271,20 +271,30 @@
   }
 }
 
-.add-to-bookshelves {
+#story-toolbar-right .add-to-bookshelves {
   position: relative;
+  padding: 0;
 
   > div {
     border: solid 1px #aaaab2;
     visibility: hidden;
     position: absolute;
-    left: 0;
-    top: 40px;
+    width: auto;
+    right: 0;
+    top: 30px;
+    z-index: 100;
     background-color: #fff;
 
     li {
       list-style: none;
       display: block;
+      padding: 12px 20px 12px 12px;
+      cursor: pointer;
+      font-size: 1.4rem;
+
+      &:hover {
+        background-color: #f4f4f4;
+      }
     }
   }
 
