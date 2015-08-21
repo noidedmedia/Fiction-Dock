@@ -1,4 +1,4 @@
-json.bookshelves(current_user.bookshelves.without(@story)) do |b|
+json.bookshelves(current_user.bookshelves.without_story(@story)) do |b|
   json.extract! b, :name, :id
 end
 
