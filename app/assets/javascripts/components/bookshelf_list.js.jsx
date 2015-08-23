@@ -55,8 +55,10 @@ var AddToBookshelves = React.createClass({
     console.log(this.props.story.id);
     console.log(bookshelf);
     console.log(bookshelf.id);
+    var url = "/bookshelves/" + bookshelf.id + "/remove";
+    console.log(url);
 
-    $.ajax("/bookshelves/" + bookshelf.id + "/remove", {
+    $.ajax(url, {
       dataType: "json",
       data: {story: {id: this.props.story.id}},
       method: "DELETE",
