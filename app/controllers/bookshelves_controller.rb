@@ -17,14 +17,20 @@ class BookshelvesController < ApplicationController
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
     @bookshelf.stories << Story.find(story_id_param)
-    redirect_to @bookshelf
+    respond_to do |format|
+      format.html { redirect_to @bookshelf}
+      format.json { render json: "success"}
+    end
   end
 
   def remove
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
     @bookshelf.stories.delete(Story.find(story_id_param))
-    redirect_to @bookshelf
+    respond_to do |format|
+      format.html { redirect_to @bookshelf}
+      format.json { render json: "success"}
+    end
   end
 
   def index
