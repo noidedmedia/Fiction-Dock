@@ -106,15 +106,15 @@ var AddToBookshelvesListItem = React.createClass({
 
     if (this.props.includesStory) {
       return (
-        <li className="bookshelf-add" onClick={onClickCallbackAdd}>
-          <span className="icon icon-plus"></span>
+        <li className="bookshelf-remove" onClick={onClickCallbackRemove}>
+          <span className="icon icon-close"></span>
           {this.props.bookshelf.name}
         </li>
       );
     } else {
       return (
-        <li className="bookshelf-remove" onClick={onClickCallbackRemove}>
-          <span className="icon icon-close"></span>
+        <li className="bookshelf-add" onClick={onClickCallbackAdd}>
+          <span className="icon icon-plus"></span>
           {this.props.bookshelf.name}
         </li>
       );

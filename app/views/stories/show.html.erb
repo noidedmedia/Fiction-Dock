@@ -8,7 +8,7 @@
       </ul>
 
       <ul id="story-toolbar-right" class="fd-toolbar-right">
-        <% if @story.published %>
+        <% if @story.published && current_user %>
           <%= react_component('AddToBookshelves', render(partial: 'bookshelves/add_to_bookshelves.json.jbuilder', locals: {i18npath: 'stories.show'}), tag: "li", id: "add-to-bookshelves") %>
         <% end %>
 
