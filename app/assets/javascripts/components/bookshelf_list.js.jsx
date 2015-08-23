@@ -1,11 +1,26 @@
 var AddToBookshelves = React.createClass({
   propTypes: {
-    bookshelves: React.PropTypes.arrayOf(React.PropTypes.object),
+    bookshelves_with: React.PropTypes.arrayOf(React.PropTypes.object),
+    bookshelves_without: React.PropTypes.arrayOf(React.PropTypes.object),
     story: React.PropTypes.object
   },
   getInitialState: function() {
+    var bookshelves = [];
+
+    this.props.bookshelves_without.forEach(function(b) {
+      b.with = false;
+      bookshelves.push(b);
+    });
+    this.props.bookshelves_with.forEach(function(b) {
+      b.with = true;
+      bookshelves.push(b);
+    });
+    
+    console.log(bookshelves);
+
     return ({
-      active: false
+      active: false,
+      bookshelves: bookshelves
     });
   },
   toggleActive: function(e) {
@@ -27,11 +42,30 @@ var AddToBookshelves = React.createClass({
       data: {story: {id: this.props.story.id}},
       method: "POST",
       success: function(data) {
-        console.log("Success!");
+        console.log("Added successfully!");
         console.log(data);
       },
       error: function(data) {
-        console.log("Goof'd!");
+        console.log("Error");
+        console.log(data);
+      }
+    });
+  },
+  removeStoryFromBookshelf: function(bookshelf) {
+    console.log(this.props.story.id);
+    console.log(bookshelf);
+    console.log(bookshelf.id);
+
+    $.ajax("/bookshelves/" + bookshelf.id + "/remove", {
+      dataType: "json",
+      data: {story: {id: this.props.story.id}},
+      method: "DELETE",
+      success: function(data) {
+        console.log("Removed successfully!");
+        console.log(data);
+      },
+      error: function(data) {
+        console.log("Error");
         console.log(data);
       }
     });
@@ -43,8 +77,8 @@ var AddToBookshelves = React.createClass({
 
         <div>
           <ul>
-            {this.props.bookshelves.map(function(bookshelf) {
-              return <AddToBookshelvesListItem key={bookshelf.id} bookshelf={bookshelf} addStoryToBookshelf={this.addStoryToBookshelf} />;
+            {this.state.bookshelves.map(function(bookshelf) {
+              return <AddToBookshelvesListItem key={bookshelf.id} bookshelf={bookshelf} includesStory={bookshelf.with} addStoryToBookshelf={this.addStoryToBookshelf} removeStoryFromBookshelf={this.removeStoryFromBookshelf} />;
             }.bind(this))}
           </ul>
         </div>
@@ -56,12 +90,22 @@ var AddToBookshelves = React.createClass({
 var AddToBookshelvesListItem = React.createClass({
   propTypes: {
     bookshelf: React.PropTypes.object,
-    addStoryToBookshelf: React.PropTypes.func
+    addStoryToBookshelf: React.PropTypes.func,
+    removeStoryFromBookshelf: React.PropTypes.func
   },
   render: function() {
-    var onClickCallback = function() {
+    var onClickCallbackAdd = function() {
       this.props.addStoryToBookshelf(this.props.bookshelf);
     }.bind(this);
-    return <li onClick={onClickCallback}>{this.props.bookshelf.name}</li>;
+    
+    var onClickCallbackRemove = function() {
+      this.props.removeStoryFromBookshelf(this.props.bookshelf);
+    }.bind(this);
+
+    if (this.props.includesStory) {
+      return <li onClick={onClickCallbackAdd}>{this.props.bookshelf.name}</li>;
+    } else {
+      return <li onClick={onClickCallbackRemove}>{this.props.bookshelf.name}</li>;
+    }
   }
 });
