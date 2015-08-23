@@ -19,7 +19,7 @@ class BookshelvesController < ApplicationController
     @bookshelf.stories << Story.find(story_id_param)
     respond_to do |format|
       format.html { redirect_to @bookshelf}
-      format.json { render json: "success"}
+      format.json { render json: {status: "success", added: story_id_param}}
     end
   end
 
@@ -29,7 +29,7 @@ class BookshelvesController < ApplicationController
     @bookshelf.stories.delete(Story.find(story_id_param))
     respond_to do |format|
       format.html { redirect_to @bookshelf}
-      format.json { render json: "success"}
+      format.json { render json: {status: "success", removed: story_id_param}}
     end
   end
 
