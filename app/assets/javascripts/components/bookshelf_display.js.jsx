@@ -7,6 +7,17 @@ var ViewMoreInformation = React.createClass({
     );
   }
 });
+var TestClass = React.createClass({
+   render: function() {
+    return (
+      <ul className="bookshelf-display-list">
+        {this.props.bookshelves.map(function(b) {
+          return <BookshelfListItem {...b} key={b.id}  />;
+        })}
+      </ul>
+    );
+  }
+});
 
 var BookshelfList = React.createClass({
   render: function() {
