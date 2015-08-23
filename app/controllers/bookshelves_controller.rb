@@ -7,9 +7,8 @@ class BookshelvesController < ApplicationController
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
     @user = @bookshelf.user
-    @stories = Story.for_content(accepted_content)
-      .joins(:bookshelves)
-      .where(bookshelves: {id: params[:id]})
+    @stories = @bookshelf.stories
+      .for_content(accepted_content)
       .for_display
       .paginate(page: page, per_page: per_page)
   end
@@ -17,7 +16,7 @@ class BookshelvesController < ApplicationController
   def add
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
-    @bookshelf.stories << Story.find(params[:story][:id])
+    @bookshelf.stories << Story.find(story_id_param)
     redirect_to @bookshelf
   end
 
