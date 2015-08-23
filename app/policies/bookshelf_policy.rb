@@ -12,6 +12,10 @@ class BookshelfPolicy < ApplicationPolicy
     owned?
   end
 
+  def remove?
+    owned?
+  end
+
   def contains?
     owned?
   end
