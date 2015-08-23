@@ -21,7 +21,7 @@ If you don't, check out [Codecademy's Command Line lessons](https://www.codecade
 5. Navigate to the Fiction-Dock directory you pulled down from GitHub.
 6. Once in the directory, run `bundle install`.
   * After that, you may also want to run `gem install rspec`. Bundler _should_ do this, but sometimes it doesn't.
-7. Make sure you have your Postgres server running, then run `rails s` to start a local Rails development server. You can navigate to the URL printed in the Terminal (by default, [http://localhost:3000]) in your browser to test your local version of Fiction-Dock.
+7. Make sure you have your Postgres server running, then run `rails s` to start a local Rails development server. You can navigate to the URL printed in the Terminal (by default, [http://localhost:3000](http://localhost:3000)) in your browser to test your local version of Fiction-Dock.
   * Note that some changes you make may require restarting the server before changes are applied, but most HTML/CSS/JavaScript changes will be visible by just reloading the page in your browser.
 9. Start contributing!
 
