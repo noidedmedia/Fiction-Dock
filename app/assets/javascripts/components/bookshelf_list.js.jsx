@@ -55,8 +55,10 @@ var AddToBookshelves = React.createClass({
     console.log(this.props.story.id);
     console.log(bookshelf);
     console.log(bookshelf.id);
+    var url = "/bookshelves/" + bookshelf.id + "/remove";
+    console.log(url);
 
-    $.ajax("/bookshelves/" + bookshelf.id + "/remove", {
+    $.ajax(url, {
       dataType: "json",
       data: {story: {id: this.props.story.id}},
       method: "DELETE",
@@ -104,15 +106,15 @@ var AddToBookshelvesListItem = React.createClass({
 
     if (this.props.includesStory) {
       return (
-        <li className="bookshelf-add" onClick={onClickCallbackAdd}>
-          <span className="icon icon-plus"></span>
+        <li className="bookshelf-remove" onClick={onClickCallbackRemove}>
+          <span className="icon icon-close"></span>
           {this.props.bookshelf.name}
         </li>
       );
     } else {
       return (
-        <li className="bookshelf-remove" onClick={onClickCallbackRemove}>
-          <span className="icon icon-close"></span>
+        <li className="bookshelf-add" onClick={onClickCallbackAdd}>
+          <span className="icon icon-plus"></span>
           {this.props.bookshelf.name}
         </li>
       );
