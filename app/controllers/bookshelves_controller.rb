@@ -73,7 +73,7 @@ class BookshelvesController < ApplicationController
 
   def story_id_param
     params.require(:story)
-      .permit(:id)
+      .permit(:id)["id"]
   end
 
   def bookshelf_params
