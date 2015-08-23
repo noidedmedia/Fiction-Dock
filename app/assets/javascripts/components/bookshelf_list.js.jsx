@@ -7,15 +7,15 @@ var AddToBookshelves = React.createClass({
   getInitialState: function() {
     var bookshelves = [];
 
-    this.props.bookshelves_without.forEach(function(b) {
-      b.with = false;
-      bookshelves.push(b);
-    });
     this.props.bookshelves_with.forEach(function(b) {
       b.with = true;
       bookshelves.push(b);
     });
-    
+    this.props.bookshelves_without.forEach(function(b) {
+      b.with = false;
+      bookshelves.push(b);
+    });
+
     console.log(bookshelves);
 
     return ({
@@ -103,9 +103,19 @@ var AddToBookshelvesListItem = React.createClass({
     }.bind(this);
 
     if (this.props.includesStory) {
-      return <li onClick={onClickCallbackAdd}>{this.props.bookshelf.name}</li>;
+      return (
+        <li className="bookshelf-add" onClick={onClickCallbackAdd}>
+          <span className="icon icon-plus"></span>
+          {this.props.bookshelf.name}
+        </li>
+      );
     } else {
-      return <li onClick={onClickCallbackRemove}>{this.props.bookshelf.name}</li>;
+      return (
+        <li className="bookshelf-remove" onClick={onClickCallbackRemove}>
+          <span className="icon icon-close"></span>
+          {this.props.bookshelf.name}
+        </li>
+      );
     }
   }
 });

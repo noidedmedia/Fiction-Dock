@@ -321,9 +321,31 @@
       padding: 12px 20px 12px 12px;
       cursor: pointer;
       font-size: 1.4rem;
+      position: relative;
+      padding-left: 32px;
+
+      span {
+        display: inline-block;
+      }
+
+      span.icon {
+        color: #aaaab2;
+        font-size: 1.2rem;
+        position: absolute;
+        top: 8px;
+        left: 10px;
+      }
 
       &:hover {
         background-color: #f4f4f4;
+      }
+
+      &.bookshelf-add:hover span.icon {
+        color: $color-success;
+      }
+
+      &.bookshelf-remove:hover span.icon {
+        color: $color-danger;
       }
     }
   }
