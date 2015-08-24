@@ -50,6 +50,14 @@ var AddToBookshelves = React.createClass({
         console.log(data);
       }
     });
+
+    var index = this.state.bookshelves.indexOf(bookshelf);
+    console.log(this.state.bookshelves[index]);
+    this.state.bookshelves[index].with = true;
+
+    console.log(this.state.bookshelves);
+
+    this.setState({bookshelves: this.state.bookshelves});
   },
   removeStoryFromBookshelf: function(bookshelf) {
     console.log(this.props.story.id);
@@ -71,6 +79,14 @@ var AddToBookshelves = React.createClass({
         console.log(data);
       }
     });
+
+    var index = this.state.bookshelves.indexOf(bookshelf);
+    console.log(this.state.bookshelves[index]);
+    this.state.bookshelves[index].with = false;
+
+    console.log(this.state.bookshelves);
+
+    this.setState({bookshelves: this.state.bookshelves});
   },
   render: function() {
     return (
@@ -80,7 +96,15 @@ var AddToBookshelves = React.createClass({
         <div>
           <ul>
             {this.state.bookshelves.map(function(bookshelf) {
-              return <AddToBookshelvesListItem key={bookshelf.id} bookshelf={bookshelf} includesStory={bookshelf.with} addStoryToBookshelf={this.addStoryToBookshelf} removeStoryFromBookshelf={this.removeStoryFromBookshelf} />;
+              return (
+                <AddToBookshelvesListItem
+                  key={bookshelf.id}
+                  bookshelf={bookshelf}
+                  includesStory={bookshelf.with}
+                  addStoryToBookshelf={this.addStoryToBookshelf}
+                  removeStoryFromBookshelf={this.removeStoryFromBookshelf}
+                />
+              );
             }.bind(this))}
           </ul>
         </div>
