@@ -1,28 +1,38 @@
 <%- title @bookshelf.name %>
 
-<div id="bookshelf-page" class="fd-text-container fd-padding-top">
-  <h2 class="fd-page-header"><%= @bookshelf.name %></h2>
-  <div class="fd-page-subtitle">
-    <p><%= @bookshelf.description %>
-    <p><%= link_to @user.name, @user %>
-  </div>
-
-  <% if policy(@bookshelf).update? %>
-    <ul id="bookshelf-options" class="fd-page-options">
-      <li><%= link_to t(".edit"), edit_bookshelf_path(@bookshelf) %>
+<div id="bookshelf-toolbar-container" class="fd-toolbar-container">
+  <div id="bookshelf-toolbar" class="fd-toolbar">
+    <ul id="bookshelf-toolbar-left" class="fd-toolbar-left">
+      <li><%= link_to @user.name, @user %></li>
     </ul>
-  <% end %>
 
-  <ul id="bookshelf-story-list" class="fd-list">
+    <ul id="bookshelf-toolbar-right" class="fd-toolbar-right">
+      <% if policy(@bookshelf).update? %>
+        <li><%= link_to t(".edit"), edit_bookshelf_path(@bookshelf) %>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-    <div class="fd-list-header"><%= t(".stories") %></div>
-    
-    <% unless @stories.blank? %>
-      <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
-    <% else %>
-      <p class="fd-list-empty-note"><%= t(".this_bookshelf_doesn't_have_any_stories_yet") %></p>
-    <% end %>
+<div class="fd-text-container fd-padding-top">
+  <h2 class="fd-page-header"><%= @bookshelf.name %></h2>
+  <div class="fd-page-subtitle"><%= @bookshelf.description %></div>
 
+  <ul data-tabs="true" class="fd-tabs">
+    <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories", count: @stories.count) %>
   </ul>
 
+  <div class="tab-content tc-tab-1 fd-tab-content current">
+
+    <ul id="bookshelf-story-list" class="fd-list">
+      
+      <% unless @stories.blank? %>
+        <%= render partial: 'stories/story_stub', collection: @stories, as: :story %>
+      <% else %>
+        <p class="fd-list-empty-note"><%= t(".this_bookshelf_doesn't_have_any_stories_yet") %></p>
+      <% end %>
+
+    </ul>
+
+  </div>
 </div>

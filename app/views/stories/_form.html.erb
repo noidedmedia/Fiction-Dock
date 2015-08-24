@@ -20,6 +20,13 @@
       <%= f.select :license, options_for_select(Story.license_attributes_for_select, @story.license), {}, { class: "custom-select", id: "story-license-select" } %>
       <span class="icon icon-down"></span>
     </div>
+
+    <%# Rating select %>
+    <div class="select-container">
+      <%= f.label :content_rating, t(".rating") %>
+      <%= f.select :content_rating, options_for_select(Story.rating_attributes_for_select, @story.license), {}, { class: "custom-select", id: "story-rating-select" } %>
+      <span class="icon icon-down"></span>
+    </div>
     
     <%# Blurb field %>
     <div class="field-container">
@@ -34,27 +41,9 @@
     </div>
 
     <%# React component helper %>
-    <%# The ReactFormElements component can be found in story_form.js.jsx. %>
+    <%# The StoryForm component can be found in story_form.js.jsx. %>
     <%# i18n strings and story franchises/characters are passed to the JS as props, which is why this is such a large block. %>
-    <%= react_component('ReactFormElements', props={
-      franchises: @story.franchises,
-      franchises_elementid: "franchises-input",
-      franchises_label: t(".franchises"),
-      franchises_placeholder: t(".franchise"),
-      franchise_add: t(".add_a_new_franchise"),
-      characters: @story.characters,
-      characters_elementid: "characters-input",
-      characters_label: t(".characters"),
-      characters_placeholder: t(".characters"),
-      character_add: t(".add_a_new_character"),
-      ships: @story.ships,
-      ships_elementid: "ships-input",
-      ships_label: t(".ships"),
-      ships_placeholder: t(".ships"),
-      ship_add: t(".add_a_new_ship"),
-      submit: t(".submit.#{action_name}"),
-      submit_elementid: "story-form-submit"
-    }, id: "react-form-elements") %>
+    <%= react_component('StoryForm', render(partial: 'stories/react_form.json.jbuilder', locals: {i18npath: 'stories.form'} ), id: "react-form-elements") %>
 
   <% end %>
 </div>

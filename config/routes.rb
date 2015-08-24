@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   concern :readable do
     post :read
   end
+
+  concern :popularity_queryable do
+    get 'popular', on: :collection
+  end
   resources :franchise_creation_requests do
     post 'accept', on: :member
   end
@@ -22,6 +26,8 @@ Rails.application.routes.draw do
   end
 
   resources :ships, only: [:index, :show]
+
+  resources :characters, only: [], concerns: [:popularity_queryable]
 
   resources :stories, concerns: [:publishable, :commentable] do
     # see if currently subscribed
@@ -38,12 +44,13 @@ Rails.application.routes.draw do
       post 'favorite'
       delete 'unfavorite'
       get 'favorited'
+      get 'bookshelves'
     end
     resources :reviews
     resources :chapters, concerns: [:publishable, :readable] 
   end
 
-  resources :franchises do
+  resources :franchises, concerns: [:popularity_queryable] do
     resources :characters do
       get 'stats', on: :member
     end

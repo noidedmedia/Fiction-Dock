@@ -2,8 +2,9 @@
 # Handle all actions related to a franchise
 class FranchisesController < ApplicationController
   include Pundit
+  include PopularityQueryable
   before_action :authenticate_user!, only: [:new, :edit]
-  after_action :verify_authorized, except: [:complete, :index, :show, :stories]
+  after_action :verify_authorized, except: [:complete, :index, :show, :stories, :popular]
  
   def stats
     @franchise = Franchise.friendly.find(params[:id])

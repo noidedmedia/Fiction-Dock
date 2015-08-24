@@ -7,6 +7,8 @@ var SuggestionsListItem = React.createClass({
     data: React.PropTypes.object
   },
   render: function() {
+    console.log(this.props.itemOnClick);
+    console.log(this.props.data);
     return <li data={this.props.data} onClick={this.props.itemOnClick}>{this.props.data.name}</li>;
   }
 });
@@ -17,8 +19,8 @@ var Suggestions = React.createClass({
     showsuggestions: React.PropTypes.bool
   },
   render: function() {
+    console.log("SUGGESTIONS:");
     console.log(this.props.suggestions);
-
     return (
       <div className={ this.props.showsuggestions ? "suggestions-container active" : "suggestions-container inactive"}>
         <ul className="suggestions">

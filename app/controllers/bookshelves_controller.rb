@@ -6,10 +6,9 @@ class BookshelvesController < ApplicationController
   def show
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
-    @user = User.friendly.find(params[:user_id])
-    @stories = Story.for_content(accepted_content)
-      .joins(:bookshelves)
-      .where(bookshelves: {id: params[:id]})
+    @user = @bookshelf.user
+    @stories = @bookshelf.stories
+      .for_content(accepted_content)
       .for_display
       .paginate(page: page, per_page: per_page)
   end
@@ -17,15 +16,21 @@ class BookshelvesController < ApplicationController
   def add
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
-    @bookshelf.stories << Story.find(params[:story][:id])
-    redirect_to @bookshelf
+    @bookshelf.stories << Story.find(story_id_param)
+    respond_to do |format|
+      format.html { redirect_to @bookshelf}
+      format.json { render json: {status: "success", added: story_id_param}}
+    end
   end
 
   def remove
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
-    @bookshelf.stories.delete(Story.find(params[:story][:id]))
-    redirect_to @bookshelf
+    @bookshelf.stories.delete(Story.find(story_id_param))
+    respond_to do |format|
+      format.html { redirect_to @bookshelf}
+      format.json { render json: {status: "success", removed: story_id_param}}
+    end
   end
 
   def index
@@ -70,6 +75,11 @@ class BookshelvesController < ApplicationController
   
   def load_user
     @user = User.friendly.find(params[:user_id])
+  end
+
+  def story_id_param
+    params.require(:story)
+      .permit(:id)["id"]
   end
 
   def bookshelf_params

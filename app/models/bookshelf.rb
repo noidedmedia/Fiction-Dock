@@ -17,4 +17,12 @@ class Bookshelf < ActiveRecord::Base
   validates :user, presence: true
   validates :name, presence: true, length: {in: (1..100)}
   validates :description, presence: true, length: {in: (5..2500)}
+
+  def self.without_story(story)
+    all.where.not(id: story.bookshelves)
+  end
+
+  def self.with_story(story)
+    all.where(id: story.bookshelves)
+  end
 end

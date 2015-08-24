@@ -24,3 +24,7 @@ en:
     franchise_updated_successfully: "Franchise updated successfully"
     franchise_created_successfully: "Franchise created successfully"
     chapter_deleted_successfully: "Chapter deleted succesfully"
+  ratings:
+    everybody: "Everybody"
+    teen: "Teen"
+    adult: "Adult"

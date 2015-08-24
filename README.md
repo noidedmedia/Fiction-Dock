@@ -6,6 +6,26 @@ Fiction Dock [ ![Codeship Status for noidedmedia/Fiction-Dock](https://codeship.
 
 ## Development FAQ
 
+### How do I set this up?
+
+This tutorial assumes you have some basic understanding of using the Terminal and Git/GitHub. You don't need to be able to hack the Pentagon, but you should know what `cd` and `ls` do, how to make a branch, and how to submit a pull request on GitHub.
+
+If you don't, check out [Codecademy's Command Line lessons](https://www.codecademy.com/courses/learn-the-command-line) and GitHub's [Git tutorial](https://help.github.com/articles/set-up-git/) before getting started.
+
+1. Use Git from the terminal, or [the GitHub Desktop app](https://desktop.github.com/) to pull down the Fiction-Dock repository.
+2. Install [RVM](https://rvm.io/) and use it to download Ruby 2.2.2.
+3. Install Bundler (`gem install bundler`).
+4. Use your package manager to install PostgreSQL 9.4.
+  * **OS X**: If you're using [Homebrew](http://brew.sh/) (which we recommend), enter the following into the Terminal to install Postgres: `brew install postgresql`. We also recommend using [Postgres.app](http://postgresapp.com/) on OS X to get the Postgres server running after the initial setup.
+  * **Linux**: Run `apt-get install postgresql` or your distro's equivalent in the Terminal.
+5. Navigate to the Fiction-Dock directory you pulled down from GitHub.
+6. Once in the directory, run `bundle install`.
+  * After that, you may also want to run `gem install rspec`. Bundler _should_ do this, but sometimes it doesn't.
+7. Make sure you have your Postgres server running, then run `rails s` to start a local Rails development server. You can navigate to the URL printed in the Terminal (by default, [http://localhost:3000](http://localhost:3000)) in your browser to test your local version of Fiction-Dock.
+  * Note that some changes you make may require restarting the server before changes are applied, but most HTML/CSS/JavaScript changes will be visible by just reloading the page in your browser.
+9. Start contributing!
+
+
 ### How do I make myself an admin on my local build?
 
 1. Navigate to your local copy of Fiction-Dock in the Terminal.

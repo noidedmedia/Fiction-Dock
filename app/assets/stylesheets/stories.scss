@@ -232,7 +232,8 @@
   }
 
   .story-franchises-list,
-  .story-characters-list {
+  .story-characters-list,
+  .story-ships-list {
     list-style: none;
     margin-top: 5px;
     padding-top: 25px;
@@ -262,6 +263,96 @@
           opacity: 1;
         }
       }
+    }
+  }
+
+  .ship-list-container:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+}
+
+.more-information {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.view-more-information-button {
+  width: 100%;
+  height: 40px;
+  background-color: #f4f4f4;
+  display: block;
+  text-align: center;
+  padding: 8px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: -30px;
+  transition: background-color 200ms;
+
+  &:hover {
+    background-color: darken(#f4f4f4,5%);
+  }
+
+  &.active {
+    display: none;
+  }
+}
+
+#story-toolbar-right .add-to-bookshelves {
+  position: relative;
+  padding: 0;
+
+  > div {
+    border: solid 1px #aaaab2;
+    visibility: hidden;
+    position: absolute;
+    width: auto;
+    right: 0;
+    top: 30px;
+    z-index: 100;
+    background-color: #fff;
+
+    li {
+      list-style: none;
+      display: block;
+      padding: 12px 20px 12px 12px;
+      cursor: pointer;
+      font-size: 1.4rem;
+      position: relative;
+      padding-left: 32px;
+
+      span {
+        display: inline-block;
+      }
+
+      span.icon {
+        color: #aaaab2;
+        font-size: 1.2rem;
+        position: absolute;
+        top: 8px;
+        left: 10px;
+      }
+
+      &:hover {
+        background-color: #f4f4f4;
+      }
+
+      &.bookshelf-add:hover span.icon {
+        color: $color-success;
+      }
+
+      &.bookshelf-remove:hover span.icon {
+        color: $color-danger;
+      }
+    }
+  }
+
+  &.active {
+    > div {
+      visibility: visible;
     }
   }
 }

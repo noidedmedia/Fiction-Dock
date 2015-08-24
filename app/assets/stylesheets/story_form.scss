@@ -6,7 +6,7 @@
   .section-header {
     width: 100%;
     display: block;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 10px;
     padding-bottom: 6px;
     border-bottom: 1px solid #aaaab2;
@@ -16,50 +16,27 @@
 .franchise-list {
   list-style: none;
 
-  > li:last-of-type {
+  .franchise-list-item-header {
+    font-weight: 500;
     position: relative;
     margin-top: 20px;
 
-    input {
-      border: 1px solid #aaaab2;
-      padding-right: 32px;
-    }
-  }
+    span {
+      position: absolute;
+      top: 0;
+      left: -20px;
+      font-size: 10px;
+      color: #aaaab2;
+      cursor: pointer;
 
-  > div {
-    margin-bottom: 25px;
-
-    > li {
-      display: block;
-      margin: 6px 0 0;
-      cursor: default;
-      position: relative;
-
-      div:not(.suggestions-container) {
-        display: inline-block;
-        padding: 8px 0;
-        font-weight: 500;
-      }
-
-      span.icon-close {
-        font-size: 10px;
-        margin-right: 8px;
-        color: #aaaab2;
-        cursor: pointer;
-        transition: color 200ms;
-        position: absolute;
-        left: -25px;
-        top: 7px;
-
-        &:hover {
-          color: $color-danger;
-        }
+      &:hover {
+        color: $color-danger;
       }
     }
   }
 }
 
-#add-franchise-button {
+.add-franchise-button {
   cursor: pointer;
   overflow: hidden;
   background-color: rgba(#5bb289,0.8);
@@ -89,28 +66,40 @@
   &:hover {
     background-color: #5bb289;
   }
+}
 
-  &.hidden {
-    overflow: auto;
-    cursor: default;
-    margin-bottom: 0;
-    padding: 0;
+.add-franchise-input {
+  position: relative;
+  max-width: 300px;
+
+  input {
+    font-size: 1.4rem;
+    padding: 8px;
+    padding-right: 32px;
+    height: 32px;
     width: 100%;
-    max-width: 300px;
-    border-radius: 0;
+    border: 1px solid #aaaab2;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
-    span:not(.icon-close) {
-      display: none;
+    &:focus {
+      outline: none;
     }
+  }
 
-    .icon-close {
-      display: block;
-      color: #aaaab2;
-      cursor: pointer;
+  .icon-close {
+    display: block;
+    position: absolute;
+    font-size: 11px;
+    top: 5px;
+    right: 10px;
+    color: #333;
+    opacity: 0.5;
+    cursor: pointer;
 
-      &:hover {
-        color: #333;
-      }
+    &:hover {
+      opacity: 1;
     }
   }
 }
@@ -124,7 +113,7 @@
   position: absolute;
   max-height: 300px;
   overflow: auto;
-  top: 34px;
+  top: 32px;
   border: 0;
 
   &.active {
@@ -154,46 +143,59 @@
 
 .character-list {
   list-style: none;
+  margin: 5px 0 25px;
 
-  > li {
+  .form-character {
     display: inline-block;
     margin: 6px 6px 0 0;
-    cursor: default;
     position: relative;
 
-    input {
-      border: 1px solid #aaaab2;
-    }
-
-    div:not(.suggestions-container) {
-      display: inline-block;
+    &.active {
       padding: 8px 48px 8px 10px;
       font-weight: 400;
       border: 1px solid #aaaab2;
       border-radius: 3px;
-    }
 
-    span.icon-close {
-      font-size: 10px;
-      color: #aaaab2;
-      cursor: pointer;
-      transition: color 200ms;
-      position: absolute;
-      right: 10px;
-      top: 8px;
+      span.icon-close {
+        font-size: 10px;
+        color: #aaaab2;
+        cursor: pointer;
+        transition: color 200ms;
+        position: absolute;
+        right: 10px;
+        top: 6px;
 
-      &:hover {
-        color: $color-danger;
+        &:hover {
+          color: $color-danger;
+        }
       }
     }
 
-    &:last-of-type {
+    &.inactive {
       display: block;
+      width: auto;
+      padding: 4px;
+      padding-left: 24px;
+
+      span.icon-plus {
+        font-size: 10px;
+        position: absolute;
+        top: 6px;
+        left: 10px;
+      }
     }
   }
 }
 
-#add-character-button {
+.add-character-container {
+  display: block;
+  margin-top: 6px;
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.add-character-button {
   cursor: pointer;
   overflow: hidden;
   background-color: transparent;
@@ -226,33 +228,92 @@
     border-color: #5bb289;
   }
 
-  &.hidden {
-    overflow: auto;
-    cursor: default;
-    margin-bottom: 0;
-    padding: 0;
+  &.active {
     width: 100%;
     max-width: 300px;
-    border-radius: 0;
-    border: 0;
-    display: block;
+    border-radius: 3px 3px 0 0;
+    background-color: #f1f1f1;
+    color: #333;
+    border-color: #aaaab2;
+    cursor: default;
+    padding-left: 10px;
 
-    span:not(.icon-close) {
+    &:hover {
+      color: #333;
+      border-color: #aaaab2;
+    }
+
+    > span.icon-plus {
       display: none;
     }
 
     .icon-close {
       display: block;
-      color: #aaaab2;
       cursor: pointer;
+      color: #333;
+      opacity: 0.7;
 
       &:hover {
-        color: #333;
+        opacity: 1;
       }
     }
   }
 }
 
+.character-suggestions {
+  position: absolute;
+  left: 0;
+  top: 33px;
+  background-color: #fff;
+  border: 1px solid #aaaab2;
+  border-radius: 0 0 3px 3px;
+  z-index: 100;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+
+  > .form-character.inactive {
+    padding: 8px 8px 8px 32px;
+    margin: 0;
+
+    &:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
+  }
+
+  span.icon-plus {
+    top: 4px;
+    left: 10px;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.ship-list {
+  list-style: none;
+
+  .ship-list-item-header {
+    font-weight: 500;
+    position: relative;
+    margin-top: 20px;
+
+    span {
+      position: absolute;
+      top: 0;
+      left: -20px;
+      font-size: 10px;
+      color: #aaaab2;
+      cursor: pointer;
+
+      &:hover {
+        color: $color-danger;
+      }
+    }
+  }
+}
 
 #add-ship-button {
   cursor: pointer;

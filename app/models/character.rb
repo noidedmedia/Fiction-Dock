@@ -34,7 +34,12 @@ class Character < ActiveRecord::Base
   # ASSOCIATION METHODS #
   #######################
   def self.by_frequency
-    joins(:stories).group(:id).order("COUNT(stories) DESC")
-      .select("characters.*, COUNT(stories) AS stories_count")
+    popular(-Float::INFINITY..Float::INFINITY)
+  end
+  def self.popular(time=(1.day.ago..Time.new))
+    joins(:stories).group(:id)
+      .order("COUNT(stories) DESC")
+      .select("characters.*, COUNT(stories) as stories_count")
+      .where(stories: {created_at: time})
   end
 end

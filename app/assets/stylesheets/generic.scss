@@ -313,11 +313,17 @@
 
   .select-container {
     display: inline-block;
-    width: calc(50% - 2px);
+    width: calc((100% / 3) - 5px);
     position: relative;
 
-    &:first-of-type {
-      margin-right: 10px;
+    @media screen and (min-width: $mobile-width) {
+      + .select-container {
+        margin-left: 2px;
+      }
+    }
+
+    @media screen and (max-width: $mobile-width) {
+      width: 100%;
     }
   }
 

@@ -1,222 +1,153 @@
-
-/* Franchises
-   ============================================== */
-
-// Franchises component
-var Franchises = React.createClass({
+var FormFranchise = React.createClass({
   getInitialState: function() {
-    // "Global" values for the franchises, characters, and ships
-    // passed when submitting the story.
     return {
-      franchisequery: "",
-      suggestions: [],
-      franchises: this.props.franchises,
-      characters: this.props.characters
+      addcharacterisactive: false
     };
   },
-  // When the value of the FranchisesInput is modified, handleChange
-  // is called with the value of the input as an argument.
-  handleChange: function(query) {
-    this.setState({ franchisequery: query });
-
-    console.log(query);
-    console.log(this.state.franchisequery);
-
-    // If query is empty, the suggestions state is emptied.
-    if (query === "") {
-      this.setState({ suggestions: [] });
-    } else {
-      // An AJAX request which returns franchises with names similar
-      // to the value of the input field.
-      // These franchises are then used as suggestions for the
-      // Franchises field.
-      $.ajax("/franchises/complete.json?query=" + query, {
-        dataType: "json",
-        success: function(data) {
-
-          console.log(data);
-
-          var suggestions = [];
-
-          // Pushes each suggestion returned from the AJAX request
-          // into the new suggestions array.
-          data.forEach(function(franchise, i) {
-            console.log(franchise);
-            suggestions.push(franchise);
-          });
-
-          console.log("Suggestions:");
-          console.log(suggestions);
-
-          // Updates suggestions state with new suggestions.
-          this.setState({ suggestions: suggestions });
-        }.bind(this),
-        error: function() {
-          console.log("Error");
-        }
-      });
-    }
+  // Remove this franchise from the overall list
+  removeFranchise: function() {
+    this.props.removeFranchise({
+      id: this.props.id,
+      name: this.props.name
+    });
   },
-  // Adds a new franchise to the franchises state.
-  addFranchise: function(franchise) {
-    var franchises = this.state.franchises;
-
-    // Push franchise argument into the franchises array created above.
-    franchises.push(franchise);
-
-    console.log("Franchises:");
-    console.log(this.state.franchises);
-
-    console.log("Adding:");
-    console.log(franchise);
-
-    // Franchises state is updated to match the franchises array we've
-    // just created.
-    this.setState({ franchises: franchises }, function() {
-      // Empty franchise suggestions after adding a franchise.
-      this.setState({ suggestions: [] });
-    }.bind(this));
+  addCharacters: function() {
+    this.setState({
+      addcharacterisactive: true
+    });
   },
-  // Removes a franchise from the franchises state.
-  removeFranchise: function(franchise) {
-    // Creates a new franchises variable out of the franchises state
-    // after filtering the removed franchise out of the array.
-    var franchises = this.state.franchises.filter(function(f) {
-      return franchise.id !== f.id;
-    });
-
-    console.log("Characters:");
-    console.log(this.state.characters);
-
-    // Any characters that belong to the franchise being removed
-    // are also removed.
-    var characters = this.state.characters.filter(function(c) {
-      return franchise.id !== c.franchise_id;
-    });
-
-    console.log("Characters2:");
-    console.log(characters);
-
-    console.log("Removing:");
-    console.log(franchise);
-
-    // Passes the updated franchises and characters arrays to their
-    // respective states. 
-    this.setState({ franchises: franchises }, function() {
-      this.props.updateFranchises(franchises);
-    });
-    this.setState({ characters: characters }, function() {
-      this.props.updateCharacters(characters);
+  closeAddCharacters: function(e) {
+    e.stopPropagation();
+    this.setState({
+      addcharacterisactive: false
     });
   },
   render: function() {
     return (
-      <div>
-        <div className="section-header">{this.props.franchises_label}</div>
+      <li>
+        <div className="franchise-list-item-header">
+          <p>{this.props.name}</p>
+          <span className="icon icon-close" title={this.props.translations.remove} onClick={this.removeFranchise}></span>
+        </div>
+        <ul className="character-list">
+          {this.props.active_characters.map(function(c) {
+            return <ActiveCharacter {...c} onRemove={this.props.removeCharacter} key={"character" + c.id} translations={this.props.translations} />;
+          }.bind(this))}
 
-        <ul className="franchise-list">
+          <div className="add-character-container">
+            <div className={this.state.addcharacterisactive ? "add-character-button active" : "add-character-button"} onClick={this.addCharacters}>
+              <span className="icon icon-plus"></span>
+              {this.props.translations.add_characters}
+              <span className="icon icon-close" onClick={this.closeAddCharacters}></span>
+            </div>
 
-          {this.props.franchises.map(function(franchise, i) {
-            var characters = this.state.characters.filter(function(character) {
-              return franchise.id == character.franchise_id;
-            });
-            return (
-              <div key={'container' + franchise.id}>
-                <ListItem key={franchise.id} data={franchise} ref={'franchise' + i} remove={this.removeFranchise} />
-                <Characters key={'franchisecharacters' + i} characters={characters} elementid={this.props.characters_elementid} placeholder={this.props.characters_placeholder} character_add={this.props.character_add} franchise={franchise} addCharacter={this.props.addCharacter} removeCharacter={this.props.removeCharacter} />
-              </div>
-            );
-          }, this)}
-          
-          <AddFranchiseButton query={this.state.franchisequery} franchise_add={this.props.franchise_add} onChange={this.handleChange} suggestions={this.state.suggestions} elementid={this.props.elementid} addFranchise={this.addFranchise} />
-
+            <div className={this.state.addcharacterisactive ? "character-suggestions" : "character-suggestions hidden"}>
+              {this.props.inactive_characters.map(function(c) {
+                return <InactiveCharacter {...c} onAdd={this.props.addCharacter} key={"character" + c.id} translations={this.props.translations} />;
+              }.bind(this))}
+            </div>
+          </div>
         </ul>
-      </div>
+      </li>
     );
   }
 });
 
 
-
-/* Add Franchise Button
-   ============================================== */
-
-// The "Add a new franchise" button
-var AddFranchiseButton = React.createClass({
-  propTypes: {
-    suggestions: React.PropTypes.arrayOf(React.PropTypes.object)
-  },
+var FranchiseAdder = React.createClass({
   getInitialState: function() {
-    return { 
-      showinput: false
+    return {
+      step: "button"
     };
   },
-  onChange: function(e) {
-    // Passes the value of the input field to the "onChange" property
-    // passed from the parent component.
-    // Used for suggesting a franchise.
-    this.props.onChange(e.target.value);
+  displaySuggestor: function(e) {
+    e.preventDefault();
+    this.setState({
+      step: "suggestor"
+    });
+    $(React.findDOMNode(this.refs.franchiseInput)).val("").focus();
   },
-  // Handles clicks on the AddFranchiseButton.
-  handleClick: function() {
-    // Sets showinput to 'input-shown', which applies it as a class
-    // to the DOM node, modifying the style to appear as though
-    // the button has been replaced by an input field.
-    this.setState({ showinput: 'input-shown' }, function() {
-      // "React.findDOMNode" returns the DOM element, which is then taken by JQuery
-      // and given an empty value and a focus state.
-      // This ensures that the input field won't have any old data in it.
-      $(React.findDOMNode(this.refs.franchiseInput)).val("").focus();
+  displayButton: function() {
+    this.setState({
+      step: "button"
     });
   },
-  hideInput: function(e) {
-    // Make sure that clicking on the close button doesn't cause it to immediately reopen itself.
-    this.preventBubbling(e);
+  render: function() {
+    if (this.state.step == "button") {
+      return (
+        <div className="add-franchise-button" onClick={this.displaySuggestor}>
+          <span className="icon icon-plus"></span>
+          {this.props.translations.add_a_new_franchise}
+        </div>
+      );
+    } else if (this.state.step == "suggestor") {
+      return (
+        <div>
+          <FranchiseSuggestor onAdd={this.props.onAdd} displayButton={this.displayButton} translations={this.props.translations} />
+        </div>
+      );
+    }
+  }
+});
 
-    // Hide input, empty input field value.
-    this.setState({showinput: false}, function() {
-      $(React.findDOMNode(this.refs.franchiseInput)).val("");
-    });
-
-    // Remove suggestions.
-    this.props.onChange("");
+var FranchiseSuggestor = React.createClass({
+  getInitialState: function() {
+    return {
+      suggestions: false
+    };
   },
-  // Stops "bubbling up" of click events on the input field,
-  // preventing handleClick from being called when the input
-  // field is acted upon.
-  preventBubbling: function(e) {
-    e.stopPropagation();
+  suggest: function(e) {
+    var prefix = e.target.value;
+    console.log("getting prefix:",prefix);
+    var url = "/franchises/complete?query=" + prefix;
+    console.log("getting with URL:",url);
+    $.getJSON(url, function(sugg){
+      console.log(sugg);
+      this.setState({
+        suggestions: sugg
+      });
+    }.bind(this));
   },
-  // First argument passed to function through .bind() has to be null,
-  // because React.js is weird.
-  // Source: https://groups.google.com/forum/#!topic/reactjs/Xv9_kVoJJOw
-  addFranchise: function(x, e) {
-    console.log(e.target.data);
-
-    // Event target data is the franchise object the user is trying
-    // to add.
-    var franchise = e.target.data;
-
-    // Forward the chosen franchise along to the main React class.
-    this.props.addFranchise(franchise);
-
-    // Hide input, remove suggestions
-    this.setState({showinput: false});
+  onAdd: function(f) {
+    $.getJSON("/franchises/" + f.id + ".json", function(fr) {
+      this.props.onAdd(fr);
+    }.bind(this));
+    this.props.displayButton();
+  },
+  getSuggestionsJSX: function() {
+    if (this.state.suggestions === []) {
+      return (
+        <div className="suggestions-container">
+          <ul className="suggestions">
+            <li className="no-suggestions">{this.props.translations.no_suggestions_found}</li>
+          </ul>
+        </div>
+      );
+    } else if (this.state.suggestions !== false) {
+      return (
+        <div className="suggestions-container active">
+          <ul className="suggestions">
+            {this.state.suggestions.map(function(f) {
+              var callback = function() {
+                this.onAdd(f);
+              }.bind(this);
+              return <li key={f.name} className="suggestion" onClick={callback}>{f.name}</li>;
+            }.bind(this))}
+          </ul>
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
   },
   render: function() {
     return (
-      <li>
-        <div ref="addFranchiseButton" id="add-franchise-button" className={this.state.showinput ? "add-new-franchise hidden" : "add-new-franchise shown"} onClick={this.handleClick}>
-          <span className="icon icon-plus"></span>
-          {this.props.franchise_add}
+      <div className="add-franchise-input">
+        <input ref="franchiseInput" onChange={this.suggest}></input>
+        <span className="icon icon-close" onClick={ this.props.displayButton }></span>
 
-          <input ref="franchiseInput" value={this.props.query} id={this.props.elementid} className={this.state.showinput ? 'shown' : 'hidden'} type="text" placeholder={this.props.placeholder} onChange={this.onChange} />
-
-          <span className="icon icon-close" onClick={this.hideInput}></span>
-        </div>
-
-        <Suggestions showsuggestions={ this.props.suggestions.length > 0 ? true : false } suggestions={this.props.suggestions} itemOnClick={this.addFranchise} itemtype="franchise" bindnull={true} />
-      </li>
+        { this.getSuggestionsJSX() }
+      </div>
     );
   }
 });

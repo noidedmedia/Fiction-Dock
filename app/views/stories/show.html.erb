@@ -8,6 +8,10 @@
       </ul>
 
       <ul id="story-toolbar-right" class="fd-toolbar-right">
+        <% if @story.published && current_user %>
+          <%= react_component('AddToBookshelves', render(partial: 'bookshelves/add_to_bookshelves.json.jbuilder', locals: {i18npath: 'stories.show'}), tag: "li", id: "add-to-bookshelves") %>
+        <% end %>
+
         <% if current_user == @story.author %>
           <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
 
@@ -71,13 +75,23 @@
         <li><%= link_to(@story.author.name, user_path(@story.author)) %></li>
       </ul>
 
-      <ul class="story-extra-information-block">
-        <li class="list-item-header"><%= t(".published") %></li>
-        <% if @story.published %>
+      <% if @story.published %>
+        <ul class="story-extra-information-block">
+          <li class="list-item-header"><%= t(".published") %></li>
           <li><%= @story.created_at.strftime("%B %e, %Y") %></li>
-        <% else %>
-          <li><%= t(".na") %></li>
-        <% end %>
+        </ul>
+      <% end %>
+
+      <% if @story.published %>
+        <ul class="story-extra-information-block">
+          <li class="list-item-header"><%= t(".last_updated") %></li>
+          <li><%= @story.updated_at.strftime("%B %e, %Y") %></li>
+        </ul>
+      <% end %>
+
+      <ul class="story-extra-information-block">
+        <li class="list-item-header"><%= t(".rating") %></li>
+        <li><%= t("ratings.#{@story.content_rating}") %></li>
       </ul>
 
       <ul class="story-extra-information-block">
@@ -89,7 +103,6 @@
         <li class="list-item-header"><%= t(".license") %></li>
         <li><%= t("licenses_html.#{@story.license}_html") %></li>
       </ul>
-
       <ul class="story-franchises-list">
         <li class="list-item-header"><%= t(".franchises") %></li>
 
@@ -104,6 +117,29 @@
           <li><%= link_to character.name, franchise_character_path(character.franchise, character) %></li>
         <% end %>
       </ul>
+
+      <% unless @story.ships.blank? %>
+        <ul class="story-ships-list">
+          <li class="list-item-header"><%= t(".ships") %></li>
+          <% @story.ships.each do |ship| %>
+            <div class="ship-list-container">
+              <% ship.characters.each do |character| %>
+                <li>
+                  <%= link_to franchise_character_path(character.franchise, character) do %>
+                    <%= character.name %> (<%= character.franchise.name %>)
+                  <% end %>
+                </li>
+              <% end %>
+            </div>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= react_component('ViewMoreInformation', props={
+        translations: {
+          view_more_information: t(".view_more_information")
+        }
+      }) %>
     </div>
   </div>
 

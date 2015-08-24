@@ -20,13 +20,14 @@ class Ship < ActiveRecord::Base
   has_many :stories, through: :story_ships
   has_many :ship_characters, autosave: true
   has_many :characters, through: :ship_characters
-  accepts_nested_attributes_for :ship_characters
+  before_validation :set_characters
   validate :has_two_characters
+  validate :characters_are_unique
 
+  attr_accessor :character_ids
   #################
   # SCOPE METHODS #
   #################
-  
   ##
   # Get a list of ships order by the frequency in which they appear
   # Note that this adds a story_count attribute to the ship objects
@@ -39,9 +40,29 @@ class Ship < ActiveRecord::Base
   # FINDER METHODS #
   ##################
   def self.with_exact_ids(ids)
+    return nil unless ids
     find_by_sql([SQL_SELECT_BY_CHARACTER_IDS, ids, ids.length, ids]).first
   end
+
+  #######################
+  # CONSTRUCTOR METHODS #
+  #######################
+
+  def self.find_or_create_by_character_ids(ids)
+    found = with_exact_ids(ids)
+    return found if found
+    return create(character_ids: ids)
+  end
   protected
+  def set_characters
+    self.characters = Character.where(id: character_ids) unless character_ids.blank?
+  end
+  def characters_are_unique
+    found = Ship.with_exact_ids(characters.pluck(:id))
+    unless found.blank? || found.id == id
+      errors.add(:characters, "this combination already exists")
+    end
+  end
   ##
   # ActiveRecord doesn't like EXCEPT, so we do this in raw SQL
   SQL_SELECT_BY_CHARACTER_IDS = %{
@@ -56,6 +77,6 @@ class Ship < ActiveRecord::Base
     WHERE ship_characters.character_id NOT IN (?)
   }
   def has_two_characters
-    errors.add(:characters, "too few (need at lest two)") unless ship_characters.length > 1
+    errors.add(:characters, "too few (need at lest two)") unless self.characters.length > 1
   end
 end
