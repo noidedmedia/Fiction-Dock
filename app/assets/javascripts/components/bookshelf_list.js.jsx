@@ -44,7 +44,7 @@ var AddToBookshelves = React.createClass({
       success: function(data) {
         console.log("Added successfully!");
         console.log(data);
-        
+
         var index = this.state.bookshelves.indexOf(bookshelf);
         console.log(this.state.bookshelves[index]);
         this.state.bookshelves[index].with = true;
@@ -52,7 +52,7 @@ var AddToBookshelves = React.createClass({
         console.log(this.state.bookshelves);
 
         this.setState({bookshelves: this.state.bookshelves});
-      },
+      }.bind(this),
       error: function(data) {
         console.log("Error");
         console.log(data);
@@ -81,7 +81,7 @@ var AddToBookshelves = React.createClass({
         console.log(this.state.bookshelves);
 
         this.setState({bookshelves: this.state.bookshelves});
-      },
+      }.bind(this),
       error: function(data) {
         console.log("Error");
         console.log(data);
