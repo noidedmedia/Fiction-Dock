@@ -17,12 +17,15 @@
 <div class="fd-text-container fd-padding-top">
 
   <h2 class="fd-page-header"><%= @character.name %></h2>
-  <div class="fd-page-subtitle"><%= markdown_parse @character.description %></div>
+  <div class="fd-page-subtitle">
+    <%= markdown_parse @character.description %>
+  </div>
 
   <ul data-tabs="true" class="fd-tabs">
     <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories", count: @stories.count) %>
-  <li data-tab="tab-2" class="fd-tabs-tab">Stats
+    <%# <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".stats") %>
   </ul>
+
   <div class="tab-content tc-tab-1 fd-tab-content current">
     <% unless @stories.blank? %>
       <ul id="character-story-list" class="fd-list">
@@ -31,9 +34,5 @@
     <% else %>
       <p class="fd-list-empty-note"><%= t(".this_character_hasn't_been_included_in_any_published_stories_yet") %></p>
     <% end %>
-  </div>
-  <div class="tab-content tc-tab-2 fd-tab-content" data-callback="getCharacterStats", data-json_url="<%= "#{stats_franchise_character_path(@franchise, @character)}.json" %>">
-    <div class="stats-section" id="stats-ship-frequency">
-    </div>
   </div>
 </div>
