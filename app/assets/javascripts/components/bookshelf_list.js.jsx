@@ -44,20 +44,20 @@ var AddToBookshelves = React.createClass({
       success: function(data) {
         console.log("Added successfully!");
         console.log(data);
+        
+        var index = this.state.bookshelves.indexOf(bookshelf);
+        console.log(this.state.bookshelves[index]);
+        this.state.bookshelves[index].with = true;
+
+        console.log(this.state.bookshelves);
+
+        this.setState({bookshelves: this.state.bookshelves});
       },
       error: function(data) {
         console.log("Error");
         console.log(data);
       }
     });
-
-    var index = this.state.bookshelves.indexOf(bookshelf);
-    console.log(this.state.bookshelves[index]);
-    this.state.bookshelves[index].with = true;
-
-    console.log(this.state.bookshelves);
-
-    this.setState({bookshelves: this.state.bookshelves});
   },
   removeStoryFromBookshelf: function(bookshelf) {
     console.log(this.props.story.id);
@@ -73,20 +73,20 @@ var AddToBookshelves = React.createClass({
       success: function(data) {
         console.log("Removed successfully!");
         console.log(data);
+
+        var index = this.state.bookshelves.indexOf(bookshelf);
+        console.log(this.state.bookshelves[index]);
+        this.state.bookshelves[index].with = false;
+
+        console.log(this.state.bookshelves);
+
+        this.setState({bookshelves: this.state.bookshelves});
       },
       error: function(data) {
         console.log("Error");
         console.log(data);
       }
     });
-
-    var index = this.state.bookshelves.indexOf(bookshelf);
-    console.log(this.state.bookshelves[index]);
-    this.state.bookshelves[index].with = false;
-
-    console.log(this.state.bookshelves);
-
-    this.setState({bookshelves: this.state.bookshelves});
   },
   render: function() {
     return (
