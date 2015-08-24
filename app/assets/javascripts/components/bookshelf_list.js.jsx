@@ -16,8 +16,6 @@ var AddToBookshelves = React.createClass({
       bookshelves.push(b);
     });
 
-    console.log(bookshelves);
-
     return ({
       active: false,
       bookshelves: bookshelves
@@ -33,23 +31,14 @@ var AddToBookshelves = React.createClass({
     }
   },
   addStoryToBookshelf: function(bookshelf) {
-    console.log(this.props.story.id);
-    console.log(bookshelf);
-    console.log(bookshelf.id);
 
     $.ajax("/bookshelves/" + bookshelf.id + "/add", {
       dataType: "json",
       data: {story: {id: this.props.story.id}},
       method: "POST",
       success: function(data) {
-        console.log("Added successfully!");
-        console.log(data);
-
         var index = this.state.bookshelves.indexOf(bookshelf);
-        console.log(this.state.bookshelves[index]);
         this.state.bookshelves[index].with = true;
-
-        console.log(this.state.bookshelves);
 
         this.setState({bookshelves: this.state.bookshelves});
       }.bind(this),
@@ -71,14 +60,8 @@ var AddToBookshelves = React.createClass({
       data: {story: {id: this.props.story.id}},
       method: "DELETE",
       success: function(data) {
-        console.log("Removed successfully!");
-        console.log(data);
-
         var index = this.state.bookshelves.indexOf(bookshelf);
-        console.log(this.state.bookshelves[index]);
         this.state.bookshelves[index].with = false;
-
-        console.log(this.state.bookshelves);
 
         this.setState({bookshelves: this.state.bookshelves});
       }.bind(this),
