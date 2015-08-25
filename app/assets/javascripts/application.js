@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.turbolinks
-//= require medium-editor
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require turbolinks
 //= require react

@@ -1,41 +1,5 @@
-function mediumMarkdownEditor() {
-  var markdownelement = document.querySelector(".editor > #markdown");
-  var placeholder = $("#rich-text").data("placeholder");
-  var anchorplaceholder = $("#rich-text").data("anchor-placeholder");
-  new MediumEditor(document.querySelector(".editor > #rich-text"), {
-    buttons: ["bold", "italic", "orderedlist", "unorderedlist", "header1", "header2", "quote", "anchor"],
-    buttonLabels: {
-      "orderedlist": '<span class="icon icon-list-ordered"></span>',
-      "unorderedlist": '<span class="icon icon-list-unordered"></span>',
-      "quote": '<span class="icon icon-quote"></span>',
-      "anchor": '<span class="icon icon-link"></span>'
-    },
-    firstHeader: 'h1',
-    secondHeader: 'h2',
-    autoLink: true,
-    anchorPreview: {
-      hideDelay: 400
-    },
-    paste: {
-      cleanPastedHTML: true,
-      cleanAttrs: ['class', 'style', 'dir'],
-      cleanTags: ['label', 'meta', 'span']
-    },
-    placeholder: {
-      text: placeholder
-    },
-    imageDragging: false,
-    disableDoubleReturn: true,
-    extensions: {
-      markdown: new MeMarkdown(function (md) {
-        markdownelement.innerHTML = md;
-      })
-    }
-  });
-}
-
-// Only run when one of the editors is open.
-if ( document.querySelector('div[contenteditable="true"]') || document.querySelector('#rich-text') ) {
+// Only run when the editor is open.
+if ( document.querySelector('div[contenteditable="true"]') ) {
   // Check for the Ctrl/⌘ key and "S" (equivalent to keyCode 83) being pressed, prevent save dialog.
   $(document).on('keydown', function(e) {
     if ((e.metaKey || (e.ctrlKey && !e.altKey)) && e.keyCode === 83) {
@@ -126,7 +90,6 @@ function plainTextEditor() {
 
 // Functions run when the document is "ready".
 var ready = function() {
-  mediumMarkdownEditor();
   preventUnloadIfChanged();
   plainTextEditor();
 };
