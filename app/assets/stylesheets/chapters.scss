@@ -22,12 +22,20 @@
 }
 
 .chapter-body {
-  font-size: 1.6rem;
-  line-height: 3.0rem;
+  font-size: 10px;
+  line-height: 3.0em;
   margin: 15px 0;
 
   p, ol, ul {
     margin-bottom: 20px;
+  }
+
+  > p, > strong, > blockquote {
+    font-size: 1.6em;
+  }
+
+  p > br:only-child {
+    display: none;
   }
 
   li {
