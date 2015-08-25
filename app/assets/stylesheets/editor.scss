@@ -18,21 +18,6 @@
     margin: 0 20px;
   }
 
-  > #rich-text {
-    outline: none;
-    font-size: 10px;
-    line-height: 1.5;
-    display: block;
-    height: auto;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    cursor: text;
-
-    > p {
-      margin-top: 10px;
-    }
-  }
-
   > .markdown {
     height: auto;
     width: 40vw;
@@ -76,24 +61,6 @@
     }
   }
 
-  &.rich-editor {
-    padding-top: 75px;
-
-    input[type=text] {
-      font-size: 4.8rem;
-      border: transparent;
-      font-weight: 600;
-      border: none;
-      width: 100%;
-    }
-
-    textarea {
-      position: fixed;
-      opacity: 0;
-      pointer-events: none;
-    }
-  }
-
   input[type=submit] {
     background-color: transparent;
     border: transparent;
@@ -104,59 +71,6 @@
 
     &:focus {
       outline: none;
-    }
-  }
-}
-
-.editor-tabs {
-  display: block;
-  margin: auto;
-  text-align: left;
-  padding-top: 50px;
-  border-bottom: 1px solid #aaaab2;
-  padding-bottom: 7px;
-
-  li {
-    display: inline-block;
-    font-size: 1.4rem;
-    margin: 0 30px;
-    position: relative;
-
-    span {
-      font-size: 1.2rem;
-      top: -5px;
-      left: 0px;
-      position: absolute;
-      color: #333;
-      opacity: 0.7;
-    }
-
-    a {
-      color: #333;
-      opacity: 0.7;
-      text-decoration: none;
-      display: block;
-      padding-left: 35px;
-    }
-
-    &.current {
-      color: #333;
-      cursor: pointer;
-      padding-left: 35px;
-
-      span {
-        opacity: 1;
-      }
-
-      &:after {
-        content: '';
-        background-color: #17cd94;
-        width: calc(100% + 70px);
-        -webkit-transform: translate(-50px, 7px);
-        transform: translate(-50px, 7px);
-        height: 3px;
-        display: block;
-      }
     }
   }
 }
