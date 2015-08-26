@@ -11,6 +11,7 @@
   display: flex;
   -webkit-flex-flow: column wrap;
           flex-flow: column wrap;
+  padding-top: 75px;
 
   @media all and (max-width: $mobile-width) {
     width: calc(100vw - 40px);
@@ -27,37 +28,28 @@
     }
   }
 
-  &.plain-editor {
-    padding-top: 75px;
+  input[type=text] {
+    font-size: 4.8rem;
+    border: transparent;
+    font-weight: 600;
+    border: none;
+    width: 100%;
+  }
 
-    input[type=text] {
-      font-size: 4.8rem;
-      border: transparent;
-      font-weight: 600;
-      border: none;
-      width: 100%;
-    }
+  textarea {
+    width: 100%;
+    min-height: 60vh;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    padding: 10px;
+    white-space: pre-wrap;
+    margin: 25px 0;
+    height: 100%;
+    resize: none;
 
-    #plain-text-contenteditable {
-      min-height: 25px;
-      width: 100%;
-      font-size: 1.6rem;
-      line-height: 1.5;
-      padding: 10px 0;
-      white-space: pre-wrap;
-      margin: 25px 0;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    textarea {
-      display: none;
-
-      &:hover, &:focus {
-        border-color: transparent;
-      }
+    &:hover, &:focus {
+      border-color: transparent;
+      outline: none;
     }
   }
 
@@ -73,17 +65,4 @@
       outline: none;
     }
   }
-}
-
-// Applies to all elements with contenteditable set to true.
-// When the field is empty, the value of the placeholder attribute
-// will be used as placeholder text.
-[contenteditable=true]:empty:before {
-  content: attr(placeholder);
-  display: block; /* For Firefox */
-  padding: 0 2px;
-  transform: translateY(-3px);
-  cursor: text;
-  opacity: 0.7;
-  font-style: italic;
 }

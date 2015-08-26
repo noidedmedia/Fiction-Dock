@@ -3,12 +3,11 @@
 <% end %>
 
 <%= form_for [@story, @chapter] do |f| %>
-  <div class="editor plain-editor">
+  <div class="editor" data-onbeforeunload="<%= t('.you_have_unsaved_changes') %>">
+
     <%= f.text_field :name, placeholder: t(".chapter_title"), autocomplete: "off" %>
 
-    <div id="plain-text-contenteditable" contenteditable="true" placeholder="<%= t('.start_writing_here') %>"><%= @chapter.body %></div>
-
-    <%= f.text_area :body, id: "plain-text-textarea" %>
+    <%= f.text_area :body, placeholder: t(".start_writing_here"), id: "plain-text-textarea" %>
 
     <hr>
 
