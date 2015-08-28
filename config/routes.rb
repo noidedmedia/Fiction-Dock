@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     post :read
   end
 
+
+  resources :notifications, only: [:index] do
+    post 'read', on: :member
+  end
   concern :popularity_queryable do
     get 'popular', on: :collection
   end
