@@ -1,8 +1,13 @@
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!
   def read
-    Notification.find(params[:id]).read!
-    render json: {success: true}
+    @notification = Notification.find(params[:id])
+    if @notification.user != current_user
+      render json: {success: false}
+    else
+      @notification.read!
+      render json: {success: true}
+    end
   end
 
   def index
