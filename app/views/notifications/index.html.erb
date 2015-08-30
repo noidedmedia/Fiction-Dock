@@ -1,1 +1,9 @@
-<%= render @notifications %>
+<ul class="notifications">
+  <h1><%= t(".notifications") %></h1>
+  
+  <% unless current_user.notifications.unread.empty? %>
+    <%= render current_user.notifications.unread %>
+  <% else %>
+    <%= t(".no_unread_notifications") %>
+  <% end %>
+</ul>

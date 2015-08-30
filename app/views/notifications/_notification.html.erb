@@ -1,3 +1,8 @@
-<li>
-  <%= notification.event %>
+<li class="notification-item" data-id="<%= notification.id %>">
+  <div class="notification-body">
+    <%= render "#{notification.event}", note: notification %>
+  </div>
+  <div class="notification-time">
+    <%= time_ago_in_words(notification.created_at) %> ago
+  </div>
 </li>

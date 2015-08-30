@@ -37,6 +37,11 @@ class User < ActiveRecord::Base
     subscribed_stories << story
   end
 
+  def has_subscribed?(story)
+    # Might be slow version, Anthony pls fix
+    subscribed_stories.include?(story)
+  end
+
   def mod_or_higher?
     level == "mod" || level == "admin"
   end

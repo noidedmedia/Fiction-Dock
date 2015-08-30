@@ -1,0 +1,36 @@
+@import "scss-variables";
+
+.notifications {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+
+  h1 {
+    font-size: 2.4rem;
+    display: block;
+    border-bottom: 1px solid #aaaab2;
+    margin-top: 20px;
+  }
+
+  li {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 5px;
+    border-bottom: 1px solid #aaaab2;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  .notification-time {
+    color: #aaaab2;
+  }
+
+  @media all and (max-width: $mobile-width) {
+    max-width: 100%;
+  }
+}

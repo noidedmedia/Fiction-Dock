@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :not_allowed
   # Adds different "flash[:type]" types.
   add_flash_types :warning, :info
-  
+  before_action :set_locale
   before_action :configure_permitted_devise_params, if: :devise_controller?
 
   def not_allowed

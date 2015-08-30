@@ -1,0 +1,6 @@
+# Stories strings.
+
+en:
+  notifications:
+    notifications: "Notifications"
+    no_unread_notifications: "No unread notifications"

@@ -12,6 +12,12 @@
           <%= react_component('AddToBookshelves', render(partial: 'bookshelves/add_to_bookshelves.json.jbuilder', locals: {i18npath: 'stories.show'}), tag: "li", id: "add-to-bookshelves") %>
         <% end %>
 
+        <% if current_user.has_subscribed?(@story) %>
+          <li><%= link_to t(".unsubscribe"), story_unsubscribe_path(@story), method: :delete %></li>
+        <% else %>
+          <li><%= link_to t(".subscribe"), story_subscribe_path(@story), method: :post %></li>
+        <% end %>
+
         <% if current_user == @story.author %>
           <li><%= link_to t(".edit"), edit_story_path(@story) %></li>
 
