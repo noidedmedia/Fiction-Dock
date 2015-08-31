@@ -14,6 +14,7 @@ class Chapter < ActiveRecord::Base
   validates :name, presence: true
   belongs_to :story
   validates :story, presence: true
+  validate :can_unpublish
   validates :chap_num, numericality: {greater_than: 0}
   validates :word_count, presence: true
   before_validation :fix_chap_num
@@ -29,6 +30,18 @@ class Chapter < ActiveRecord::Base
         event: "subscribed_updated"}}
     Notification.create(attrs)
   end
+
+  def can_unpublish
+    if ! published? && published_was == true
+      if story.published? && story.chapters.published.count == 1
+        errors.add(:published, "Cannot unpublish the last published chapter in a published story")
+        return false
+      else
+        return true
+      end
+    end
+  end
+
   def sanitize_tags
     self.body = Sanitize.fragment(self.body, Sanitize::Config::BASIC).gsub('&gt;','>')
   end
