@@ -27,21 +27,17 @@
     transform: translateX(0%);
 
     // Translates the notification item to the right, then after a 200ms delay collapses the space it was taking up by removing height/padding.
-    transition: transform 400ms ease-in, max-height 200ms 600ms, padding 200ms 600ms;
+    transition: transform 400ms ease-in, max-height 200ms 600ms, padding 200ms 600ms, background-color 200ms;
 
     &:hover {
       background-color: darken(#fff, 6%);
-    }
-
-    &:last-of-type {
-      border-bottom: none;
     }
 
     > .mark-as-read {
       position: absolute;
       top: 12px;
       right: 12px;
-      opacity: 0.7;
+      opacity: 0.6;
 
       &:hover {
         opacity: 1;
