@@ -2,12 +2,14 @@
 
 en:
   notifications:
-    notifications: "Notifications"
-    no_unread_notifications: "No unread notifications"
+    index:
+      notifications: "Notifications"
+      no_unread_notifications: "No unread notifications"
     commented_on:
-      user_commented_on_html: "%{user} commented on %{subject}."
+      user_commented_on_html: "%{user} commented on your %{subject}."
     subscribed_updated:
-      user_updated_story_html: "%{user} updated %{story}."
+      story_has_been_updated_html: "%{story} has been %{updated}."
+      updated: "updated"
     story_reviewed:
       user_reviewed_story_html: "%{user} reviewed %{story}."
     story_favorited:

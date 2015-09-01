@@ -1,3 +1,1 @@
-<%= link_to note.subject.name, note.subject %> 
-<%= link_to t(".updated"), [note.subject, note.secondary_subject] %>
-
+<%= t(".story_has_been_updated_html", story: link_to(note.subject.name, note.subject), link_to(t(".updated"), [note.subject, note.secondary_subject]) %>

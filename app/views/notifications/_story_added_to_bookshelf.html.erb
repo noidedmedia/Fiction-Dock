@@ -1,2 +1,1 @@
-<%= link_to note.subject.name, note.subject %> has been added to
-<%= link_to note.secondary_subject.name, note.secondary_subject %>
+<%= t(".story_has_been_added_to_bookshelf_html", story: link_to(note.subject.name, note.subject), bookshelf: link_to(note.secondary_subject.name, note.secondary_subject)) %>

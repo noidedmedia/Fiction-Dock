@@ -1,1 +1,1 @@
-Your <%= link_to note.secondary_subject.model_name.human, note.secondary_subject %> has been <%= link_to "commented on", note.subject %>
+<%= t(".user_commented_on_html", user: link_to(note.subject, note.subject), subject: link_to(note.secondary_subject.model_name.human, note.secondary_subject)) %>

@@ -1,2 +1,1 @@
-<%= link_to note.secondary_subject.name, note.secondary_subject %> favorited
-<%= link_to note.subject.name, note.subject %>
+<%= t(".user_favorited_story_html", user: link_to(note.secondary_subject.name, note.secondary_subject), story: link_to(note.subject.name, note.subject)) %>
