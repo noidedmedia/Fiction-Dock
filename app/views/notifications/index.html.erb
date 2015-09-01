@@ -1,9 +1,11 @@
+<%- title t(".notifications") %>
+
 <ul class="notifications">
   <h1><%= t(".notifications") %></h1>
   
-  <% unless current_user.notifications.unread.empty? %>
-    <%= render current_user.notifications.unread %>
+  <% unless @notifications.empty? %>
+    <%= render @notifications %>
   <% else %>
-    <p class="fd-list-empty-note"><%= t(".no_unread_notifications") %></p>
+    <%= t(".no_unread_notifications") %>
   <% end %>
 </ul>

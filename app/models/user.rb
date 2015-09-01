@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :franchises, through: :francise_users
   has_many :subscriptions
   has_many :subscribed_stories, through: :subscriptions, class_name: "Story", source: :story
-  has_many :notifications
+  has_many :notifications, -> { order("created_at DESC") }
   validates :name,
     presence: true,
     format: {with: /\A([[:alpha:]]+|\w+)\z/},

@@ -3,6 +3,6 @@
     <%= render "#{notification.event}", note: notification %>
   </div>
   <div class="notification-time">
-    <%= time_ago_in_words(notification.created_at) %> ago
+    <%= t("time_ago", time: time_ago_in_words(notification.created_at)) %>
   </div>
 </li>

@@ -1,1 +1,1 @@
-<%= t(".user_commented_on_html", user: link_to(note.subject, note.subject), subject: link_to(note.secondary_subject.model_name.human, note.secondary_subject)) %>
+<%= t(".user_commented_on_html", user: link_to(note.subject, note.subject), your_subject: link_to(t(".your_subject", subject: note.secondary_subject.model_name.human.downcase), note.secondary_subject)) %>

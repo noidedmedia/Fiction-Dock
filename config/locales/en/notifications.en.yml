@@ -6,7 +6,8 @@ en:
       notifications: "Notifications"
       no_unread_notifications: "No unread notifications"
     commented_on:
-      user_commented_on_html: "%{user} commented on your %{subject}."
+      user_commented_on_html: "%{user} commented on %{your_subject}."
+      your_subject: "your %{subject}"
     subscribed_updated:
       story_has_been_updated_html: "%{story} has been %{updated}."
       updated: "updated"
