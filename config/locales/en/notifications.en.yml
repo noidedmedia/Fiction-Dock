@@ -6,6 +6,8 @@ en:
       notifications: "Notifications"
       no_unread_notifications: "No unread notifications"
       no_notifications_yet: "No notifications yet"
+    notification:
+      mark_as_read: "Mark as read"
     commented_on:
       user_commented_on_html: "%{user} commented on %{your_subject}."
       your_subject: "your %{subject}"
