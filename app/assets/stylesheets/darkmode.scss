@@ -101,7 +101,7 @@
     }
 
     .editor input[type=text] {
-      border-color: transparent;
+      border: 0px solid transparent;
     }
 
     .stats {
@@ -183,70 +183,6 @@
 
     .fd-list-item:not(:first-of-type) {
       border-top: 1px solid rgba(#fff,0.3);
-    }
-
-
-    /* ==============================================
-        Medium Editor
-       ============================================== */
-
-    $medium_editor_bgcolor:                     #333 !default;
-    $medium_editor_border_color:                #222 !default;
-    $medium_editor_button_size:                 60px !default;
-    $medium_editor_button_active_text_color:    #fff !default;
-    $medium_editor_hover_color:                 #444 !default;
-    $medium_editor_link_color:                  #fff !default;
-    $medium_editor_border_radius:               4px !default;
-    $medium_editor_placeholder_color:           #fff !default;
-
-    .medium-editor-toolbar {
-      border: 1px solid $medium_editor_border_color;
-      background-color: $medium_editor_bgcolor;
-
-      li {
-        button {
-          border: none;
-          border-right: 1px solid $medium_editor_border_color;
-          background-color: transparent;
-          color: $medium_editor_link_color;
-          box-sizing: border-box;
-          transition: background-color .2s ease-in, color .2s ease-in;
-
-          &:hover {
-            background-color: $medium_editor_hover_color;
-            color: $medium_editor_button_active_text_color;
-          }
-        }
-
-        .medium-editor-button-last {
-          border-right: none;
-        }
-
-        .medium-editor-button-active {
-          background-color: $medium_editor_hover_color;
-          color: $medium_editor_button_active_text_color;
-        }
-      }
-    }
-
-    .medium-toolbar-arrow-under:before {
-      border-color: $medium_editor_border_color transparent transparent transparent;
-    }
-
-    .medium-toolbar-arrow-under:after {
-      border-color: $medium_editor_bgcolor transparent transparent transparent;
-    }
-
-    .medium-toolbar-arrow-over:before {
-      border-color: transparent transparent $medium_editor_border_color transparent;
-    }
-
-    .medium-toolbar-arrow-over:after {
-      border-color: transparent transparent $medium_editor_bgcolor transparent;
-    }
-
-    .medium-editor-placeholder:after {
-      color: #fff;
     }
   }
 }

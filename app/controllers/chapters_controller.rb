@@ -56,7 +56,6 @@ class ChaptersController < ApplicationController
   # Authorizes the user first
   def new
     @chapter = Chapter.new(story: @story)
-    @editor = params[:editor] || "rich_editor"
     authorize @chapter
   end
 
@@ -108,7 +107,6 @@ class ChaptersController < ApplicationController
 
   def edit
     @chapter = @story.chapters.friendly.find(params[:id])
-    @editor = params[:editor] || "rich_editor"
     authorize @chapter
   end
 
