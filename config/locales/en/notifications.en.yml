@@ -4,3 +4,13 @@ en:
   notifications:
     notifications: "Notifications"
     no_unread_notifications: "No unread notifications"
+    commented_on:
+      user_commented_on_html: "%{user} commented on %{subject}."
+    subscribed_updated:
+      user_updated_story_html: "%{user} updated %{story}."
+    story_reviewed:
+      user_reviewed_story_html: "%{user} reviewed %{story}."
+    story_favorited:
+      user_favorited_story_html: "%{user} favorited %{story}." 
+    story_added_to_bookshelf:
+      story_has_been_added_to_bookshelf_html: "%{story} has been added to %{bookshelf}"
