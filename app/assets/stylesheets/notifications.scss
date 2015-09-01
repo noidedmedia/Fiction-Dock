@@ -9,9 +9,10 @@
 
   h1 {
     font-size: 2.4rem;
+    font-weight: 500;
     display: block;
-    border-bottom: 1px solid #aaaab2;
     padding-top: 20px;
+    margin-bottom: 20px;
   }
 
   li {
@@ -19,11 +20,13 @@
     position: relative;
     cursor: pointer;
     width: 100%;
-    padding: 10px 12px;
-    border-bottom: 1px solid #aaaab2;
+    padding: 10px 40px 10px 12px;
+    border-top: 1px solid #aaaab2;
     font-size: 1.4rem;
     line-height: 2.1rem;
-    max-height: 100vh;
+
+    // Defaults are no transformation and a max-height above the reasonable limit, for animation purposes.
+    max-height: 500px;
     transform: translateX(0%);
 
     // Translates the notification item to the right, then after a 200ms delay collapses the space it was taking up by removing height/padding.
@@ -33,10 +36,14 @@
       background-color: darken(#fff, 6%);
     }
 
+    &:last-of-type {
+      border-bottom: 1px solid #aaaab2;
+    }
+
     > .mark-as-read {
       position: absolute;
       top: 12px;
-      right: 12px;
+      right: 15px;
       opacity: 0.6;
 
       &:hover {
