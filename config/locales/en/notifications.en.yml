@@ -5,6 +5,7 @@ en:
     index:
       notifications: "Notifications"
       no_unread_notifications: "No unread notifications"
+      no_notifications_yet: "No notifications yet"
     commented_on:
       user_commented_on_html: "%{user} commented on %{your_subject}."
       your_subject: "your %{subject}"
@@ -16,4 +17,4 @@ en:
     story_favorited:
       user_favorited_story_html: "%{user} favorited %{story}." 
     story_added_to_bookshelf:
-      story_has_been_added_to_bookshelf_html: "%{story} has been added to %{bookshelf}"
+      story_has_been_added_to_bookshelf_html: "%{story} has been added to %{bookshelf}."

@@ -1,4 +1,4 @@
-<li class="notification-item" data-id="<%= notification.id %>">
+<li class="notification-item" data-id="<%= notification.id %>" data-subjectpath="<%= polymorphic_path(notification.subject) %>">
   <div class="notification-body">
     <%= render "#{notification.event}", note: notification %>
   </div>
