@@ -11,26 +11,12 @@
   display: flex;
   -webkit-flex-flow: column wrap;
           flex-flow: column wrap;
+  padding-top: 75px;
 
   @media all and (max-width: $mobile-width) {
     width: calc(100vw - 40px);
     max-width: 100%;
     margin: 0 20px;
-  }
-
-  > #rich-text {
-    outline: none;
-    font-size: 10px;
-    line-height: 1.5;
-    display: block;
-    height: auto;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    cursor: text;
-
-    > p {
-      margin-top: 10px;
-    }
   }
 
   > .markdown {
@@ -42,55 +28,28 @@
     }
   }
 
-  &.plain-editor {
-    padding-top: 75px;
-
-    input[type=text] {
-      font-size: 4.8rem;
-      border: transparent;
-      font-weight: 600;
-      border: none;
-      width: 100%;
-    }
-
-    #plain-text-contenteditable {
-      min-height: 25px;
-      width: 100%;
-      font-size: 1.6rem;
-      line-height: 1.5;
-      padding: 10px 0;
-      white-space: pre-wrap;
-      margin: 25px 0;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    textarea {
-      display: none;
-
-      &:hover, &:focus {
-        border-color: transparent;
-      }
-    }
+  input[type=text] {
+    font-size: 4.8rem;
+    border: transparent;
+    font-weight: 600;
+    border: none;
+    width: 100%;
   }
 
-  &.rich-editor {
-    padding-top: 75px;
+  textarea {
+    width: 100%;
+    min-height: 60vh;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    padding: 10px;
+    white-space: pre-wrap;
+    margin: 25px 0;
+    height: 100%;
+    resize: none;
 
-    input[type=text] {
-      font-size: 4.8rem;
-      border: transparent;
-      font-weight: 600;
-      border: none;
-      width: 100%;
-    }
-
-    textarea {
-      position: fixed;
-      opacity: 0;
-      pointer-events: none;
+    &:hover, &:focus {
+      border-color: transparent;
+      outline: none;
     }
   }
 
@@ -106,218 +65,4 @@
       outline: none;
     }
   }
-}
-
-.editor-tabs {
-  display: block;
-  margin: auto;
-  text-align: left;
-  padding-top: 50px;
-  border-bottom: 1px solid #aaaab2;
-  padding-bottom: 7px;
-
-  li {
-    display: inline-block;
-    font-size: 1.4rem;
-    margin: 0 30px;
-    position: relative;
-
-    span {
-      font-size: 1.2rem;
-      top: -5px;
-      left: 0px;
-      position: absolute;
-      color: #333;
-      opacity: 0.7;
-    }
-
-    a {
-      color: #333;
-      opacity: 0.7;
-      text-decoration: none;
-      display: block;
-      padding-left: 35px;
-    }
-
-    &.current {
-      color: #333;
-      cursor: pointer;
-      padding-left: 35px;
-
-      span {
-        opacity: 1;
-      }
-
-      &:after {
-        content: '';
-        background-color: #17cd94;
-        width: calc(100% + 70px);
-        -webkit-transform: translate(-50px, 7px);
-        transform: translate(-50px, 7px);
-        height: 3px;
-        display: block;
-      }
-    }
-  }
-}
-
-// Applies to all elements with contenteditable set to true.
-// When the field is empty, the value of the placeholder attribute
-// will be used as placeholder text.
-[contenteditable=true]:empty:before {
-  content: attr(placeholder);
-  display: block; /* For Firefox */
-  padding: 0 2px;
-  transform: translateY(-3px);
-  cursor: text;
-  opacity: 0.7;
-  font-style: italic;
-}
-
-
-$medium_editor_bgcolor:                     #fff !default;
-$medium_editor_border_color:                #aaaab2 !default;
-$medium_editor_button_size:                 60px !default;
-$medium_editor_button_active_text_color:    #333 !default;
-$medium_editor_hover_color:                 #f0f0f0 !default;
-$medium_editor_link_color:                  #333 !default;
-$medium_editor_border_radius:               4px !default;
-$medium_editor_placeholder_color:           #333 !default;
-
-.medium-toolbar-arrow-under:after {
-  top: $medium_editor_button_size;
-  border-color: $medium_editor_bgcolor transparent transparent transparent;
-}
-
-.medium-toolbar-arrow-over:before {
-  border-color: transparent transparent $medium_editor_bgcolor transparent;
-}
-
-.medium-editor-toolbar {
-  border: 1px solid $medium_editor_border_color;
-  background-color: $medium_editor_bgcolor;
-  border-radius: $medium_editor_border_radius;
-
-  li {
-    button {
-      min-width: $medium_editor_button_size;
-      height: $medium_editor_button_size;
-      border: none;
-      border-right: 1px solid $medium_editor_border_color;
-      background-color: transparent;
-      color: $medium_editor_link_color;
-      box-sizing: border-box;
-      transition: background-color .2s ease-in, color .2s ease-in;
-
-      &:hover {
-        background-color: $medium_editor_hover_color;
-        color: $medium_editor_button_active_text_color;
-      }
-
-      span {
-        font-size: 1.0rem;
-        line-height: 28px;
-      }
-    }
-
-    .medium-editor-button-first {
-      border-top-left-radius: $medium_editor_border_radius;
-      border-bottom-left-radius: $medium_editor_border_radius;
-    }
-
-    .medium-editor-button-last {
-      border-right: none;
-      border-top-right-radius: $medium_editor_border_radius;
-      border-bottom-right-radius: $medium_editor_border_radius;
-    }
-
-    .medium-editor-button-active {
-      background-color: $medium_editor_hover_color;
-      color: $medium_editor_button_active_text_color;
-    }
-  }
-}
-
-.medium-editor-toolbar-form {
-  background: $medium_editor_bgcolor;
-  color: #fff;
-  border-radius: $medium_editor_border_radius;
-
-  input.medium-editor-toolbar-input {
-    height: $medium_editor_button_size;
-    background: transparent;
-    color: $medium_editor_link_color;
-    padding: 0 12px;
-
-    &::-webkit-input-placeholder {
-      color: $medium_editor_placeholder_color;
-      color: rgba($medium_editor_placeholder_color, .8);
-    }
-
-    &:-moz-placeholder { /* Firefox 18- */
-      color: $medium_editor_placeholder_color;
-      color: rgba($medium_editor_placeholder_color, .8);
-    }
-
-    &::-moz-placeholder {  /* Firefox 19+ */
-      color: $medium_editor_placeholder_color;
-      color: rgba($medium_editor_placeholder_color, .8);
-    }
-
-    &:-ms-input-placeholder {
-      color: $medium_editor_placeholder_color;
-      color: rgba($medium_editor_placeholder_color, .8);
-    }
-  }
-
-  a {
-    color: $medium_editor_link_color;
-  }
-}
-
-.medium-editor-toolbar-anchor-preview {
-  background: $medium_editor_bgcolor;
-  color: $medium_editor_link_color;
-  border-radius: $medium_editor_border_radius;
-}
-
-.medium-editor-placeholder:after {
-  color: $medium_editor_border_color;
-}
-
-
-.medium-toolbar-arrow-under:before, .medium-toolbar-arrow-under:after,
-.medium-toolbar-arrow-over:after, .medium-toolbar-arrow-over:before {
-  position: absolute;
-  left: 50%;
-  display: block;
-  margin-left: -8px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  content: "";
-}
-
-.medium-toolbar-arrow-under:before {
-  top: 61px;
-  border-color: $medium_editor_border_color transparent transparent transparent;
-  border-width: 8px 8px 0 8px;
-}
-
-.medium-toolbar-arrow-under:after {
-  top: 60px;
-  border-color: $medium_editor_bgcolor transparent transparent transparent;
-  border-width: 8px 8px 0 8px;
-}
-
-.medium-toolbar-arrow-over:before {
-  top: -9px !important;
-  border-color: transparent transparent $medium_editor_border_color transparent;
-  border-width: 0 8px 8px 8px;
-}
-
-.medium-toolbar-arrow-over:after {
-  top: -8px !important;
-  border-color: transparent transparent $medium_editor_bgcolor transparent;
-  border-width: 0 8px 8px 8px;
 }
