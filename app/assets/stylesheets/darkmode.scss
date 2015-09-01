@@ -184,5 +184,14 @@
     .fd-list-item:not(:first-of-type) {
       border-top: 1px solid rgba(#fff,0.3);
     }
+
+    #story-toolbar-right .add-to-bookshelves > div {
+      background-color: #444;
+      border-color: lighten(#444,20%);
+
+      li:hover {
+        background-color: lighten(#444,20%);
+      }
+    }
   }
 }
