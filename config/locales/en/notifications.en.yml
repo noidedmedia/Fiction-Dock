@@ -4,8 +4,9 @@ en:
   notifications:
     index:
       notifications: "Notifications"
-      no_unread_notifications: "No unread notifications"
       no_notifications_yet: "No notifications yet"
+    notifications_flyout:
+      no_unread_notifications: "No unread notifications"
     notification:
       mark_as_read: "Mark as read"
     commented_on:
