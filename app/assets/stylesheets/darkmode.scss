@@ -197,5 +197,9 @@
     .notification-item:hover {
       background-color: lighten(#444, 8%);
     }
+
+    #notifications-flyout {
+      background-color: #444;
+    }
   }
 }

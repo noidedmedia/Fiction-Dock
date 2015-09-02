@@ -67,10 +67,10 @@
         </div>
       </div>
 
-      <div id="header-notifications" class="header-item header-item-with-flyout">
+      <div id="header-notifications" class="header-item">
         <div class="header-item-title"><%= current_user.notifications.unread.count %></div>
 
-        <div id="notifications-flyout" class="flyout">
+        <div id="notifications-flyout" data-showon="#header-notifications">
           <%= render partial: 'notifications/notifications_flyout' %>
         </div>
       </div>

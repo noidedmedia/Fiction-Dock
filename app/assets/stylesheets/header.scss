@@ -357,6 +357,25 @@
   }
 }
 
+#header-notifications {
+  display: inline-block;
+  position: relative;
+}
+
+#notifications-flyout {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  display: none;
+  background-color: #fff;
+  border-left: 1px solid #aaaab2;
+  border-right: 1px solid #aaaab2;
+
+  &.active {
+    display: inline-block;
+  }
+}
+
 #general-info {
   position: absolute;
   top: 0;

@@ -20,5 +20,4 @@ class NotificationsController < ApplicationController
     end
     render(layout: false) if request.xhr?
   end
-
 end
