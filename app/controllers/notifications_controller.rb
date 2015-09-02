@@ -20,4 +20,8 @@ class NotificationsController < ApplicationController
     end
     render(layout: false) if request.xhr?
   end
+
+  def notifications
+    @notifications = current_user.notifications
+  end
 end

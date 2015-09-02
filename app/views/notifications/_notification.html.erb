@@ -1,6 +1,6 @@
 <li class="notification-item" data-id="<%= notification.id %>" data-subjectpath="<%= polymorphic_path(notification.subject) %>">
   <div class="notification-body">
-    <%= render "#{notification.event}", note: notification %>
+    <%= render "notifications/#{notification.event}", note: notification %>
   </div>
   <div class="notification-time">
     <%= t("time_ago", time: time_ago_in_words(notification.created_at)) %>

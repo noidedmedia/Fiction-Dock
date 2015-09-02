@@ -1,6 +1,6 @@
 <ul class="notifications">
-  <% if !@notifications.empty? %>
-    <%= render 'notifications' %>
+  <% if !current_user.notifications.unread.empty? %>
+    <%= render 'notifications/notifications', notifications: current_user.notifications.unread %>
   <% else %>
     <p class="fd-list-empty-note"><%= t(".no_unread_notifications") %></p>
   <% end %>

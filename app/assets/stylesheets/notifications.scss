@@ -40,6 +40,10 @@
       border-bottom: 1px solid #aaaab2;
     }
 
+    a {
+      text-decoration: underline;
+    }
+
     > .mark-as-read {
       position: absolute;
       top: 12px;
