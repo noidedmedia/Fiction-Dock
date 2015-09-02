@@ -199,6 +199,20 @@
       background-color: lighten(#444, 8%);
     }
 
+    #header-notifications {
+      .header-item-title {
+        background-color: #222;
+      }
+
+      &.active .header-item-title {
+        background-color: #444;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+
     #notifications-flyout {
       background-color: #444;
     }

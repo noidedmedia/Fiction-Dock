@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <div id="header-notifications" class="header-item">
+      <div id="header-notifications" class="header-item <% if current_user.notifications.unread.count > 0 %>unread<% end %>">
         <div class="header-item-title">
           <%= link_to current_user.notifications.unread.count, notifications_path %>
         </div>
