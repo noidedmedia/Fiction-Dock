@@ -360,6 +360,25 @@
 #header-notifications {
   display: inline-block;
   position: relative;
+  padding: 0;
+  
+  &.active {
+    background-color: #fff;
+  }
+
+  .header-item-title {
+    cursor: pointer;
+    display: block;
+    padding: 13px 15px;
+
+    a {
+      display: block;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 #notifications-flyout {

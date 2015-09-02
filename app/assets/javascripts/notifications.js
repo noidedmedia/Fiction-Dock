@@ -18,6 +18,10 @@ $(function() {
     e.stopPropagation();
   });
 
+  $("#header-notifications > .header-item-title a").click(function(e) {
+    e.preventDefault();
+  });
+
   $(".notification-item .mark-as-read").click(function(e) {
     e.stopPropagation();
 
