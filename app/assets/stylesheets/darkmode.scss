@@ -204,6 +204,10 @@
         background-color: #222;
       }
 
+      &.unread .header-item-title {
+        background-color: #b70f3b;
+      }
+
       &.active .header-item-title {
         background-color: #444;
 
