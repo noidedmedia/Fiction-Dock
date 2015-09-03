@@ -43,7 +43,7 @@ $(function() {
       url: "/notifications/mark_all_read",
       success: function() {
         $(".notification-item").addClass("notification-read-animate");
-        $("#header-notifications .header-item-title a").innerHTML("0");
+        $("#header-notifications .header-item-title a").html("0");
         $("#header-notifications").removeClass("unread").removeClass("active");
       }
     });
