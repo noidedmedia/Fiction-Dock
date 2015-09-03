@@ -1,6 +1,11 @@
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!
-  
+
+
+  def mark_all_read
+   current_user.notifications.upate_all(read: true)
+  end
+
   def read
     @notification = Notification.find(params[:id])
     if @notification.user != current_user
