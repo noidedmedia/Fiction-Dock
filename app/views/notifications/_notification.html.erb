@@ -5,7 +5,10 @@
   <div class="notification-time">
     <%= t("time_ago", time: time_ago_in_words(notification.created_at)) %>
   </div>
-  <div class="mark-as-read">
-    <span class="icon icon-check" title="<%= t('.mark_as_read') %>"></span>
-  </div>
+
+  <% unless notification.read? %>
+    <div class="mark-as-read">
+      <span class="icon icon-check" title="<%= t('.mark_as_read') %>"></span>
+    </div>
+  <% end %>
 </li>
