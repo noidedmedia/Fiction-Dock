@@ -85,7 +85,7 @@ Rails.application.routes.draw do
 
   get '/about', to: "static_stuff#about"
   get '/rules', to: "static_stuff#rules"
-
+  get '/faq', to: "static_stuff#faq"
   root 'frontpage#index'
 
 end

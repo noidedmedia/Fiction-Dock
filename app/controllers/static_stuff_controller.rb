@@ -13,4 +13,8 @@ class StaticStuffController < ApplicationController
   def rules
     
   end
+
+  def faq
+    
+  end
 end

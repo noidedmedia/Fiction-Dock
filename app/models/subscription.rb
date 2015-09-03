@@ -20,7 +20,7 @@ class Subscription < ActiveRecord::Base
   def notify_author
     Notification.create(
       event: :story_subscribed,
-      subject: self,
+      subject: user,
       secondary_subject: story,
       user: story.author
     )

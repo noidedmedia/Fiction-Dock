@@ -1,5 +1,19 @@
 @import "scss-variables";
 
+
+#faq{
+  h1{
+    font-size: 2.4rem;
+  }
+  h2{
+    font-size: 2rem;
+  }
+  margin: 20px;
+  ol{
+    margin-left: 20px;
+  }
+}
+
 .about-page-container {
   padding-top: 80px;
 }
