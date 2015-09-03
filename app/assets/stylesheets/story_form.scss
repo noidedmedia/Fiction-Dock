@@ -313,6 +313,13 @@
       }
     }
   }
+
+  .form-character.inactive {
+    span.icon {
+      top: 3px;
+      left: 2px;
+    }
+  }
 }
 
 #add-ship-button {
