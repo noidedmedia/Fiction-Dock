@@ -79,6 +79,7 @@
     height: 32px;
     width: 100%;
     border: 1px solid #aaaab2;
+    background-color: transparent;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -94,7 +95,6 @@
     font-size: 11px;
     top: 5px;
     right: 10px;
-    color: #333;
     opacity: 0.5;
     cursor: pointer;
 

@@ -220,5 +220,18 @@
     #notifications-flyout {
       background-color: #444;
     }
+
+    .suggestions-container,
+    .character-suggestions {
+      background-color: #444;
+
+      li:hover {
+        background-color: lighten(#444, 6%);
+      }
+    }
+
+    .character-suggestions > .form-character.inactive:hover {
+      background-color: lighten(#444, 6%);
+    }
   }
 }
