@@ -27,7 +27,8 @@ class Notification < ActiveRecord::Base
     # subject: story
     # secondary_subject: the chapter
     :subscribed_updated,
-    :commented_on
+    :commented_on,
+    :story_subscribed,
   ]
 
   def read!

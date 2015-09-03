@@ -14,4 +14,15 @@
 class Subscription < ActiveRecord::Base
   belongs_to :user
   belongs_to :story
+
+  after_create :notify_author
+
+  def notify_author
+    Notification.create(
+      event: :story_subscribed,
+      subject: self,
+      secondary_subject: story,
+      user: story.author
+    )
+  end
 end
