@@ -45,6 +45,9 @@ $(function() {
         $(".notification-item").addClass("notification-read-animate");
         $("#header-notifications .header-item-title a").html("0");
         $("#header-notifications").removeClass("unread").removeClass("active");
+        window.setTimeout(function() {
+          $("#header-notifications .fd-list-empty-note").removeProp("hidden");
+        }, 700);
       }
     });
   });
