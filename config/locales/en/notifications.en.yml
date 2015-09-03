@@ -15,6 +15,8 @@ en:
     subscribed_updated:
       story_has_been_updated_html: "%{story} has been %{updated}."
       updated: "updated"
+    story_subscribed:
+      user_has_subscribed_to_story_html: "%{user} has subscribed to %{story}."
     story_reviewed:
       user_reviewed_story_html: "%{user} reviewed %{story}."
     story_favorited:
