@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :franchises, through: :francise_users
   has_many :subscriptions
   has_many :subscribed_stories, through: :subscriptions, class_name: "Story", source: :story
-  has_many :notifications
+  has_many :notifications, -> { order("created_at DESC") }
   validates :name,
     presence: true,
     format: {with: /\A([[:alpha:]]+|\w+)\z/},
@@ -35,6 +35,11 @@ class User < ActiveRecord::Base
 
   def subscribe!(story)
     subscribed_stories << story
+  end
+
+  def has_subscribed?(story)
+    # Might be slow version, Anthony pls fix
+    subscribed_stories.include?(story)
   end
 
   def mod_or_higher?

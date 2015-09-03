@@ -1,0 +1,11 @@
+<%- title t(".notifications") %>
+
+<ul class="notifications">
+  <h1><%= t(".notifications") %></h1>
+  
+  <% if !@notifications.empty? %>
+    <%= render 'notifications', notifications: @notifications %>
+  <% else %>
+    <p class="fd-list-empty-note"><%= t(".no_notifications_yet") %></p>
+  <% end %>
+</ul>

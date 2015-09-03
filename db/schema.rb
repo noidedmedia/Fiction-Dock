@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812013655) do
+ActiveRecord::Schema.define(version: 20150828224546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,11 +132,12 @@ ActiveRecord::Schema.define(version: 20150812013655) do
     t.integer  "subject_id"
     t.string   "subject_type"
     t.integer  "user_id"
-    t.integer  "event",                  null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "event",                                  null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "secondary_subject_id"
     t.string   "secondary_subject_type"
+    t.boolean  "read",                   default: false, null: false
   end
 
   add_index "notifications", ["secondary_subject_id", "secondary_subject_type"], name: "secondary_subject_index", using: :btree

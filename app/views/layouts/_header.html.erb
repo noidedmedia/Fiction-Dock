@@ -67,6 +67,16 @@
         </div>
       </div>
 
+      <div id="header-notifications" class="header-item <% if current_user.notifications.unread.count > 0 %>unread<% end %>">
+        <div class="header-item-title">
+          <%= link_to current_user.notifications.unread.count, notifications_path %>
+        </div>
+
+        <div id="notifications-flyout" data-showon="#header-notifications">
+          <%= render partial: 'notifications/notifications_flyout' %>
+        </div>
+      </div>
+
       <div id="username" class="header-item header-item-with-flyout">
         <div class="header-item-title"><%= current_user.name %></div>
 

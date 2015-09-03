@@ -1,0 +1,27 @@
+# Stories strings.
+
+en:
+  notifications:
+    index:
+      notifications: "Notifications"
+      no_notifications_yet: "No notifications yet"
+    notifications_flyout:
+      notifications: "Notifications"
+      mark_all_as_read: "Mark all as read"
+      no_unread_notifications: "No unread notifications"
+    notification:
+      mark_as_read: "Mark as read"
+    commented_on:
+      user_commented_on_html: "%{user} commented on %{your_subject}."
+      your_subject: "your %{subject}"
+    subscribed_updated:
+      story_has_been_updated_html: "%{story} has been %{updated}."
+      updated: "updated"
+    story_subscribed:
+      user_has_subscribed_to_story_html: "%{user} has subscribed to %{story}."
+    story_reviewed:
+      user_reviewed_story_html: "%{user} reviewed %{story}."
+    story_favorited:
+      user_favorited_story_html: "%{user} favorited %{story}." 
+    story_added_to_bookshelf:
+      story_has_been_added_to_bookshelf_html: "%{story} has been added to %{bookshelf}."

@@ -14,16 +14,34 @@ class Chapter < ActiveRecord::Base
   validates :name, presence: true
   belongs_to :story
   validates :story, presence: true
+  validate :can_unpublish
   validates :chap_num, numericality: {greater_than: 0}
   validates :word_count, presence: true
   before_validation :fix_chap_num
   before_validation :sanitize_tags
   before_validation :save_word_count
+  before_update :notify_published
   def notify_published
+    return unless published? && published_was == false
     attrs = story.subscribers
-      .pluck(:id).map{|x| {user_id: x, subject: story, event: "subscribed_updated"}}
+      .pluck(:id).map{|x| {user_id: x, 
+        subject: story, 
+        secondary_subject: self,
+        event: "subscribed_updated"}}
     Notification.create(attrs)
   end
+
+  def can_unpublish
+    if ! published? && published_was == true
+      if story.published? && story.chapters.published.count == 1
+        errors.add(:published, "Cannot unpublish the last published chapter in a published story")
+        return false
+      else
+        return true
+      end
+    end
+  end
+
   def sanitize_tags
     self.body = Sanitize.fragment(self.body, Sanitize::Config::BASIC).gsub('&gt;','>')
   end

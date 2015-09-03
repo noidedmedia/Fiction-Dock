@@ -1,6 +1,14 @@
 ##
 # Helpers we may need in all views
 module ApplicationHelper
+
+  def review_path(rev)
+    story_review_path(rev.story, rev)
+  end
+  
+  def comment_path(comment)
+    polymorphic_path(comment.commentable) + "#comment-number-#{comment.id}"
+  end
   ##
   # Properly format a Time
   # 7:21 PM June 14, 2015

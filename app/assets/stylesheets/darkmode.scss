@@ -155,6 +155,7 @@
     }
 
     #general-info.active,
+    #header-notifications.active,
     #username:hover,
     .header-item-with-flyout:hover {
       background-color: #444;
@@ -192,6 +193,45 @@
       li:hover {
         background-color: lighten(#444,20%);
       }
+    }
+
+    .notification-item:hover {
+      background-color: lighten(#444, 8%);
+    }
+
+    #header-notifications {
+      .header-item-title {
+        background-color: #222;
+      }
+
+      &.unread .header-item-title {
+        background-color: #b70f3b;
+      }
+
+      &.active .header-item-title {
+        background-color: #444;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+
+    #notifications-flyout {
+      background-color: #444;
+    }
+
+    .suggestions-container,
+    .character-suggestions {
+      background-color: #444;
+
+      li:hover {
+        background-color: lighten(#444, 6%);
+      }
+    }
+
+    .character-suggestions > .form-character.inactive:hover {
+      background-color: lighten(#444, 6%);
     }
   }
 }

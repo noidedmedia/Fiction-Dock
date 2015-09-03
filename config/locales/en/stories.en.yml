@@ -14,6 +14,8 @@ en:
       favorite: "Favorite"
       unfavorite: "Unfavorite"
       add_to_bookshelves: "Add to bookshelves"
+      subscribe: "Subscribe"
+      unsubscribe: "Unsubscribe"
       edit: "Edit"
       publish: "Publish"
       unpublish: "Unpublish"

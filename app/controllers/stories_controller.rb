@@ -93,17 +93,18 @@ class StoriesController < ApplicationController
   #
   # The point is to do this with JSON
   def subscribe
-    if current_user.subscriptions.where(story_id: params[:id]).first.nil?
-      Subscription.create(story_id: params[:id],
+    @story = Story.find(params[:story_id])
+    unless current_user.has_subscribed? @story
+      Subscription.create(story_id: params[:story_id],
                           user_id: current_user.id)
       respond_to do |format|
-        format.html { redirect_to story_path(params[:id]) }
+        format.html { redirect_to @story }
         format.json { render json: true }
       end
     else
       respond_to do |format|
         # TODO: fix this
-        format.html { redirect_to story_path(params[:id]) }
+        format.html { redirect_to @story }
         format.json { render json: false }
       end
     end
@@ -113,15 +114,16 @@ class StoriesController < ApplicationController
   # use a DELETE to unsubscribe
   # Returns the success as a JSON
   def unsubscribe
-    s = Subscription.where(story_id: params[:id],
+    s = Subscription.where(story_id: params[:story_id],
                            user_id: current_user.id)
+          .first
     respond_to do |format|
       if s.try(:destroy)
-        format.html { redirect_to story_path(params[:id]) }
+        format.html { redirect_to story_path(params[:story_id]) }
         format.json { render json: true }
       else
         # TODO: Fix this
-        format.html { redirect_to story_path(params[:id]) }
+        format.html { redirect_to story_path(params[:story_id]) }
         format.json { render json: false }
       end
     end

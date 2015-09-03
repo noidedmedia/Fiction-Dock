@@ -24,7 +24,6 @@
   <ul data-tabs="true" class="fd-tabs">
     <li data-tab="tab-1" class="fd-tabs-tab current"><%= t(".stories", count: @stories.count) %>
   <li data-tab="tab-2" class="fd-tabs-tab"><%= t(".characters", count: @franchise.characters.count) %>
-  <li data-tab="tab-3" class="fd-tabs-tab">Stats
   </ul>
 
   <div class="tab-content tc-tab-1 fd-tab-content current">
@@ -52,8 +51,5 @@
         </li>
       <% end %>
     </ul>
-  </div>
-  <div class="tab-content tc-tab-3 fd-tab-content" data-callback="getFranchiseStats" data-json_url="<%= "#{stats_franchise_path @franchise}.json" %>">
-
   </div>
 </div>

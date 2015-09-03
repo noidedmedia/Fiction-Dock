@@ -1,0 +1,73 @@
+@import "scss-variables";
+
+.notifications {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  position: relative;
+  overflow-x: hidden;
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    display: block;
+    padding-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  li {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 60px 10px 12px;
+    border-top: 1px solid #aaaab2;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+
+    // Defaults are no transformation and a max-height above the reasonable limit, for animation purposes.
+    max-height: 500px;
+    transform: translateX(0%);
+
+    // Translates the notification item to the right, then after a 200ms delay collapses the space it was taking up by removing height/padding.
+    transition: transform 400ms ease-in, max-height 200ms 600ms, padding 200ms 600ms, background-color 200ms;
+
+    &:hover {
+      background-color: darken(#fff, 6%);
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid #aaaab2;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+
+    > .mark-as-read {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    // This moves the notification off to the right and makes its height and padding 0.
+    &.notification-read-animate {
+      transform: translateX(100%);
+      max-height: 0;
+      padding: 0;
+    }
+  }
+
+  .notification-time {
+    color: #aaaab2;
+  }
+
+  @media all and (max-width: $mobile-width) {
+    max-width: 100%;
+  }
+}

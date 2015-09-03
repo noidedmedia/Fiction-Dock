@@ -7,11 +7,11 @@ RSpec.describe Chapter, type: :model do
                                      story: story,
                                      chap_num: 2)}
     let(:prev_c){FactoryGirl.create(:chapter,
-                                  story: story,
-                                  chap_num: 1)}
+                                    story: story,
+                                    chap_num: 1)}
     let(:next_c){FactoryGirl.create(:chapter,
-                                  story: story,
-                                  chap_num: 3)}
+                                    story: story,
+                                    chap_num: 3)}
     it "can find the next chapter" do
       next_c
       expect(current.next_chapter).to eq(next_c)
@@ -28,6 +28,17 @@ RSpec.describe Chapter, type: :model do
                                    story: story,
                                    body: "This has four words.")
       expect(chapter.word_count).to eq(4)
+    end
+  end
+
+  describe "validation" do
+    let(:story){FactoryGirl.create(:published_story)}
+    it "does not allow chapters to be unpublished if the story is published" do
+      expect{
+        story.chapters.each do |e|
+        e.unpublish
+        e.save!
+        end}.to raise_error
     end
   end
   describe "notifications" do

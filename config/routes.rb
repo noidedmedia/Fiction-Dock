@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     post :read
   end
 
+
+  resources :notifications, only: [:index] do
+    post 'read', on: :member
+    post 'mark_all_read', on: :collection
+  end
   concern :popularity_queryable do
     get 'popular', on: :collection
   end
@@ -81,7 +86,7 @@ Rails.application.routes.draw do
 
   get '/about', to: "static_stuff#about"
   get '/rules', to: "static_stuff#rules"
-
+  get '/faq', to: "static_stuff#faq"
   root 'frontpage#index'
 
 end
