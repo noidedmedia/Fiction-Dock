@@ -6,6 +6,8 @@ en:
       notifications: "Notifications"
       no_notifications_yet: "No notifications yet"
     notifications_flyout:
+      notifications: "Notifications"
+      mark_all_as_read: "Mark all as read"
       no_unread_notifications: "No unread notifications"
     notification:
       mark_as_read: "Mark as read"

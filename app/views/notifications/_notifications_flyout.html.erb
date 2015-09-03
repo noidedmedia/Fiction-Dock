@@ -1,3 +1,8 @@
+<div class="notifications-flyout-header">
+  <p><%= link_to t(".notifications"), notifications_path %></p>
+  <p id="mark-all-as-read"><%= t(".mark_all_as_read") %></p>
+</div>
+
 <ul class="notifications">
   <% if !current_user.notifications.unread.empty? %>
     <%= render 'notifications/notifications', notifications: current_user.notifications.unread %>
