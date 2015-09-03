@@ -47,5 +47,5 @@ $(function() {
         $("#header-notifications").removeClass("unread").removeClass("active");
       }
     });
-  }  
+  });
 });
