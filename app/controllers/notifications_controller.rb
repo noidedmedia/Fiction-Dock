@@ -3,7 +3,10 @@ class NotificationsController < ApplicationController
 
 
   def mark_all_read
-   current_user.notifications.upate_all(read: true)
+   current_user.notifications.each do |n|
+     n.update(read: true)
+   end
+   render json: {success: true}
   end
 
   def read
