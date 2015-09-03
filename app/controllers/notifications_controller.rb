@@ -17,12 +17,7 @@ class NotificationsController < ApplicationController
   end
 
   def index
-    @notifications = current_user.notifications.paginate(page: params[:page])
-    if params["include_read"]
-      @notifications = @notifications.read
-    else
-      @notifications = @notifications.unread
-    end
+    @notifications = current_user.notifications
     render(layout: false) if request.xhr?
   end
 
