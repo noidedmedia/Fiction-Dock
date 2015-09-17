@@ -5,9 +5,6 @@ source 'https://rubygems.org'
 # Redcarpet for Markdown
 gem 'redcarpet', '~> 3.2.3'
 
-# The Medium Editor gem for rails.
-gem 'medium-editor-rails'
-
 
 gem 'will_paginate', "~> 3.0.6"
 # Data migrations!
