@@ -12,7 +12,8 @@
     
   <% end %>
 
-  <% if action_name == "edit" %>
+  <%# Only display "Delete bookshelf" if the bookshelf has already been created. Verify that the user has the ability to delete the bookshelf. %>
+  <% if action_name == "edit" && policy(@bookshelf).destroy? %>
     <%= link_to t(".delete_bookshelf"), bookshelf_path(@bookshelf), method: :delete, data: { confirm: t(".are_you_sure_you_want_to_delete_this_bookshelf") }, class: "delete-button" %>
   <% end %>
 </div>
