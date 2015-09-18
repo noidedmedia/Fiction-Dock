@@ -42,7 +42,7 @@ class ApplicationPolicy
   end
 
   ##
-  # BY default, disallow update
+  # By default, disallow update
   def update?
     false
   end
