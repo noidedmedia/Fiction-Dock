@@ -12,8 +12,11 @@ class ChaptersController < ApplicationController
     render nothing: true
   end
 
+  ##
+  # Publish this chapter
   def publish
     @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
     @chapter.publish
     respond_to do |format|
       format.html { redirect_to [@story, @chapter] }
@@ -21,8 +24,11 @@ class ChaptersController < ApplicationController
     end
   end
 
+  ##
+  # Unpublish this chapter
   def unpublish
     @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
     @chapter.unpublish
     respond_to do |format|
       format.html { redirect_to [@story, @chapter] }
@@ -30,8 +36,11 @@ class ChaptersController < ApplicationController
     end
   end
 
+  ##
+  # Check if this chapter is published
   def published
     @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
     respond_to do |format|
       format.json { render json: @chapter.published? }
     end
@@ -42,13 +51,6 @@ class ChaptersController < ApplicationController
   def show
     @chapter = @story.chapters.friendly.find(params[:id])
     authorize @chapter
-  end
-
-  def destroy
-    @chapter = @story.chapters.friendly.find(params[:id])
-    authorize @chapter
-    @chapter.destroy
-    redirect_to @story
   end
 
   ##

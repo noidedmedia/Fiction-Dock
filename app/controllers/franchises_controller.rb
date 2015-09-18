@@ -15,6 +15,7 @@ class FranchisesController < ApplicationController
     @foreign_ships = @franchise.foreign_ships.by_frequency
       .includes(characters: :franchise).limit(10)
   end 
+  
   ##
   # Get all stories under this franchise
   def stories

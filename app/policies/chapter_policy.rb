@@ -28,18 +28,36 @@ class ChapterPolicy < ApplicationPolicy
   # Make it a bit easier to get the chapter
   attr_accessor :chapter
 
+  ##
+  # Users can view a chapter if the chapter is published or if they own it
   def show?
     @chapter.published || owned?
   end
+  
+  ##
+  # Users can check if a chapter is published only if they own the story
+  def published?
+    owned?
+  end
+
+  ##
+  # Users can publish a chapter if they own the story
+  def publish?
+    owned?
+  end
+
+  ##
+  # Users can unpublish a chapter if they own the story
+  def unpublish?
+    owned?
+  end
+
   ##
   # Users can create a new chapter if they own the story
   def new?
     owned?
   end
 
-  def destroy?
-    owned?
-  end
   ##
   # Users can edit chapters if they own the story
   def edit?
@@ -53,8 +71,14 @@ class ChapterPolicy < ApplicationPolicy
   end
 
   ## 
-  # Users can update the chapters if they own a story
+  # Users can update chapters if they own a story
   def update?
+    owned?
+  end
+
+  ## 
+  # Users can destroy chapters if they own a story
+  def destroy?
     owned?
   end
 
