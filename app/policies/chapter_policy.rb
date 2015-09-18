@@ -37,6 +37,9 @@ class ChapterPolicy < ApplicationPolicy
     owned?
   end
 
+  def destroy?
+    owned?
+  end
   ##
   # Users can edit chapters if they own the story
   def edit?

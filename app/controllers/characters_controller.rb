@@ -26,7 +26,13 @@ class CharactersController < ApplicationController
       .for_display.joins(:characters).where(characters: {id: @character.id})
       .paginate(page: page, per_page: per_page)
   end
-  
+
+  def destroy
+    @character = Character.friendly.find(params[:id])
+    authorize @character
+    @character.remove
+  end
+
   ##
   # Create a new character
   # TODO: restrict this

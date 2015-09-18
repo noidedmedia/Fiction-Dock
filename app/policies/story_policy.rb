@@ -12,7 +12,9 @@ class StoryPolicy < ApplicationPolicy
     @user = user
     @story = story
   end
-
+  def destroy?
+    owned?
+  end
   def publish?
     owned?
   end

@@ -44,6 +44,12 @@ class ChaptersController < ApplicationController
     authorize @chapter
   end
 
+  def destroy
+    @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
+    @chapter.destroy
+  end
+
   ##
   # List all chapters
   # Only really useful for JSON routes

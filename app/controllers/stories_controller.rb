@@ -153,6 +153,11 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
   end
 
+  def destroy
+    @story = Story.find(params[:id])
+    authorize @story
+    @story.destroy
+  end
   ##
   # Display a form to create a new story.
   def new
