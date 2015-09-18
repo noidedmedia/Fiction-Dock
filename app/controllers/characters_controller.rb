@@ -30,7 +30,7 @@ class CharactersController < ApplicationController
   def destroy
     @character = Character.friendly.find(params[:id])
     authorize @character
-    @character.remove
+    @character.destroy
     redirect_to "/"
   end
 
