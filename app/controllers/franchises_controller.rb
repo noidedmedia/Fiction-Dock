@@ -47,7 +47,7 @@ class FranchisesController < ApplicationController
   end
 
   ##
-  # Edit a franchise
+  # Edit an existing franchise
   # TODO: restrict this only to authorized users
   def edit
     @franchise = Franchise.friendly.find(params[:id])
@@ -63,21 +63,7 @@ class FranchisesController < ApplicationController
       .joins(:franchises).where(franchises: {id: @franchise.id})
       .paginate(page: page, per_page: per_page)
   end
-
-  def update
-    @franchise = Franchise.friendly.find(params[:id])
-    authorize @franchise
-    respond_to do |format|
-      if @franchise.update(franchise_params)
-        format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_updated_successfully") }
-        format.json { render :show, status: :created, location: @franchise}
-      else
-        format.json { redirect_to :back, warning: @franchise.errors.full_messages.join(", ") }
-        format.json { render json: @franchise.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
+  
   ##
   # Make a new franchise
   # TODO: restrict this
@@ -88,6 +74,22 @@ class FranchisesController < ApplicationController
       if @franchise.save
         format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_created_successfully") }
         format.json { render :show, status: :created, location: @franchise }
+      else
+        format.html { redirect_to :back, warning: @franchise.errors.full_messages.join(", ") }
+        format.json { render json: @franchise.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  ##
+  # Update an existing franchise
+  def update
+    @franchise = Franchise.friendly.find(params[:id])
+    authorize @franchise
+    respond_to do |format|
+      if @franchise.update(franchise_params)
+        format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_updated_successfully") }
+        format.json { render :show, status: :created, location: @franchise}
       else
         format.html { redirect_to :back, warning: @franchise.errors.full_messages.join(", ") }
         format.json { render json: @franchise.errors, status: :unprocessable_entity }
