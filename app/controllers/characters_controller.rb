@@ -30,7 +30,6 @@ class CharactersController < ApplicationController
 
   ##
   # Create a new character
-  # TODO: restrict this
   def new
     @character = Character.new(franchise: @franchise)
     authorize @character
@@ -38,7 +37,6 @@ class CharactersController < ApplicationController
 
   ##
   # Modify a character
-  # TODO: restrict this
   def edit
     @character = Character.friendly.find(params[:id])
     authorize @character
@@ -46,7 +44,6 @@ class CharactersController < ApplicationController
 
   ##
   # Make a new character
-  # TODO: restritct this
   def create
     @character = Character.new(character_params)
     authorize @character
@@ -63,7 +60,6 @@ class CharactersController < ApplicationController
 
   ##
   # Change a character
-  # TODO: restrict this
   def update
     @character = Character.friendly.find(params[:id])
     authorize @character
