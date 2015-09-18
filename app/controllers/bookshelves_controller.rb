@@ -18,7 +18,7 @@ class BookshelvesController < ApplicationController
     authorize @bookshelf
     @bookshelf.stories << Story.find(story_id_param)
     respond_to do |format|
-      format.html { redirect_to @bookshelf}
+      format.html { redirect_to @bookshelf }
       format.json { render json: {status: "success", added: story_id_param}}
     end
   end
@@ -28,7 +28,7 @@ class BookshelvesController < ApplicationController
     authorize @bookshelf
     @bookshelf.stories.delete(Story.find(story_id_param))
     respond_to do |format|
-      format.html { redirect_to @bookshelf}
+      format.html { redirect_to @bookshelf }
       format.json { render json: {status: "success", removed: story_id_param}}
     end
   end
@@ -47,26 +47,26 @@ class BookshelvesController < ApplicationController
     authorize @bookshelf
   end
   
-  def update
-    @bookshelf = Bookshelf.find(params[:id])
-    authorize @bookshelf
-    respond_to do |format|
-      if @bookshelf.update(bookshelf_params)
-        format.html { redirect_to @bookshelf }
-      else
-        format.html { render :edit }
-      end
-    end
-  end
-  
   def create
     @bookshelf = Bookshelf.new(bookshelf_params)
     authorize @bookshelf
     respond_to do |format|
       if @bookshelf.save
-        format.html { redirect_to @bookshelf }
+        format.html { redirect_to @bookshelf, notice: I18n.t(".notices.bookshelf_created_successfully") }
       else
         format.html { render :new }
+      end
+    end
+  end
+  
+  def update
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+    respond_to do |format|
+      if @bookshelf.update(bookshelf_params)
+        format.html { redirect_to @bookshelf, notice: I18n.t(".notices.bookshelf_updated_successfully") }
+      else
+        format.html { render :edit }
       end
     end
   end

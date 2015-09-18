@@ -18,6 +18,7 @@ class CharactersController < ApplicationController
     @ships_by_frequency = @character.ships.by_frequency
     @foreign_ships = @character.foreign_ships.by_frequency
   end
+  
   ##
   # Show a bio about this character
   def show
@@ -25,15 +26,6 @@ class CharactersController < ApplicationController
     @stories = Story.for_content(accepted_content)
       .for_display.joins(:characters).where(characters: {id: @character.id})
       .paginate(page: page, per_page: per_page)
-  end
-
-  def destroy
-    @character = Character.friendly.find(params[:id])
-    authorize @character
-    @character.destroy
-    respond_to do |format|
-      format.html { redirect_to franchise_path(@franchise), notice: I18n.t(".notices.character_deleted_successfully") }
-    end
   end
 
   ##
@@ -60,7 +52,7 @@ class CharactersController < ApplicationController
     authorize @character
     respond_to do |format|
       if @character.save
-        format.html { redirect_to [@franchise, @character] }
+        format.html { redirect_to [@franchise, @character], notice: I18n.t(".notices.character_created_successfully") }
         format.json { render :show }
       else
         format.html { redirect_to :back, warning: @character.errors.full_messages.join(", ") }
@@ -77,12 +69,23 @@ class CharactersController < ApplicationController
     authorize @character
     respond_to do |format|
       if @character.update(character_params)
-        format.html { redirect_to [@franchise, @character] }
+        format.html { redirect_to [@franchise, @character], notice: I18n.t(".notices.character_updated_successfully") }
         format.json { render :show }
       else
         format.html { redirect_to :back, warning: @character.errors.full_messages.join(", ") }
         format.json { render json: @character.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  ##
+  # Delete a character
+  def destroy
+    @character = Character.friendly.find(params[:id])
+    authorize @character
+    @character.destroy
+    respond_to do |format|
+      format.html { redirect_to franchise_path(@franchise), notice: I18n.t(".notices.character_deleted_successfully") }
     end
   end
 

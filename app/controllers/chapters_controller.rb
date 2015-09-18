@@ -74,7 +74,7 @@ class ChaptersController < ApplicationController
     authorize @chapter
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to [@story, @chapter] }
+        format.html { redirect_to [@story, @chapter], notice: I18n.t(".notices.chapter_created_successfully") }
         format.json { render :show }
       else
         format.html { redirect_to :back, warning: @chapter.errors.full_messages.join(", ") }
@@ -91,7 +91,7 @@ class ChaptersController < ApplicationController
     authorize @chapter
     respond_to do |format|
       if @chapter.update(chapter_params)
-        format.html { redirect_to [@story, @chapter] }
+        format.html { redirect_to [@story, @chapter], notice: I18n.t(".notices.chapter_updated_successfully") }
         format.json { render :show }
       else
         format.html { redirect_to :back, warning: @chapter.errors.full_messages.join(", ") }
