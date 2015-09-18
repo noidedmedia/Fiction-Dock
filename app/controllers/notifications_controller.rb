@@ -1,12 +1,20 @@
 class NotificationsController < ApplicationController
   before_filter :authenticate_user!
 
+  def index
+    @notifications = current_user.notifications
+    render(layout: false) if request.xhr?
+  end
+
+  def notifications
+    @notifications = current_user.notifications
+  end
 
   def mark_all_read
-   current_user.notifications.each do |n|
-     n.update(read: true)
-   end
-   render json: {success: true}
+    current_user.notifications.each do |n|
+      n.update(read: true)
+    end
+    render json: {success: true}
   end
 
   def read
@@ -17,14 +25,5 @@ class NotificationsController < ApplicationController
       @notification.read!
       render json: { success: true }
     end
-  end
-
-  def index
-    @notifications = current_user.notifications
-    render(layout: false) if request.xhr?
-  end
-
-  def notifications
-    @notifications = current_user.notifications
   end
 end
