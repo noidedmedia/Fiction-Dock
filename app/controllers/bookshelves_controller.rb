@@ -3,12 +3,6 @@ class BookshelvesController < ApplicationController
   before_action :load_user, only: [:index, :new, :create]
   include Pundit
 
-  def destroy
-    @bookshelf = Bookshelf.find(params[:id])
-    authorize @bookshelf
-    @bookshelf.destroy
-    redirect_to action: :index
-  end
   def show
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
@@ -74,6 +68,15 @@ class BookshelvesController < ApplicationController
       else
         format.html { render :new }
       end
+    end
+  end
+
+  def destroy
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+    @bookshelf.destroy
+    respond_to do |format|
+      format.html { redirect_to action: :index, notice: I18n.t(".notices.bookshelf_deleted_successfully") }
     end
   end
   

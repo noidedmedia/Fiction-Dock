@@ -212,7 +212,7 @@ class StoriesController < ApplicationController
     authorize @story
     @story.destroy
     respond_to do |format|
-      format.html { redirect_to "/stories" }
+      format.html { redirect_to stories_path, notice: I18n.t(".notices.story_deleted_successfully")  }
       format.json { render json: true }
     end
   end

@@ -23,7 +23,10 @@ en:
   notices:
     franchise_updated_successfully: "Franchise updated successfully"
     franchise_created_successfully: "Franchise created successfully"
-    chapter_deleted_successfully: "Chapter deleted succesfully"
+    story_deleted_successfully: "Story deleted successfully"
+    chapter_deleted_successfully: "Chapter deleted successfully"
+    character_deleted_successfully: "Character deleted successfully"
+    bookshelf_deleted_successfully: "Bookshelf deleted successfully"
   ratings:
     everybody: "Everybody"
     teen: "Teen"

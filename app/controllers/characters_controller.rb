@@ -31,7 +31,9 @@ class CharactersController < ApplicationController
     @character = Character.friendly.find(params[:id])
     authorize @character
     @character.destroy
-    redirect_to "/"
+    respond_to do |format|
+      format.html { redirect_to franchise_path(@franchise), notice: I18n.t(".notices.character_deleted_successfully") }
+    end
   end
 
   ##
