@@ -11,6 +11,7 @@ class FranchisePolicy < ApplicationPolicy
   def stats?
     true
   end
+  
   ##
   # Mods and admins are allowed to create
   def create?

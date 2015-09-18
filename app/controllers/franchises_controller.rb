@@ -41,20 +41,6 @@ class FranchisesController < ApplicationController
   end
 
   ##
-  # Create a new franchise
-  def new
-    @franchise = Franchise.new
-    authorize @franchise
-  end
-
-  ##
-  # Edit an existing franchise
-  def edit
-    @franchise = Franchise.friendly.find(params[:id])
-    authorize @franchise
-  end
-
-  ##
   # Show a franchise, including stories within
   def show
     @franchise = Franchise.friendly.find(params[:id])
@@ -62,6 +48,13 @@ class FranchisesController < ApplicationController
       .for_display
       .joins(:franchises).where(franchises: {id: @franchise.id})
       .paginate(page: page, per_page: per_page)
+  end
+
+  ##
+  # Create a new franchise
+  def new
+    @franchise = Franchise.new
+    authorize @franchise
   end
   
   ##
@@ -78,6 +71,13 @@ class FranchisesController < ApplicationController
         format.json { render json: @franchise.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  ##
+  # Edit an existing franchise
+  def edit
+    @franchise = Franchise.friendly.find(params[:id])
+    authorize @franchise
   end
   
   ##

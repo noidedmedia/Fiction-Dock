@@ -11,6 +11,7 @@ class BookshelfPolicy < ApplicationPolicy
   def destroy?
     owned?
   end
+  
   def delete?
     owned?
   end
@@ -30,6 +31,7 @@ class BookshelfPolicy < ApplicationPolicy
   def index?
     true
   end
+
   def create?
     owned?
   end
@@ -41,7 +43,9 @@ class BookshelfPolicy < ApplicationPolicy
   def destroy?
     owned?
   end
+
   protected
+  
   def owned?
     @bookshelf.user == @user
   end
