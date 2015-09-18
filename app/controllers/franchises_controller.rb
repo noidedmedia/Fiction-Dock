@@ -49,7 +49,6 @@ class FranchisesController < ApplicationController
 
   ##
   # Edit an existing franchise
-  # TODO: restrict this only to authorized users
   def edit
     @franchise = Franchise.friendly.find(params[:id])
     authorize @franchise
@@ -67,7 +66,6 @@ class FranchisesController < ApplicationController
   
   ##
   # Make a new franchise
-  # TODO: restrict this
   def create
     @franchise = Franchise.new(franchise_params)
     authorize @franchise
