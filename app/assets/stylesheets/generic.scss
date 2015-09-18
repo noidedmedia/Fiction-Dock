@@ -296,7 +296,8 @@
     }
   }
 
-  input[type=submit], .delete-button {
+  input[type=submit],
+  .delete-button {
     position: absolute;
     right: 0;
     background-color: transparent;
