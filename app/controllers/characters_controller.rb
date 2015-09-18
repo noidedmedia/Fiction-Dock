@@ -31,6 +31,7 @@ class CharactersController < ApplicationController
     @character = Character.friendly.find(params[:id])
     authorize @character
     @character.remove
+    redirect_to "/"
   end
 
   ##
