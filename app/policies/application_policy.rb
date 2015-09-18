@@ -9,7 +9,7 @@ class ApplicationPolicy
     attr_accessor :user
     attr_accessor :scope
   end
-  
+
   ##
   # Default initializer
   def initialize(user, record)
@@ -42,7 +42,7 @@ class ApplicationPolicy
   end
 
   ##
-  # BY default, disallow udpate
+  # BY default, disallow update
   def update?
     false
   end
