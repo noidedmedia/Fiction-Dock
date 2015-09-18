@@ -16,8 +16,8 @@ class ChaptersController < ApplicationController
     @chapter = @story.chapters.friendly.find(params[:id])
     @chapter.publish
     respond_to do |format|
-      format.json { render json: @chapter.published? }
       format.html { redirect_to [@story, @chapter] }
+      format.json { render json: @chapter.published? }
     end
   end
 
@@ -25,8 +25,8 @@ class ChaptersController < ApplicationController
     @chapter = @story.chapters.friendly.find(params[:id])
     @chapter.unpublish
     respond_to do |format|
-      format.json { render json: @chapter.published? }
       format.html { redirect_to [@story, @chapter] }
+      format.json { render json: @chapter.published? }
     end
   end
 
