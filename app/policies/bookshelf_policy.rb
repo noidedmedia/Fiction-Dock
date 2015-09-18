@@ -8,6 +8,9 @@ class BookshelfPolicy < ApplicationPolicy
     owned?
   end
 
+  def destroy?
+    owned?
+  end
   def delete?
     owned?
   end

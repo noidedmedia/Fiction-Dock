@@ -3,6 +3,11 @@ class BookshelvesController < ApplicationController
   before_action :load_user, only: [:index, :new, :create]
   include Pundit
 
+  def destroy
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+    @bookshelf.destroy
+  end
   def show
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
