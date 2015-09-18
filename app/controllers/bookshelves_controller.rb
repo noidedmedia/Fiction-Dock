@@ -3,6 +3,8 @@ class BookshelvesController < ApplicationController
   before_action :load_user, only: [:index, :new, :create]
   include Pundit
 
+  ##
+  # Show the bookshelf
   def show
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
@@ -13,6 +15,8 @@ class BookshelvesController < ApplicationController
       .paginate(page: page, per_page: per_page)
   end
 
+  ##
+  # Add a story to the bookshelf
   def add
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
@@ -23,6 +27,8 @@ class BookshelvesController < ApplicationController
     end
   end
 
+  ##
+  # Remove a story from the bookshelf
   def remove
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
@@ -37,16 +43,15 @@ class BookshelvesController < ApplicationController
     @bookshelves = @user.bookshelves
   end
 
-  def edit
-    @bookshelf = Bookshelf.find(params[:id])
-    authorize @bookshelf
-  end
-
+  ##
+  # Display a form for creating a new bookshelf
   def new
     @bookshelf = Bookshelf.new(user_id: @user.id)
     authorize @bookshelf
   end
   
+  ##
+  # Create the new bookshelf
   def create
     @bookshelf = Bookshelf.new(bookshelf_params)
     authorize @bookshelf
@@ -59,6 +64,15 @@ class BookshelvesController < ApplicationController
     end
   end
   
+  ##
+  # Display a form for updating this bookshelf
+  def edit
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+  end
+
+  ##
+  # Update this bookshelf
   def update
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
@@ -71,6 +85,8 @@ class BookshelvesController < ApplicationController
     end
   end
 
+  ##
+  # Delete this bookshelf
   def destroy
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf

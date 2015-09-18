@@ -9,12 +9,16 @@ class StoriesController < ApplicationController
   include ControllerCommentable
   before_filter :authenticate_user!, except: [:show, :index, :search, :franchises, :characters]
 
+  ##
+  # Favorite this story
   def favorite
     @story = Story.find(params[:id])
     current_user.favorites << @story
     redirect_to @story
   end
 
+  ##
+  # Unfavorite this story
   def unfavorite
     @story = Story.find(params[:id])
     current_user.favorites.delete(@story)
@@ -32,21 +36,29 @@ class StoriesController < ApplicationController
     @bookshelves = @story.bookshelves
   end
 
+  ##
+  # Ships associated with this story
   def ships
     @story = Story.find(params[:id])
     @ships = @story.ships
   end
 
+  ##
+  # Characters associated with this story
   def characters
     @story = Story.find(params[:id])
     @characters = @story.characters
   end
 
+  ##
+  # Franchises associated with this story
   def franchises
     @story = Story.find(params[:id])
     @franchises = @story.franchises
   end
   
+  ##
+  # Publish this story
   def publish
     @story = Story.find(params[:id])
     authorize @story
@@ -61,6 +73,8 @@ class StoriesController < ApplicationController
     end
   end
 
+  ##
+  # Unpublish this story
   def unpublish
     @story = Story.find(params[:id])
     authorize @story
@@ -74,6 +88,8 @@ class StoriesController < ApplicationController
     end
   end
 
+  ##
+  # Check whether this story is published or not
   def published
     @story = Story.find(params[:id])
     authorize @story
@@ -111,7 +127,7 @@ class StoriesController < ApplicationController
   end
 
   ##
-  # use a DELETE to unsubscribe
+  # Use a DELETE to unsubscribe
   # Returns the success as a JSON
   def unsubscribe
     s = Subscription.where(story_id: params[:story_id],
@@ -145,13 +161,6 @@ class StoriesController < ApplicationController
   def index
     @stories = Story.for_content(accepted_content)
       .includes(:franchises).for_display.paginate(page: params[:page])
-  end
-
-  ##
-  # Display a story. The id needs to be in `params[:id]`
-  def show
-    @story = Story.find(params[:id])
-    authorize @story
   end
 
   ##

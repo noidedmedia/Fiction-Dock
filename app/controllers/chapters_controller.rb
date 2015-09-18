@@ -61,7 +61,7 @@ class ChaptersController < ApplicationController
   end
 
   ##
-  # Make a new chapter
+  # Displays a form to make a new chapter
   # Authorizes the user first
   def new
     @chapter = Chapter.new(story: @story)
@@ -85,8 +85,15 @@ class ChaptersController < ApplicationController
     end 
   end
 
+  ##
+  # Display a form to edit this chapter
+  def edit
+    @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
+  end
+
   ## 
-  # Update a chapter
+  # Update this chapter
   # see chapter_params for more info
   def update
     @chapter = @story.chapters.friendly.find(params[:id])
@@ -103,7 +110,7 @@ class ChaptersController < ApplicationController
   end
 
   ##
-  # Remove a chapter
+  # Remove this chapter
   def destroy
     @chapter = @story.chapters.friendly.find(params[:id])
     authorize @chapter
@@ -112,11 +119,6 @@ class ChaptersController < ApplicationController
       format.html { redirect_to @story, notice: I18n.t(".notices.chapter_deleted_successfully") }
       format.json { render json: true }
     end
-  end
-
-  def edit
-    @chapter = @story.chapters.friendly.find(params[:id])
-    authorize @chapter
   end
 
   protected
