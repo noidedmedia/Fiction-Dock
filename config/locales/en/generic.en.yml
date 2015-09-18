@@ -26,6 +26,7 @@ en:
     story_created_successfully: "Story created successfully."
     story_updated_successfully: "Story updated successfully."
     story_deleted_successfully: "Story deleted successfully."
+    story_could_not_be_published: "Story could not be published"
     chapter_created_successfully: "Chapter created successfully."
     chapter_updated_successfully: "Chapter updated successfully."
     chapter_deleted_successfully: "Chapter deleted successfully."

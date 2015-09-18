@@ -55,8 +55,8 @@ class StoriesController < ApplicationController
         format.html { redirect_to @story } 
         format.json { render json: true }
       else
+        format.html { redirect_to @story, flash: {warning: I18n.t(".notices.story_could_not_be_published")} }
         format.json { render json: @story.errors, status: :unprocessable_entity }
-        format.html { redirect_to @story, flash: {warning: "could not publish" }}
       end
     end
   end
@@ -66,8 +66,8 @@ class StoriesController < ApplicationController
     authorize @story
     respond_to do |format|
       if @story.unpublish
-        format.json { render json: true }
         format.html { redirect_to @story }
+        format.json { render json: true }
       else
         format.json { render json: @story.errors, status: :unprocessable_entity }
       end
@@ -153,12 +153,6 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
   end
 
-  def destroy
-    @story = Story.find(params[:id])
-    authorize @story
-    @story.destroy
-    redirect_to "/"
-  end
   ##
   # Display a form to create a new story.
   def new
