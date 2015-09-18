@@ -15,6 +15,12 @@ class StoryPolicy < ApplicationPolicy
   end
 
   ##
+  # Users can view a story if they own it or if it's published
+  def show?
+    @story.published || owned?
+  end
+
+  ##
   # Users can check if a story is published only if they own it
   def published?
     owned?

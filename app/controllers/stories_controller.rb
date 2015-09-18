@@ -151,6 +151,7 @@ class StoriesController < ApplicationController
   # Display a story. The id needs to be in `params[:id]`
   def show
     @story = Story.find(params[:id])
+    authorize @story
   end
 
   ##
@@ -163,6 +164,7 @@ class StoriesController < ApplicationController
   # Actually create the new story.
   def create
     @story = Story.new(story_params)
+    authorize @story
     respond_to do |format|
       if @story.save
         format.html { redirect_to @story }
