@@ -45,5 +45,9 @@
     <%# i18n strings and story franchises/characters are passed to the JS as props, which is why this is such a large block. %>
     <%= react_component('StoryForm', render(partial: 'stories/react_form.json.jbuilder', locals: {i18npath: 'stories.form'} ), id: "react-form-elements") %>
 
+    <% if action_name == "edit" %>
+      <%= link_to t(".delete_story"), story_path(@story), method: :delete, data: { confirm: t(".are_you_sure_you_want_to_delete_this_story") }, class: "delete-button" %>
+    <% end %>
+
   <% end %>
 </div>

@@ -296,7 +296,7 @@
     }
   }
 
-  input[type=submit] {
+  input[type=submit], .delete-button {
     position: absolute;
     right: 0;
     background-color: transparent;
@@ -309,6 +309,14 @@
       opacity: 1;
       outline: none;
     }
+  }
+
+  .delete-button {
+    left: 0;
+    right: auto;
+    opacity: 1;
+    color: $color-danger;
+    text-decoration: none;
   }
 
   .select-container {

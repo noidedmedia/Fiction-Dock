@@ -11,4 +11,8 @@
     <%= f.submit t(".submit.#{action_name}") %>
 
   <% end %> 
+
+  <% if action_name == "edit" %>
+    <%= link_to t(".delete_character"), franchise_character_path(@franchise, @character), method: :delete, data: { confirm: t(".are_you_sure_you_want_to_delete_this_character") }, class: "delete-button" %>
+  <% end %>
 </div>
