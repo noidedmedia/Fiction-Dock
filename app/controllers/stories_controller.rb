@@ -157,6 +157,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     authorize @story
     @story.destroy
+    redirect_to "/"
   end
   ##
   # Display a form to create a new story.

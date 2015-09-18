@@ -48,6 +48,7 @@ class ChaptersController < ApplicationController
     @chapter = @story.chapters.friendly.find(params[:id])
     authorize @chapter
     @chapter.destroy
+    redirect_to @story
   end
 
   ##

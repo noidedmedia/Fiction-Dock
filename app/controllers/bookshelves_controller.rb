@@ -7,6 +7,7 @@ class BookshelvesController < ApplicationController
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
     @bookshelf.destroy
+    redirect_to action: :index
   end
   def show
     @bookshelf = Bookshelf.find(params[:id])
