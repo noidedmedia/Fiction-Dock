@@ -164,6 +164,12 @@ class StoriesController < ApplicationController
   end
 
   ##
+  # Display a story. The id needs to be in `params[:id]`
+  def show
+    @story = Story.find(params[:id])
+  end
+
+  ##
   # Display a form to create a new story.
   def new
     @story = Story.new(user: current_user)
