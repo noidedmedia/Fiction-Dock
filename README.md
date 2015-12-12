@@ -6,24 +6,39 @@ Fiction Dock [ ![Codeship Status for noidedmedia/Fiction-Dock](https://codeship.
 
 ## Development FAQ
 
-### How do I set this up?
+### Setting up your Development environment
 
 This tutorial assumes you have some basic understanding of using the Terminal and Git/GitHub. You don't need to be able to hack the Pentagon, but you should know what `cd` and `ls` do, how to make a branch, and how to submit a pull request on GitHub.
 
-If you don't, check out [Codecademy's Command Line lessons](https://www.codecademy.com/courses/learn-the-command-line) and GitHub's [Git tutorial](https://help.github.com/articles/set-up-git/) before getting started.
+If you don't, check out [Codecademy's Command Line course](https://www.codecademy.com/courses/learn-the-command-line) and GitHub's [Git tutorial](https://help.github.com/articles/set-up-git/) before getting started.
 
-1. Use Git from the terminal, or [the GitHub Desktop app](https://desktop.github.com/) to pull down the Fiction-Dock repository.
-2. Install [RVM](https://rvm.io/) and use it to download Ruby 2.2.2.
-3. Install Bundler (`gem install bundler`).
-4. Use your package manager to install PostgreSQL 9.4.
-  * **OS X**: If you're using [Homebrew](http://brew.sh/) (which we recommend), enter the following into the Terminal to install Postgres: `brew install postgresql`. We also recommend using [Postgres.app](http://postgresapp.com/) on OS X to get the Postgres server running after the initial setup.
-  * **Linux**: Run `apt-get install postgresql` or your distro's equivalent in the Terminal.
-5. Navigate to the Fiction-Dock directory you pulled down from GitHub.
-6. Once in the directory, run `bundle install`.
-  * After that, you may also want to run `gem install rspec`. Bundler _should_ do this, but sometimes it doesn't.
-7. Make sure you have your Postgres server running, then run `rails s` to start a local Rails development server. You can navigate to the URL printed in the Terminal (by default, [http://localhost:3000](http://localhost:3000)) in your browser to test your local version of Fiction-Dock.
-  * Note that some changes you make may require restarting the server before changes are applied, but most HTML/CSS/JavaScript changes will be visible by just reloading the page in your browser.
-9. Start contributing!
+#### OS X
+1. Install the Xcode command-line tools with `xcode-select –install`. This'll be necessary to install Homebrew.
+2. Install [Homebrew](http://brew.sh/) with the following command: `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`.
+3. Install [RVM](https://rvm.io/).
+4. Use RVM to install Ruby 2.2.3 (`rvm install ruby-2.2.3`) and then switch to that version of Ruby with `rvm use ruby-2.2.3 --default`.
+5. Install [Git](https://git-scm.com/) with `brew install git`, then either use Git from the terminal or [the GitHub Desktop app](https://desktop.github.com/) to pull down the Fiction-Dock repository.
+6. Install PostgreSQL 9.4 with `brew install postgresql`. We also recommend using [Postgres.app](http://postgresapp.com/) on OS X to get the Postgres server running after the initial setup.
+8. Install [Bundler](http://bundler.io/) with `gem install bundler`.
+9. In the Fiction-Dock directory (wherever you installed the Git repository), run `bundle install` to install all the relevant gems you'll need for developing Fiction-Dock. This might take a bit of time, be patient!
+10. Run `rake db:setup` to set up the Postgres development server.
+11. If everything has gone right so far, you'll be able to start up a Rails server with `rails s`! You can navigate to the URL printed in the Terminal (by default, [http://localhost:3000](http://localhost:3000)) in your browser to test your local version of Fiction-Dock.
+12. Get working!
+
+You can update packages installed with Homebrew at any time with `brew update` and `brew upgrade`. You'll likely want to do this once a week, just in case there are security issues in anything you've installed. We recommend using Homebrew as much as possible to install development dependencies, as it makes uninstalling and updating things much easier!
+
+#### Linux
+Note: Replace `apt-get install` with your distro's equivalent package manager, this uses `apt-get` for simplicity's sake.
+
+1. Install [RVM](https://rvm.io/).
+2. Use RVM to install Ruby 2.2.3 (`rvm install ruby-2.2.3`) and then switch to that version of Ruby with `rvm use ruby-2.2.3 --default`.
+3. Install [Git](https://git-scm.com/) if you need to, then use git from the terminal to pull down the Fiction-Dock repository.
+4. Install PostgreSQL 9.4 with `apt-get install postgresql`.
+5. Install [Bundler](http://bundler.io/) with `gem install bundler`.
+6. In the Fiction-Dock directory (wherever you installed the Git repository), run `bundle install` to install all the relevant gems you'll need for developing Fiction-Dock. This might take a bit of time, be patient!
+7. Run `rake db:setup` to set up the Postgres development server.
+8. If everything has gone right so far, you'll be able to start up a Rails server with `rails s`! You can navigate to the URL printed in the Terminal (by default, [http://localhost:3000](http://localhost:3000)) in your browser to test your local version of Fiction-Dock.
+9. Get working!
 
 
 ### How do I make myself an admin on my local build?
