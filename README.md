@@ -16,7 +16,7 @@ If you don't, check out [Codecademy's Command Line course](https://www.codecadem
 1. Install the Xcode command-line tools with `xcode-select –install`. This'll be necessary to install Homebrew.
 2. Install [Homebrew](http://brew.sh/) with the following command: `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`.
 3. Install [RVM](https://rvm.io/).
-4. Use RVM to install Ruby 2.2.3 (`rvm install ruby-2.2.3`) and then switch to that version of Ruby with `rvm use ruby-2.2.3 --default`.
+4. Use RVM to install Ruby 2.2.4 (`rvm install ruby-2.2.4`) and then switch to that version of Ruby with `rvm use ruby-2.2.4 --default`.
 5. Install [Git](https://git-scm.com/) with `brew install git`, then either use Git from the terminal or [the GitHub Desktop app](https://desktop.github.com/) to pull down the Fiction-Dock repository.
 6. Install PostgreSQL 9.4 with `brew install postgresql`. We also recommend using [Postgres.app](http://postgresapp.com/) on OS X to get the Postgres server running after the initial setup.
 8. Install [Bundler](http://bundler.io/) with `gem install bundler`.
@@ -31,7 +31,7 @@ You can update packages installed with Homebrew at any time with `brew update` a
 Note: Replace `apt-get install` with your distro's equivalent package manager, this uses `apt-get` for simplicity's sake.
 
 1. Install [RVM](https://rvm.io/).
-2. Use RVM to install Ruby 2.2.3 (`rvm install ruby-2.2.3`) and then switch to that version of Ruby with `rvm use ruby-2.2.3 --default`.
+2. Use RVM to install Ruby 2.2.4 (`rvm install ruby-2.2.4`) and then switch to that version of Ruby with `rvm use ruby-2.2.4 --default`.
 3. Install [Git](https://git-scm.com/) if you need to, then use git from the terminal to pull down the Fiction-Dock repository.
 4. Install PostgreSQL 9.4 with `apt-get install postgresql`.
 5. Install [Bundler](http://bundler.io/) with `gem install bundler`.
