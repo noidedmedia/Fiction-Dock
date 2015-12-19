@@ -12,26 +12,35 @@ class ChaptersController < ApplicationController
     render nothing: true
   end
 
+  ##
+  # Publish this chapter
   def publish
     @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
     @chapter.publish
     respond_to do |format|
-      format.json { render json: @chapter.published? }
       format.html { redirect_to [@story, @chapter] }
+      format.json { render json: @chapter.published? }
     end
   end
 
+  ##
+  # Unpublish this chapter
   def unpublish
     @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
     @chapter.unpublish
     respond_to do |format|
-      format.json { render json: @chapter.published? }
       format.html { redirect_to [@story, @chapter] }
+      format.json { render json: @chapter.published? }
     end
   end
 
+  ##
+  # Check if this chapter is published
   def published
     @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
     respond_to do |format|
       format.json { render json: @chapter.published? }
     end
@@ -52,7 +61,7 @@ class ChaptersController < ApplicationController
   end
 
   ##
-  # Make a new chapter
+  # Displays a form to make a new chapter
   # Authorizes the user first
   def new
     @chapter = Chapter.new(story: @story)
@@ -67,7 +76,7 @@ class ChaptersController < ApplicationController
     authorize @chapter
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to [@story, @chapter] }
+        format.html { redirect_to [@story, @chapter], notice: I18n.t(".notices.chapter_created_successfully") }
         format.json { render :show }
       else
         format.html { redirect_to :back, warning: @chapter.errors.full_messages.join(", ") }
@@ -76,15 +85,22 @@ class ChaptersController < ApplicationController
     end 
   end
 
+  ##
+  # Display a form to edit this chapter
+  def edit
+    @chapter = @story.chapters.friendly.find(params[:id])
+    authorize @chapter
+  end
+
   ## 
-  # Update a chapter
+  # Update this chapter
   # see chapter_params for more info
   def update
     @chapter = @story.chapters.friendly.find(params[:id])
     authorize @chapter
     respond_to do |format|
       if @chapter.update(chapter_params)
-        format.html { redirect_to [@story, @chapter] }
+        format.html { redirect_to [@story, @chapter], notice: I18n.t(".notices.chapter_updated_successfully") }
         format.json { render :show }
       else
         format.html { redirect_to :back, warning: @chapter.errors.full_messages.join(", ") }
@@ -94,7 +110,7 @@ class ChaptersController < ApplicationController
   end
 
   ##
-  # Remove a chapter
+  # Remove this chapter
   def destroy
     @chapter = @story.chapters.friendly.find(params[:id])
     authorize @chapter
@@ -103,11 +119,6 @@ class ChaptersController < ApplicationController
       format.html { redirect_to @story, notice: I18n.t(".notices.chapter_deleted_successfully") }
       format.json { render json: true }
     end
-  end
-
-  def edit
-    @chapter = @story.chapters.friendly.find(params[:id])
-    authorize @chapter
   end
 
   protected

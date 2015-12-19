@@ -3,6 +3,8 @@ class BookshelvesController < ApplicationController
   before_action :load_user, only: [:index, :new, :create]
   include Pundit
 
+  ##
+  # Show the bookshelf
   def show
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
@@ -13,22 +15,26 @@ class BookshelvesController < ApplicationController
       .paginate(page: page, per_page: per_page)
   end
 
+  ##
+  # Add a story to the bookshelf
   def add
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
     @bookshelf.stories << Story.find(story_id_param)
     respond_to do |format|
-      format.html { redirect_to @bookshelf}
+      format.html { redirect_to @bookshelf }
       format.json { render json: {status: "success", added: story_id_param}}
     end
   end
 
+  ##
+  # Remove a story from the bookshelf
   def remove
     @bookshelf = Bookshelf.find(params[:id])
     authorize @bookshelf
     @bookshelf.stories.delete(Story.find(story_id_param))
     respond_to do |format|
-      format.html { redirect_to @bookshelf}
+      format.html { redirect_to @bookshelf }
       format.json { render json: {status: "success", removed: story_id_param}}
     end
   end
@@ -37,37 +43,56 @@ class BookshelvesController < ApplicationController
     @bookshelves = @user.bookshelves
   end
 
-  def edit
-    @bookshelf = Bookshelf.find(params[:id])
-    authorize @bookshelf
-  end
-
+  ##
+  # Display a form for creating a new bookshelf
   def new
     @bookshelf = Bookshelf.new(user_id: @user.id)
     authorize @bookshelf
   end
   
-  def update
-    @bookshelf = Bookshelf.find(params[:id])
-    authorize @bookshelf
-    respond_to do |format|
-      if @bookshelf.update(bookshelf_params)
-        format.html { redirect_to @bookshelf }
-      else
-        format.html { render :edit }
-      end
-    end
-  end
-  
+  ##
+  # Create the new bookshelf
   def create
     @bookshelf = Bookshelf.new(bookshelf_params)
     authorize @bookshelf
     respond_to do |format|
       if @bookshelf.save
-        format.html { redirect_to @bookshelf }
+        format.html { redirect_to @bookshelf, notice: I18n.t(".notices.bookshelf_created_successfully") }
       else
         format.html { render :new }
       end
+    end
+  end
+  
+  ##
+  # Display a form for updating this bookshelf
+  def edit
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+  end
+
+  ##
+  # Update this bookshelf
+  def update
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+    respond_to do |format|
+      if @bookshelf.update(bookshelf_params)
+        format.html { redirect_to @bookshelf, notice: I18n.t(".notices.bookshelf_updated_successfully") }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
+  ##
+  # Delete this bookshelf
+  def destroy
+    @bookshelf = Bookshelf.find(params[:id])
+    authorize @bookshelf
+    @bookshelf.destroy
+    respond_to do |format|
+      format.html { redirect_to action: :index, notice: I18n.t(".notices.bookshelf_deleted_successfully") }
     end
   end
   

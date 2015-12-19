@@ -51,6 +51,8 @@ en:
       add_a_new_ship: "Add a new ship"
       no_suggestions_found: "No suggestions found"
       remove: "Remove"
+      delete_story: "Delete story"
+      are_you_sure_you_want_to_delete_this_story: "Are you sure you want to delete this story?"
       submit: 
         new: "Submit"
         edit: "Save changes"

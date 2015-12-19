@@ -19,6 +19,9 @@ en:
       chapter_title: "Chapter title"
       start_writing_here: "Start writing here..."
       you_have_unsaved_changes: "You have unsaved changes!"
+      delete_chapter: "Delete chapter"
+      are_you_sure_you_want_to_delete_this_chapter_this_action_can't_be_undone: "Are you sure you want to delete this chapter? This action can't be undone."
+      cancel: "Cancel"
       save: "Save"
     new:
       new_chapter_page_title: "New chapter in %{story_name}"

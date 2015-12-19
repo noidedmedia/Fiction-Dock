@@ -15,6 +15,7 @@ class FranchisesController < ApplicationController
     @foreign_ships = @franchise.foreign_ships.by_frequency
       .includes(characters: :franchise).limit(10)
   end 
+  
   ##
   # Get all stories under this franchise
   def stories
@@ -40,21 +41,6 @@ class FranchisesController < ApplicationController
   end
 
   ##
-  # Create a new franchise
-  def new
-    @franchise = Franchise.new
-    authorize @franchise
-  end
-
-  ##
-  # Edit a franchise
-  # TODO: restrict this only to authorized users
-  def edit
-    @franchise = Franchise.friendly.find(params[:id])
-    authorize @franchise
-  end
-
-  ##
   # Show a franchise, including stories within
   def show
     @franchise = Franchise.friendly.find(params[:id])
@@ -64,23 +50,15 @@ class FranchisesController < ApplicationController
       .paginate(page: page, per_page: per_page)
   end
 
-  def update
-    @franchise = Franchise.friendly.find(params[:id])
+  ##
+  # Create a new franchise
+  def new
+    @franchise = Franchise.new
     authorize @franchise
-    respond_to do |format|
-      if @franchise.update(franchise_params)
-        format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_updated_successfully") }
-        format.json { render :show, status: :created, location: @franchise}
-      else
-        format.json { redirect_to :back, warning: @franchise.errors.full_messages.join(", ") }
-        format.json { render json: @franchise.errors, status: :unprocessable_entity }
-      end
-    end
   end
-
+  
   ##
   # Make a new franchise
-  # TODO: restrict this
   def create
     @franchise = Franchise.new(franchise_params)
     authorize @franchise
@@ -88,6 +66,29 @@ class FranchisesController < ApplicationController
       if @franchise.save
         format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_created_successfully") }
         format.json { render :show, status: :created, location: @franchise }
+      else
+        format.html { redirect_to :back, warning: @franchise.errors.full_messages.join(", ") }
+        format.json { render json: @franchise.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  ##
+  # Edit an existing franchise
+  def edit
+    @franchise = Franchise.friendly.find(params[:id])
+    authorize @franchise
+  end
+  
+  ##
+  # Update an existing franchise
+  def update
+    @franchise = Franchise.friendly.find(params[:id])
+    authorize @franchise
+    respond_to do |format|
+      if @franchise.update(franchise_params)
+        format.html { redirect_to @franchise, notice: I18n.t(".notices.franchise_updated_successfully") }
+        format.json { render :show, status: :created, location: @franchise}
       else
         format.html { redirect_to :back, warning: @franchise.errors.full_messages.join(", ") }
         format.json { render json: @franchise.errors, status: :unprocessable_entity }

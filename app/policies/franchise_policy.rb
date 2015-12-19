@@ -11,6 +11,7 @@ class FranchisePolicy < ApplicationPolicy
   def stats?
     true
   end
+
   ##
   # Mods and admins are allowed to create
   def create?
@@ -18,12 +19,12 @@ class FranchisePolicy < ApplicationPolicy
   end
 
   def update?
-    admined?
+    admin?
   end
 
   protected
   
-  def admined?
+  def admin?
     if @user
       @franchise.moderated_by?(@user) || @user.mod_or_higher?
     end

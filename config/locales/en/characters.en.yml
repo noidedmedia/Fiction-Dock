@@ -18,6 +18,8 @@ en:
       character_name: "Character name"
       write_a_short_description_of_the_character: "Write a short description of the character."
       description: "Description"
+      delete_character: "Delete character"
+      are_you_sure_you_want_to_delete_this_character: "Are you sure you want to delete this character?"
       submit: 
         new: "Submit"
         edit: "Save changes"

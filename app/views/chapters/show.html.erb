@@ -10,19 +10,19 @@
     </ul>
 
     <ul id="chapter-toolbar-right" class="fd-toolbar-right">
-      <% if current_user == @story.author %>
+      <% if policy(@chapter).edit? %>
         <li><%= link_to t(".edit"), edit_story_chapter_path(@story, @chapter) %></li>
         <% if @chapter.published %>
           <li>
-          <%= button_to t(".unpublish"), unpublish_story_chapter_path(@story, @chapter), method: :delete, id: "unpublish-chapter-button", data: { confirm: "Are you sure?" } %>
+            <%= button_to t(".unpublish"), unpublish_story_chapter_path(@story, @chapter), method: :delete, id: "unpublish-chapter-button", data: { confirm: "Are you sure?" } %>
           </li>
         <% else %>
           <li>
-          <%= button_to t(".publish"), publish_story_chapter_path(@story, @chapter), method: :post, id: "publish-chapter-button", data: { confirm: "Are you sure?" } %>
+            <%= button_to t(".publish"), publish_story_chapter_path(@story, @chapter), method: :post, id: "publish-chapter-button", data: { confirm: "Are you sure?" } %>
           </li>
         <% end %>
 
-        <% if current_user == @story.author %>
+        <% if policy(@story).update? %>
           <li><%= link_to t(".add_a_new_chapter"), new_story_chapter_path(@story) %></li>
         <% end %>
       <% end %>

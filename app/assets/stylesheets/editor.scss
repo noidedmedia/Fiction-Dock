@@ -1,10 +1,9 @@
 @import "scss-variables";
 
-.editor {
+div.editor {
   width: 100%;
   max-width: 700px;
   margin: auto;
-  padding-top: 20px;
   padding-bottom: 80px;
   position: relative;
   display: -webkit-flex;
@@ -46,6 +45,7 @@
     margin: 25px 0;
     height: 100%;
     resize: none;
+    max-height: auto;
 
     &:hover, &:focus {
       border-color: transparent;

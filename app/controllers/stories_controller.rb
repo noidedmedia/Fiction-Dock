@@ -9,12 +9,16 @@ class StoriesController < ApplicationController
   include ControllerCommentable
   before_filter :authenticate_user!, except: [:show, :index, :search, :franchises, :characters]
 
+  ##
+  # Favorite this story
   def favorite
     @story = Story.find(params[:id])
     current_user.favorites << @story
     redirect_to @story
   end
 
+  ##
+  # Unfavorite this story
   def unfavorite
     @story = Story.find(params[:id])
     current_user.favorites.delete(@story)
@@ -32,21 +36,29 @@ class StoriesController < ApplicationController
     @bookshelves = @story.bookshelves
   end
 
+  ##
+  # Ships associated with this story
   def ships
     @story = Story.find(params[:id])
     @ships = @story.ships
   end
 
+  ##
+  # Characters associated with this story
   def characters
     @story = Story.find(params[:id])
     @characters = @story.characters
   end
 
+  ##
+  # Franchises associated with this story
   def franchises
     @story = Story.find(params[:id])
     @franchises = @story.franchises
   end
   
+  ##
+  # Publish this story
   def publish
     @story = Story.find(params[:id])
     authorize @story
@@ -55,25 +67,29 @@ class StoriesController < ApplicationController
         format.html { redirect_to @story } 
         format.json { render json: true }
       else
+        format.html { redirect_to @story, flash: {warning: I18n.t(".notices.story_could_not_be_published")} }
         format.json { render json: @story.errors, status: :unprocessable_entity }
-        format.html { redirect_to @story, flash: {warning: "could not publish" }}
       end
     end
   end
 
+  ##
+  # Unpublish this story
   def unpublish
     @story = Story.find(params[:id])
     authorize @story
     respond_to do |format|
       if @story.unpublish
-        format.json { render json: true }
         format.html { redirect_to @story }
+        format.json { render json: true }
       else
         format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  ##
+  # Check whether this story is published or not
   def published
     @story = Story.find(params[:id])
     authorize @story
@@ -111,7 +127,7 @@ class StoriesController < ApplicationController
   end
 
   ##
-  # use a DELETE to unsubscribe
+  # Use a DELETE to unsubscribe
   # Returns the success as a JSON
   def unsubscribe
     s = Subscription.where(story_id: params[:story_id],
@@ -163,6 +179,7 @@ class StoriesController < ApplicationController
   # Actually create the new story.
   def create
     @story = Story.new(story_params)
+    authorize @story
     respond_to do |format|
       if @story.save
         format.html { redirect_to @story }
@@ -206,7 +223,7 @@ class StoriesController < ApplicationController
     authorize @story
     @story.destroy
     respond_to do |format|
-      format.html { redirect_to "/stories" }
+      format.html { redirect_to stories_path, notice: I18n.t(".notices.story_deleted_successfully")  }
       format.json { render json: true }
     end
   end

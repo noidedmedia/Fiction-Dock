@@ -18,6 +18,7 @@ class CharactersController < ApplicationController
     @ships_by_frequency = @character.ships.by_frequency
     @foreign_ships = @character.foreign_ships.by_frequency
   end
+  
   ##
   # Show a bio about this character
   def show
@@ -26,10 +27,9 @@ class CharactersController < ApplicationController
       .for_display.joins(:characters).where(characters: {id: @character.id})
       .paginate(page: page, per_page: per_page)
   end
-  
+
   ##
   # Create a new character
-  # TODO: restrict this
   def new
     @character = Character.new(franchise: @franchise)
     authorize @character
@@ -37,7 +37,6 @@ class CharactersController < ApplicationController
 
   ##
   # Modify a character
-  # TODO: restrict this
   def edit
     @character = Character.friendly.find(params[:id])
     authorize @character
@@ -45,13 +44,12 @@ class CharactersController < ApplicationController
 
   ##
   # Make a new character
-  # TODO: restritct this
   def create
     @character = Character.new(character_params)
     authorize @character
     respond_to do |format|
       if @character.save
-        format.html { redirect_to [@franchise, @character] }
+        format.html { redirect_to [@franchise, @character], notice: I18n.t(".notices.character_created_successfully") }
         format.json { render :show }
       else
         format.html { redirect_to :back, warning: @character.errors.full_messages.join(", ") }
@@ -62,18 +60,28 @@ class CharactersController < ApplicationController
 
   ##
   # Change a character
-  # TODO: restrict this
   def update
     @character = Character.friendly.find(params[:id])
     authorize @character
     respond_to do |format|
       if @character.update(character_params)
-        format.html { redirect_to [@franchise, @character] }
+        format.html { redirect_to [@franchise, @character], notice: I18n.t(".notices.character_updated_successfully") }
         format.json { render :show }
       else
         format.html { redirect_to :back, warning: @character.errors.full_messages.join(", ") }
         format.json { render json: @character.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  ##
+  # Delete a character
+  def destroy
+    @character = Character.friendly.find(params[:id])
+    authorize @character
+    @character.destroy
+    respond_to do |format|
+      format.html { redirect_to franchise_path(@franchise), notice: I18n.t(".notices.character_deleted_successfully") }
     end
   end
 

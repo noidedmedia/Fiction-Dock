@@ -1,16 +1,21 @@
 <% @chapter.errors.full_messages.each do |err| %>
   <%= err %>
 <% end %>
+<div id="chapter-form" class="fd-form">
+  <%= form_for [@story, @chapter] do |f| %>
+    <div class="editor" data-onbeforeunload="<%= t('.you_have_unsaved_changes') %>">
 
-<%= form_for [@story, @chapter] do |f| %>
-  <div class="editor" data-onbeforeunload="<%= t('.you_have_unsaved_changes') %>">
+      <%= f.text_field :name, placeholder: t(".chapter_title"), autocomplete: "off" %>
 
-    <%= f.text_field :name, placeholder: t(".chapter_title"), autocomplete: "off" %>
+      <%= f.text_area :body, placeholder: t(".start_writing_here"), id: "plain-text-textarea" %>
 
-    <%= f.text_area :body, placeholder: t(".start_writing_here"), id: "plain-text-textarea" %>
+      <hr>
 
-    <hr>
+      <% if action_name == "edit" && policy(@chapter).destroy? %>
+        <%= link_to t(".delete_chapter"), story_chapter_path(@story, @chapter), method: :delete, data: { confirm: t(".are_you_sure_you_want_to_delete_this_chapter_this_action_can't_be_undone") }, class: "delete-button" %>
+      <% end %>
 
-    <%= f.submit t(".save"), id: "plain-editor-submit" %>
-  </div>
-<% end %>
+      <%= f.submit t(".save"), id: "plain-editor-submit" %>
+    </div>
+  <% end %>
+</div>
